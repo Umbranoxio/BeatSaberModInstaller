@@ -25,7 +25,7 @@ namespace BeatSaberModInstaller
         public const string ScoreSaber = "Umbranoxio/ScoreSaber/releases";
         public const int ScoreSaberOculusDownloadID = 0;
         public const int ScoreSaberSteamDownloadID = 1;
-        public const Int16 CurrentVersion = 1;
+        public const Int16 CurrentVersion = 2;
         public List<ReleaseInfo> releases;
 
         public string InstallDirectory = @"";
