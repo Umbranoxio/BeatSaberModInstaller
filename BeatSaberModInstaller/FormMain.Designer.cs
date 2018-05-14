@@ -44,6 +44,7 @@
             // 
             // textBoxDirectory
             // 
+            this.textBoxDirectory.Enabled = false;
             this.textBoxDirectory.Location = new System.Drawing.Point(10, 25);
             this.textBoxDirectory.Name = "textBoxDirectory";
             this.textBoxDirectory.Size = new System.Drawing.Size(330, 22);

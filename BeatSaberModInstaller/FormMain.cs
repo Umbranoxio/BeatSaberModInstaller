@@ -37,7 +37,7 @@ namespace BeatSaberModInstaller
         private void FormMain_Load(object sender, EventArgs e)
         {
             LocationHandler();
-            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             releases = new List<ReleaseInfo>();
             radioButtonScoreSaberSteam.Checked = true;
             new Thread(() =>
@@ -65,8 +65,8 @@ namespace BeatSaberModInstaller
             this.Invoke((MethodInvoker)(() =>
             {//Invoke so we can call from current thread
                 //Update checkbox's text
-                checkBoxBeatSaver.Text = string.Format(checkBoxBeatSaver.Text, injectorRelease.Version);
-                checkBoxSongLoader.Text = string.Format(checkBoxSongLoader.Text, scoreSaverRelease.Version);
+                checkBoxBeatSaver.Text = string.Format(checkBoxBeatSaver.Text, scoreSaverRelease.Version);
+                checkBoxSongLoader.Text = string.Format(checkBoxSongLoader.Text, injectorRelease.Version);
                 radioButtonScoreSaberOculus.Text = string.Format(radioButtonScoreSaberOculus.Text, scoreSaberReleaseOculus.Version);
                 radioButtonScoreSaberSteam.Text = string.Format(radioButtonScoreSaberSteam.Text, scoreSaberReleaseSteam.Version);
                 //Let the user use the controls as they where
