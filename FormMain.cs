@@ -254,6 +254,7 @@ namespace BeatSaberModInstaller
                         if (File.Exists(path + @"\Beat Saber.exe"))
                         {
                             textBoxDirectory.Text = folderDialog.SelectedPath;
+                            InstallDirectory = folderDialog.SelectedPath;
                             found = true;
                         }
                         else
@@ -325,6 +326,7 @@ namespace BeatSaberModInstaller
         {
             MessageBox.Show("We couldn't seem to find your beatsaber installation, please press \"OK\" and point us to it", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             NotFoundHandler();
+            this.TopMost = true;
         }
         private string GetSteamLocation()
         {
