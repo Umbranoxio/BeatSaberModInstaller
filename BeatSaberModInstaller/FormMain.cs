@@ -11,8 +11,11 @@ using System.Threading;
 using BeatSaberModInstaller.Internals;
 using System.Linq;
 using System.Diagnostics;
+using System.IO.Compression;
+using System.Reflection;
 using Microsoft.Win32;
 using System.Runtime.InteropServices;
+using System.Security.Principal;
 
 namespace BeatSaberModInstaller
 {
@@ -23,6 +26,7 @@ namespace BeatSaberModInstaller
         public const string Injector = "xyonico/BeatSaberSongInjector/releases";
         public const string ScoreSaver = "andruzzzhka/BeatSaverDownloader/releases";
         public const string ScoreSaber = "Umbranoxio/ScoreSaber/releases";
+        public const string SabermapProgId = "sabermapfile";
         public const int ScoreSaberOculusDownloadID = 0;
         public const int ScoreSaberSteamDownloadID = 1;
         public const Int16 CurrentVersion = 3;
@@ -33,6 +37,14 @@ namespace BeatSaberModInstaller
         public FormMain()
         {
             InitializeComponent();
+
+            // sabermap association handling
+            var toInstall = Environment.GetCommandLineArgs().FirstOrDefault(x => x.EndsWith(".sabermap"));
+            if (toInstall != null)
+            {
+                InstallSabermap(toInstall);
+                Environment.Exit(0);
+            }
         }
         private void FormMain_Load(object sender, EventArgs e)
         {
@@ -134,6 +146,26 @@ namespace BeatSaberModInstaller
                     UpdateStatus(string.Format("Moved!{0}", release.Name));
                 }
             }
+
+            // Set .sabermap association
+            var associated = FileAssociations.IsAssociationSet(".sabermap", FormMain.SabermapProgId);
+            if (this.checkBoxSabermap.Checked && !associated)
+            {
+                // Install association
+                FileAssociations.SetAssociation(".sabermap", FormMain.SabermapProgId, "BeatSaber custom map files",
+                    Path.Combine(this.InstallDirectory, "BeatSaberModInstaller.exe"));
+            }
+            else if (!this.checkBoxSabermap.Checked && associated)
+            {
+                // Remove association
+                FileAssociations.RemoveAssociation(".sabermap", FormMain.SabermapProgId);
+                FileAssociations.SHChangeNotify(FileAssociations.SHCNE_ASSOCCHANGED, FileAssociations.SHCNF_FLUSH, IntPtr.Zero, IntPtr.Zero);
+            }
+
+            // Copy ourselves to install directory to allow .sabermap association to work even when user deletes downloaded file
+            // This should be fine, considering our .exe is not very big and probably a good idea to keep anyway
+            File.Copy(Assembly.GetExecutingAssembly().Location, Path.Combine(this.InstallDirectory, "BeatSaberModInstaller.exe"), true);
+
             Process.Start(InstallDirectory + @"\IPA.exe", Quoted(InstallDirectory + @"\Beat Saber.exe"));
             UpdateStatus("Install complete!");
             ChangeInstallButtonState(true);
@@ -289,6 +321,10 @@ namespace BeatSaberModInstaller
                     buttonInstall.Enabled = enabled;
                 }));
         }
+
+        private bool IsAdmin => new WindowsPrincipal(WindowsIdentity.GetCurrent())
+            .IsInRole(WindowsBuiltInRole.Administrator);
+
         #endregion
 
         #region Registry
@@ -418,6 +454,126 @@ namespace BeatSaberModInstaller
         }
         #endregion
 
-    }
+        #region Sabermap installation
+
+        private void InstallSabermap(string filename)
+        {
+            var file = ZipFile.OpenRead(filename);
+            var extractTo = Path.Combine(Assembly.GetExecutingAssembly().Location.Contains(this.GetSteamLocation())
+                ? this.GetSteamLocation()
+                : this.GetOculusHomeLocation(), "CustomSongs");
+
+            if (!File.Exists(Path.Combine(extractTo, "..", "Beat Saber.exe")))
+            {
+                MessageBox.Show("Couldn't find beat saber installation directory. Aborting.", "Error");
+                return;
+            }
+
+            var extractedPathInitial = Path.Combine(extractTo, Path.GetFileNameWithoutExtension(filename) ?? "sabermap-unnamed");
+            var extractedPath = extractedPathInitial;
+
+            try
+            {
+                file.ExtractToDirectory(extractedPath);
+                file.Dispose();
+
+                while (Directory.EnumerateDirectories(extractedPath).Any() && !Directory.EnumerateFiles(extractedPath).Any())
+                {
+                    var insideDir = Directory.EnumerateDirectories(extractedPath).First();
+                    Directory.Move(insideDir, Path.Combine(extractTo, Path.GetFileName(insideDir)));
+                    Directory.Delete(extractedPath, true);
+                    extractedPath = Path.Combine(extractTo, Path.GetFileName(insideDir));
+                }
+
+                MessageBox.Show(Path.GetFileName(extractedPath) + " has been installed!", "Success");
+            }
+            catch (Exception e)
+            {
+                try
+                {
+                    Directory.Delete(extractedPathInitial, true);
+                }
+                catch
+                {
+                    // ignroed, this time
+                }
+
+                MessageBox.Show("Error while installing sabermap: " + e.Message, "Error");
+            }
+        }
+
+        #endregion
+
+        #region FileAssociationHelpers
+
+        // NOTE: Credit goes to Kirill Osenkov at https://stackoverflow.com/a/44816953
+
+        public class FileAssociation
+        {
+            public string Extension { get; set; }
+            public string ProgId { get; set; }
+            public string FileTypeDescription { get; set; }
+            public string ExecutableFilePath { get; set; }
+        }
+
+        public class FileAssociations
+        {
+            // needed so that Explorer windows get refreshed after the registry is updated
+            [DllImport("Shell32.dll")]
+            public static extern int SHChangeNotify(int eventId, int flags, IntPtr item1, IntPtr item2);
+
+            public const int SHCNE_ASSOCCHANGED = 0x8000000;
+            public const int SHCNF_FLUSH = 0x1000;
+
+            public static void RemoveAssociation(string extension, string progId)
+            {
+                if (string.IsNullOrWhiteSpace(extension) || string.IsNullOrWhiteSpace(progId))
+                {
+                    // Safety measure
+                    return;
+                }
+
+                Registry.CurrentUser.DeleteSubKeyTree(@"Software\Classes\" + extension);
+                Registry.CurrentUser.DeleteSubKeyTree(@"Software\Classes\" + progId);
+            }
+
+            public static void SetAssociation(string extension, string progId, string fileTypeDescription,
+                string applicationFilePath)
+            {
+                bool madeChanges = false;
+                madeChanges |= SetKeyDefaultValue(@"Software\Classes\" + extension, progId);
+                madeChanges |= SetKeyDefaultValue(@"Software\Classes\" + progId, fileTypeDescription);
+                madeChanges |= SetKeyDefaultValue($@"Software\Classes\{progId}\shell\open\command",
+                    "\"" + applicationFilePath + "\" \"%1\"");
+                if (madeChanges)
+                {
+                    SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_FLUSH, IntPtr.Zero, IntPtr.Zero);
+                }
+            }
+
+            private static bool SetKeyDefaultValue(string keyPath, string value)
+            {
+                using (var key = Registry.CurrentUser.CreateSubKey(keyPath))
+                {
+                    if (key.GetValue(null) as string != value)
+                    {
+                        key.SetValue(null, value);
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            public static bool IsAssociationSet(string extension, string progId)
+            {
+                return Registry.CurrentUser.OpenSubKey(@"Software\Classes\" + extension)?.GetValue(null) as string ==
+                       progId;
+            }
+        }
+
+        #endregion
+
+        }
 
 }
