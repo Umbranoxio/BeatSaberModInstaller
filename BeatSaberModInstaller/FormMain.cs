@@ -25,7 +25,7 @@ namespace BeatSaberModInstaller
         public const string ScoreSaber = "Umbranoxio/ScoreSaber/releases";
         public const int ScoreSaberOculusDownloadID = 0;
         public const int ScoreSaberSteamDownloadID = 1;
-        public const Int16 CurrentVersion = 3;
+        public const Int16 CurrentVersion = 4;
         public List<ReleaseInfo> releases;
 
         public string InstallDirectory = @"";
@@ -92,11 +92,11 @@ namespace BeatSaberModInstaller
             var ScoreSaberData = BeatSaberModInstaller.Internals.SimpleJSON.JSON.Parse(DownloadSite(releaseFormatted));
 
             var rootNode = ScoreSaberData[0];
-            var tagName = rootNode[5];
-            var name = rootNode[7];
-            var assetsNode = rootNode[13];
+            var tagName = rootNode["tag_name"];
+            var name = rootNode["name"];
+            var assetsNode = rootNode["assets"];
             var downloadReleaseNode = assetsNode[downloadId];
-            var downloadLink = downloadReleaseNode[11];
+            var downloadLink = downloadReleaseNode["browser_download_url"];
             Thread.Sleep(500); //So we don't get rate limited by github
 
             if (downloadId == ScoreSaberOculusDownloadID && release == ScoreSaber)
