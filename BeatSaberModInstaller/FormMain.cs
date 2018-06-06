@@ -39,11 +39,29 @@ namespace BeatSaberModInstaller
             InitializeComponent();
 
             // sabermap association handling
-            var toInstall = Environment.GetCommandLineArgs().FirstOrDefault(x => x.EndsWith(".sabermap"));
-            if (toInstall != null)
+            var toInstall = Environment.GetCommandLineArgs().Where(x => x.EndsWith(".sabermap"));
+            if (toInstall != null && toInstall.Any())
             {
-                InstallSabermap(toInstall);
+                foreach (var map in toInstall)
+                {
+                    InstallSabermap(map);
+                }
+
                 Environment.Exit(0);
+            }
+            else
+            {
+                // Not started with sabermap, require admin
+                if (!IsAdmin)
+                {
+                    var elevated =
+                        new ProcessStartInfo(Assembly.GetEntryAssembly().Location)
+                        {
+                            Verb = "runas"
+                        };
+                    Process.Start(elevated);
+                    Environment.Exit(0);
+                }
             }
         }
         private void FormMain_Load(object sender, EventArgs e)
@@ -108,6 +126,10 @@ namespace BeatSaberModInstaller
             var name = rootNode[7];
             var assetsNode = rootNode[13];
             var downloadReleaseNode = assetsNode[downloadId];
+            if (downloadReleaseNode == null)
+            {
+                return new ReleaseInfo("ERR", "", name, false);
+            }
             var downloadLink = downloadReleaseNode[11];
             Thread.Sleep(500); //So we don't get rate limited by github
 
@@ -307,10 +329,16 @@ namespace BeatSaberModInstaller
             {
                 this.Invoke((MethodInvoker)(() =>
                 {
-                    MessageBox.Show("Your version of the mod installer is outdated! Please download the new one!", "Update available!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    Process.Start("https://github.com/Umbranoxio/BeatSaberModInstaller/releases");
-                    Process.GetCurrentProcess().Kill();
-                    Environment.Exit(0);
+                    // Give user choice to also use outdated version if he really wants to
+                    if (MessageBox.Show(
+                            "Your version of the mod installer is outdated! Do you want to go the download page to update now?",
+                            "Update available!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) ==
+                        DialogResult.Yes)
+                    {
+                        Process.Start("https://github.com/Umbranoxio/BeatSaberModInstaller/releases");
+                        Process.GetCurrentProcess().Kill();
+                        Environment.Exit(0);
+                    }
                 }));
             }
         }
