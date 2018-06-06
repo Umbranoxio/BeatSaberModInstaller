@@ -126,10 +126,6 @@ namespace BeatSaberModInstaller
             var name = rootNode[7];
             var assetsNode = rootNode[13];
             var downloadReleaseNode = assetsNode[downloadId];
-            if (downloadReleaseNode == null)
-            {
-                return new ReleaseInfo("ERR", "", name, false);
-            }
             var downloadLink = downloadReleaseNode[11];
             Thread.Sleep(500); //So we don't get rate limited by github
 
