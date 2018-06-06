@@ -33,6 +33,7 @@
             this.buttonFolderBrowser = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBoxMods = new System.Windows.Forms.GroupBox();
+            this.checkBoxSabermap = new System.Windows.Forms.CheckBox();
             this.radioButtonScoreSaberOculus = new System.Windows.Forms.RadioButton();
             this.radioButtonScoreSaberSteam = new System.Windows.Forms.RadioButton();
             this.checkBoxBeatSaver = new System.Windows.Forms.CheckBox();
@@ -71,16 +72,29 @@
             // 
             // groupBoxMods
             // 
+            this.groupBoxMods.Controls.Add(this.checkBoxSabermap);
             this.groupBoxMods.Controls.Add(this.radioButtonScoreSaberOculus);
             this.groupBoxMods.Controls.Add(this.radioButtonScoreSaberSteam);
             this.groupBoxMods.Controls.Add(this.checkBoxBeatSaver);
             this.groupBoxMods.Controls.Add(this.checkBoxSongLoader);
             this.groupBoxMods.Location = new System.Drawing.Point(10, 53);
             this.groupBoxMods.Name = "groupBoxMods";
-            this.groupBoxMods.Size = new System.Drawing.Size(362, 121);
+            this.groupBoxMods.Size = new System.Drawing.Size(362, 138);
             this.groupBoxMods.TabIndex = 3;
             this.groupBoxMods.TabStop = false;
             this.groupBoxMods.Text = "Mod to install";
+            // 
+            // checkBoxSabermap
+            // 
+            this.checkBoxSabermap.AutoSize = true;
+            this.checkBoxSabermap.Checked = true;
+            this.checkBoxSabermap.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxSabermap.Location = new System.Drawing.Point(6, 113);
+            this.checkBoxSabermap.Name = "checkBoxSabermap";
+            this.checkBoxSabermap.Size = new System.Drawing.Size(166, 17);
+            this.checkBoxSabermap.TabIndex = 4;
+            this.checkBoxSabermap.Text = "Auto-install .sabermap files";
+            this.checkBoxSabermap.UseVisualStyleBackColor = true;
             // 
             // radioButtonScoreSaberOculus
             // 
@@ -138,7 +152,7 @@
             // buttonInstall
             // 
             this.buttonInstall.Enabled = false;
-            this.buttonInstall.Location = new System.Drawing.Point(297, 180);
+            this.buttonInstall.Location = new System.Drawing.Point(297, 197);
             this.buttonInstall.Name = "buttonInstall";
             this.buttonInstall.Size = new System.Drawing.Size(75, 23);
             this.buttonInstall.TabIndex = 4;
@@ -149,7 +163,7 @@
             // labelStatus
             // 
             this.labelStatus.AutoSize = true;
-            this.labelStatus.Location = new System.Drawing.Point(9, 185);
+            this.labelStatus.Location = new System.Drawing.Point(9, 202);
             this.labelStatus.Name = "labelStatus";
             this.labelStatus.Size = new System.Drawing.Size(66, 13);
             this.labelStatus.TabIndex = 5;
@@ -159,7 +173,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 211);
+            this.ClientSize = new System.Drawing.Size(384, 232);
             this.Controls.Add(this.labelStatus);
             this.Controls.Add(this.buttonInstall);
             this.Controls.Add(this.groupBoxMods);
@@ -192,6 +206,7 @@
         private System.Windows.Forms.CheckBox checkBoxSongLoader;
         private System.Windows.Forms.Button buttonInstall;
         private System.Windows.Forms.Label labelStatus;
+        private System.Windows.Forms.CheckBox checkBoxSabermap;
     }
 }
 
