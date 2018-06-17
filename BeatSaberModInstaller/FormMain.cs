@@ -13,21 +13,22 @@ using System.Linq;
 using System.Diagnostics;
 using Microsoft.Win32;
 using System.Runtime.InteropServices;
-
+using BeatSaberModInstaller.Internals.SimpleJSON;
 namespace BeatSaberModInstaller
 {
     public partial class FormMain : Form
     {
 
+        [DllImport("user32.dll")]
+        static extern int GetScrollPos(IntPtr hWnd, int nBar);
         public const string Git = "https://api.github.com/repos/";
         public const string Injector = "xyonico/BeatSaberSongInjector/releases";
         public const string ScoreSaver = "andruzzzhka/BeatSaverDownloader/releases";
         public const string ScoreSaber = "Umbranoxio/ScoreSaber/releases";
-        public const int ScoreSaberOculusDownloadID = 0;
-        public const int ScoreSaberSteamDownloadID = 1;
+        public const string Multiplayer = "Umbranoxio/BeatSaberMultiplayer/releases";
+
         public const Int16 CurrentVersion = 4;
         public List<ReleaseInfo> releases;
-
         public string InstallDirectory = @"";
         public bool isSteam = true;
         public FormMain()
@@ -42,26 +43,32 @@ namespace BeatSaberModInstaller
             radioButtonScoreSaberSteam.Checked = true;
             new Thread(() =>
             {
-                GetStartupInformation();
+                LoadRequiredPlugins();
             }).Start();
         }
 
         #region ReleaseHandling
-        private void GetStartupInformation()
+        private void LoadRequiredPlugins()
         {
             CheckVersion();
             UpdateStatus("Getting latest version info...");
             ReleaseInfo injectorRelease = GetLatestRelease(1, Injector);
             ReleaseInfo scoreSaverRelease = GetLatestRelease(0, ScoreSaver);
-            ReleaseInfo scoreSaberReleaseOculus = GetLatestRelease(ScoreSaberOculusDownloadID, ScoreSaber);
-            ReleaseInfo scoreSaberReleaseSteam = GetLatestRelease(ScoreSaberSteamDownloadID, ScoreSaber);
+            ReleaseInfo scoreSaberReleaseOculus = GetLatestRelease(0, ScoreSaber);
+            ReleaseInfo scoreSaberReleaseSteam = GetLatestRelease(1, ScoreSaber);
+
+            ReleaseInfo multiplayerReleaseOculus = GetLatestRelease(0, Multiplayer);
+            ReleaseInfo multiplayerReleaseSteam = GetLatestRelease(1, Multiplayer);
+
             releases.Add(injectorRelease);
             releases.Add(scoreSaverRelease);
             releases.Add(scoreSaberReleaseOculus);
             releases.Add(scoreSaberReleaseSteam);
-
-            string exampleToShowReleaseInfoContainsDownloadLinkAswell = injectorRelease.Link;
-
+            releases.Add(multiplayerReleaseOculus);
+            releases.Add(multiplayerReleaseSteam);
+            scoreSaberReleaseOculus.Install = false;
+            multiplayerReleaseOculus.Install = false;
+            multiplayerReleaseSteam.Install = false;
             this.Invoke((MethodInvoker)(() =>
             {//Invoke so we can call from current thread
                 //Update checkbox's text
@@ -69,6 +76,11 @@ namespace BeatSaberModInstaller
                 checkBoxSongLoader.Text = string.Format(checkBoxSongLoader.Text, injectorRelease.Version);
                 radioButtonScoreSaberOculus.Text = string.Format(radioButtonScoreSaberOculus.Text, scoreSaberReleaseOculus.Version);
                 radioButtonScoreSaberSteam.Text = string.Format(radioButtonScoreSaberSteam.Text, scoreSaberReleaseSteam.Version);
+                radioButtonBetaOculus.Text = string.Format(radioButtonBetaOculus.Text, multiplayerReleaseOculus.Version);
+                radioButtonBetaSteam.Text = string.Format(radioButtonBetaSteam.Text, multiplayerReleaseSteam.Version);
+
+               
+
                 //Let the user use the controls as they where
                 checkBoxBeatSaver.Enabled = true;
                 radioButtonScoreSaberOculus.Enabled = true;
@@ -77,8 +89,9 @@ namespace BeatSaberModInstaller
                 if (!isSteam)
                 {
                     radioButtonScoreSaberOculus.Checked = true;
+                    radioButtonBetaOculus.Checked = true;
                 }
-                
+                tabControlMain.Enabled = true;
                 buttonInstall.Enabled = true;
             }));
             UpdateStatus("Release info updated!");
@@ -89,8 +102,8 @@ namespace BeatSaberModInstaller
         {
             //Terrible handling of the json but it works, feel free to fix this
             string releaseFormatted = Git + release;
-            var ScoreSaberData = BeatSaberModInstaller.Internals.SimpleJSON.JSON.Parse(DownloadSite(releaseFormatted));
-
+            var ScoreSaberData = JSON.Parse(DownloadSite(releaseFormatted));
+           
             var rootNode = ScoreSaberData[0];
             var tagName = rootNode["tag_name"];
             var name = rootNode["name"];
@@ -99,15 +112,10 @@ namespace BeatSaberModInstaller
             var downloadLink = downloadReleaseNode["browser_download_url"];
             Thread.Sleep(500); //So we don't get rate limited by github
 
-            if (downloadId == ScoreSaberOculusDownloadID && release == ScoreSaber)
-            {
-                return new ReleaseInfo(tagName, downloadLink, name, false);
-            }
-            else
-            {
-                return new ReleaseInfo(tagName, downloadLink, name, true);
-            }
+          return new ReleaseInfo(tagName, downloadLink, name, true);
+       
         }
+     
         #endregion
 
         #region Installation
@@ -138,11 +146,29 @@ namespace BeatSaberModInstaller
             UpdateStatus("Install complete!");
             ChangeInstallButtonState(true);
         }
+        private void DeleteIncompatiblePlugins()
+        {
+            if (radioButtonBetaOculus.Checked || radioButtonBetaSteam.Checked)
+            {
+                try
+                {
+                    string oldMultiPath = InstallDirectory + @"\Plugins\BeatSaberMultiplayer.dll";
+                    if (File.Exists(oldMultiPath))
+                    {
+                        File.Delete(oldMultiPath);
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+        }
         #endregion
 
         #region UIEvents
         private void buttonInstall_Click(object sender, EventArgs e)
         {
+            DeleteIncompatiblePlugins();
             new Thread(() =>
             {
                 Install();
@@ -163,6 +189,14 @@ namespace BeatSaberModInstaller
         {
             UpdateRelease("scoresabero", radioButtonScoreSaberOculus.Checked);
         }
+        private void radioButtonBetaSteam_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateRelease("multiplayersteam", radioButtonBetaSteam.Checked);
+        }
+        private void radioButtonBetaOculus_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateRelease("multiplayeroculus", radioButtonBetaOculus.Checked);
+        }
         private void buttonFolderBrowser_Click(object sender, EventArgs e)
         {
             using (var folderDialog = new FolderBrowserDialog())
@@ -182,6 +216,50 @@ namespace BeatSaberModInstaller
 
                 }
 
+            }
+        }
+        private void linkLabelBeta_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://scoresaber.com/info/beta.php");
+        }
+
+        private void tabControlMain_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControlMain.SelectedIndex == 0)
+            {
+                this.Size = new Size(414, 286);
+                labelPS.Visible = false;
+            }
+            else
+            {
+                this.Size = new Size(578, 411);
+                labelPS.Visible = true;
+            }
+        }
+
+        private void linkLabelReadMore_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/Umbranoxio/BeatSaberMultiplayer/blob/master/README.md");
+        }
+
+        private void checkBoxRead_CheckedChanged(object sender, EventArgs e)
+        {
+
+            if (checkBoxRead.Checked)
+            {
+                if (ScrollCheck())
+                {
+                    radioButtonBetaOculus.Enabled = true;
+                    radioButtonBetaSteam.Enabled = true;
+                }
+            }
+            else
+            {
+                radioButtonBetaOculus.Checked = false;
+                radioButtonBetaOculus.Enabled = false;
+
+                radioButtonBetaSteam.Checked = false;
+                radioButtonBetaSteam.Enabled = false;
             }
         }
         #endregion
@@ -288,6 +366,20 @@ namespace BeatSaberModInstaller
                 {
                     buttonInstall.Enabled = enabled;
                 }));
+        }
+        private bool ScrollCheck()
+        {
+            int scrollPos = GetScrollPos(textBoxBeta.Handle, 0x1);
+            if (scrollPos == 0)
+            {
+                MessageBox.Show("No you haven't, scroll down", "ಠ_ಠ", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                checkBoxRead.Checked = false;
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
         #endregion
 
