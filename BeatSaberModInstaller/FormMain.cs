@@ -37,6 +37,7 @@ namespace BeatSaberModInstaller
         }
         private void FormMain_Load(object sender, EventArgs e)
         {
+            this.Size = new Size(414, 286);
             LocationHandler();
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             releases = new List<ReleaseInfo>();

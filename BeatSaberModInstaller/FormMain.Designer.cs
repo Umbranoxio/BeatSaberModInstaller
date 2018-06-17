@@ -60,13 +60,13 @@
             this.textBoxDirectory.Enabled = false;
             this.textBoxDirectory.Location = new System.Drawing.Point(10, 25);
             this.textBoxDirectory.Name = "textBoxDirectory";
-            this.textBoxDirectory.Size = new System.Drawing.Size(344, 22);
+            this.textBoxDirectory.Size = new System.Drawing.Size(508, 22);
             this.textBoxDirectory.TabIndex = 0;
             // 
             // buttonFolderBrowser
             // 
             this.buttonFolderBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonFolderBrowser.Location = new System.Drawing.Point(360, 25);
+            this.buttonFolderBrowser.Location = new System.Drawing.Point(524, 25);
             this.buttonFolderBrowser.Name = "buttonFolderBrowser";
             this.buttonFolderBrowser.Size = new System.Drawing.Size(26, 23);
             this.buttonFolderBrowser.TabIndex = 1;
@@ -90,7 +90,7 @@
             this.checkBoxSongLoader.Checked = true;
             this.checkBoxSongLoader.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxSongLoader.Enabled = false;
-            this.checkBoxSongLoader.Location = new System.Drawing.Point(81, 22);
+            this.checkBoxSongLoader.Location = new System.Drawing.Point(163, 85);
             this.checkBoxSongLoader.Name = "checkBoxSongLoader";
             this.checkBoxSongLoader.Size = new System.Drawing.Size(211, 17);
             this.checkBoxSongLoader.TabIndex = 4;
@@ -102,7 +102,7 @@
             this.radioButtonScoreSaberOculus.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.radioButtonScoreSaberOculus.AutoSize = true;
             this.radioButtonScoreSaberOculus.Enabled = false;
-            this.radioButtonScoreSaberOculus.Location = new System.Drawing.Point(10, 91);
+            this.radioButtonScoreSaberOculus.Location = new System.Drawing.Point(92, 154);
             this.radioButtonScoreSaberOculus.Name = "radioButtonScoreSaberOculus";
             this.radioButtonScoreSaberOculus.Size = new System.Drawing.Size(353, 17);
             this.radioButtonScoreSaberOculus.TabIndex = 7;
@@ -117,7 +117,7 @@
             this.checkBoxBeatSaver.Checked = true;
             this.checkBoxBeatSaver.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxBeatSaver.Enabled = false;
-            this.checkBoxBeatSaver.Location = new System.Drawing.Point(56, 45);
+            this.checkBoxBeatSaver.Location = new System.Drawing.Point(138, 108);
             this.checkBoxBeatSaver.Name = "checkBoxBeatSaver";
             this.checkBoxBeatSaver.Size = new System.Drawing.Size(261, 17);
             this.checkBoxBeatSaver.TabIndex = 5;
@@ -129,7 +129,7 @@
             this.radioButtonScoreSaberSteam.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.radioButtonScoreSaberSteam.AutoSize = true;
             this.radioButtonScoreSaberSteam.Enabled = false;
-            this.radioButtonScoreSaberSteam.Location = new System.Drawing.Point(29, 68);
+            this.radioButtonScoreSaberSteam.Location = new System.Drawing.Point(111, 131);
             this.radioButtonScoreSaberSteam.Name = "radioButtonScoreSaberSteam";
             this.radioButtonScoreSaberSteam.Size = new System.Drawing.Size(315, 17);
             this.radioButtonScoreSaberSteam.TabIndex = 6;
@@ -141,7 +141,7 @@
             // 
             this.buttonInstall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonInstall.Enabled = false;
-            this.buttonInstall.Location = new System.Drawing.Point(278, 216);
+            this.buttonInstall.Location = new System.Drawing.Point(440, 341);
             this.buttonInstall.Name = "buttonInstall";
             this.buttonInstall.Size = new System.Drawing.Size(112, 23);
             this.buttonInstall.TabIndex = 4;
@@ -153,7 +153,7 @@
             // 
             this.labelStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelStatus.AutoSize = true;
-            this.labelStatus.Location = new System.Drawing.Point(7, 221);
+            this.labelStatus.Location = new System.Drawing.Point(7, 346);
             this.labelStatus.Name = "labelStatus";
             this.labelStatus.Size = new System.Drawing.Size(66, 13);
             this.labelStatus.TabIndex = 5;
@@ -170,7 +170,7 @@
             this.tabControlMain.Location = new System.Drawing.Point(10, 53);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(380, 157);
+            this.tabControlMain.Size = new System.Drawing.Size(544, 282);
             this.tabControlMain.TabIndex = 8;
             this.tabControlMain.SelectedIndexChanged += new System.EventHandler(this.tabControlMain_SelectedIndexChanged);
             // 
@@ -183,7 +183,7 @@
             this.tabPageCore.Location = new System.Drawing.Point(4, 22);
             this.tabPageCore.Name = "tabPageCore";
             this.tabPageCore.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCore.Size = new System.Drawing.Size(372, 131);
+            this.tabPageCore.Size = new System.Drawing.Size(536, 256);
             this.tabPageCore.TabIndex = 0;
             this.tabPageCore.Text = "Core Plugins";
             this.tabPageCore.UseVisualStyleBackColor = true;
@@ -199,7 +199,7 @@
             this.tabPageMultiplayer.Location = new System.Drawing.Point(4, 22);
             this.tabPageMultiplayer.Name = "tabPageMultiplayer";
             this.tabPageMultiplayer.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageMultiplayer.Size = new System.Drawing.Size(536, 282);
+            this.tabPageMultiplayer.Size = new System.Drawing.Size(536, 256);
             this.tabPageMultiplayer.TabIndex = 1;
             this.tabPageMultiplayer.Text = "Multiplayer Beta";
             this.tabPageMultiplayer.UseVisualStyleBackColor = true;
@@ -209,11 +209,11 @@
             this.radioButtonBetaOculus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.radioButtonBetaOculus.AutoSize = true;
             this.radioButtonBetaOculus.Enabled = false;
-            this.radioButtonBetaOculus.Location = new System.Drawing.Point(264, 259);
+            this.radioButtonBetaOculus.Location = new System.Drawing.Point(231, 231);
             this.radioButtonBetaOculus.Name = "radioButtonBetaOculus";
-            this.radioButtonBetaOculus.Size = new System.Drawing.Size(266, 17);
+            this.radioButtonBetaOculus.Size = new System.Drawing.Size(299, 17);
             this.radioButtonBetaOculus.TabIndex = 11;
-            this.radioButtonBetaOculus.Text = "Install Multiplayer Beta (Oculus) {0} - Umbranox";
+            this.radioButtonBetaOculus.Text = "Install Multiplayer Beta (Oculus Home) {0} - Umbranox";
             this.radioButtonBetaOculus.UseVisualStyleBackColor = true;
             this.radioButtonBetaOculus.CheckedChanged += new System.EventHandler(this.radioButtonBetaOculus_CheckedChanged);
             // 
@@ -222,7 +222,7 @@
             this.radioButtonBetaSteam.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.radioButtonBetaSteam.AutoSize = true;
             this.radioButtonBetaSteam.Enabled = false;
-            this.radioButtonBetaSteam.Location = new System.Drawing.Point(269, 238);
+            this.radioButtonBetaSteam.Location = new System.Drawing.Point(269, 211);
             this.radioButtonBetaSteam.Name = "radioButtonBetaSteam";
             this.radioButtonBetaSteam.Size = new System.Drawing.Size(261, 17);
             this.radioButtonBetaSteam.TabIndex = 10;
@@ -245,7 +245,7 @@
             // 
             this.checkBoxRead.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkBoxRead.AutoSize = true;
-            this.checkBoxRead.Location = new System.Drawing.Point(9, 247);
+            this.checkBoxRead.Location = new System.Drawing.Point(9, 220);
             this.checkBoxRead.Name = "checkBoxRead";
             this.checkBoxRead.Size = new System.Drawing.Size(156, 17);
             this.checkBoxRead.TabIndex = 3;
@@ -265,7 +265,7 @@
             this.textBoxBeta.Name = "textBoxBeta";
             this.textBoxBeta.ReadOnly = true;
             this.textBoxBeta.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxBeta.Size = new System.Drawing.Size(521, 208);
+            this.textBoxBeta.Size = new System.Drawing.Size(521, 178);
             this.textBoxBeta.TabIndex = 2;
             this.textBoxBeta.Text = resources.GetString("textBoxBeta.Text");
             // 
@@ -284,7 +284,7 @@
             this.labelPS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelPS.AutoSize = true;
             this.labelPS.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.labelPS.Location = new System.Drawing.Point(27, 58);
+            this.labelPS.Location = new System.Drawing.Point(191, 58);
             this.labelPS.Name = "labelPS";
             this.labelPS.Size = new System.Drawing.Size(355, 13);
             this.labelPS.TabIndex = 5;
@@ -295,7 +295,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(402, 251);
+            this.ClientSize = new System.Drawing.Size(566, 376);
             this.Controls.Add(this.labelPS);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.labelStatus);
