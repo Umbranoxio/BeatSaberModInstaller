@@ -118,15 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="textBoxBeta.Text" xml:space="preserve">
-    <value>The beat saber multiplayer plugin is in it's extreme beta phase, most bugs have been squashed, but some definitely still do exist.
+    <value>The open Beta has been temporarily disabled, more information will be available shortly.
 
-Things you should know before using the beta:
+Please visit the GitHub by clicking the "Learn More" link above to get more updated information.
 
-• When creating a room, there is a 1 in 10 chance your game will crash
-
-• If the host switches songs while a user is trying to download a song, the users song won't update
-
-• The host currently has no way to tell if everybody is ready, get creative, the beta testers simply put their hands in the air if they are ready</value>
+Thank you to everyone who participated in the first Beta, hopefully we can get this out and fully functional ASAP.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

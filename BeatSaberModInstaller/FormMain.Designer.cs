@@ -245,6 +245,7 @@
             // 
             this.checkBoxRead.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkBoxRead.AutoSize = true;
+            this.checkBoxRead.Enabled = false;
             this.checkBoxRead.Location = new System.Drawing.Point(9, 220);
             this.checkBoxRead.Name = "checkBoxRead";
             this.checkBoxRead.Size = new System.Drawing.Size(156, 17);

@@ -80,6 +80,7 @@ namespace BeatSaberModInstaller
                 radioButtonBetaOculus.Text = string.Format(radioButtonBetaOculus.Text, multiplayerReleaseOculus.Version);
                 radioButtonBetaSteam.Text = string.Format(radioButtonBetaSteam.Text, multiplayerReleaseSteam.Version);
 
+                
                
 
                 //Let the user use the controls as they where
@@ -233,6 +234,8 @@ namespace BeatSaberModInstaller
             }
             else
             {
+
+                
                 this.Size = new Size(578, 411);
                 labelPS.Visible = true;
             }
