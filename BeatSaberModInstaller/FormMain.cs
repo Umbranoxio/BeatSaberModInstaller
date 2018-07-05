@@ -27,7 +27,7 @@ namespace BeatSaberModInstaller
         public const string ScoreSaber = "Umbranoxio/ScoreSaber/releases";
         public const string Multiplayer = "Umbranoxio/BeatSaberMultiplayer/releases";
 
-        public const Int16 CurrentVersion = 4;
+        public const Int16 CurrentVersion = 6;
         public List<ReleaseInfo> releases;
         public string InstallDirectory = @"";
         public bool isSteam = true;
@@ -513,7 +513,7 @@ namespace BeatSaberModInstaller
             }
         }
         #endregion
-
+        
     }
 
 }

@@ -109,6 +109,7 @@
             this.radioButtonScoreSaberOculus.TabStop = true;
             this.radioButtonScoreSaberOculus.Text = "ScoreSaber (Custom ScoreBoards) (Oculus Home) {0} - Umbranox";
             this.radioButtonScoreSaberOculus.UseVisualStyleBackColor = true;
+            this.radioButtonScoreSaberOculus.CheckedChanged += new System.EventHandler(this.radioButtonScoreSaberOculus_CheckedChanged);
             // 
             // checkBoxBeatSaver
             // 

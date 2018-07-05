@@ -118,11 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="textBoxBeta.Text" xml:space="preserve">
-    <value>The open Beta has been temporarily disabled, more information will be available shortly.
+    <value>The multiplayer plugin has been disabled until further notice, as I will now be implementing the feature directly into Beat Saber itself (https://twitter.com/BeatSaber/status/1011267998487908353)
 
-Please visit the GitHub by clicking the "Learn More" link above to get more updated information.
-
-Thank you to everyone who participated in the first Beta, hopefully we can get this out and fully functional ASAP.</value>
+Although, click "learn more" and keep an eye on that page, as the plugin may be used in the future for potential early closed beta testing</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
