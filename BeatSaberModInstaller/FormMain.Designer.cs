@@ -124,6 +124,7 @@
             this.checkBoxBeatSaver.TabIndex = 5;
             this.checkBoxBeatSaver.Text = "Beat Saver In-Game Browser {0} - Andruzzzhka";
             this.checkBoxBeatSaver.UseVisualStyleBackColor = true;
+            this.checkBoxBeatSaver.CheckedChanged += new System.EventHandler(this.checkBoxBeatSaver_CheckedChanged);
             // 
             // radioButtonScoreSaberSteam
             // 
@@ -137,6 +138,7 @@
             this.radioButtonScoreSaberSteam.TabStop = true;
             this.radioButtonScoreSaberSteam.Text = "ScoreSaber (Custom ScoreBoards) (Steam) {0} - Umbranox";
             this.radioButtonScoreSaberSteam.UseVisualStyleBackColor = true;
+            this.radioButtonScoreSaberSteam.CheckedChanged += new System.EventHandler(this.radioButtonScoreSaberSteam_CheckedChanged);
             // 
             // buttonInstall
             // 
