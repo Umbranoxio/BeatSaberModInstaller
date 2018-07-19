@@ -1,57 +1,43 @@
 {
   "totalMods" : 7,
   "0" : {
-   "name" : "Song Loader Plugin v3.1",
-   "author" : "xyonico",
-   "version" : "v3.1",
+   "name" : "Song Loader Plugin",
    "tag" : "",
    "gitPath" : "xyonico/BeatSaberSongInjector",
    "releaseId" : 1
   },
   "1" : {
-   "name" : "BeatSaver Downloader v2.1",
-   "author" : "andruzzzhka",
-   "version" : "2.1",
+   "name" : "BeatSaver Downloader",
    "tag" : "",
    "gitPath" : "andruzzzhka/BeatSaverDownloader",
    "releaseId" : 0
   },
   "2" : {
-   "name" : "Score Saber V1.0",
-   "author" : "Umbranoxio",
-   "version" : "1.0",
+   "name" : "Score Saber",
    "tag" : "Steam",
    "gitPath" : "Umbranoxio/ScoreSaber",
    "releaseId" : 1
   },
   "3" : {
-   "name" : "Score Saber V1.0",
-   "author" : "Umbranoxio",
-   "version" : "1.0",
+   "name" : "Score Saber",
    "tag" : "Oculus",
    "gitPath" : "Umbranoxio/ScoreSaber",
    "releaseId" : 0
   },
   "4" : {
-   "name" : "Practice Plugin v1.1",
-   "author" : " xyonico",
-   "version" : "1.1",
+   "name" : "Practice Plugin",
    "tag" : "",
    "gitPath" : "xyonico/PracticePlugin",
    "releaseId" : 0
   },
   "5" : {
-   "name" : "Beat Saber Tweaks 3.0",
-   "author" : "taz030485",
-   "version" : "3.0",
+   "name" : "Beat Saber Tweaks",
    "tag" : "",
    "gitPath" : "taz030485/BeatSaberTweaks",
    "releaseId" : 0
   },
   "6" : {
-   "name" : "Discord Presence Plugin v1.2",
-   "author" : " xyonico",
-   "version" : "1.2",
+   "name" : "Discord Presence Plugin",
    "tag" : "",
    "gitPath" : "xyonico/BeatSaberDiscordPresence",
    "releaseId" : 0
