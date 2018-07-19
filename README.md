@@ -1,5 +1,5 @@
 # BeatSaberModInstaller
-![Preview](https://i.imgur.com/xlcIpOB.png)
+![Preview](https://media.discordapp.net/attachments/443146108420620318/469555973120327680/unknown.png)
 
 This program will install custom mods into beat saber automatically, and can be re-run in order to update the mods
 
