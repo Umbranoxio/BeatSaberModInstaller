@@ -1,5 +1,5 @@
 {
-  "totalMods" : 4,
+  "totalMods" : 5,
   "0" : {
    "name" : "Song Loader Plugin",
    "tag" : "",
@@ -23,5 +23,12 @@
    "tag" : "Oculus",
    "gitPath" : "Umbranoxio/ScoreSaber",
    "releaseId" : 0
+  },
+  "4" : {
+   "name" : "Camera Plus",
+   "tag" : "",
+   "gitPath" : "xyonico/CameraPlus",
+   "releaseId" : 0
   }
 }
+
