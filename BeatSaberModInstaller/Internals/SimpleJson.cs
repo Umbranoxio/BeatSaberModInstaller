@@ -7,113 +7,129 @@ using System.Text;
 namespace BeatSaberModInstaller.Internals
 {
     /* * * * *
-* A simple JSON Parser / builder
-* ------------------------------
-* 
-* It mainly has been written as a simple JSON parser. It can build a JSON string
-* from the node-tree, or generate a node tree from any valid JSON string.
-* 
-* If you want to use compression when saving to file / stream / B64 you have to include
-* SharpZipLib ( http://www.icsharpcode.net/opensource/sharpziplib/ ) in your project and
-* define "USE_SharpZipLib" at the top of the file
-* 
-* Written by Bunny83 
-* 2012-06-09
-* 
-* [2012-06-09 First Version]
-* - provides strongly typed node classes and lists / dictionaries
-* - provides easy access to class members / array items / data values
-* - the parser now properly identifies types. So generating JSON with this framework should work.
-* - only double quotes (") are used for quoting strings.
-* - provides "casting" properties to easily convert to / from those types:
-*   int / float / double / bool
-* - provides a common interface for each node so no explicit casting is required.
-* - the parser tries to avoid errors, but if malformed JSON is parsed the result is more or less undefined
-* - It can serialize/deserialize a node tree into/from an experimental compact binary format. It might
-*   be handy if you want to store things in a file and don't want it to be easily modifiable
-* 
-* 
-* [2012-12-17 Update]
-* - Added internal JSONLazyCreator class which simplifies the construction of a JSON tree
-*   Now you can simple reference any item that doesn't exist yet and it will return a JSONLazyCreator
-*   The class determines the required type by it's further use, creates the type and removes itself.
-* - Added binary serialization / deserialization.
-* - Added support for BZip2 zipped binary format. Requires the SharpZipLib ( http://www.icsharpcode.net/opensource/sharpziplib/ )
-*   The usage of the SharpZipLib library can be disabled by removing or commenting out the USE_SharpZipLib define at the top
-* - The serializer uses different types when it comes to store the values. Since my data values
-*   are all of type string, the serializer will "try" which format fits best. The order is: int, float, double, bool, string.
-*   It's not the most efficient way but for a moderate amount of data it should work on all platforms.
-* 
-* [2017-03-08 Update]
-* - Optimised parsing by using a StringBuilder for token. This prevents performance issues when large
-*   string data fields are contained in the json data.
-* - Finally refactored the badly named JSONClass into JSONObject.
-* - Replaced the old JSONData class by distict typed classes ( JSONString, JSONNumber, JSONBool, JSONNull ) this
-*   allows to propertly convert the node tree back to json without type information loss. The actual value
-*   parsing now happens at parsing time and not when you actually access one of the casting properties.
-* 
-* [2017-04-11 Update]
-* - Fixed parsing bug where empty string values have been ignored.
-* - Optimised "ToString" by using a StringBuilder internally. This should heavily improve performance for large files
-* - Changed the overload of "ToString(string aIndent)" to "ToString(int aIndent)"
-* 
-* [2017-11-29 Update]
-* - Removed the IEnumerator implementations on JSONArray & JSONObject and replaced it with a common
-*   struct Enumerator in JSONNode that should avoid garbage generation. The enumerator always works
-*   on KeyValuePair<string, JSONNode>, even for JSONArray.
-* - Added two wrapper Enumerators that allows for easy key or value enumeration. A JSONNode now has
-*   a "Keys" and a "Values" enumerable property. Those are also struct enumerators / enumerables
-* - A KeyValuePair<string, JSONNode> can now be implicitly converted into a JSONNode. This allows
-*   a foreach loop over a JSONNode to directly access the values only. Since KeyValuePair as well as
-*   all the Enumerators are structs, no garbage is allocated.
-* - To add Linq support another "LinqEnumerator" is available through the "Linq" property. This
-*   enumerator does implement the generic IEnumerable interface so most Linq extensions can be used
-*   on this enumerable object. This one does allocate memory as it's a wrapper class.
-* - The Escape method now escapes all control characters (# < 32) in strings as uncode characters
-*   (\uXXXX) and if the static bool JSONNode.forceASCII is set to true it will also escape all
-*   characters # > 127. This might be useful if you require an ASCII output. Though keep in mind
-*   when your strings contain many non-ascii characters the strings become much longer (x6) and are
-*   no longer human readable.
-* - The node types JSONObject and JSONArray now have an "Inline" boolean switch which will default to
-*   false. It can be used to serialize this element inline even you serialize with an indented format
-*   This is useful for arrays containing numbers so it doesn't place every number on a new line
-* - Extracted the binary serialization code into a seperate extension file. All classes are now declared
-*   as "partial" so an extension file can even add a new virtual or abstract method / interface to
-*   JSONNode and override it in the concrete type classes. It's of course a hacky approach which is
-*   generally not recommended, but i wanted to keep everything tightly packed.
-* - Added a static CreateOrGet method to the JSONNull class. Since this class is immutable it could
-*   be reused without major problems. If you have a lot null fields in your data it will help reduce
-*   the memory / garbage overhead. I also added a static setting (reuseSameInstance) to JSONNull
-*   (default is true) which will change the behaviour of "CreateOrGet". If you set this to false
-*   CreateOrGet will not reuse the cached instance but instead create a new JSONNull instance each time.
-*   I made the JSONNull constructor private so if you need to create an instance manually use
-*   JSONNull.CreateOrGet()
-* 
-* 
-* The MIT License (MIT)
-* 
-* Copyright (c) 2012-2017 Markus Göbel (Bunny83)
-* 
-* Permission is hereby granted, free of charge, to any person obtaining a copy
-* of this software and associated documentation files (the "Software"), to deal
-* in the Software without restriction, including without limitation the rights
-* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-* copies of the Software, and to permit persons to whom the Software is
-* furnished to do so, subject to the following conditions:
-* 
-* The above copyright notice and this permission notice shall be included in all
-* copies or substantial portions of the Software.
-* 
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-* SOFTWARE.
-* 
-* * * * */
-
+   * A simple JSON Parser / builder
+   * ------------------------------
+   * 
+   * It mainly has been written as a simple JSON parser. It can build a JSON string
+   * from the node-tree, or generate a node tree from any valid JSON string.
+   * 
+   * If you want to use compression when saving to file / stream / B64 you have to include
+   * SharpZipLib ( http://www.icsharpcode.net/opensource/sharpziplib/ ) in your project and
+   * define "USE_SharpZipLib" at the top of the file
+   * 
+   * Written by Bunny83 
+   * 2012-06-09
+   * 
+   * [2012-06-09 First Version]
+   * - provides strongly typed node classes and lists / dictionaries
+   * - provides easy access to class members / array items / data values
+   * - the parser now properly identifies types. So generating JSON with this framework should work.
+   * - only double quotes (") are used for quoting strings.
+   * - provides "casting" properties to easily convert to / from those types:
+   *   int / float / double / bool
+   * - provides a common interface for each node so no explicit casting is required.
+   * - the parser tries to avoid errors, but if malformed JSON is parsed the result is more or less undefined
+   * - It can serialize/deserialize a node tree into/from an experimental compact binary format. It might
+   *   be handy if you want to store things in a file and don't want it to be easily modifiable
+   * 
+   * [2012-12-17 Update]
+   * - Added internal JSONLazyCreator class which simplifies the construction of a JSON tree
+   *   Now you can simple reference any item that doesn't exist yet and it will return a JSONLazyCreator
+   *   The class determines the required type by it's further use, creates the type and removes itself.
+   * - Added binary serialization / deserialization.
+   * - Added support for BZip2 zipped binary format. Requires the SharpZipLib ( http://www.icsharpcode.net/opensource/sharpziplib/ )
+   *   The usage of the SharpZipLib library can be disabled by removing or commenting out the USE_SharpZipLib define at the top
+   * - The serializer uses different types when it comes to store the values. Since my data values
+   *   are all of type string, the serializer will "try" which format fits best. The order is: int, float, double, bool, string.
+   *   It's not the most efficient way but for a moderate amount of data it should work on all platforms.
+   * 
+   * [2017-03-08 Update]
+   * - Optimised parsing by using a StringBuilder for token. This prevents performance issues when large
+   *   string data fields are contained in the json data.
+   * - Finally refactored the badly named JSONClass into JSONObject.
+   * - Replaced the old JSONData class by distict typed classes ( JSONString, JSONNumber, JSONBool, JSONNull ) this
+   *   allows to propertly convert the node tree back to json without type information loss. The actual value
+   *   parsing now happens at parsing time and not when you actually access one of the casting properties.
+   * 
+   * [2017-04-11 Update]
+   * - Fixed parsing bug where empty string values have been ignored.
+   * - Optimised "ToString" by using a StringBuilder internally. This should heavily improve performance for large files
+   * - Changed the overload of "ToString(string aIndent)" to "ToString(int aIndent)"
+   * 
+   * [2017-11-29 Update]
+   * - Removed the IEnumerator implementations on JSONArray & JSONObject and replaced it with a common
+   *   struct Enumerator in JSONNode that should avoid garbage generation. The enumerator always works
+   *   on KeyValuePair<string, JSONNode>, even for JSONArray.
+   * - Added two wrapper Enumerators that allows for easy key or value enumeration. A JSONNode now has
+   *   a "Keys" and a "Values" enumerable property. Those are also struct enumerators / enumerables
+   * - A KeyValuePair<string, JSONNode> can now be implicitly converted into a JSONNode. This allows
+   *   a foreach loop over a JSONNode to directly access the values only. Since KeyValuePair as well as
+   *   all the Enumerators are structs, no garbage is allocated.
+   * - To add Linq support another "LinqEnumerator" is available through the "Linq" property. This
+   *   enumerator does implement the generic IEnumerable interface so most Linq extensions can be used
+   *   on this enumerable object. This one does allocate memory as it's a wrapper class.
+   * - The Escape method now escapes all control characters (# < 32) in strings as uncode characters
+   *   (\uXXXX) and if the static bool JSONNode.forceASCII is set to true it will also escape all
+   *   characters # > 127. This might be useful if you require an ASCII output. Though keep in mind
+   *   when your strings contain many non-ascii characters the strings become much longer (x6) and are
+   *   no longer human readable.
+   * - The node types JSONObject and JSONArray now have an "Inline" boolean switch which will default to
+   *   false. It can be used to serialize this element inline even you serialize with an indented format
+   *   This is useful for arrays containing numbers so it doesn't place every number on a new line
+   * - Extracted the binary serialization code into a seperate extension file. All classes are now declared
+   *   as "partial" so an extension file can even add a new virtual or abstract method / interface to
+   *   JSONNode and override it in the concrete type classes. It's of course a hacky approach which is
+   *   generally not recommended, but i wanted to keep everything tightly packed.
+   * - Added a static CreateOrGet method to the JSONNull class. Since this class is immutable it could
+   *   be reused without major problems. If you have a lot null fields in your data it will help reduce
+   *   the memory / garbage overhead. I also added a static setting (reuseSameInstance) to JSONNull
+   *   (default is true) which will change the behaviour of "CreateOrGet". If you set this to false
+   *   CreateOrGet will not reuse the cached instance but instead create a new JSONNull instance each time.
+   *   I made the JSONNull constructor private so if you need to create an instance manually use
+   *   JSONNull.CreateOrGet()
+   * 
+   * [2018-01-09 Update]
+   * - Changed all double.TryParse and double.ToString uses to use the invariant culture to avoid problems
+   *   on systems with a culture that uses a comma as decimal point.
+   * 
+   * [2018-01-26 Update]
+   * - Added AsLong. Note that a JSONNumber is stored as double and can't represent all long values. However
+   *   storing it as string would work.
+   * - Added static setting "JSONNode.longAsString" which controls the default type that is used by the
+   *   LazyCreator when using AsLong
+   * 
+   * [2018-04-25 Update]
+   *  - Added support for parsing single values (JSONBool, JSONString, JSONNumber, JSONNull) as top level value.
+   * 
+   * The MIT License (MIT)
+   * 
+   * Copyright (c) 2012-2017 Markus Göbel (Bunny83)
+   * 
+   * Permission is hereby granted, free of charge, to any person obtaining a copy
+   * of this software and associated documentation files (the "Software"), to deal
+   * in the Software without restriction, including without limitation the rights
+   * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+   * copies of the Software, and to permit persons to whom the Software is
+   * furnished to do so, subject to the following conditions:
+   * 
+   * The above copyright notice and this permission notice shall be included in all
+   * copies or substantial portions of the Software.
+   * 
+   * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+   * SOFTWARE.
+   * 
+   * * * * */
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
+    using System.Text;
 
     namespace SimpleJSON
     {
@@ -239,6 +255,7 @@ namespace BeatSaberModInstaller.Internals
             #region common interface
 
             public static bool forceASCII = false; // Use Unicode by default
+            public static bool longAsString = false; // lazy creator creates a JSONString instead of JSONNumber
 
             public abstract JSONNodeType Tag { get; }
 
@@ -330,13 +347,13 @@ namespace BeatSaberModInstaller.Internals
                 get
                 {
                     double v = 0.0;
-                    if (double.TryParse(Value, out v))
+                    if (double.TryParse(Value, NumberStyles.Float, CultureInfo.InvariantCulture, out v))
                         return v;
                     return 0.0;
                 }
                 set
                 {
-                    Value = value.ToString();
+                    Value = value.ToString(CultureInfo.InvariantCulture);
                 }
             }
 
@@ -364,6 +381,21 @@ namespace BeatSaberModInstaller.Internals
                 set
                 {
                     Value = (value) ? "true" : "false";
+                }
+            }
+
+            public virtual long AsLong
+            {
+                get
+                {
+                    long val = 0;
+                    if (long.TryParse(Value, out val))
+                        return val;
+                    return 0L;
+                }
+                set
+                {
+                    Value = value.ToString();
                 }
             }
 
@@ -422,6 +454,17 @@ namespace BeatSaberModInstaller.Internals
             public static implicit operator int(JSONNode d)
             {
                 return (d == null) ? 0 : d.AsInt;
+            }
+
+            public static implicit operator JSONNode(long n)
+            {
+                if (longAsString)
+                    return new JSONString(n.ToString());
+                return new JSONNumber(n);
+            }
+            public static implicit operator long(JSONNode d)
+            {
+                return (d == null) ? 0L : d.AsLong;
             }
 
             public static implicit operator JSONNode(bool b)
@@ -524,26 +567,20 @@ namespace BeatSaberModInstaller.Internals
                 return result;
             }
 
-            static void ParseElement(JSONNode ctx, string token, string tokenName, bool quoted)
+            private static JSONNode ParseElement(string token, bool quoted)
             {
                 if (quoted)
-                {
-                    ctx.Add(tokenName, token);
-                    return;
-                }
+                    return token;
                 string tmp = token.ToLower();
                 if (tmp == "false" || tmp == "true")
-                    ctx.Add(tokenName, tmp == "true");
-                else if (tmp == "null")
-                    ctx.Add(tokenName, null);
+                    return tmp == "true";
+                if (tmp == "null")
+                    return JSONNull.CreateOrGet();
+                double val;
+                if (double.TryParse(token, NumberStyles.Float, CultureInfo.InvariantCulture, out val))
+                    return val;
                 else
-                {
-                    double val;
-                    if (double.TryParse(token, out val))
-                        ctx.Add(tokenName, val);
-                    else
-                        ctx.Add(tokenName, token);
-                }
+                    return token;
             }
 
             public static JSONNode Parse(string aJSON)
@@ -605,10 +642,8 @@ namespace BeatSaberModInstaller.Internals
 
                             stack.Pop();
                             if (Token.Length > 0 || TokenIsQuoted)
-                            {
-                                ParseElement(ctx, Token.ToString(), TokenName, TokenIsQuoted);
-                                TokenIsQuoted = false;
-                            }
+                                ctx.Add(TokenName, ParseElement(Token.ToString(), TokenIsQuoted));
+                            TokenIsQuoted = false;
                             TokenName = "";
                             Token.Length = 0;
                             if (stack.Count > 0)
@@ -638,10 +673,8 @@ namespace BeatSaberModInstaller.Internals
                                 break;
                             }
                             if (Token.Length > 0 || TokenIsQuoted)
-                            {
-                                ParseElement(ctx, Token.ToString(), TokenName, TokenIsQuoted);
-                                TokenIsQuoted = false;
-                            }
+                                ctx.Add(TokenName, ParseElement(Token.ToString(), TokenIsQuoted));
+                            TokenIsQuoted = false;
                             TokenName = "";
                             Token.Length = 0;
                             TokenIsQuoted = false;
@@ -705,6 +738,8 @@ namespace BeatSaberModInstaller.Internals
                 {
                     throw new Exception("JSON Parse: Quotation marks seems to be messed up.");
                 }
+                if (ctx == null)
+                    return ParseElement(Token.ToString(), TokenIsQuoted);
                 return ctx;
             }
 
@@ -1021,11 +1056,11 @@ namespace BeatSaberModInstaller.Internals
 
             public override string Value
             {
-                get { return m_Data.ToString(); }
+                get { return m_Data.ToString(CultureInfo.InvariantCulture); }
                 set
                 {
                     double v;
-                    if (double.TryParse(value, out v))
+                    if (double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out v))
                         m_Data = v;
                 }
             }
@@ -1033,6 +1068,11 @@ namespace BeatSaberModInstaller.Internals
             public override double AsDouble
             {
                 get { return m_Data; }
+                set { m_Data = value; }
+            }
+            public override long AsLong
+            {
+                get { return (long)m_Data; }
                 set { m_Data = value; }
             }
 
@@ -1048,7 +1088,7 @@ namespace BeatSaberModInstaller.Internals
 
             internal override void WriteToStringBuilder(StringBuilder aSB, int aIndent, int aIndentInc, JSONTextMode aMode)
             {
-                aSB.Append(m_Data);
+                aSB.Append(Value);
             }
             private static bool IsNumeric(object value)
             {
@@ -1196,59 +1236,36 @@ namespace BeatSaberModInstaller.Internals
                 m_Key = aKey;
             }
 
-            private void Set(JSONNode aVal)
+            private T Set<T>(T aVal) where T : JSONNode
             {
                 if (m_Key == null)
-                {
                     m_Node.Add(aVal);
-                }
                 else
-                {
                     m_Node.Add(m_Key, aVal);
-                }
                 m_Node = null; // Be GC friendly.
+                return aVal;
             }
 
             public override JSONNode this[int aIndex]
             {
-                get
-                {
-                    return new JSONLazyCreator(this);
-                }
-                set
-                {
-                    var tmp = new JSONArray();
-                    tmp.Add(value);
-                    Set(tmp);
-                }
+                get { return new JSONLazyCreator(this); }
+                set { Set(new JSONArray()).Add(value); }
             }
 
             public override JSONNode this[string aKey]
             {
-                get
-                {
-                    return new JSONLazyCreator(this, aKey);
-                }
-                set
-                {
-                    var tmp = new JSONObject();
-                    tmp.Add(aKey, value);
-                    Set(tmp);
-                }
+                get { return new JSONLazyCreator(this, aKey); }
+                set { Set(new JSONObject()).Add(aKey, value); }
             }
 
             public override void Add(JSONNode aItem)
             {
-                var tmp = new JSONArray();
-                tmp.Add(aItem);
-                Set(tmp);
+                Set(new JSONArray()).Add(aItem);
             }
 
             public override void Add(string aKey, JSONNode aItem)
             {
-                var tmp = new JSONObject();
-                tmp.Add(aKey, aItem);
-                Set(tmp);
+                Set(new JSONObject()).Add(aKey, aItem);
             }
 
             public static bool operator ==(JSONLazyCreator a, object b)
@@ -1277,82 +1294,55 @@ namespace BeatSaberModInstaller.Internals
 
             public override int AsInt
             {
-                get
-                {
-                    JSONNumber tmp = new JSONNumber(0);
-                    Set(tmp);
-                    return 0;
-                }
-                set
-                {
-                    JSONNumber tmp = new JSONNumber(value);
-                    Set(tmp);
-                }
+                get { Set(new JSONNumber(0)); return 0; }
+                set { Set(new JSONNumber(value)); }
             }
 
             public override float AsFloat
             {
-                get
-                {
-                    JSONNumber tmp = new JSONNumber(0.0f);
-                    Set(tmp);
-                    return 0.0f;
-                }
-                set
-                {
-                    JSONNumber tmp = new JSONNumber(value);
-                    Set(tmp);
-                }
+                get { Set(new JSONNumber(0.0f)); return 0.0f; }
+                set { Set(new JSONNumber(value)); }
             }
 
             public override double AsDouble
             {
+                get { Set(new JSONNumber(0.0)); return 0.0; }
+                set { Set(new JSONNumber(value)); }
+            }
+
+            public override long AsLong
+            {
                 get
                 {
-                    JSONNumber tmp = new JSONNumber(0.0);
-                    Set(tmp);
-                    return 0.0;
+                    if (longAsString)
+                        Set(new JSONString("0"));
+                    else
+                        Set(new JSONNumber(0.0));
+                    return 0L;
                 }
                 set
                 {
-                    JSONNumber tmp = new JSONNumber(value);
-                    Set(tmp);
+                    if (longAsString)
+                        Set(new JSONString(value.ToString()));
+                    else
+                        Set(new JSONNumber(value));
                 }
             }
 
             public override bool AsBool
             {
-                get
-                {
-                    JSONBool tmp = new JSONBool(false);
-                    Set(tmp);
-                    return false;
-                }
-                set
-                {
-                    JSONBool tmp = new JSONBool(value);
-                    Set(tmp);
-                }
+                get { Set(new JSONBool(false)); return false; }
+                set { Set(new JSONBool(value)); }
             }
 
             public override JSONArray AsArray
             {
-                get
-                {
-                    JSONArray tmp = new JSONArray();
-                    Set(tmp);
-                    return tmp;
-                }
+                get { return Set(new JSONArray()); }
             }
 
             public override JSONObject AsObject
             {
-                get
-                {
-                    JSONObject tmp = new JSONObject();
-                    Set(tmp);
-                    return tmp;
-                }
+                get { return Set(new JSONObject()); }
             }
             internal override void WriteToStringBuilder(StringBuilder aSB, int aIndent, int aIndentInc, JSONTextMode aMode)
             {
@@ -1369,4 +1359,5 @@ namespace BeatSaberModInstaller.Internals
             }
         }
     }
+
 }
