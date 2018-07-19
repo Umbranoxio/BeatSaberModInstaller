@@ -31,7 +31,7 @@
    "tag" : "Oculus",
    "gitPath" : "Umbranoxio/ScoreSaber",
    "releaseId" : 0
-  }
+  },
   "4" : {
    "name" : "Practice Plugin v1.1",
    "author" : " xyonico",
@@ -39,7 +39,7 @@
    "tag" : "",
    "gitPath" : "xyonico/PracticePlugin",
    "releaseId" : 0
-  }
+  },
   "5" : {
    "name" : "Beat Saber Tweaks 3.0",
    "author" : "taz030485",
@@ -47,7 +47,7 @@
    "tag" : "",
    "gitPath" : "taz030485/BeatSaberTweaks",
    "releaseId" : 0
-  }
+  },
   "6" : {
    "name" : "Discord Presence Plugin v1.2",
    "author" : " xyonico",
