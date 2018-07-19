@@ -1,5 +1,5 @@
 {
-  "totalMods" : 7,
+  "totalMods" : 4,
   "0" : {
    "name" : "Song Loader Plugin",
    "tag" : "",
@@ -22,24 +22,6 @@
    "name" : "Score Saber",
    "tag" : "Oculus",
    "gitPath" : "Umbranoxio/ScoreSaber",
-   "releaseId" : 0
-  },
-  "4" : {
-   "name" : "Practice Plugin",
-   "tag" : "",
-   "gitPath" : "xyonico/PracticePlugin",
-   "releaseId" : 0
-  },
-  "5" : {
-   "name" : "Beat Saber Tweaks",
-   "tag" : "",
-   "gitPath" : "taz030485/BeatSaberTweaks",
-   "releaseId" : 0
-  },
-  "6" : {
-   "name" : "Discord Presence Plugin",
-   "tag" : "",
-   "gitPath" : "xyonico/BeatSaberDiscordPresence",
    "releaseId" : 0
   }
 }
