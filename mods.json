@@ -1,5 +1,5 @@
 {
-  "totalMods" : 9,
+  "totalMods" : 8,
   "0" : {
    "name" : "Song Loader Plugin",
    "tag" : "",
@@ -46,12 +46,6 @@
    "name" : "Checkpoint Plugin",
    "tag" : "",
    "gitPath" : "Zacho1/CheckpointPlugin",
-   "releaseId" : 0
-  },
-  "8" : {
-   "name" : "InGameTime",
-   "tag" : "",
-   "gitPath" : "taz030485/InGameTime",
    "releaseId" : 0
   }
 }
