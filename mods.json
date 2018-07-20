@@ -1,5 +1,5 @@
 {
-  "totalMods" : 8,
+  "totalMods" : 7,
   "0" : {
    "name" : "Song Loader Plugin",
    "tag" : "",
@@ -40,12 +40,6 @@
    "name" : "Darth Maul",
    "tag" : "",
    "gitPath" : "PureDark/BSDarthMaul",
-   "releaseId" : 0
-  },
-  "7" : {
-   "name" : "Checkpoint Plugin",
-   "tag" : "",
-   "gitPath" : "Zacho1/CheckpointPlugin",
    "releaseId" : 0
   }
 }
