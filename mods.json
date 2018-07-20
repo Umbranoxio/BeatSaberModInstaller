@@ -1,5 +1,5 @@
 {
-  "totalMods" : 5,
+  "totalMods" : 9,
   "0" : {
    "name" : "Song Loader Plugin",
    "tag" : "",
@@ -29,6 +29,29 @@
    "tag" : "",
    "gitPath" : "xyonico/CameraPlus",
    "releaseId" : 0
+  },
+  "5" : {
+   "name" : "Transparent Wall",
+   "tag" : "",
+   "gitPath" : "PureDark/BSTransparentWall",
+   "releaseId" : 0
+  },
+  "6" : {
+   "name" : "Darth Maul",
+   "tag" : "",
+   "gitPath" : "PureDark/BSDarthMaul",
+   "releaseId" : 0
+  },
+  "7" : {
+   "name" : "Checkpoint Plugin",
+   "tag" : "",
+   "gitPath" : "Zacho1/CheckpointPlugin",
+   "releaseId" : 0
+  },
+  "8" : {
+   "name" : "InGameTime",
+   "tag" : "",
+   "gitPath" : "taz030485/InGameTime",
+   "releaseId" : 0
   }
 }
-
