@@ -147,6 +147,12 @@ namespace BeatSaberModInstaller
         #region UIEvents
         private void buttonInstall_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(InstallDirectory))
+            {
+                MessageBox.Show("No install directory selected!", "No install directory", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             new Thread(() =>
             {
                 Install();
@@ -257,7 +263,8 @@ namespace BeatSaberModInstaller
         private void NotFoundHandler()
         {
             bool found = false;
-            while (found == false)
+            bool trying = true;
+            while (found == false && trying)
             {
                 using (var folderDialog = new FolderBrowserDialog())
                 {
@@ -277,6 +284,10 @@ namespace BeatSaberModInstaller
                             MessageBox.Show("The directory you selected doesn't contain Beat Saber.exe! please try again!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
 
+                    }
+                    else
+                    {
+                        trying = false;
                     }
                 }
             }
