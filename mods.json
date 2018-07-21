@@ -1,5 +1,5 @@
 {
-  "totalMods" : 9,
+  "totalMods" : 10,
   "0" : {
    "name" : "Song Loader Plugin",
    "tag" : "",
@@ -52,6 +52,12 @@
   "name" : "Checkpoint Plugin",
   "tag" : "",
   "gitPath" : "Zacho1/CheckpointPlugin",
+  "releaseId" : 0
+  },
+  "9" : {
+  "name" : "Progress Counter",
+  "tag" : "",
+  "gitPath" : "Strackeror/BeatSaberProgressCounter",
   "releaseId" : 0
   }
 }
