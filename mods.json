@@ -1,5 +1,5 @@
 {
-  "totalMods" : 10,
+  "totalMods" : 11,
   "0" : {
    "name" : "Song Loader Plugin",
    "tag" : "",
@@ -59,5 +59,11 @@
   "tag" : "",
   "gitPath" : "Strackeror/BeatSaberProgressCounter",
   "releaseId" : 0
+  }
+  "10" : {
+   "name" : "BailOut Mode",
+   "tag" : "",
+   "gitPath" : "JumpmanSr/BailOutMode",
+   "releaseId" : 0
   }
 }
