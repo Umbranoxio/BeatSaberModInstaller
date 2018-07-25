@@ -12,5 +12,6 @@ The program currently supports:
 * [Beat Saber Tweaks](https://github.com/taz030485/BeatSaberTweaks) - by **taz030485**
 * [Discord Presence Plugin](https://github.com/xyonico/BeatSaberDiscordPresence) - by **xyonico**
 * [Progress Counter](https://github.com/Strackeror/BeatSaberProgressCounter) - by **Strackeror**
+* [Dynamic Camera](https://github.com/mihaiko/DynamicCamera) - by **WickedGaming**
 
 This uses the GitHub API to get the latest release of all these mods, so you know you'll always be getting the latest version!
