@@ -1,5 +1,5 @@
 {
-  "totalMods" : 11,
+  "totalMods" : 13,
   "0" : {
    "name" : "Song Loader Plugin",
    "tag" : "",
@@ -71,6 +71,12 @@
   "tag" : "",
   "gitPath" : "Strackeror/BeatSaberProgressCounter",
   "releaseId" : 0
-  }
+  },
+  "12" : {
+   "name" : "RandomSong",
+   "tag" : "",
+   "gitPath" : "taz030485/RandomSong",
+   "releaseId" : 0
+  },
 }
 
