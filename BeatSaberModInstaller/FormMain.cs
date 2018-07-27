@@ -38,13 +38,9 @@ namespace BeatSaberModInstaller
         #region ReleaseHandling
         private void LoadReleases()
         {
-            var decoded = JSON.Parse(DownloadSite("https://raw.githubusercontent.com/Umbranoxio/BeatSaberModInstaller/master/mods.json"));
-            int totalMods = decoded["totalMods"];
-            for (int i = 0; i < totalMods; i++)
+            foreach (JSONNode mod in JSON.Parse(DownloadSite("https://raw.githubusercontent.com/Umbranoxio/BeatSaberModInstaller/master/mods.json")))
             {
-                JSONNode current = decoded[i.ToString()];
-                ReleaseInfo release = new ReleaseInfo(null, null, null, true, null, current["gitPath"],
-                    current["releaseId"], current["tag"]);
+                ReleaseInfo release = new ReleaseInfo(null, null, null, true, null, mod["gitPath"], mod["releaseId"], mod["tag"]);
                 release = UpdateReleaseInfo(release.ReleaseId, release.GitPath, release.Tag);
                 releases.Add(release);
             }
