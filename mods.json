@@ -43,27 +43,34 @@
    "releaseId" : 0
   },
   "7" : {
-   "name" : "Custom Avatar",
+   "name" : "Custom Avatars",
    "tag" : "",
    "gitPath" : "Ikeiwa/BeatSaber-Custom-Avatar-Plugin",
    "releaseId" : 0
   },
   "8" : {
+   "name" : "Custom Sabers",
+   "tag" : "",
+   "gitPath" : "Reaxt00/CustomSaberPlugin",
+   "releaseId" : 0
+  },
+  "9" : {
    "name" : "Darth Maul",
    "tag" : "",
    "gitPath" : "PureDark/BSDarthMaul",
    "releaseId" : 0
   },
-  "9" : {
+  "10" : {
   "name" : "Checkpoint Plugin",
   "tag" : "",
   "gitPath" : "Zacho1/CheckpointPlugin",
   "releaseId" : 0
   },
-  "10" : {
+  "11" : {
   "name" : "Progress Counter",
   "tag" : "",
   "gitPath" : "Strackeror/BeatSaberProgressCounter",
   "releaseId" : 0
   }
 }
+
