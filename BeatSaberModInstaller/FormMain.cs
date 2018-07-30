@@ -15,7 +15,7 @@ namespace BeatSaberModInstaller
     public partial class FormMain : Form
     {
         public const string BaseEndpoint = "https://api.github.com/repos/";
-        public const Int16 CurrentVersion = 8;
+        public const Int16 CurrentVersion = 9;
         public List<ReleaseInfo> releases;
         public string InstallDirectory = @"";
         public bool isSteam = true;
