@@ -1,76 +1,74 @@
-{
-  "totalMods" : 11,
-  "0" : {
-   "name" : "Song Loader Plugin",
-   "tag" : "",
-   "gitPath" : "xyonico/BeatSaberSongInjector",
-   "releaseId" : 1
+[
+  {
+    "name" : "Song Loader Plugin",
+    "tag" : "",
+    "gitPath" : "xyonico/BeatSaberSongInjector",
+    "releaseId" : 1
   },
-  "1" : {
-   "name" : "BeatSaver Downloader",
-   "tag" : "",
-   "gitPath" : "andruzzzhka/BeatSaverDownloader",
-   "releaseId" : 0
+  {
+    "name" : "BeatSaver Downloader",
+    "tag" : "",
+    "gitPath" : "andruzzzhka/BeatSaverDownloader",
+    "releaseId" : 0
   },
-  "2" : {
-   "name" : "Score Saber",
-   "tag" : "Steam",
-   "gitPath" : "Umbranoxio/ScoreSaber",
-   "releaseId" : 1
+  {
+    "name" : "Score Saber",
+    "tag" : "Steam",
+    "gitPath" : "Umbranoxio/ScoreSaber",
+    "releaseId" : 1
   },
-  "3" : {
-   "name" : "Score Saber",
-   "tag" : "Oculus",
-   "gitPath" : "Umbranoxio/ScoreSaber",
-   "releaseId" : 0
+  {
+    "name" : "Score Saber",
+    "tag" : "Oculus",
+    "gitPath" : "Umbranoxio/ScoreSaber",
+    "releaseId" : 0
   },
-  "4" : {
-   "name" : "Beat Saber Tweaks",
-   "tag" : "",
-   "gitPath" : "taz030485/BeatSaberTweaks",
-   "releaseId" : 0
+  {
+    "name" : "Beat Saber Tweaks",
+    "tag" : "",
+    "gitPath" : "taz030485/BeatSaberTweaks",
+    "releaseId" : 0
   },
-  "5" : {
-   "name" : "Camera Plus",
-   "tag" : "",
-   "gitPath" : "xyonico/CameraPlus",
-   "releaseId" : 0
+  {
+    "name" : "Camera Plus",
+    "tag" : "",
+    "gitPath" : "xyonico/CameraPlus",
+    "releaseId" : 0
   },
-  "6" : {
-   "name" : "Transparent Wall",
-   "tag" : "",
-   "gitPath" : "PureDark/BSTransparentWall",
-   "releaseId" : 0
+  {
+    "name" : "Transparent Wall",
+    "tag" : "",
+    "gitPath" : "PureDark/BSTransparentWall",
+    "releaseId" : 0
   },
-  "7" : {
-   "name" : "Custom Avatars",
-   "tag" : "",
-   "gitPath" : "Ikeiwa/BeatSaber-Custom-Avatar-Plugin",
-   "releaseId" : 0
+  {
+    "name" : "Custom Avatars",
+    "tag" : "",
+    "gitPath" : "Ikeiwa/BeatSaber-Custom-Avatar-Plugin",
+    "releaseId" : 0
   },
-  "8" : {
-   "name" : "Custom Sabers",
-   "tag" : "",
-   "gitPath" : "Reaxt00/CustomSaberPlugin",
-   "releaseId" : 0
+  {
+    "name" : "Custom Sabers",
+    "tag" : "",
+    "gitPath" : "Reaxt00/CustomSaberPlugin",
+    "releaseId" : 0
   },
-  "9" : {
-   "name" : "Darth Maul",
-   "tag" : "",
-   "gitPath" : "PureDark/BSDarthMaul",
-   "releaseId" : 0
+  {
+    "name" : "Darth Maul",
+    "tag" : "",
+    "gitPath" : "PureDark/BSDarthMaul",
+    "releaseId" : 0
   },
-  "10" : {
-  "name" : "Checkpoint Plugin",
-  "tag" : "",
-  "gitPath" : "Zacho1/CheckpointPlugin",
-  "releaseId" : 0
+  {
+    "name" : "Checkpoint Plugin",
+    "tag" : "",
+    "gitPath" : "Zacho1/CheckpointPlugin",
+    "releaseId" : 0
   },
-  "11" : {
-  "name" : "Progress Counter",
-  "tag" : "",
-  "gitPath" : "Strackeror/BeatSaberProgressCounter",
-  "releaseId" : 0
+  {
+    "name" : "Progress Counter",
+    "tag" : "",
+    "gitPath" : "Strackeror/BeatSaberProgressCounter",
+    "releaseId" : 0
   }
-}
-
+]
