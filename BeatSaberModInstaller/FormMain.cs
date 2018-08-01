@@ -8,14 +8,19 @@ using System.IO;
 using System.Threading;
 using BeatSaberModInstaller.Internals;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 using BeatSaberModInstaller.Internals.SimpleJSON;
+using Microsoft.Win32;
+using System.Management;
+
 namespace BeatSaberModInstaller
 {
     public partial class FormMain : Form
     {
         public const string BaseEndpoint = "https://api.github.com/repos/";
         public const Int16 CurrentVersion = 8;
+        private const string AppFileName = "Beat Saber.exe";
         public List<ReleaseInfo> releases;
         public string InstallDirectory = @"";
         public bool isSteam = true;
@@ -147,6 +152,12 @@ namespace BeatSaberModInstaller
         #region UIEvents
         private void buttonInstall_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(InstallDirectory))
+            {
+                MessageBox.Show("No install directory selected!", "No install directory", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             new Thread(() =>
             {
                 Install();
@@ -257,7 +268,8 @@ namespace BeatSaberModInstaller
         private void NotFoundHandler()
         {
             bool found = false;
-            while (found == false)
+            bool trying = true;
+            while (found == false && trying)
             {
                 using (var folderDialog = new FolderBrowserDialog())
                 {
@@ -277,6 +289,10 @@ namespace BeatSaberModInstaller
                             MessageBox.Show("The directory you selected doesn't contain Beat Saber.exe! please try again!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
 
+                    }
+                    else
+                    {
+                        trying = false;
                     }
                 }
             }
@@ -337,7 +353,6 @@ namespace BeatSaberModInstaller
         private void LocationHandler()
         {
             string steam = GetSteamLocation();
-            string oculus = GetOculusHomeLocation();
             if (steam != null)
             {
                 if (Directory.Exists(steam))
@@ -351,20 +366,17 @@ namespace BeatSaberModInstaller
                     }
                 }
             }
-            if (oculus != null)
+
+            string path = GetValidOculusLocation();
+            if (path != null)
             {
-                if (Directory.Exists(oculus))
-                {
-                    if (File.Exists(oculus + @"\Beat Saber.exe"))
-                    {
-                        textBoxDirectory.Text = oculus;
-                        InstallDirectory = oculus;
-                        isSteam = false;
-                        platformDetected = true;
-                        return;
-                    }
-                }
+                textBoxDirectory.Text = path;
+                InstallDirectory      = path;
+                isSteam               = false;
+                platformDetected      = true;
+                return;
             }
+
             ShowErrorFindingDirectoryMessage();
         }
         private void ShowErrorFindingDirectoryMessage()
@@ -382,14 +394,66 @@ namespace BeatSaberModInstaller
             }
             return path;
         }
-        private string GetOculusHomeLocation()
+        private string GetValidOculusLocation()
         {
-            string path = RegistryWOW6432.GetRegKey32(RegHive.HKEY_LOCAL_MACHINE, @"SOFTWARE\Oculus VR, LLC\Oculus\Config", @"InitialAppLibrary");
-            if (path != null)
+            const string subFolderPath = @"Software\hyperbolic-magnetism-beat-saber\";
+
+            string path = Registry.LocalMachine.OpenSubKey("SOFTWARE")?.OpenSubKey("WOW6432Node")?.OpenSubKey("Oculus VR, LLC")?.OpenSubKey("Oculus")?.OpenSubKey("Config")?.GetValue("InitialAppLibrary") as string;
+
+            if (path == null)
             {
-                path = path + @"\Software\hyperbolic-magnetism-beat-saber";
+                // No Oculus Home detected
+                return null;
             }
-            return path;
+
+            // With the old Home
+            string folderPath = Path.Combine(path, subFolderPath);
+            string fullAppPath = Path.Combine(folderPath, AppFileName);
+
+            if (File.Exists(fullAppPath))
+            {
+                return folderPath;
+            }
+            else
+            {
+                // With the new Home / Dash
+                using (RegistryKey librariesKey = Registry.CurrentUser.OpenSubKey("Software")?.OpenSubKey("Oculus VR, LLC")?.OpenSubKey("Oculus")?.OpenSubKey("Libraries"))
+                {
+                    // Oculus libraries uses GUID volume paths like this "\\?\Volume{0fea75bf-8ad6-457c-9c24-cbe2396f1096}\Games\Oculus Apps", we need to transform these to "D:\Game"\Oculus Apps"
+                    WqlObjectQuery wqlQuery = new WqlObjectQuery("SELECT * FROM Win32_Volume");
+                    ManagementObjectSearcher searcher = new ManagementObjectSearcher(wqlQuery);
+                    Dictionary<string, string> guidLetterVolumes = new Dictionary<string, string>();
+
+                    foreach (ManagementBaseObject disk in searcher.Get())
+                    {
+                        var diskId = ((string) disk.GetPropertyValue("DeviceID")).Substring(11, 36);
+                        var diskLetter = ((string) disk.GetPropertyValue("DriveLetter")) + @"\";
+
+                        if (!string.IsNullOrWhiteSpace(diskLetter))
+                        {
+                            guidLetterVolumes.Add(diskId, diskLetter);
+                        }
+                    }
+
+                    // Search among the library folders
+                    foreach (string libraryKeyName in librariesKey.GetSubKeyNames())
+                    {
+                        using (RegistryKey libraryKey = librariesKey.OpenSubKey(libraryKeyName))
+                        {
+                            string libraryPath = (string) libraryKey.GetValue("Path");
+                            folderPath = Path.Combine(guidLetterVolumes.First(x => libraryPath.Contains(x.Key)).Value, libraryPath.Substring(49), subFolderPath);
+                            fullAppPath = Path.Combine(folderPath, AppFileName);
+
+                            if (File.Exists(fullAppPath))
+                            {
+                                return folderPath;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return null;
         }
         private void CheckDefaultMod(ReleaseInfo release, ListViewItem item)
         {
