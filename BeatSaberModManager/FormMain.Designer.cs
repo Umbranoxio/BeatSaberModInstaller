@@ -40,17 +40,17 @@
             this.listViewMods = new System.Windows.Forms.ListView();
             this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderAuthor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStripMain = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPageCredits = new System.Windows.Forms.TabPage();
-            this.buttonViewInfo = new System.Windows.Forms.Button();
-            this.columnHeaderVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.labelModSaber1 = new System.Windows.Forms.Label();
-            this.linkLabelModSaberLink = new System.Windows.Forms.LinkLabel();
-            this.labelModSaber2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.linkLabelUmbranox = new System.Windows.Forms.LinkLabel();
             this.linkLabellolPants = new System.Windows.Forms.LinkLabel();
+            this.linkLabelUmbranox = new System.Windows.Forms.LinkLabel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.labelModSaber2 = new System.Windows.Forms.Label();
+            this.linkLabelModSaberLink = new System.Windows.Forms.LinkLabel();
+            this.labelModSaber1 = new System.Windows.Forms.Label();
+            this.buttonViewInfo = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabPageCore.SuspendLayout();
             this.contextMenuStripMain.SuspendLayout();
@@ -164,6 +164,11 @@
             this.columnHeaderAuthor.Text = "Author";
             this.columnHeaderAuthor.Width = 150;
             // 
+            // columnHeaderVersion
+            // 
+            this.columnHeaderVersion.Text = "Version";
+            this.columnHeaderVersion.Width = 107;
+            // 
             // contextMenuStripMain
             // 
             this.contextMenuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -192,6 +197,72 @@
             this.tabPageCredits.Text = "Mod Manager Credits";
             this.tabPageCredits.UseVisualStyleBackColor = true;
             // 
+            // linkLabellolPants
+            // 
+            this.linkLabellolPants.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.linkLabellolPants.AutoSize = true;
+            this.linkLabellolPants.Location = new System.Drawing.Point(383, 110);
+            this.linkLabellolPants.Name = "linkLabellolPants";
+            this.linkLabellolPants.Size = new System.Drawing.Size(48, 13);
+            this.linkLabellolPants.TabIndex = 5;
+            this.linkLabellolPants.TabStop = true;
+            this.linkLabellolPants.Text = "lolPants";
+            this.linkLabellolPants.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabellolPants_LinkClicked);
+            // 
+            // linkLabelUmbranox
+            // 
+            this.linkLabelUmbranox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.linkLabelUmbranox.AutoSize = true;
+            this.linkLabelUmbranox.Location = new System.Drawing.Point(302, 133);
+            this.linkLabelUmbranox.Name = "linkLabelUmbranox";
+            this.linkLabelUmbranox.Size = new System.Drawing.Size(60, 13);
+            this.linkLabelUmbranox.TabIndex = 4;
+            this.linkLabelUmbranox.TabStop = true;
+            this.linkLabelUmbranox.Text = "Umbranox";
+            this.linkLabelUmbranox.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelUmbranox_LinkClicked);
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(174, 133);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(134, 13);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Mod Installer created by ";
+            // 
+            // labelModSaber2
+            // 
+            this.labelModSaber2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelModSaber2.AutoSize = true;
+            this.labelModSaber2.Location = new System.Drawing.Point(326, 110);
+            this.labelModSaber2.Name = "labelModSaber2";
+            this.labelModSaber2.Size = new System.Drawing.Size(60, 13);
+            this.labelModSaber2.TabIndex = 2;
+            this.labelModSaber2.Text = "created by";
+            // 
+            // linkLabelModSaberLink
+            // 
+            this.linkLabelModSaberLink.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.linkLabelModSaberLink.AutoSize = true;
+            this.linkLabelModSaberLink.Location = new System.Drawing.Point(256, 110);
+            this.linkLabelModSaberLink.Name = "linkLabelModSaberLink";
+            this.linkLabelModSaberLink.Size = new System.Drawing.Size(73, 13);
+            this.linkLabelModSaberLink.TabIndex = 1;
+            this.linkLabelModSaberLink.TabStop = true;
+            this.linkLabelModSaberLink.Text = "modsaber.ml";
+            this.linkLabelModSaberLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelModSaberLink_LinkClicked);
+            // 
+            // labelModSaber1
+            // 
+            this.labelModSaber1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelModSaber1.AutoSize = true;
+            this.labelModSaber1.Location = new System.Drawing.Point(75, 110);
+            this.labelModSaber1.Name = "labelModSaber1";
+            this.labelModSaber1.Size = new System.Drawing.Size(187, 13);
+            this.labelModSaber1.TabIndex = 0;
+            this.labelModSaber1.Text = "Mod Hosting Platform Provided by ";
+            // 
             // buttonViewInfo
             // 
             this.buttonViewInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -203,71 +274,6 @@
             this.buttonViewInfo.Text = "View Selected Mod Info";
             this.buttonViewInfo.UseVisualStyleBackColor = true;
             this.buttonViewInfo.Click += new System.EventHandler(this.buttonViewInfo_Click);
-            // 
-            // columnHeaderVersion
-            // 
-            this.columnHeaderVersion.Text = "Version";
-            this.columnHeaderVersion.Width = 107;
-            // 
-            // labelModSaber1
-            // 
-            this.labelModSaber1.AutoSize = true;
-            this.labelModSaber1.Location = new System.Drawing.Point(75, 110);
-            this.labelModSaber1.Name = "labelModSaber1";
-            this.labelModSaber1.Size = new System.Drawing.Size(187, 13);
-            this.labelModSaber1.TabIndex = 0;
-            this.labelModSaber1.Text = "Mod Hosting Platform Provided by ";
-            // 
-            // linkLabelModSaberLink
-            // 
-            this.linkLabelModSaberLink.AutoSize = true;
-            this.linkLabelModSaberLink.Location = new System.Drawing.Point(256, 110);
-            this.linkLabelModSaberLink.Name = "linkLabelModSaberLink";
-            this.linkLabelModSaberLink.Size = new System.Drawing.Size(73, 13);
-            this.linkLabelModSaberLink.TabIndex = 1;
-            this.linkLabelModSaberLink.TabStop = true;
-            this.linkLabelModSaberLink.Text = "modsaber.ml";
-            this.linkLabelModSaberLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelModSaberLink_LinkClicked);
-            // 
-            // labelModSaber2
-            // 
-            this.labelModSaber2.AutoSize = true;
-            this.labelModSaber2.Location = new System.Drawing.Point(326, 110);
-            this.labelModSaber2.Name = "labelModSaber2";
-            this.labelModSaber2.Size = new System.Drawing.Size(60, 13);
-            this.labelModSaber2.TabIndex = 2;
-            this.labelModSaber2.Text = "created by";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(174, 133);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(134, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Mod Installer created by ";
-            // 
-            // linkLabelUmbranox
-            // 
-            this.linkLabelUmbranox.AutoSize = true;
-            this.linkLabelUmbranox.Location = new System.Drawing.Point(302, 133);
-            this.linkLabelUmbranox.Name = "linkLabelUmbranox";
-            this.linkLabelUmbranox.Size = new System.Drawing.Size(60, 13);
-            this.linkLabelUmbranox.TabIndex = 4;
-            this.linkLabelUmbranox.TabStop = true;
-            this.linkLabelUmbranox.Text = "Umbranox";
-            this.linkLabelUmbranox.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelUmbranox_LinkClicked);
-            // 
-            // linkLabellolPants
-            // 
-            this.linkLabellolPants.AutoSize = true;
-            this.linkLabellolPants.Location = new System.Drawing.Point(383, 110);
-            this.linkLabellolPants.Name = "linkLabellolPants";
-            this.linkLabellolPants.Size = new System.Drawing.Size(48, 13);
-            this.linkLabellolPants.TabIndex = 5;
-            this.linkLabellolPants.TabStop = true;
-            this.linkLabellolPants.Text = "lolPants";
-            this.linkLabellolPants.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabellolPants_LinkClicked);
             // 
             // FormMain
             // 
