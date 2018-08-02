@@ -127,6 +127,13 @@ namespace BeatSaberModManager
         {
             new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
         }
+        private void viewInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listViewMods.SelectedItems.Count >= 1)
+            {
+                new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
+            }
+        }
         private void linkLabellolPants_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://github.com/lolPants");
@@ -143,5 +150,6 @@ namespace BeatSaberModManager
         }
         #endregion
 
+        
     }
 }

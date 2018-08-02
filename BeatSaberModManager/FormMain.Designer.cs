@@ -174,13 +174,14 @@
             this.contextMenuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.viewInfoToolStripMenuItem});
             this.contextMenuStripMain.Name = "contextMenuStripMain";
-            this.contextMenuStripMain.Size = new System.Drawing.Size(124, 26);
+            this.contextMenuStripMain.Size = new System.Drawing.Size(181, 48);
             // 
             // viewInfoToolStripMenuItem
             // 
             this.viewInfoToolStripMenuItem.Name = "viewInfoToolStripMenuItem";
-            this.viewInfoToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.viewInfoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.viewInfoToolStripMenuItem.Text = "View Info";
+            this.viewInfoToolStripMenuItem.Click += new System.EventHandler(this.viewInfoToolStripMenuItem_Click);
             // 
             // tabPageCredits
             // 
