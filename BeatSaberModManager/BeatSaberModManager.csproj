@@ -152,9 +152,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\descriptionTemplate.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="saber.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

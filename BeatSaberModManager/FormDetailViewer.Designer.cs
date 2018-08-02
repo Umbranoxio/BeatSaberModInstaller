@@ -51,7 +51,7 @@
             // 
             this.linkLabelDirectLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.linkLabelDirectLink.AutoSize = true;
-            this.linkLabelDirectLink.Location = new System.Drawing.Point(12, 350);
+            this.linkLabelDirectLink.Location = new System.Drawing.Point(12, 454);
             this.linkLabelDirectLink.Name = "linkLabelDirectLink";
             this.linkLabelDirectLink.Size = new System.Drawing.Size(94, 13);
             this.linkLabelDirectLink.TabIndex = 3;
@@ -62,7 +62,7 @@
             // buttonClose
             // 
             this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonClose.Location = new System.Drawing.Point(434, 345);
+            this.buttonClose.Location = new System.Drawing.Point(548, 449);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 23);
             this.buttonClose.TabIndex = 4;
@@ -88,7 +88,7 @@
             this.panelDescription.Controls.Add(this.webBrowserDescription);
             this.panelDescription.Location = new System.Drawing.Point(15, 48);
             this.panelDescription.Name = "panelDescription";
-            this.panelDescription.Size = new System.Drawing.Size(493, 291);
+            this.panelDescription.Size = new System.Drawing.Size(607, 395);
             this.panelDescription.TabIndex = 5;
             // 
             // webBrowserDescription
@@ -98,14 +98,14 @@
             this.webBrowserDescription.Location = new System.Drawing.Point(0, 0);
             this.webBrowserDescription.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowserDescription.Name = "webBrowserDescription";
-            this.webBrowserDescription.Size = new System.Drawing.Size(491, 289);
+            this.webBrowserDescription.Size = new System.Drawing.Size(605, 393);
             this.webBrowserDescription.TabIndex = 6;
             // 
             // FormDetailViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(520, 375);
+            this.ClientSize = new System.Drawing.Size(634, 479);
             this.Controls.Add(this.panelDescription);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.linkLabelDirectLink);

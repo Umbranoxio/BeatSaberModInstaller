@@ -4,6 +4,7 @@ using BeatSaberModManager.Core;
 using System.Threading;
 using BeatSaberModManager.DataModels;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace BeatSaberModManager
 {
@@ -79,6 +80,10 @@ namespace BeatSaberModManager
         private void CheckDefaultMod(ReleaseInfo release, ListViewItem item)
         {
             string link = release.downloadLink.ToLower();
+            if (link.Contains("song-loader"))
+            {
+                item.Text = item.Text + " (required)";
+            }
             if (link.Contains("song-loader") || link.Contains("scoresaber") || link.Contains("beatsaver"))
             {
                 item.Checked = true;
@@ -149,7 +154,6 @@ namespace BeatSaberModManager
             Process.Start("https://twitter.com/Umbranoxus");
         }
         #endregion
-
-        
+   
     }
 }

@@ -19,7 +19,7 @@ namespace BeatSaberModManager.Core
         }
         public void PopulateReleases()
         {
-            string raw = CallApiFunction("api/public/all/approved");
+            string raw = CallApiFunction("api/public/temp/approved");
             if (raw != null)
             {
                 var decoded = JSON.Parse(raw);
