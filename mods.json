@@ -1,5 +1,5 @@
 {
-  "totalMods" : 11,
+  "totalMods" : 12,
   "0" : {
    "name" : "Song Loader Plugin",
    "tag" : "",
@@ -37,36 +37,42 @@
    "releaseId" : 0
   },
   "6" : {
+   "name" : "Dynamic Camera",
+   "tag" : "",
+   "gitPath" : "mihaiko/DynamicCamera",
+   "releaseId" : 0
+  },
+  "7" : {
    "name" : "Transparent Wall",
    "tag" : "",
    "gitPath" : "PureDark/BSTransparentWall",
    "releaseId" : 0
   },
-  "7" : {
+  "8" : {
    "name" : "Custom Avatars",
    "tag" : "",
    "gitPath" : "Ikeiwa/BeatSaber-Custom-Avatar-Plugin",
    "releaseId" : 0
   },
-  "8" : {
+  "9" : {
    "name" : "Custom Sabers",
    "tag" : "",
    "gitPath" : "Reaxt00/CustomSaberPlugin",
    "releaseId" : 0
   },
-  "9" : {
+  "10" : {
    "name" : "Darth Maul",
    "tag" : "",
    "gitPath" : "PureDark/BSDarthMaul",
    "releaseId" : 0
   },
-  "10" : {
+  "11" : {
   "name" : "Checkpoint Plugin",
   "tag" : "",
   "gitPath" : "Zacho1/CheckpointPlugin",
   "releaseId" : 0
   },
-  "11" : {
+  "12" : {
   "name" : "Progress Counter",
   "tag" : "",
   "gitPath" : "Strackeror/BeatSaberProgressCounter",
