@@ -79,7 +79,7 @@ namespace BeatSaberModManager
         private void CheckDefaultMod(ReleaseInfo release, ListViewItem item)
         {
             string link = release.downloadLink.ToLower();
-            if (link.Contains("songloader") || link.Contains("scoresaber") || link.Contains("beatsaver"))
+            if (link.Contains("song-loader") || link.Contains("scoresaber") || link.Contains("beatsaver"))
             {
                 item.Checked = true;
                 release.install = true;
@@ -109,7 +109,7 @@ namespace BeatSaberModManager
         private void listViewMods_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             ReleaseInfo release = (ReleaseInfo)e.Item.Tag;
-            if (release.downloadLink.ToLower().Contains("songloader")) { e.Item.Checked = true; };
+            if (release.downloadLink.ToLower().Contains("song-loader")) { e.Item.Checked = true; };
             release.install = e.Item.Checked;
         }
         private void listViewMods_SelectedIndexChanged(object sender, EventArgs e)
