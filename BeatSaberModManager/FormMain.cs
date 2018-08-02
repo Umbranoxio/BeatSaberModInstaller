@@ -4,7 +4,6 @@ using BeatSaberModManager.Core;
 using System.Threading;
 using BeatSaberModManager.DataModels;
 using System.Diagnostics;
-using System.Drawing;
 
 namespace BeatSaberModManager
 {
