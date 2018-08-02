@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A053076C-1827-4FD0-B29C-35CDEC751687}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BeatSaberModManager</RootNamespace>
+    <AssemblyName>BeatSaberModManager</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\Helper.cs" />
+    <Compile Include="Core\InstallerLogic.cs" />
+    <Compile Include="Core\PathLogic.cs" />
+    <Compile Include="Core\RemoteLogic.cs" />
+    <Compile Include="DataModels\Platform.cs" />
+    <Compile Include="DataModels\ReleaseInfo.cs" />
+    <Compile Include="Dependencies\CommonMark\CommonMarkAdditionalFeatures.cs" />
+    <Compile Include="Dependencies\CommonMark\CommonMarkConverter.cs" />
+    <Compile Include="Dependencies\CommonMark\CommonMarkException.cs" />
+    <Compile Include="Dependencies\CommonMark\CommonMarkSettings.cs" />
+    <Compile Include="Dependencies\CommonMark\Formatters\HtmlFormatter.cs" />
+    <Compile Include="Dependencies\CommonMark\Formatters\HtmlFormatterSlim.cs" />
+    <Compile Include="Dependencies\CommonMark\Formatters\HtmlTextWriter.cs" />
+    <Compile Include="Dependencies\CommonMark\Formatters\Printer.cs" />
+    <Compile Include="Dependencies\CommonMark\Func.cs" />
+    <Compile Include="Dependencies\CommonMark\Lazy.cs" />
+    <Compile Include="Dependencies\CommonMark\OutputFormat.cs" />
+    <Compile Include="Dependencies\CommonMark\Parser\BlockMethods.cs" />
+    <Compile Include="Dependencies\CommonMark\Parser\EntityDecoder.cs" />
+    <Compile Include="Dependencies\CommonMark\Parser\InlineMethods.cs" />
+    <Compile Include="Dependencies\CommonMark\Parser\InlineStack.cs" />
+    <Compile Include="Dependencies\CommonMark\Parser\LineInfo.cs" />
+    <Compile Include="Dependencies\CommonMark\Parser\PositionOffset.cs" />
+    <Compile Include="Dependencies\CommonMark\Parser\PositionTracker.cs" />
+    <Compile Include="Dependencies\CommonMark\Parser\Scanner.cs" />
+    <Compile Include="Dependencies\CommonMark\Parser\ScannerCharacterMatcher.cs" />
+    <Compile Include="Dependencies\CommonMark\Parser\ScannerHtmlTag.cs" />
+    <Compile Include="Dependencies\CommonMark\Parser\Subject.cs" />
+    <Compile Include="Dependencies\CommonMark\Parser\TabTextReader.cs" />
+    <Compile Include="Dependencies\CommonMark\Syntax\Block.cs" />
+    <Compile Include="Dependencies\CommonMark\Syntax\BlockTag.cs" />
+    <Compile Include="Dependencies\CommonMark\Syntax\DocumentData.cs" />
+    <Compile Include="Dependencies\CommonMark\Syntax\EmphasisData.cs" />
+    <Compile Include="Dependencies\CommonMark\Syntax\Enumerable.cs" />
+    <Compile Include="Dependencies\CommonMark\Syntax\EnumeratorEntry.cs" />
+    <Compile Include="Dependencies\CommonMark\Syntax\FencedCodeData.cs" />
+    <Compile Include="Dependencies\CommonMark\Syntax\HeadingData.cs" />
+    <Compile Include="Dependencies\CommonMark\Syntax\HtmlBlockType.cs" />
+    <Compile Include="Dependencies\CommonMark\Syntax\Inline.cs" />
+    <Compile Include="Dependencies\CommonMark\Syntax\InlineContentLinkable.cs" />
+    <Compile Include="Dependencies\CommonMark\Syntax\InlineTag.cs" />
+    <Compile Include="Dependencies\CommonMark\Syntax\ListData.cs" />
+    <Compile Include="Dependencies\CommonMark\Syntax\ListDelimiter.cs" />
+    <Compile Include="Dependencies\CommonMark\Syntax\ListType.cs" />
+    <Compile Include="Dependencies\CommonMark\Syntax\Reference.cs" />
+    <Compile Include="Dependencies\CommonMark\Syntax\StringContent.cs" />
+    <Compile Include="Dependencies\CommonMark\Syntax\StringContentPart.cs" />
+    <Compile Include="Dependencies\CommonMark\Utilities.cs" />
+    <Compile Include="Dependencies\RegHelper.cs" />
+    <Compile Include="Dependencies\SimpleJson.cs" />
+    <Compile Include="Dependencies\Unzip.cs" />
+    <Compile Include="FormDetailViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDetailViewer.Designer.cs">
+      <DependentUpon>FormDetailViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPlatformSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPlatformSelect.Designer.cs">
+      <DependentUpon>FormPlatformSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormDetailViewer.resx">
+      <DependentUpon>FormDetailViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPlatformSelect.resx">
+      <DependentUpon>FormPlatformSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\descriptionTemplate.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
