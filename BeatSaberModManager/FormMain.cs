@@ -102,6 +102,12 @@ namespace BeatSaberModManager
         }
         private void buttonInstall_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(textBoxDirectory.Text))
+            {
+                MessageBox.Show("No install directory selected!", "No install directory", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             new Thread(() => { installer.Run(); }).Start();
         }
 

@@ -88,6 +88,10 @@ namespace BeatSaberModManager.Core
                             MessageBox.Show("The directory you selected doesn't contain Beat Saber.exe! please try again!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
+                    else
+                    {
+                        return null;
+                    }
                 }
             }
             return string.Empty;
