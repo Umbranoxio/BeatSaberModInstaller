@@ -101,33 +101,33 @@
     <Compile Include="Dependencies\RegHelper.cs" />
     <Compile Include="Dependencies\SimpleJson.cs" />
     <Compile Include="Dependencies\Unzip.cs" />
-    <Compile Include="FormDetailViewer.cs">
+    <Compile Include="Forms\FormDetailViewer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormDetailViewer.Designer.cs">
+    <Compile Include="Forms\FormDetailViewer.Designer.cs">
       <DependentUpon>FormDetailViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormMain.cs">
+    <Compile Include="Forms\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormMain.Designer.cs">
+    <Compile Include="Forms\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormPlatformSelect.cs">
+    <Compile Include="Forms\FormPlatformSelect.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormPlatformSelect.Designer.cs">
+    <Compile Include="Forms\FormPlatformSelect.Designer.cs">
       <DependentUpon>FormPlatformSelect.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormDetailViewer.resx">
+    <EmbeddedResource Include="Forms\FormDetailViewer.resx">
       <DependentUpon>FormDetailViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormMain.resx">
+    <EmbeddedResource Include="Forms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormPlatformSelect.resx">
+    <EmbeddedResource Include="Forms\FormPlatformSelect.resx">
       <DependentUpon>FormPlatformSelect.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
