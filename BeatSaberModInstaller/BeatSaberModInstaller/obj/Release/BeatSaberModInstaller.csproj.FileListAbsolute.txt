@@ -1,0 +1,11 @@
+C:\Projects\Mods\BeatSaberModInstaller\BeatSaberModInstaller\bin\Release\BeatSaberModInstaller.exe.config
+C:\Projects\Mods\BeatSaberModInstaller\BeatSaberModInstaller\bin\Release\BeatSaberModInstaller.exe
+C:\Projects\Mods\BeatSaberModInstaller\BeatSaberModInstaller\bin\Release\BeatSaberModInstaller.pdb
+C:\Projects\Mods\BeatSaberModInstaller\BeatSaberModInstaller\obj\Release\BeatSaberModInstaller.csprojResolveAssemblyReference.cache
+C:\Projects\Mods\BeatSaberModInstaller\BeatSaberModInstaller\obj\Release\BeatSaberModInstaller.FormMain.resources
+C:\Projects\Mods\BeatSaberModInstaller\BeatSaberModInstaller\obj\Release\BeatSaberModInstaller.FormSelectPlatform.resources
+C:\Projects\Mods\BeatSaberModInstaller\BeatSaberModInstaller\obj\Release\BeatSaberModInstaller.Properties.Resources.resources
+C:\Projects\Mods\BeatSaberModInstaller\BeatSaberModInstaller\obj\Release\BeatSaberModInstaller.csproj.GenerateResource.cache
+C:\Projects\Mods\BeatSaberModInstaller\BeatSaberModInstaller\obj\Release\BeatSaberModInstaller.csproj.CoreCompileInputs.cache
+C:\Projects\Mods\BeatSaberModInstaller\BeatSaberModInstaller\obj\Release\BeatSaberModInstaller.exe
+C:\Projects\Mods\BeatSaberModInstaller\BeatSaberModInstaller\obj\Release\BeatSaberModInstaller.pdb

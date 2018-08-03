@@ -1,0 +1,51 @@
+{
+  "totalMods" : 8,
+  "0" : {
+   "name" : "Song Loader Plugin",
+   "tag" : "",
+   "gitPath" : "xyonico/BeatSaberSongInjector",
+   "releaseId" : 1
+  },
+  "1" : {
+   "name" : "BeatSaver Downloader",
+   "tag" : "",
+   "gitPath" : "andruzzzhka/BeatSaverDownloader",
+   "releaseId" : 0
+  },
+  "2" : {
+   "name" : "Score Saber",
+   "tag" : "Steam",
+   "gitPath" : "Umbranoxio/ScoreSaber",
+   "releaseId" : 1
+  },
+  "3" : {
+   "name" : "Score Saber",
+   "tag" : "Oculus",
+   "gitPath" : "Umbranoxio/ScoreSaber",
+   "releaseId" : 0
+  },
+  "4" : {
+   "name" : "Camera Plus",
+   "tag" : "",
+   "gitPath" : "xyonico/CameraPlus",
+   "releaseId" : 0
+  },
+  "5" : {
+   "name" : "Transparent Wall",
+   "tag" : "",
+   "gitPath" : "PureDark/BSTransparentWall",
+   "releaseId" : 0
+  },
+  "6" : {
+   "name" : "Darth Maul",
+   "tag" : "",
+   "gitPath" : "PureDark/BSDarthMaul",
+   "releaseId" : 0
+  },
+  "7" : {
+  "name" : "Checkpoint Plugin",
+  "tag" : "",
+  "gitPath" : "Zacho1/CheckpointPlugin",
+  "releaseId" : 0
+  }
+}
