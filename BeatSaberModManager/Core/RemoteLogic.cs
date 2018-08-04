@@ -10,7 +10,7 @@ namespace BeatSaberModManager.Core
     public class RemoteLogic
     {
         private const string EndPoint = "https://www.modsaber.ml/";
-        private const Int16 CurrentVersion = 9;
+        private const Int16 CurrentVersion = 10;
         public List<ReleaseInfo> releases;
         public RemoteLogic()
         {
