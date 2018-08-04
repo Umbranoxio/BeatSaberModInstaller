@@ -121,7 +121,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Core\SteamFinder.cs" />
+    <Compile Include="Dependencies\SteamFinder.cs" />
     <EmbeddedResource Include="Forms\FormDetailViewer.resx">
       <DependentUpon>FormDetailViewer.cs</DependentUpon>
     </EmbeddedResource>

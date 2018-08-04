@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace BeatSaberModManager.Core
+namespace BeatSaberModManager.Dependencies
 {
     /// <summary>
     /// Steam installation path and Steam games folder finder.
