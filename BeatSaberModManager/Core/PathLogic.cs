@@ -13,6 +13,7 @@ namespace BeatSaberModManager.Core
         public string installPath;
         public Platform platform;
 
+        private const int SteamAppId = 620980;
         private const string AppFileName = "Beat Saber.exe";
 
 
@@ -57,13 +58,11 @@ namespace BeatSaberModManager.Core
         }
         private string GetSteamLocation()
         {
-            string path = RegistryWOW6432.GetRegKey64(RegHive.HKEY_LOCAL_MACHINE, 
-            @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 620980", @"InstallLocation");
-            if (path != null)
-            {
-                path = path + @"\";
-            }
-            return path;
+            var steamFinder = new SteamFinder();
+            if (!steamFinder.FindSteam())
+                return null;
+
+            return steamFinder.FindGameFolder(SteamAppId);
         }
         private string GetValidOculusLocation()
         {
