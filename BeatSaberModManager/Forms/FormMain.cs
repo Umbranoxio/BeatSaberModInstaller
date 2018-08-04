@@ -95,7 +95,7 @@ namespace BeatSaberModManager
         }
         #endregion
 
-        #region Events Handlers
+        #region Event Handlers
         private void Installer_StatusUpdate(string status)
         {
             UpdateStatus(status);
@@ -158,7 +158,11 @@ namespace BeatSaberModManager
         {
             Process.Start("https://twitter.com/Umbranoxus");
         }
+        private void linkLabelContributors_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/Umbranoxio/BeatSaberModInstaller/graphs/contributors");
+        }
         #endregion
-   
+
     }
 }

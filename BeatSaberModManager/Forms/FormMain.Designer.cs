@@ -51,6 +51,7 @@
             this.linkLabelModSaberLink = new System.Windows.Forms.LinkLabel();
             this.labelModSaber1 = new System.Windows.Forms.Label();
             this.buttonViewInfo = new System.Windows.Forms.Button();
+            this.linkLabelContributors = new System.Windows.Forms.LinkLabel();
             this.tabControlMain.SuspendLayout();
             this.tabPageCore.SuspendLayout();
             this.contextMenuStripMain.SuspendLayout();
@@ -174,17 +175,18 @@
             this.contextMenuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.viewInfoToolStripMenuItem});
             this.contextMenuStripMain.Name = "contextMenuStripMain";
-            this.contextMenuStripMain.Size = new System.Drawing.Size(181, 48);
+            this.contextMenuStripMain.Size = new System.Drawing.Size(124, 26);
             // 
             // viewInfoToolStripMenuItem
             // 
             this.viewInfoToolStripMenuItem.Name = "viewInfoToolStripMenuItem";
-            this.viewInfoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viewInfoToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.viewInfoToolStripMenuItem.Text = "View Info";
             this.viewInfoToolStripMenuItem.Click += new System.EventHandler(this.viewInfoToolStripMenuItem_Click);
             // 
             // tabPageCredits
             // 
+            this.tabPageCredits.Controls.Add(this.linkLabelContributors);
             this.tabPageCredits.Controls.Add(this.linkLabellolPants);
             this.tabPageCredits.Controls.Add(this.linkLabelUmbranox);
             this.tabPageCredits.Controls.Add(this.label3);
@@ -202,7 +204,7 @@
             // 
             this.linkLabellolPants.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.linkLabellolPants.AutoSize = true;
-            this.linkLabellolPants.Location = new System.Drawing.Point(383, 110);
+            this.linkLabellolPants.Location = new System.Drawing.Point(383, 99);
             this.linkLabellolPants.Name = "linkLabellolPants";
             this.linkLabellolPants.Size = new System.Drawing.Size(48, 13);
             this.linkLabellolPants.TabIndex = 5;
@@ -214,7 +216,7 @@
             // 
             this.linkLabelUmbranox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.linkLabelUmbranox.AutoSize = true;
-            this.linkLabelUmbranox.Location = new System.Drawing.Point(302, 133);
+            this.linkLabelUmbranox.Location = new System.Drawing.Point(302, 122);
             this.linkLabelUmbranox.Name = "linkLabelUmbranox";
             this.linkLabelUmbranox.Size = new System.Drawing.Size(60, 13);
             this.linkLabelUmbranox.TabIndex = 4;
@@ -226,7 +228,7 @@
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(174, 133);
+            this.label3.Location = new System.Drawing.Point(174, 122);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(134, 13);
             this.label3.TabIndex = 3;
@@ -236,7 +238,7 @@
             // 
             this.labelModSaber2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelModSaber2.AutoSize = true;
-            this.labelModSaber2.Location = new System.Drawing.Point(326, 110);
+            this.labelModSaber2.Location = new System.Drawing.Point(326, 99);
             this.labelModSaber2.Name = "labelModSaber2";
             this.labelModSaber2.Size = new System.Drawing.Size(60, 13);
             this.labelModSaber2.TabIndex = 2;
@@ -246,7 +248,7 @@
             // 
             this.linkLabelModSaberLink.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.linkLabelModSaberLink.AutoSize = true;
-            this.linkLabelModSaberLink.Location = new System.Drawing.Point(256, 110);
+            this.linkLabelModSaberLink.Location = new System.Drawing.Point(256, 99);
             this.linkLabelModSaberLink.Name = "linkLabelModSaberLink";
             this.linkLabelModSaberLink.Size = new System.Drawing.Size(73, 13);
             this.linkLabelModSaberLink.TabIndex = 1;
@@ -258,7 +260,7 @@
             // 
             this.labelModSaber1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelModSaber1.AutoSize = true;
-            this.labelModSaber1.Location = new System.Drawing.Point(75, 110);
+            this.labelModSaber1.Location = new System.Drawing.Point(75, 99);
             this.labelModSaber1.Name = "labelModSaber1";
             this.labelModSaber1.Size = new System.Drawing.Size(187, 13);
             this.labelModSaber1.TabIndex = 0;
@@ -275,6 +277,18 @@
             this.buttonViewInfo.Text = "View Selected Mod Info";
             this.buttonViewInfo.UseVisualStyleBackColor = true;
             this.buttonViewInfo.Click += new System.EventHandler(this.buttonViewInfo_Click);
+            // 
+            // linkLabelContributors
+            // 
+            this.linkLabelContributors.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.linkLabelContributors.AutoSize = true;
+            this.linkLabelContributors.Location = new System.Drawing.Point(232, 145);
+            this.linkLabelContributors.Name = "linkLabelContributors";
+            this.linkLabelContributors.Size = new System.Drawing.Size(73, 13);
+            this.linkLabelContributors.TabIndex = 7;
+            this.linkLabelContributors.TabStop = true;
+            this.linkLabelContributors.Text = "Contributors";
+            this.linkLabelContributors.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelContributors_LinkClicked);
             // 
             // FormMain
             // 
@@ -327,6 +341,7 @@
         private System.Windows.Forms.LinkLabel linkLabelModSaberLink;
         private System.Windows.Forms.Label labelModSaber1;
         private System.Windows.Forms.LinkLabel linkLabellolPants;
+        private System.Windows.Forms.LinkLabel linkLabelContributors;
     }
 }
 
