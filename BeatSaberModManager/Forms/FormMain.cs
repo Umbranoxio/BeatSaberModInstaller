@@ -36,6 +36,7 @@ namespace BeatSaberModManager
             } catch (Exception ex)
             {
                 MessageBox.Show("Failed to start, error: " + ex.ToString());
+                Environment.Exit(0);
             }
         }
         private void RemoteLoad()
@@ -99,6 +100,7 @@ namespace BeatSaberModManager
         private void Installer_StatusUpdate(string status)
         {
             UpdateStatus(status);
+            if (status == "Install complete!") { this.Invoke((MethodInvoker)(() => { buttonInstall.Enabled = true; })); }
         }
         private void buttonInstall_Click(object sender, EventArgs e)
         {
@@ -107,7 +109,7 @@ namespace BeatSaberModManager
                 MessageBox.Show("No install directory selected!", "No install directory", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
+            buttonInstall.Enabled = false;
             new Thread(() => { installer.Run(); }).Start();
         }
 

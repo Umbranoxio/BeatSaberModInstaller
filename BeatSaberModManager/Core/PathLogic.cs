@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Management;
@@ -58,11 +59,18 @@ namespace BeatSaberModManager.Core
         }
         private string GetSteamLocation()
         {
-            var steamFinder = new SteamFinder();
-            if (!steamFinder.FindSteam())
-                return null;
+            try
+            {
+                var steamFinder = new SteamFinder();
+                if (!steamFinder.FindSteam())
+                    return null;
 
-            return steamFinder.FindGameFolder(SteamAppId);
+                return steamFinder.FindGameFolder(SteamAppId);
+            } catch (Exception ex)
+            {
+                return null;
+            }
+           
         }
         private string GetValidOculusLocation()
         {

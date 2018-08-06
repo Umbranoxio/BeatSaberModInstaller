@@ -1,11 +1,8 @@
-﻿using BeatSaberModManager.DataModels;
-using System;
-using System.Collections.Generic;
-
+﻿using System;
 using System.Diagnostics;
-using System.IO;
 using System.Windows.Forms;
 using CommonMark;
+using BeatSaberModManager.DataModels;
 namespace BeatSaberModManager
 {
     public partial class FormDetailViewer : Form

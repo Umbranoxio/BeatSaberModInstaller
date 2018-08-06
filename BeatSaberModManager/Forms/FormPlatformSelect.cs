@@ -1,12 +1,6 @@
-﻿using BeatSaberModManager.Core;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
+﻿using System;
 using System.Windows.Forms;
-
+using BeatSaberModManager.Core;
 namespace BeatSaberModManager
 {
     public partial class FormPlatformSelect : Form
