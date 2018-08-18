@@ -158,8 +158,11 @@ namespace BeatSaberModManager.Dependencies
 
         static string FindWindowsSteamPath()
         {
-            var subRegKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\Valve\Steam");
-            var path = subRegKey?.GetValue("SteamPath").ToString()
+           var regPath = Environment.Is64BitOperatingSystem
+                ? @"SOFTWARE\Wow6432Node\Valve\Steam"
+                : @"SOFTWARE\Valve\Steam";
+            var subRegKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(regPath);
+            var path = subRegKey?.GetValue("InstallPath").ToString()
                 .Replace('/', '\\'); // not actually required, just for consistency's sake
 
             if (Directory.Exists(path))
