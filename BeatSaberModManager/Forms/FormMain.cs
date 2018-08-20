@@ -42,6 +42,7 @@ namespace BeatSaberModManager
         private void RemoteLoad()
         {
             UpdateStatus("Loading latest releases...");
+            remote.GetCurrentGameVersion();
             remote.PopulateReleases();
             installer = new InstallerLogic(remote.releases, path.installPath);
             installer.StatusUpdate += Installer_StatusUpdate;
@@ -52,16 +53,17 @@ namespace BeatSaberModManager
         {
             foreach (ReleaseInfo release in remote.releases)
             {
-                ListViewItem item = new ListViewItem();
-                item.Text = release.title;
-                item.SubItems.Add(release.author);
-                item.SubItems.Add(release.version);
-                item.Tag = release;
-                if (release.platform == path.platform || release.platform == Platform.Default)
-                {
-                    listViewMods.Items.Add(item);
-                    CheckDefaultMod(release, item);
-                }
+               
+                    ListViewItem item = new ListViewItem();
+                    item.Text = release.title;
+                    item.SubItems.Add(release.author);
+                    item.SubItems.Add(release.version);
+                    item.Tag = release;
+                    if (release.platform == path.platform || release.platform == Platform.Default)
+                    {
+                        listViewMods.Items.Add(item);
+                        CheckDefaultMod(release, item);
+                    }
             }
             UpdateStatus("Releases loaded.");
             tabControlMain.Enabled = true;

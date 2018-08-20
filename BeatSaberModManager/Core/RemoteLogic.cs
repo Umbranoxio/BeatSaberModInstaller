@@ -10,13 +10,23 @@ namespace BeatSaberModManager.Core
     public class RemoteLogic
     {
         private const string EndPoint = "https://www.modsaber.ml/";
-        private const Int16 CurrentVersion = 10;
+        private const Int16 CurrentVersion = 11;
+        private string currentGameVersion = string.Empty;
         public List<ReleaseInfo> releases;
         public RemoteLogic()
         {
             releases = new List<ReleaseInfo>();
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
         }
+        public void GetCurrentGameVersion()
+        {
+            string raw = CallApiFunction("api/public/gameversions");
+            var decoded = JSON.Parse(raw);
+            var current = decoded[0];
+            var value = current["value"];
+            currentGameVersion = value;
+        }
+
         public void PopulateReleases()
         {
             string raw = CallApiFunction("api/public/temp/approved");
@@ -51,7 +61,10 @@ namespace BeatSaberModManager.Core
         }
         private void CreateRelease(ReleaseInfo release)
         {
-            releases.Add(release);
+            if (release.gameVersion == currentGameVersion)
+            {
+                releases.Add(release);
+            }
         }
         public void CheckVersion()
         {
