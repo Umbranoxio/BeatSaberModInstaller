@@ -51,6 +51,9 @@
             this.labelModSaber2 = new System.Windows.Forms.Label();
             this.linkLabelModSaberLink = new System.Windows.Forms.LinkLabel();
             this.labelModSaber1 = new System.Windows.Forms.Label();
+            this.tabPageHelp = new System.Windows.Forms.TabPage();
+            this.linkLabelDiscord = new System.Windows.Forms.LinkLabel();
+            this.labelDiscordInfo = new System.Windows.Forms.Label();
             this.buttonViewInfo = new System.Windows.Forms.Button();
             this.panelInfo = new System.Windows.Forms.Panel();
             this.tableLayoutPanelInfo = new System.Windows.Forms.TableLayoutPanel();
@@ -58,10 +61,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxPluginsPath = new System.Windows.Forms.TextBox();
             this.helpInfoLabel3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabPageCore.SuspendLayout();
             this.contextMenuStripMain.SuspendLayout();
             this.tabPageCredits.SuspendLayout();
+            this.tabPageHelp.SuspendLayout();
             this.panelInfo.SuspendLayout();
             this.tableLayoutPanelInfo.SuspendLayout();
             this.SuspendLayout();
@@ -125,6 +130,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControlMain.Controls.Add(this.tabPageCore);
             this.tabControlMain.Controls.Add(this.tabPageCredits);
+            this.tabControlMain.Controls.Add(this.tabPageHelp);
             this.tabControlMain.Enabled = false;
             this.tabControlMain.Location = new System.Drawing.Point(10, 140);
             this.tabControlMain.Name = "tabControlMain";
@@ -287,6 +293,43 @@
             this.labelModSaber1.TabIndex = 0;
             this.labelModSaber1.Text = "Mod Hosting Platform Provided by ";
             // 
+            // tabPageHelp
+            // 
+            this.tabPageHelp.Controls.Add(this.label4);
+            this.tabPageHelp.Controls.Add(this.linkLabelDiscord);
+            this.tabPageHelp.Controls.Add(this.labelDiscordInfo);
+            this.tabPageHelp.Location = new System.Drawing.Point(4, 22);
+            this.tabPageHelp.Name = "tabPageHelp";
+            this.tabPageHelp.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageHelp.Size = new System.Drawing.Size(536, 229);
+            this.tabPageHelp.TabIndex = 2;
+            this.tabPageHelp.Text = "Help";
+            this.tabPageHelp.UseVisualStyleBackColor = true;
+            // 
+            // linkLabelDiscord
+            // 
+            this.linkLabelDiscord.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.linkLabelDiscord.AutoSize = true;
+            this.linkLabelDiscord.Location = new System.Drawing.Point(189, 137);
+            this.linkLabelDiscord.Name = "linkLabelDiscord";
+            this.linkLabelDiscord.Size = new System.Drawing.Size(145, 13);
+            this.linkLabelDiscord.TabIndex = 1;
+            this.linkLabelDiscord.TabStop = true;
+            this.linkLabelDiscord.Text = "discord.gg/beatsabermods";
+            this.linkLabelDiscord.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.linkLabelDiscord.Click += new System.EventHandler(this.linkLabelDiscord_Click);
+            // 
+            // labelDiscordInfo
+            // 
+            this.labelDiscordInfo.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelDiscordInfo.AutoSize = true;
+            this.labelDiscordInfo.Location = new System.Drawing.Point(117, 114);
+            this.labelDiscordInfo.Name = "labelDiscordInfo";
+            this.labelDiscordInfo.Size = new System.Drawing.Size(303, 13);
+            this.labelDiscordInfo.TabIndex = 0;
+            this.labelDiscordInfo.Text = "Join us on the Beat Saber Modding Group Discord server!";
+            this.labelDiscordInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // buttonViewInfo
             // 
             this.buttonViewInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -348,10 +391,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(3, 56);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(530, 13);
+            this.label2.Size = new System.Drawing.Size(378, 13);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Select a mod then click the \"View Selected Mod Info\" button to see more informati" +
-    "on about that mod.";
+            this.label2.Text = "Right click on a mod in the list below to view more info about that mod.";
             // 
             // textBoxPluginsPath
             // 
@@ -378,6 +420,17 @@
             this.helpInfoLabel3.TabIndex = 3;
             this.helpInfoLabel3.Text = "You can uninstall mods by removing the .dll from that folder.";
             // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(212, 91);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(94, 13);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Need more help?";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -402,6 +455,8 @@
             this.contextMenuStripMain.ResumeLayout(false);
             this.tabPageCredits.ResumeLayout(false);
             this.tabPageCredits.PerformLayout();
+            this.tabPageHelp.ResumeLayout(false);
+            this.tabPageHelp.PerformLayout();
             this.panelInfo.ResumeLayout(false);
             this.tableLayoutPanelInfo.ResumeLayout(false);
             this.tableLayoutPanelInfo.PerformLayout();
@@ -440,6 +495,10 @@
         private System.Windows.Forms.Label helpInfoLabel3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxPluginsPath;
+        private System.Windows.Forms.TabPage tabPageHelp;
+        private System.Windows.Forms.Label labelDiscordInfo;
+        private System.Windows.Forms.LinkLabel linkLabelDiscord;
+        private System.Windows.Forms.Label label4;
     }
 }
 

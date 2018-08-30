@@ -189,5 +189,10 @@ namespace BeatSaberModManager
             textBoxPluginsPath.DeselectAll();
         }
         #endregion
+
+        private void linkLabelDiscord_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://discord.gg/beatsabermods");
+        }
     }
 }
