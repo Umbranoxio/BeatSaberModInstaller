@@ -166,7 +166,33 @@ namespace BeatSaberModManager
         {
             Process.Start("https://github.com/Umbranoxio/BeatSaberModInstaller/graphs/contributors");
         }
-        #endregion
 
+        private void textBoxDirectory_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBoxDirectory.Text))
+            {
+                textBoxPluginsPath.Text = "${Install Directory}\\Plugins";
+            }
+            else
+            {
+                textBoxPluginsPath.Text = textBoxDirectory.Text + "\\Plugins";
+            }
+        }
+
+        private void textBoxPluginsPath_Click(object sender, System.EventArgs e)
+        {
+            textBoxPluginsPath.SelectAll();
+        }
+
+        private void textBoxPluginsPath_Leave(object sender, System.EventArgs e)
+        {
+            textBoxPluginsPath.DeselectAll();
+        }
+
+        private void linkLabelDiscord_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://discord.gg/beatsabermods");
+        }
+        #endregion
     }
 }

@@ -43,7 +43,7 @@
             this.labelTitle.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTitle.Location = new System.Drawing.Point(11, 9);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(249, 20);
+            this.labelTitle.Size = new System.Drawing.Size(250, 20);
             this.labelTitle.TabIndex = 0;
             this.labelTitle.Text = "Mod Name by Author Name Version";
             // 
@@ -100,6 +100,7 @@
             this.webBrowserDescription.Name = "webBrowserDescription";
             this.webBrowserDescription.Size = new System.Drawing.Size(605, 393);
             this.webBrowserDescription.TabIndex = 6;
+            this.webBrowserDescription.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowserDescription_DocumentCompleted);
             // 
             // FormDetailViewer
             // 
