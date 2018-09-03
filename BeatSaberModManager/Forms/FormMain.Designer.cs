@@ -78,14 +78,14 @@
             this.textBoxDirectory.Enabled = false;
             this.textBoxDirectory.Location = new System.Drawing.Point(10, 25);
             this.textBoxDirectory.Name = "textBoxDirectory";
-            this.textBoxDirectory.Size = new System.Drawing.Size(508, 22);
+            this.textBoxDirectory.Size = new System.Drawing.Size(530, 22);
             this.textBoxDirectory.TabIndex = 0;
             this.textBoxDirectory.TextChanged += new System.EventHandler(this.textBoxDirectory_TextChanged);
             // 
             // buttonFolderBrowser
             // 
             this.buttonFolderBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonFolderBrowser.Location = new System.Drawing.Point(524, 25);
+            this.buttonFolderBrowser.Location = new System.Drawing.Point(546, 25);
             this.buttonFolderBrowser.Name = "buttonFolderBrowser";
             this.buttonFolderBrowser.Size = new System.Drawing.Size(26, 23);
             this.buttonFolderBrowser.TabIndex = 1;
@@ -105,7 +105,7 @@
             // buttonInstall
             // 
             this.buttonInstall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonInstall.Location = new System.Drawing.Point(440, 401);
+            this.buttonInstall.Location = new System.Drawing.Point(462, 401);
             this.buttonInstall.Name = "buttonInstall";
             this.buttonInstall.Size = new System.Drawing.Size(112, 23);
             this.buttonInstall.TabIndex = 4;
@@ -119,7 +119,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelStatus.Location = new System.Drawing.Point(7, 406);
             this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(263, 145);
+            this.labelStatus.Size = new System.Drawing.Size(285, 145);
             this.labelStatus.TabIndex = 5;
             this.labelStatus.Text = "Status: Null";
             // 
@@ -135,7 +135,7 @@
             this.tabControlMain.Location = new System.Drawing.Point(10, 140);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(544, 255);
+            this.tabControlMain.Size = new System.Drawing.Size(566, 255);
             this.tabControlMain.TabIndex = 8;
             // 
             // tabPageCore
@@ -144,7 +144,7 @@
             this.tabPageCore.Location = new System.Drawing.Point(4, 22);
             this.tabPageCore.Name = "tabPageCore";
             this.tabPageCore.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCore.Size = new System.Drawing.Size(536, 229);
+            this.tabPageCore.Size = new System.Drawing.Size(558, 229);
             this.tabPageCore.TabIndex = 0;
             this.tabPageCore.Text = "Plugins";
             this.tabPageCore.UseVisualStyleBackColor = true;
@@ -163,7 +163,7 @@
             this.listViewMods.FullRowSelect = true;
             this.listViewMods.Location = new System.Drawing.Point(6, 6);
             this.listViewMods.Name = "listViewMods";
-            this.listViewMods.Size = new System.Drawing.Size(524, 217);
+            this.listViewMods.Size = new System.Drawing.Size(546, 217);
             this.listViewMods.TabIndex = 0;
             this.listViewMods.UseCompatibleStateImageBehavior = false;
             this.listViewMods.View = System.Windows.Forms.View.Details;
@@ -345,7 +345,7 @@
             // 
             this.buttonViewInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonViewInfo.Enabled = false;
-            this.buttonViewInfo.Location = new System.Drawing.Point(276, 401);
+            this.buttonViewInfo.Location = new System.Drawing.Point(298, 401);
             this.buttonViewInfo.Name = "buttonViewInfo";
             this.buttonViewInfo.Size = new System.Drawing.Size(158, 23);
             this.buttonViewInfo.TabIndex = 9;
@@ -363,7 +363,7 @@
             this.panelInfo.ForeColor = System.Drawing.SystemColors.ControlText;
             this.panelInfo.Location = new System.Drawing.Point(10, 54);
             this.panelInfo.Name = "panelInfo";
-            this.panelInfo.Size = new System.Drawing.Size(542, 80);
+            this.panelInfo.Size = new System.Drawing.Size(564, 80);
             this.panelInfo.TabIndex = 10;
             // 
             // tableLayoutPanelInfo
@@ -385,7 +385,7 @@
             this.tableLayoutPanelInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanelInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanelInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelInfo.Size = new System.Drawing.Size(542, 79);
+            this.tableLayoutPanelInfo.Size = new System.Drawing.Size(564, 79);
             this.tableLayoutPanelInfo.TabIndex = 13;
             // 
             // helpInfoLabel1
@@ -417,7 +417,7 @@
             this.textBoxPluginsPath.Name = "textBoxPluginsPath";
             this.textBoxPluginsPath.ReadOnly = true;
             this.textBoxPluginsPath.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.textBoxPluginsPath.Size = new System.Drawing.Size(533, 15);
+            this.textBoxPluginsPath.Size = new System.Drawing.Size(555, 15);
             this.textBoxPluginsPath.TabIndex = 5;
             this.textBoxPluginsPath.Click += new System.EventHandler(this.textBoxPluginsPath_Click);
             this.textBoxPluginsPath.Leave += new System.EventHandler(this.textBoxPluginsPath_Leave);
@@ -435,7 +435,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(566, 436);
+            this.ClientSize = new System.Drawing.Size(588, 436);
             this.Controls.Add(this.panelInfo);
             this.Controls.Add(this.buttonViewInfo);
             this.Controls.Add(this.tabControlMain);
