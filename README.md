@@ -1,16 +1,7 @@
-# BeatSaberModInstaller
+# Beat Saber Mod Manager
 ![Preview](https://media.discordapp.net/attachments/443146108420620318/469555973120327680/unknown.png)
 
-This program will install custom mods into beat saber automatically, and can be re-run in order to update the mods.
+This program will install custom mods into Beat Saber automatically, and can be re-run in order to update the mods.
 
-The program currently supports:
-
-* [Song Loader](https://github.com/xyonico/BeatSaberSongLoader/releases) by **xyonico**
-* [BeatSaver.com in-game browser](https://github.com/andruzzzhka/BeatSaverDownloader) by **Andruzzzhka**
-* [ScoreSaber](https://github.com/Umbranoxio/ScoreSaber) - by **Umbranox**
-* [Practice Plugin](https://github.com/xyonico/PracticePlugin) - by **xyonico**
-* [Beat Saber Tweaks](https://github.com/taz030485/BeatSaberTweaks) - by **taz030485**
-* [Discord Presence Plugin](https://github.com/xyonico/BeatSaberDiscordPresence) - by **xyonico**
-* [Progress Counter](https://github.com/Strackeror/BeatSaberProgressCounter) - by **Strackeror**
-
-This uses the GitHub API to get the latest release of all these mods, so you know you'll always be getting the latest version!
+The program currently supports every mod on [ModSaber](https://www.modsaber.ml)  
+This uses ModSaber to get the latest release of all these mods, so you know you'll always be getting the latest version!
