@@ -52,6 +52,7 @@
             this.linkLabelModSaberLink = new System.Windows.Forms.LinkLabel();
             this.labelModSaber1 = new System.Windows.Forms.Label();
             this.tabPageHelp = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
             this.linkLabelDiscord = new System.Windows.Forms.LinkLabel();
             this.labelDiscordInfo = new System.Windows.Forms.Label();
             this.buttonViewInfo = new System.Windows.Forms.Button();
@@ -61,7 +62,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxPluginsPath = new System.Windows.Forms.TextBox();
             this.helpInfoLabel3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabPageCore.SuspendLayout();
             this.contextMenuStripMain.SuspendLayout();
@@ -231,7 +231,7 @@
             // 
             this.linkLabellolPants.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.linkLabellolPants.AutoSize = true;
-            this.linkLabellolPants.Location = new System.Drawing.Point(383, 91);
+            this.linkLabellolPants.Location = new System.Drawing.Point(386, 92);
             this.linkLabellolPants.Name = "linkLabellolPants";
             this.linkLabellolPants.Size = new System.Drawing.Size(48, 13);
             this.linkLabellolPants.TabIndex = 5;
@@ -265,7 +265,7 @@
             // 
             this.labelModSaber2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelModSaber2.AutoSize = true;
-            this.labelModSaber2.Location = new System.Drawing.Point(326, 91);
+            this.labelModSaber2.Location = new System.Drawing.Point(329, 92);
             this.labelModSaber2.Name = "labelModSaber2";
             this.labelModSaber2.Size = new System.Drawing.Size(60, 13);
             this.labelModSaber2.TabIndex = 2;
@@ -275,19 +275,19 @@
             // 
             this.linkLabelModSaberLink.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.linkLabelModSaberLink.AutoSize = true;
-            this.linkLabelModSaberLink.Location = new System.Drawing.Point(256, 91);
+            this.linkLabelModSaberLink.Location = new System.Drawing.Point(273, 92);
             this.linkLabelModSaberLink.Name = "linkLabelModSaberLink";
-            this.linkLabelModSaberLink.Size = new System.Drawing.Size(73, 13);
+            this.linkLabelModSaberLink.Size = new System.Drawing.Size(60, 13);
             this.linkLabelModSaberLink.TabIndex = 1;
             this.linkLabelModSaberLink.TabStop = true;
-            this.linkLabelModSaberLink.Text = "modsaber.ml";
+            this.linkLabelModSaberLink.Text = "ModSaber";
             this.linkLabelModSaberLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelModSaberLink_LinkClicked);
             // 
             // labelModSaber1
             // 
             this.labelModSaber1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelModSaber1.AutoSize = true;
-            this.labelModSaber1.Location = new System.Drawing.Point(75, 91);
+            this.labelModSaber1.Location = new System.Drawing.Point(92, 92);
             this.labelModSaber1.Name = "labelModSaber1";
             this.labelModSaber1.Size = new System.Drawing.Size(187, 13);
             this.labelModSaber1.TabIndex = 0;
@@ -305,6 +305,17 @@
             this.tabPageHelp.TabIndex = 2;
             this.tabPageHelp.Text = "Help";
             this.tabPageHelp.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(212, 91);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(94, 13);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Need more help?";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // linkLabelDiscord
             // 
@@ -416,20 +427,9 @@
             this.helpInfoLabel3.AutoSize = true;
             this.helpInfoLabel3.Location = new System.Drawing.Point(3, 42);
             this.helpInfoLabel3.Name = "helpInfoLabel3";
-            this.helpInfoLabel3.Size = new System.Drawing.Size(319, 13);
+            this.helpInfoLabel3.Size = new System.Drawing.Size(318, 13);
             this.helpInfoLabel3.TabIndex = 3;
             this.helpInfoLabel3.Text = "You can uninstall mods by removing the .dll from that folder.";
-            // 
-            // label4
-            // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(212, 91);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(94, 13);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Need more help?";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FormMain
             // 
