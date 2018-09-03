@@ -43,14 +43,14 @@ namespace BeatSaberModManager.Core
                         var steam = files[0];
                         var oculus = files[1];
                         CreateRelease(new ReleaseInfo(current["title"], current["version"], current["author"],
-                        current["description"], current["gameVersion"], steam["url"], Platform.Steam));
+                        current["description"], current["weight"], current["gameVersion"], steam["url"], current["category"], Platform.Steam));
                         CreateRelease(new ReleaseInfo(current["title"], current["version"], current["author"],
-                        current["description"], current["gameVersion"], oculus["url"], Platform.Oculus));
+                        current["description"], current["weight"], current["gameVersion"], oculus["url"], current["category"], Platform.Oculus));
                     }
                     else
                     {
                         CreateRelease(new ReleaseInfo(current["title"], current["version"], current["author"],
-                        current["description"], current["gameVersion"], files["steam"]["url"], Platform.Default));
+                        current["description"], current["weight"], current["gameVersion"], files["steam"]["url"], current["category"], Platform.Default));
                     }
                 }
             }

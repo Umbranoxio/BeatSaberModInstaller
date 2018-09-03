@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using BeatSaberModManager.Core;
 using System.Threading;
+using System.Collections.Generic;
 using BeatSaberModManager.DataModels;
 using System.Diagnostics;
 
@@ -51,20 +52,53 @@ namespace BeatSaberModManager
 
         private void ShowReleases()
         {
+            Dictionary<string, int> groups = new Dictionary<string, int>();
+
+            listViewMods.Groups.Clear();
+            int other = listViewMods.Groups.Add(new ListViewGroup("Other", HorizontalAlignment.Left));
+            groups.Add("Other", other);
+
             foreach (ReleaseInfo release in remote.releases)
             {
-               
-                    ListViewItem item = new ListViewItem();
-                    item.Text = release.title;
-                    item.SubItems.Add(release.author);
-                    item.SubItems.Add(release.version);
-                    item.Tag = release;
-                    if (release.platform == path.platform || release.platform == Platform.Default)
+                ListViewItem item = new ListViewItem();
+                item.Text = release.title;
+                item.SubItems.Add(release.author);
+                item.SubItems.Add(release.version);
+                item.Tag = release;
+
+                if (release.platform == path.platform || release.platform == Platform.Default)
+                {
+                    if (release.category == "")
                     {
-                        listViewMods.Items.Add(item);
-                        CheckDefaultMod(release, item);
+                        item.Group = listViewMods.Groups[other];
                     }
+                    else if (groups.ContainsKey(release.category))
+                    {
+                        int index = groups[release.category];
+                        item.Group = listViewMods.Groups[index];
+                    }
+                    else
+                    {
+                        int index = listViewMods.Groups.Add(new ListViewGroup(release.category, HorizontalAlignment.Left));
+                        groups.Add(release.category, index);
+                        item.Group = listViewMods.Groups[index];
+                    }
+                    
+                    listViewMods.Items.Add(item);
+                    CheckDefaultMod(release, item);
+                }
             }
+
+            ListViewGroup[] sortedGroups = new ListViewGroup[this.listViewMods.Groups.Count];
+
+            this.listViewMods.Groups.CopyTo(sortedGroups, 0);
+            Array.Sort(sortedGroups, new GroupComparer());
+
+            this.listViewMods.BeginUpdate();
+            this.listViewMods.Groups.Clear();
+            this.listViewMods.Groups.AddRange(sortedGroups);
+            this.listViewMods.EndUpdate();
+
             UpdateStatus("Releases loaded.");
             tabControlMain.Enabled = true;
         }
