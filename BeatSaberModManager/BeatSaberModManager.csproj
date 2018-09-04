@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\GroupSorter.cs" />
     <Compile Include="Core\Helper.cs" />
     <Compile Include="Core\InstallerLogic.cs" />
     <Compile Include="Core\PathLogic.cs" />
