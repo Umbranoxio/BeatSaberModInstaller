@@ -173,30 +173,26 @@ namespace BeatSaberModManager.Dependencies
 
         static string FindUnixSteamPath()
         {
-            string path = null;
-            if (Directory.Exists(path = GetDefaultLinuxSteamPath())
-                || Directory.Exists(path = GetDefaultMacOsSteamPath()))
+            var possiblePaths = new[]
             {
-                return path;
+                InHome("Library/Application Support/Steam"), // macOS
+                InHome(".steam/steam"),
+                InHome(".local/share/Steam")
+            };
+
+            foreach (var path in possiblePaths)
+            {
+                if (Directory.Exists(path))
+                    return path;
             }
 
             return null;
         }
 
-        static string GetDefaultLinuxSteamPath()
+        static string InHome(string relativePath)
         {
-            return Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.Personal),
-                ".local/share/Steam/"
-            );
-        }
-
-        static string GetDefaultMacOsSteamPath()
-        {
-            return Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.Personal),
-                "Library/Application Support/Steam"
-            );
+            var homePath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            return Path.Combine(homePath, relativePath);
         }
 
         // https://stackoverflow.com/questions/5116977
