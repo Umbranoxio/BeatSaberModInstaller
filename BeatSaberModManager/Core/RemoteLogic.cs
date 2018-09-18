@@ -9,8 +9,11 @@ namespace BeatSaberModManager.Core
 {
     public class RemoteLogic
     {
-        private const string EndPoint = "https://www.modsaber.ml/";
-        private const Int16 CurrentVersion = 11;
+        private const string ModSaberURL = "https://www.modsaber.ml";
+        private const string ApiVersion = "1.0";
+        private readonly string ApiURL = $"{ModSaberURL}/api/v{ApiVersion}";
+
+        private const Int16 CurrentVersion = 12;
         private string currentGameVersion = string.Empty;
         public List<ReleaseInfo> releases;
         public RemoteLogic()
@@ -18,9 +21,10 @@ namespace BeatSaberModManager.Core
             releases = new List<ReleaseInfo>();
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
         }
+
         public void GetCurrentGameVersion()
         {
-            string raw = CallApiFunction("api/public/gameversions");
+            string raw = Fetch($"{ApiURL}/site/gameversions");
             var decoded = JSON.Parse(raw);
             var current = decoded[0];
             var value = current["value"];
@@ -29,11 +33,10 @@ namespace BeatSaberModManager.Core
 
         public void PopulateReleases()
         {
-            string raw = CallApiFunction("api/public/temp/approved");
+            string raw = GetModSaberReleases();
             if (raw != null)
             {
-                var decoded = JSON.Parse(raw);
-                var mods = decoded["mods"];
+                var mods = JSON.Parse(raw);
                 for (int i = 0; i < mods.Count; i++)
                 {
                     var current = mods[i];
@@ -55,10 +58,29 @@ namespace BeatSaberModManager.Core
                 }
             }
         }
-        private string CallApiFunction(string function)
+
+        private string Fetch(string URL) => Helper.Get(URL);
+
+        private string GetModSaberReleases()
         {
-            return Helper.Get(string.Format("{0}{1}", EndPoint, function));
+            string raw = Fetch($"{ApiURL}/mods/approved");
+            var decoded = JSON.Parse(raw);
+            int lastPage = decoded["lastPage"];
+
+            JSONArray final = new JSONArray();
+
+            for (int i = 0; i <= lastPage; i++)
+            {
+                string page = Fetch($"{ApiURL}/mods/approved/{i}");
+                var pageDecoded = JSON.Parse(page);
+                var mods = pageDecoded["mods"];
+
+                foreach (var x in mods)
+                    final.Add(x.Value);
+            }
+            return final.ToString();
         }
+
         private void CreateRelease(ReleaseInfo release)
         {
             if (release.gameVersion == currentGameVersion)
@@ -66,6 +88,7 @@ namespace BeatSaberModManager.Core
                 releases.Add(release);
             }
         }
+
         public void CheckVersion()
         {
             //TODO: Don't be lazy and actually make an auto updater
