@@ -89,18 +89,12 @@ namespace BeatSaberModManager.Core
             }
         }
 
-        public void CheckVersion()
+        public bool CheckIfLatestInstallerVersion()
         {
             //TODO: Don't be lazy and actually make an auto updater
-            Int16 version = Convert.ToInt16(Helper.Get(
-                "https://raw.githubusercontent.com/Umbranoxio/BeatSaberModInstaller/master/update.txt"));
-            if (version > CurrentVersion)
-            {
-                MessageBox.Show("Your version of the mod installer is outdated! Please download the new one!", "Update available!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                Process.Start("https://github.com/Umbranoxio/BeatSaberModInstaller/releases");
-                Process.GetCurrentProcess().Kill();
-                Environment.Exit(0);
-            }
+            var latestVersionStr = Helper.Get("https://raw.githubusercontent.com/Umbranoxio/BeatSaberModInstaller/master/update.txt");
+            var latestVersion = Convert.ToInt16(latestVersionStr);
+            return CurrentVersion >= latestVersion;
         }
     }
 }
