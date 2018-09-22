@@ -5,6 +5,7 @@ using System.Threading;
 using System.Collections.Generic;
 using BeatSaberModManager.DataModels;
 using System.Diagnostics;
+using System.Net;
 
 namespace BeatSaberModManager
 {
@@ -32,7 +33,7 @@ namespace BeatSaberModManager
             try
             {
                 textBoxDirectory.Text = path.GetInstallationPath();
-                remote.CheckVersion();
+                CheckInstallerVersion();
                 new Thread(() => { RemoteLoad(); }).Start();
             } catch (Exception ex)
             {
@@ -40,14 +41,65 @@ namespace BeatSaberModManager
                 Environment.Exit(0);
             }
         }
+
+        private void CheckInstallerVersion()
+        {
+            var isLastVersion = false;
+
+            try
+            {
+                isLastVersion = remote.CheckIfLatestInstallerVersion();
+            }
+            catch (WebException)
+            {
+                MessageBox.Show(this,
+                    "Failed to get the latest Mod Manager version info! Please check your internet connection!",
+                    "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Environment.Exit(1);
+                return;
+            }
+
+            if (!isLastVersion)
+            {
+                MessageBox.Show(this,
+                    "Your version of the mod installer is outdated! Please download the new one!",
+                    "Update available!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                Process.Start("https://github.com/Umbranoxio/BeatSaberModInstaller/releases");
+                Environment.Exit(1);
+            }
+        }
+
         private void RemoteLoad()
         {
             UpdateStatus("Loading latest releases...");
-            remote.GetCurrentGameVersion();
-            remote.PopulateReleases();
+
+            try
+            {
+                remote.GetCurrentGameVersion();
+                remote.PopulateReleases();
+            }
+            catch (WebException)
+            {
+                ShowModSaberConnectionError();
+                Environment.Exit(1);
+                return;
+            }
+
             installer = new InstallerLogic(remote.releases, path.installPath);
             installer.StatusUpdate += Installer_StatusUpdate;
             this.Invoke((MethodInvoker)(() => { ShowReleases(); }));
+        }
+
+        private void ShowModSaberConnectionError()
+        {
+            this.Invoke((MethodInvoker)(() =>
+            {
+                MessageBox.Show(this,
+                    "Unable to connect to ModSaber!\n"
+                        + "modsaber.ml may be currently unavailable.\n\n"
+                        + "Please also check your internet connection.",
+                    "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }));
         }
 
         private void ShowReleases()
@@ -83,7 +135,7 @@ namespace BeatSaberModManager
                         groups.Add(release.category, index);
                         item.Group = listViewMods.Groups[index];
                     }
-                    
+
                     listViewMods.Items.Add(item);
                     CheckDefaultMod(release, item);
                 }
