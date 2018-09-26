@@ -210,7 +210,7 @@
             this.tabPageCredits.Controls.Add(this.labelModSaber1);
             this.tabPageCredits.Location = new System.Drawing.Point(4, 22);
             this.tabPageCredits.Name = "tabPageCredits";
-            this.tabPageCredits.Size = new System.Drawing.Size(536, 229);
+            this.tabPageCredits.Size = new System.Drawing.Size(558, 229);
             this.tabPageCredits.TabIndex = 1;
             this.tabPageCredits.Text = "Mod Manager Credits";
             this.tabPageCredits.UseVisualStyleBackColor = true;
@@ -301,7 +301,7 @@
             this.tabPageHelp.Location = new System.Drawing.Point(4, 22);
             this.tabPageHelp.Name = "tabPageHelp";
             this.tabPageHelp.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageHelp.Size = new System.Drawing.Size(536, 229);
+            this.tabPageHelp.Size = new System.Drawing.Size(558, 229);
             this.tabPageHelp.TabIndex = 2;
             this.tabPageHelp.Text = "Help";
             this.tabPageHelp.UseVisualStyleBackColor = true;
