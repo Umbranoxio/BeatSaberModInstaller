@@ -34,7 +34,8 @@ namespace BeatSaberModManager
                 textBoxDirectory.Text = path.GetInstallationPath();
                 remote.CheckVersion();
                 new Thread(() => { RemoteLoad(); }).Start();
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show("Failed to start, error: " + ex.ToString());
                 Environment.Exit(0);
@@ -60,11 +61,14 @@ namespace BeatSaberModManager
 
             foreach (ReleaseInfo release in remote.releases)
             {
-                ListViewItem item = new ListViewItem();
-                item.Text = release.title;
+                ListViewItem item = new ListViewItem
+                {
+                    Text = release.title,
+                    Tag = release
+                };
+
                 item.SubItems.Add(release.author);
                 item.SubItems.Add(release.version);
-                item.Tag = release;
 
                 if (release.platform == path.platform || release.platform == Platform.Default)
                 {
@@ -83,7 +87,7 @@ namespace BeatSaberModManager
                         groups.Add(release.category, index);
                         item.Group = listViewMods.Groups[index];
                     }
-                    
+
                     listViewMods.Items.Add(item);
                     CheckDefaultMod(release, item);
                 }
@@ -154,12 +158,14 @@ namespace BeatSaberModManager
             textBoxDirectory.Text = path.ManualFind();
             installer.installDirectory = textBoxDirectory.Text;
         }
+
         private void listViewMods_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             ReleaseInfo release = (ReleaseInfo)e.Item.Tag;
             if (release.downloadLink.ToLower().Contains("song-loader")) { e.Item.Checked = true; };
             release.install = e.Item.Checked;
         }
+
         private void listViewMods_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listViewMods.SelectedItems.Count == 1)
@@ -171,10 +177,12 @@ namespace BeatSaberModManager
                 buttonViewInfo.Enabled = false;
             }
         }
+
         private void buttonViewInfo_Click(object sender, EventArgs e)
         {
             new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
         }
+
         private void viewInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (listViewMods.SelectedItems.Count >= 1)
@@ -182,6 +190,7 @@ namespace BeatSaberModManager
                 new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
             }
         }
+
         private void linkLabellolPants_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://github.com/lolPants");
@@ -196,6 +205,7 @@ namespace BeatSaberModManager
         {
             Process.Start("https://twitter.com/Umbranoxus");
         }
+
         private void linkLabelContributors_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://github.com/Umbranoxio/BeatSaberModInstaller/graphs/contributors");
