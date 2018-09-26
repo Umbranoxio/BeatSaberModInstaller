@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
@@ -40,23 +40,62 @@ namespace BeatSaberModManager.Core
                 for (int i = 0; i < mods.Count; i++)
                 {
                     var current = mods[i];
+
+                    List<ModLink> dependsOn = NodeToLinks(current["dependsOn"]);
+                    List<ModLink> conflictsWith = NodeToLinks(current["conflictsWith"]);
+
                     var files = current["files"];
                     if (files.Count > 1)
                     {
                         var steam = files[0];
                         var oculus = files[1];
-                        CreateRelease(new ReleaseInfo(current["title"], current["version"], current["author"],
-                        current["description"], current["weight"], current["gameVersion"], steam["url"], current["category"], Platform.Steam));
-                        CreateRelease(new ReleaseInfo(current["title"], current["version"], current["author"],
-                        current["description"], current["weight"], current["gameVersion"], oculus["url"], current["category"], Platform.Oculus));
+
+                        CreateRelease(
+                            new ReleaseInfo(current["title"], current["version"], current["author"],
+                            current["description"], current["weight"], current["gameVersion"],
+                            steam["url"], current["category"], Platform.Steam, dependsOn, conflictsWith));
+
+                        CreateRelease(
+                            new ReleaseInfo(current["title"], current["version"], current["author"],
+                            current["description"], current["weight"], current["gameVersion"],
+                            oculus["url"], current["category"], Platform.Oculus, dependsOn, conflictsWith));
                     }
                     else
                     {
-                        CreateRelease(new ReleaseInfo(current["title"], current["version"], current["author"],
-                        current["description"], current["weight"], current["gameVersion"], files["steam"]["url"], current["category"], Platform.Default));
+                        CreateRelease(
+                            new ReleaseInfo(current["title"], current["version"], current["author"],
+                            current["description"], current["weight"], current["gameVersion"],
+                            files["steam"]["url"], current["category"], Platform.Default, dependsOn, conflictsWith));
                     }
                 }
             }
+        }
+
+        private string[] AsArray(JSONArray arrayJson)
+        {
+            string[] array = new string[arrayJson.Count];
+            int index = 0;
+            foreach (JSONNode node in arrayJson)
+            {
+                array[index] = (string)node.ToString().Trim('"');
+                index += 1;
+                    }
+            return array;
+                }
+
+        private List<ModLink> NodeToLinks (JSONNode node)
+        {
+            string[] arr = AsArray(node.AsArray);
+            List<ModLink> links = new List<ModLink>();
+
+            foreach (string str in arr)
+            {
+                string[] split = str.Split('@');
+                ModLink link = new ModLink(split[0], split[1]);
+                links.Add(link);
+            }
+
+            return links;
         }
 
         private string Fetch(string URL) => Helper.Get(URL);
@@ -84,10 +123,8 @@ namespace BeatSaberModManager.Core
         private void CreateRelease(ReleaseInfo release)
         {
             if (release.gameVersion == currentGameVersion)
-            {
                 releases.Add(release);
             }
-        }
 
         public void CheckVersion()
         {
