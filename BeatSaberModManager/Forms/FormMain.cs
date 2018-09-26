@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using BeatSaberModManager.Core;
 using System.Threading;
 using System.Collections.Generic;
 using BeatSaberModManager.DataModels;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace BeatSaberModManager
 {
@@ -122,7 +124,9 @@ namespace BeatSaberModManager
             string link = release.downloadLink.ToLower();
             if (link.Contains("song-loader"))
             {
-                item.Text = item.Text + " (required)";
+                item.Text = $"[REQUIRED] {release.title}";
+                item.BackColor = Color.LightGray;
+                release.disabled = true;
             }
             if (link.Contains("song-loader") || link.Contains("scoresaber") || link.Contains("beatsaver"))
             {
@@ -133,6 +137,8 @@ namespace BeatSaberModManager
             {
                 release.install = false;
             }
+
+            ReRenderListView();
         }
         #endregion
 
@@ -162,8 +168,103 @@ namespace BeatSaberModManager
         private void listViewMods_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             ReleaseInfo release = (ReleaseInfo)e.Item.Tag;
-            if (release.downloadLink.ToLower().Contains("song-loader")) { e.Item.Checked = true; };
-            release.install = e.Item.Checked;
+            if (release.disabled)
+            {
+                e.Item.Checked = release.install;
+                return;
+            }
+
+            IEnumerable<ListViewItem> lv = listViewMods.Items.Cast<ListViewItem>();
+
+            List<ListViewItem> changedConflicts = new List<ListViewItem>();
+            if (release.conflictsWith.Count > 0)
+            {
+                List<ListViewItem> filtered = lv.Where(lvi =>
+                {
+                    ReleaseInfo info = (ReleaseInfo)lvi.Tag;
+
+                    bool exists = release.conflictsWith.Exists(l => l.name == info.name);
+                    if (!exists)
+                        return false;
+
+                    ModLink link = release.conflictsWith.Find(l => l.name == info.name);
+
+                    return true;
+                }).ToList();
+
+                foreach (var x in filtered)
+                {
+                    changedConflicts.Add(x);
+                    ReleaseInfo info = (ReleaseInfo)x.Tag;
+                    info.disabled = e.Item.Checked;
+                    info.install = !e.Item.Checked;
+
+                    if (e.Item.Checked)
+                        x.Checked = false;
+                }
+            }
+
+            if (release.dependsOn.Count > 0)
+            {
+                List<ListViewItem> filtered = lv.Where(lvi =>
+                {
+                    ReleaseInfo info = (ReleaseInfo)lvi.Tag;
+                    if (info.disabled && !info.install)
+                        return false;
+
+                    bool exists = release.dependsOn.Exists(l => l.name == info.name);
+                    if (!exists)
+                        return false;
+
+                    ModLink link = release.dependsOn.Find(l => l.name == info.name);
+
+                    return true;
+                }).ToList();
+
+                if (filtered.Count != release.dependsOn.Count)
+                {
+                    release.install = false;
+                    release.disabled = true;
+
+                    foreach (var x in changedConflicts)
+                    {
+                        ReleaseInfo info = (ReleaseInfo)x.Tag;
+                        info.disabled = !e.Item.Checked;
+                        info.install = e.Item.Checked;
+                    }
+                }
+                else
+                {
+                    foreach (var x in filtered)
+                    {
+                        ReleaseInfo info = (ReleaseInfo)x.Tag;
+                        info.disabled = e.Item.Checked;
+                        info.install = e.Item.Checked;
+                        x.Checked = e.Item.Checked;
+                    }
+                }
+            }
+
+            ReRenderListView();
+        }
+
+        private void ReRenderListView ()
+        {
+            foreach (ListViewItem item in listViewMods.Items)
+            {
+                ReleaseInfo release = (ReleaseInfo)item.Tag;
+                if (release.disabled)
+                {
+                    item.Checked = release.install;
+                    item.BackColor = Color.LightGray;
+                    item.Text = $"[{(release.install ? "REQUIRED" : "CONFLICT")}] {release.title}";
+                }
+                else
+                {
+                    item.Text = release.title;
+                    item.BackColor = Color.White;
+                }
+            }
         }
 
         private void listViewMods_SelectedIndexChanged(object sender, EventArgs e)
