@@ -3,6 +3,8 @@ using System;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
+using ICSharpCode.SharpZipLib.Core;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace BeatSaberModManager.Core
 {
@@ -38,9 +40,29 @@ namespace BeatSaberModManager.Core
         {
             using (MemoryStream ms = new MemoryStream(data))
             {
-                using (var unzip = new Unzip(ms))
+                using (var zf = new ZipFile(ms))
                 {
-                    unzip.ExtractToDirectory(directory);
+                    foreach (ZipEntry zipEntry in zf)
+                    {
+                        if (!zipEntry.IsFile)
+                            continue;
+
+                        string entryFileName = zipEntry.Name;
+
+                        byte[] buffer = new byte[4096];
+                        Stream zipStream = zf.GetInputStream(zipEntry);
+
+                        string fullZipToPath = Path.Combine(directory, entryFileName);
+                        string directoryName = Path.GetDirectoryName(fullZipToPath);
+
+                        if (directoryName.Length > 0)
+                            Directory.CreateDirectory(directoryName);
+
+                        using (FileStream streamWriter = File.Create(fullZipToPath))
+                        {
+                            StreamUtils.Copy(zipStream, streamWriter, buffer);
+                        }
+                    }
                 }
             }
         }
