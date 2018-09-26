@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using BeatSaberModManager.DataModels;
 using System.Diagnostics;
 using System.Drawing;
+using SemVer;
+using Version = SemVer.Version;
 
 namespace BeatSaberModManager
 {
@@ -189,7 +191,10 @@ namespace BeatSaberModManager
 
                     ModLink link = release.conflictsWith.Find(l => l.name == info.name);
 
-                    return true;
+                    Version version = new Version(info.version);
+                    Range range = new Range(link.semver);
+
+                    return range.IsSatisfied(version);
                 }).ToList();
 
                 foreach (var x in filtered)
@@ -218,7 +223,10 @@ namespace BeatSaberModManager
 
                     ModLink link = release.dependsOn.Find(l => l.name == info.name);
 
-                    return true;
+                    Version version = new Version(info.version);
+                    Range range = new Range(link.semver);
+
+                    return range.IsSatisfied(version);
                 }).ToList();
 
                 if (filtered.Count != release.dependsOn.Count)
