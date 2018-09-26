@@ -13,7 +13,7 @@ namespace BeatSaberModManager.Core
         private const string ApiVersion = "1.0";
         private readonly string ApiURL = $"{ModSaberURL}/api/v{ApiVersion}";
 
-        private const Int16 CurrentVersion = 12;
+        private const Int16 CurrentVersion = 14;
         private string currentGameVersion = string.Empty;
         public List<ReleaseInfo> releases;
         public RemoteLogic()
