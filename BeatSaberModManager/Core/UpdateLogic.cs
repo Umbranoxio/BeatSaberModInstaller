@@ -63,7 +63,7 @@ namespace BeatSaberModManager.Core
 
             bool updateAvailable = remote > current;
             if (!updateAvailable)
-                return;
+               return;
 
             // Fetch EXE from release
             JSONArray assets = release["assets"].AsArray;
