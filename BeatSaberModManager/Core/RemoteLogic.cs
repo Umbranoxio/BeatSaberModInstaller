@@ -79,11 +79,11 @@ namespace BeatSaberModManager.Core
             {
                 array[index] = (string)node.ToString().Trim('"');
                 index += 1;
-                    }
+            }
             return array;
-                }
+        }
 
-        private List<ModLink> NodeToLinks (JSONNode node)
+        private List<ModLink> NodeToLinks(JSONNode node)
         {
             string[] arr = AsArray(node.AsArray);
             List<ModLink> links = new List<ModLink>();
@@ -124,7 +124,7 @@ namespace BeatSaberModManager.Core
         {
             if (release.gameVersion == currentGameVersion)
                 releases.Add(release);
-            }
+        }
 
         public void CheckVersion()
         {
