@@ -13,7 +13,6 @@ namespace BeatSaberModManager.Core
         private const string ApiVersion = "1.0";
         private readonly string ApiURL = $"{ModSaberURL}/api/v{ApiVersion}";
 
-        private const Int16 CurrentVersion = 14;
         private string currentGameVersion = string.Empty;
         public List<ReleaseInfo> releases;
         public RemoteLogic()
@@ -124,20 +123,6 @@ namespace BeatSaberModManager.Core
         {
             if (release.gameVersion == currentGameVersion)
                 releases.Add(release);
-        }
-
-        public void CheckVersion()
-        {
-            //TODO: Don't be lazy and actually make an auto updater
-            Int16 version = Convert.ToInt16(Helper.Get(
-                "https://raw.githubusercontent.com/Umbranoxio/BeatSaberModInstaller/master/update.txt"));
-            if (version > CurrentVersion)
-            {
-                MessageBox.Show("Your version of the mod installer is outdated! Please download the new one!", "Update available!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                Process.Start("https://github.com/Umbranoxio/BeatSaberModInstaller/releases");
-                Process.GetCurrentProcess().Kill();
-                Environment.Exit(0);
-            }
         }
     }
 }

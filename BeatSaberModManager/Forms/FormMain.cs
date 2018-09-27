@@ -36,7 +36,9 @@ namespace BeatSaberModManager
             try
             {
                 textBoxDirectory.Text = path.GetInstallationPath();
-                remote.CheckVersion();
+                
+                // TODO: Re-implement update core
+
                 new Thread(() => { RemoteLoad(); }).Start();
             }
             catch (Exception ex)
