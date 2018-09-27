@@ -38,8 +38,7 @@ namespace BeatSaberModManager
             try
             {
                 textBoxDirectory.Text = path.GetInstallationPath();
-                
-                // TODO: Re-implement update core
+                updater.CheckForUpdates();
 
                 new Thread(() => { RemoteLoad(); }).Start();
             }
