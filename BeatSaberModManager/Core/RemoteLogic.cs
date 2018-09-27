@@ -9,7 +9,7 @@ namespace BeatSaberModManager.Core
 {
     public class RemoteLogic
     {
-        private const string ModSaberURL = "https://www.modsaber.ml";
+        private const string ModSaberURL = "https://www.modsaber.org";
         private const string ApiVersion = "1.0";
         private readonly string ApiURL = $"{ModSaberURL}/api/v{ApiVersion}";
 

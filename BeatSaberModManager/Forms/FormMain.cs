@@ -307,7 +307,7 @@ namespace BeatSaberModManager
 
         private void linkLabelModSaberLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://www.modsaber.ml/#/faq");
+            Process.Start("https://www.modsaber.org/faq");
         }
 
         private void linkLabelUmbranox_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
