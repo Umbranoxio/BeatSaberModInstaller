@@ -17,6 +17,7 @@ namespace BeatSaberModManager
 
         #region Instances
         PathLogic path;
+        UpdateLogic updater;
         RemoteLogic remote;
         InstallerLogic installer;
         #endregion
@@ -26,6 +27,7 @@ namespace BeatSaberModManager
         {
             InitializeComponent();
             path = new PathLogic();
+            updater = new UpdateLogic();
             remote = new RemoteLogic();
         }
         #endregion
