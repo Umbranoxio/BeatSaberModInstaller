@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using BeatSaberModManager.Core;
 using System.Threading;
 using System.Collections.Generic;
 using BeatSaberModManager.DataModels;
 using System.Diagnostics;
+using System.Drawing;
+using SemVer;
+using Version = SemVer.Version;
 
 namespace BeatSaberModManager
 {
@@ -13,6 +17,7 @@ namespace BeatSaberModManager
 
         #region Instances
         PathLogic path;
+        UpdateLogic updater;
         RemoteLogic remote;
         InstallerLogic installer;
         #endregion
@@ -22,6 +27,7 @@ namespace BeatSaberModManager
         {
             InitializeComponent();
             path = new PathLogic();
+            updater = new UpdateLogic();
             remote = new RemoteLogic();
         }
         #endregion
@@ -32,9 +38,11 @@ namespace BeatSaberModManager
             try
             {
                 textBoxDirectory.Text = path.GetInstallationPath();
-                remote.CheckVersion();
+                updater.CheckForUpdates();
+
                 new Thread(() => { RemoteLoad(); }).Start();
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show("Failed to start, error: " + ex.ToString());
                 Environment.Exit(0);
@@ -60,11 +68,14 @@ namespace BeatSaberModManager
 
             foreach (ReleaseInfo release in remote.releases)
             {
-                ListViewItem item = new ListViewItem();
-                item.Text = release.title;
+                ListViewItem item = new ListViewItem
+                {
+                    Text = release.title,
+                    Tag = release
+                };
+
                 item.SubItems.Add(release.author);
                 item.SubItems.Add(release.version);
-                item.Tag = release;
 
                 if (release.platform == path.platform || release.platform == Platform.Default)
                 {
@@ -83,7 +94,7 @@ namespace BeatSaberModManager
                         groups.Add(release.category, index);
                         item.Group = listViewMods.Groups[index];
                     }
-                    
+
                     listViewMods.Items.Add(item);
                     CheckDefaultMod(release, item);
                 }
@@ -118,7 +129,9 @@ namespace BeatSaberModManager
             string link = release.downloadLink.ToLower();
             if (link.Contains("song-loader"))
             {
-                item.Text = item.Text + " (required)";
+                item.Text = $"[REQUIRED] {release.title}";
+                item.BackColor = Color.LightGray;
+                release.disabled = true;
             }
             if (link.Contains("song-loader") || link.Contains("scoresaber") || link.Contains("beatsaver"))
             {
@@ -129,6 +142,8 @@ namespace BeatSaberModManager
             {
                 release.install = false;
             }
+
+            ReRenderListView();
         }
         #endregion
 
@@ -154,12 +169,115 @@ namespace BeatSaberModManager
             textBoxDirectory.Text = path.ManualFind();
             installer.installDirectory = textBoxDirectory.Text;
         }
+
         private void listViewMods_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             ReleaseInfo release = (ReleaseInfo)e.Item.Tag;
-            if (release.downloadLink.ToLower().Contains("song-loader")) { e.Item.Checked = true; };
-            release.install = e.Item.Checked;
+            if (release.disabled)
+            {
+                e.Item.Checked = release.install;
+                return;
+            }
+
+            IEnumerable<ListViewItem> lv = listViewMods.Items.Cast<ListViewItem>();
+
+            List<ListViewItem> changedConflicts = new List<ListViewItem>();
+            if (release.conflictsWith.Count > 0)
+            {
+                List<ListViewItem> filtered = lv.Where(lvi =>
+                {
+                    ReleaseInfo info = (ReleaseInfo)lvi.Tag;
+
+                    bool exists = release.conflictsWith.Exists(l => l.name == info.name);
+                    if (!exists)
+                        return false;
+
+                    ModLink link = release.conflictsWith.Find(l => l.name == info.name);
+
+                    Version version = new Version(info.version);
+                    Range range = new Range(link.semver);
+
+                    return range.IsSatisfied(version);
+                }).ToList();
+
+                foreach (var x in filtered)
+                {
+                    changedConflicts.Add(x);
+                    ReleaseInfo info = (ReleaseInfo)x.Tag;
+                    info.disabled = e.Item.Checked;
+                    info.install = !e.Item.Checked;
+
+                    if (e.Item.Checked)
+                        x.Checked = false;
+                }
+            }
+
+            if (release.dependsOn.Count > 0)
+            {
+                List<ListViewItem> filtered = lv.Where(lvi =>
+                {
+                    ReleaseInfo info = (ReleaseInfo)lvi.Tag;
+                    if (info.disabled && !info.install)
+                        return false;
+
+                    bool exists = release.dependsOn.Exists(l => l.name == info.name);
+                    if (!exists)
+                        return false;
+
+                    ModLink link = release.dependsOn.Find(l => l.name == info.name);
+
+                    Version version = new Version(info.version);
+                    Range range = new Range(link.semver);
+
+                    return range.IsSatisfied(version);
+                }).ToList();
+
+                if (filtered.Count != release.dependsOn.Count)
+                {
+                    release.install = false;
+                    release.disabled = true;
+
+                    foreach (var x in changedConflicts)
+                    {
+                        ReleaseInfo info = (ReleaseInfo)x.Tag;
+                        info.disabled = !e.Item.Checked;
+                        info.install = e.Item.Checked;
+                    }
+                }
+                else
+                {
+                    foreach (var x in filtered)
+                    {
+                        ReleaseInfo info = (ReleaseInfo)x.Tag;
+                        info.disabled = e.Item.Checked;
+                        info.install = e.Item.Checked;
+                        x.Checked = e.Item.Checked;
+                    }
+                }
+            }
+
+            ReRenderListView();
         }
+
+        private void ReRenderListView ()
+        {
+            foreach (ListViewItem item in listViewMods.Items)
+            {
+                ReleaseInfo release = (ReleaseInfo)item.Tag;
+                if (release.disabled)
+                {
+                    item.Checked = release.install;
+                    item.BackColor = Color.LightGray;
+                    item.Text = $"[{(release.install ? "REQUIRED" : "CONFLICT")}] {release.title}";
+                }
+                else
+                {
+                    item.Text = release.title;
+                    item.BackColor = Color.White;
+                }
+            }
+        }
+
         private void listViewMods_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listViewMods.SelectedItems.Count == 1)
@@ -171,10 +289,12 @@ namespace BeatSaberModManager
                 buttonViewInfo.Enabled = false;
             }
         }
+
         private void buttonViewInfo_Click(object sender, EventArgs e)
         {
             new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
         }
+
         private void viewInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (listViewMods.SelectedItems.Count >= 1)
@@ -182,6 +302,7 @@ namespace BeatSaberModManager
                 new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
             }
         }
+
         private void linkLabellolPants_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://github.com/lolPants");
@@ -189,13 +310,14 @@ namespace BeatSaberModManager
 
         private void linkLabelModSaberLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://www.modsaber.ml/#/faq");
+            Process.Start("https://www.modsaber.org/faq");
         }
 
         private void linkLabelUmbranox_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://twitter.com/Umbranoxus");
         }
+
         private void linkLabelContributors_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://github.com/Umbranoxio/BeatSaberModInstaller/graphs/contributors");
