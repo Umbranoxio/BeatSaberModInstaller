@@ -178,6 +178,10 @@ namespace BeatSaberModManager
                 e.Item.Checked = release.install;
                 return;
             }
+            else
+            {
+                release.install = e.Item.Checked;
+            }
 
             IEnumerable<ListViewItem> lv = listViewMods.Items.Cast<ListViewItem>();
 
