@@ -26,6 +26,7 @@ namespace BeatSaberModManager.Core
         public Version CurrentVersion()
         {
             string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            version = version.Substring(2, version.Length - 2);
             return new Version(version, true);
         }
 

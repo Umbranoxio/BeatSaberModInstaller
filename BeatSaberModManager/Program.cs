@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Reflection;
 
 namespace BeatSaberModManager
 {
@@ -15,5 +16,6 @@ namespace BeatSaberModManager
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormMain());
         }
+        
     }
 }

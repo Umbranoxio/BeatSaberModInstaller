@@ -43,15 +43,9 @@
     <ApplicationIcon>saber.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=1.0.0.999, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpZipLib.1.0.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
-    <Reference Include="SemVer, Version=1.2.0.0, Culture=neutral, PublicKeyToken=a89bb7dc6f7a145c, processorArchitecture=MSIL">
-      <HintPath>..\packages\SemanticVersioning.1.2.0\lib\net45\SemVer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -59,6 +53,7 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -114,7 +109,84 @@
     <Compile Include="Dependencies\CommonMark\Syntax\StringContent.cs" />
     <Compile Include="Dependencies\CommonMark\Syntax\StringContentPart.cs" />
     <Compile Include="Dependencies\CommonMark\Utilities.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\BZip2\BZip2.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\BZip2\BZip2Constants.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\BZip2\BZip2Exception.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\BZip2\BZip2InputStream.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\BZip2\BZip2OutputStream.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Checksum\Adler32.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Checksum\BZip2Crc.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Checksum\Crc32.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Checksum\IChecksum.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Core\Exceptions\SharpZipBaseException.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Core\Exceptions\StreamDecodingException.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Core\Exceptions\StreamUnsupportedException.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Core\Exceptions\UnexpectedEndOfStreamException.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Core\Exceptions\ValueOutOfRangeException.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Core\FileSystemScanner.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Core\INameTransform.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Core\InvalidNameException.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Core\IScanFilter.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Core\NameFilter.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Core\PathFilter.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Core\StreamUtils.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Core\WindowsPathUtils.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Encryption\PkzipClassic.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Encryption\ZipAESStream.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Encryption\ZipAESTransform.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\GZip\GZip.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\GZip\GZipConstants.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\GZip\GZipException.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\GZip\GzipInputStream.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\GZip\GzipOutputStream.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Lzw\LzwConstants.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Lzw\LzwException.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Lzw\LzwInputStream.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Tar\InvalidHeaderException.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Tar\TarArchive.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Tar\TarBuffer.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Tar\TarEntry.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Tar\TarException.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Tar\TarExtendedHeaderReader.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Tar\TarHeader.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Tar\TarInputStream.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Tar\TarOutputStream.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\Compression\Deflater.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\Compression\DeflaterConstants.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\Compression\DeflaterEngine.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\Compression\DeflaterHuffman.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\Compression\DeflaterPending.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\Compression\Inflater.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\Compression\InflaterDynHeader.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\Compression\InflaterHuffmanTree.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\Compression\PendingBuffer.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\Compression\Streams\DeflaterOutputStream.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\Compression\Streams\InflaterInputStream.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\Compression\Streams\OutputWindow.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\Compression\Streams\StreamManipulator.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\FastZip.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\IEntryFactory.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\WindowsNameTransform.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\ZipConstants.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\ZipEntry.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\ZipEntryFactory.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\ZipException.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\ZipExtraData.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\ZipFile.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\ZipHelperStream.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\ZipInputStream.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\ZipNameTransform.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\ZipOutputStream.cs" />
+    <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\ZipStrings.cs" />
     <Compile Include="Dependencies\RegHelper.cs" />
+    <Compile Include="Dependencies\SemVer\Comparator.cs" />
+    <Compile Include="Dependencies\SemVer\ComparatorSet.cs" />
+    <Compile Include="Dependencies\SemVer\Desugarer.cs" />
+    <Compile Include="Dependencies\SemVer\PartialVersion.cs" />
+    <Compile Include="Dependencies\SemVer\PreReleaseVersion.cs" />
+    <Compile Include="Dependencies\SemVer\Range.cs" />
+    <Compile Include="Dependencies\SemVer\Tuple.cs" />
+    <Compile Include="Dependencies\SemVer\Version.cs" />
     <Compile Include="Dependencies\SimpleJson.cs" />
     <Compile Include="Forms\FormDetailViewer.cs">
       <SubType>Form</SubType>
@@ -148,21 +220,20 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="app.config" />
     <None Include="app.manifest" />
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -170,19 +241,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="FodyWeavers.xml" />
     <Content Include="saber.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Costura.Fody.3.1.2\build\Costura.Fody.targets" Condition="Exists('..\packages\Costura.Fody.3.1.2\build\Costura.Fody.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Costura.Fody.3.1.2\build\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.3.1.2\build\Costura.Fody.targets'))" />
-    <Error Condition="!Exists('..\packages\Fody.3.2.4\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.3.2.4\build\Fody.targets'))" />
-  </Target>
-  <Import Project="..\packages\Fody.3.2.4\build\Fody.targets" Condition="Exists('..\packages\Fody.3.2.4\build\Fody.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
