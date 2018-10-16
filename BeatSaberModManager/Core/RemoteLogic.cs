@@ -106,7 +106,7 @@ namespace BeatSaberModManager.Core
 
         private string GetModSaberReleases()
         {
-            string raw = Fetch($"{ApiURL}/mods/approved");
+            string raw = Fetch($"{ApiURL}/mods/approved/latest");
             var decoded = JSON.Parse(raw);
             int lastPage = decoded["lastPage"];
 
@@ -114,7 +114,7 @@ namespace BeatSaberModManager.Core
 
             for (int i = 0; i <= lastPage; i++)
             {
-                string page = Fetch($"{ApiURL}/mods/approved/{i}");
+                string page = Fetch($"{ApiURL}/mods/approved/latest/{i}");
                 var pageDecoded = JSON.Parse(page);
                 var mods = pageDecoded["mods"];
 
