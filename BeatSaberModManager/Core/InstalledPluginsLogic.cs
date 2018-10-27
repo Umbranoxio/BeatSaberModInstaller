@@ -53,13 +53,14 @@ namespace BeatSaberModManager.Core
             AssemblyLocator.Init();
             Assembly illusionPlugin = LoadBeatSaberAssemblies(installPath);
 
-            if (illusionPlugin == null)
-                return Plugins;
+            if (illusionPlugin == null) return Plugins;
 
             // IPlugin interface is implemented by Mods
             Type iPlugin = illusionPlugin.GetType("IllusionPlugin.IPlugin");
 
             string pluginPath = Path.Combine(installPath, PluginDir);
+            if (!Directory.Exists(pluginPath)) return Plugins;
+
             var pluginFiles = Directory.GetFiles(pluginPath, "*.dll");
             foreach (var pluginFile in pluginFiles)
             {
