@@ -62,6 +62,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxPluginsPath = new System.Windows.Forms.TextBox();
             this.helpInfoLabel3 = new System.Windows.Forms.Label();
+            this.columnHeaderInstalled = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControlMain.SuspendLayout();
             this.tabPageCore.SuspendLayout();
             this.contextMenuStripMain.SuspendLayout();
@@ -158,7 +159,8 @@
             this.listViewMods.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeaderName,
             this.columnHeaderAuthor,
-            this.columnHeaderVersion});
+            this.columnHeaderVersion,
+            this.columnHeaderInstalled});
             this.listViewMods.ContextMenuStrip = this.contextMenuStripMain;
             this.listViewMods.FullRowSelect = true;
             this.listViewMods.Location = new System.Drawing.Point(6, 6);
@@ -178,12 +180,12 @@
             // columnHeaderAuthor
             // 
             this.columnHeaderAuthor.Text = "Author";
-            this.columnHeaderAuthor.Width = 150;
+            this.columnHeaderAuthor.Width = 130;
             // 
             // columnHeaderVersion
             // 
             this.columnHeaderVersion.Text = "Version";
-            this.columnHeaderVersion.Width = 107;
+            this.columnHeaderVersion.Width = 70;
             // 
             // contextMenuStripMain
             // 
@@ -431,6 +433,11 @@
             this.helpInfoLabel3.TabIndex = 3;
             this.helpInfoLabel3.Text = "You can uninstall mods by removing the .dll from that folder.";
             // 
+            // columnHeaderInstalled
+            // 
+            this.columnHeaderInstalled.Text = "Installed";
+            this.columnHeaderInstalled.Width = 70;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -499,6 +506,7 @@
         private System.Windows.Forms.Label labelDiscordInfo;
         private System.Windows.Forms.LinkLabel linkLabelDiscord;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ColumnHeader columnHeaderInstalled;
     }
 }
 

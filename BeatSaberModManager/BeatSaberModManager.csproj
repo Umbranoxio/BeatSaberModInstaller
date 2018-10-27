@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Core\GroupSorter.cs" />
     <Compile Include="Core\Helper.cs" />
+    <Compile Include="Core\InstalledPluginsLogic.cs" />
     <Compile Include="Core\InstallerLogic.cs" />
     <Compile Include="Core\PathLogic.cs" />
     <Compile Include="Core\RemoteLogic.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="DataModels\ModLink.cs" />
     <Compile Include="DataModels\Platform.cs" />
     <Compile Include="DataModels\ReleaseInfo.cs" />
+    <Compile Include="Dependencies\AssemblyLocator.cs" />
     <Compile Include="Dependencies\CommonMark\CommonMarkAdditionalFeatures.cs" />
     <Compile Include="Dependencies\CommonMark\CommonMarkConverter.cs" />
     <Compile Include="Dependencies\CommonMark\CommonMarkException.cs" />

@@ -20,6 +20,7 @@ namespace BeatSaberModManager
         UpdateLogic updater;
         RemoteLogic remote;
         InstallerLogic installer;
+        InstalledPluginsLogic installedPlugins;
         #endregion
 
         #region Constructor
@@ -29,6 +30,7 @@ namespace BeatSaberModManager
             path = new PathLogic();
             updater = new UpdateLogic();
             remote = new RemoteLogic();
+            installedPlugins = new InstalledPluginsLogic();
         }
         #endregion
 
@@ -39,8 +41,11 @@ namespace BeatSaberModManager
             {
                 textBoxDirectory.Text = path.GetInstallationPath();
                 updater.CheckForUpdates();
-
-                new Thread(() => { RemoteLoad(); }).Start();
+                new Thread(() => {
+                    UpdateStatus("Loading installed mods...");
+                    installedPlugins.LoadInstalledPlugins(path.installPath);
+                    RemoteLoad();
+                }).Start();
             }
             catch (Exception ex)
             {
@@ -76,6 +81,9 @@ namespace BeatSaberModManager
 
                 item.SubItems.Add(release.author);
                 item.SubItems.Add(release.version);
+
+                string installedVersion = installedPlugins.GetInstalledVersion(release.title);
+                item.SubItems.Add(installedVersion ?? "unknown");
 
                 if (release.platform == path.platform || release.platform == Platform.Default)
                 {
