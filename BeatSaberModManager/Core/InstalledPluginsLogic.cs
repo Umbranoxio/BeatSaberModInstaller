@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using SemVer;
 
 namespace BeatSaberModManager.Core
 {
@@ -118,7 +119,16 @@ namespace BeatSaberModManager.Core
                 return null;
             if (!Plugins.ContainsKey(name))
                 return null;
-            return Plugins[name];
+            try
+            {
+                var version = new SemVer.Version(Plugins[name], true);
+                var baseVersion = version.BaseVersion();
+                return baseVersion.ToString();
+            }
+            catch
+            {
+                return Plugins[name];
+            }
         }
     }
 }
