@@ -50,6 +50,7 @@ namespace BeatSaberModManager.Core
         /// <returns>Installed Plugins as (name, version)Dictionary</returns>
         public Dictionary<string, string> LoadInstalledPlugins(string installPath)
         {
+            if (installPath == null || installPath == "") return null;
             Plugins = new Dictionary<string, string>();
             AssemblyLocator.Init();
             Assembly illusionPlugin = LoadBeatSaberAssemblies(installPath);
