@@ -64,6 +64,7 @@
     <Compile Include="Core\PathLogic.cs" />
     <Compile Include="Core\RemoteLogic.cs" />
     <Compile Include="Core\UpdateLogic.cs" />
+    <Compile Include="DataModels\GameVersion.cs" />
     <Compile Include="DataModels\ModLink.cs" />
     <Compile Include="DataModels\Platform.cs" />
     <Compile Include="DataModels\ReleaseInfo.cs" />

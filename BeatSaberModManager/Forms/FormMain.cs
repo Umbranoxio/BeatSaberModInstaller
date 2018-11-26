@@ -40,6 +40,15 @@ namespace BeatSaberModManager
                 textBoxDirectory.Text = path.GetInstallationPath();
                 updater.CheckForUpdates();
 
+                remote.GetGameVersions();
+                for (int i = 0; i < remote.gameVersions.Length; i++)
+                {
+                    GameVersion gv = remote.gameVersions[i];
+                    comboBox_gameVersions.Items.Add(gv.value);
+                }
+
+                comboBox_gameVersions.SelectedIndex = 0;
+
                 new Thread(() => { RemoteLoad(); }).Start();
             }
             catch (Exception ex)
@@ -48,13 +57,25 @@ namespace BeatSaberModManager
                 Environment.Exit(0);
             }
         }
+
         private void RemoteLoad()
         {
-            UpdateStatus("Loading latest releases...");
-            remote.GetCurrentGameVersion();
+            UpdateStatus("Loading releases...");
+
             remote.PopulateReleases();
             installer = new InstallerLogic(remote.releases, path.installPath);
             installer.StatusUpdate += Installer_StatusUpdate;
+            this.Invoke((MethodInvoker)(() => { ShowReleases(); }));
+        }
+
+        private void comboBox_gameVersions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+            GameVersion gameVersion = remote.gameVersions[comboBox.SelectedIndex];
+
+            remote.selectedGameVersion = gameVersion;
+            remote.PopulateReleases();
+
             this.Invoke((MethodInvoker)(() => { ShowReleases(); }));
         }
 
@@ -100,17 +121,17 @@ namespace BeatSaberModManager
                 }
             }
 
-            ReRenderListView();
-
             ListViewGroup[] sortedGroups = new ListViewGroup[this.listViewMods.Groups.Count];
 
-            this.listViewMods.Groups.CopyTo(sortedGroups, 0);
+            listViewMods.Groups.CopyTo(sortedGroups, 0);
             Array.Sort(sortedGroups, new GroupComparer());
 
-            this.listViewMods.BeginUpdate();
-            this.listViewMods.Groups.Clear();
-            this.listViewMods.Groups.AddRange(sortedGroups);
-            this.listViewMods.EndUpdate();
+            listViewMods.BeginUpdate();
+            listViewMods.Groups.Clear();
+            listViewMods.Groups.AddRange(sortedGroups);
+            listViewMods.EndUpdate();
+
+            ReRenderListView();
 
             UpdateStatus("Releases loaded.");
             tabControlMain.Enabled = true;
