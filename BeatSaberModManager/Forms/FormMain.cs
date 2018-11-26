@@ -51,7 +51,7 @@ namespace BeatSaberModManager
         private void RemoteLoad()
         {
             UpdateStatus("Loading latest releases...");
-            remote.GetCurrentGameVersion();
+            remote.GetGameVersions();
             remote.PopulateReleases();
             installer = new InstallerLogic(remote.releases, path.installPath);
             installer.StatusUpdate += Installer_StatusUpdate;

@@ -18,21 +18,38 @@ namespace BeatSaberModManager.Core
         private const string ApiVersion = "1.0";
         private readonly string ApiURL = $"{ModSaberURL}/api/v{ApiVersion}";
 
-        private string currentGameVersion = string.Empty;
+        private GameVersion[] gameVersions;
+        private GameVersion selectedGameVersion;
+
         public List<ReleaseInfo> releases;
+
         public RemoteLogic()
         {
             releases = new List<ReleaseInfo>();
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
         }
 
-        public void GetCurrentGameVersion()
+        public void GetGameVersions()
         {
             string raw = Fetch($"{ApiURL}/site/gameversions");
-            var decoded = JSON.Parse(raw);
-            var current = decoded[0];
-            var value = current["value"];
-            currentGameVersion = value;
+            var gameVersionsRaw = JSON.Parse(raw);
+
+            List<GameVersion> gvList = new List<GameVersion>();
+            for (int i = 0; i < gameVersionsRaw.Count; i++)
+            {
+                var current = gameVersionsRaw[i];
+
+                GameVersion gv = new GameVersion(
+                    current["id"],
+                    current["value"],
+                    current["manifest"]
+                );
+
+                gvList.Add(gv);
+            }
+
+            gameVersions = gvList.ToArray();
+            selectedGameVersion = gameVersions[0];
         }
 
         public void PopulateReleases()
@@ -126,7 +143,7 @@ namespace BeatSaberModManager.Core
 
         private void CreateRelease(ReleaseInfo release)
         {
-            if (release.gameVersion == currentGameVersion)
+            if (release.gameVersion == selectedGameVersion.value)
                 releases.Add(release);
         }
     }
