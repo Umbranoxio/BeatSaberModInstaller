@@ -100,6 +100,8 @@ namespace BeatSaberModManager
                 }
             }
 
+            ReRenderListView();
+
             ListViewGroup[] sortedGroups = new ListViewGroup[this.listViewMods.Groups.Count];
 
             this.listViewMods.Groups.CopyTo(sortedGroups, 0);
@@ -132,7 +134,11 @@ namespace BeatSaberModManager
                 item.Text = $"[REQUIRED] {release.title}";
                 item.BackColor = Color.LightGray;
                 release.disabled = true;
+
+                release.install = true;
+                item.Checked = true;
             }
+
             if (link.Contains("song-loader") || link.Contains("scoresaber") || link.Contains("beatsaver"))
             {
                 item.Checked = true;
@@ -142,8 +148,6 @@ namespace BeatSaberModManager
             {
                 release.install = false;
             }
-
-            ReRenderListView();
         }
         #endregion
 
@@ -209,7 +213,12 @@ namespace BeatSaberModManager
                     changedConflicts.Add(x);
                     ReleaseInfo info = (ReleaseInfo)x.Tag;
                     info.disabled = e.Item.Checked;
-                    info.install = !e.Item.Checked;
+
+                    info.install = !info.install && !e.Item.Checked ?
+                        false :
+                        info.install && !e.Item.Checked ?
+                            true :
+                            false;
 
                     if (e.Item.Checked)
                         x.Checked = false;
