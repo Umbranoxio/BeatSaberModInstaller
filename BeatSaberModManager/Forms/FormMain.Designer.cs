@@ -62,6 +62,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxPluginsPath = new System.Windows.Forms.TextBox();
             this.helpInfoLabel3 = new System.Windows.Forms.Label();
+            this.comboBox_gameVersions = new System.Windows.Forms.ComboBox();
             this.tabControlMain.SuspendLayout();
             this.tabPageCore.SuspendLayout();
             this.contextMenuStripMain.SuspendLayout();
@@ -78,14 +79,14 @@
             this.textBoxDirectory.Enabled = false;
             this.textBoxDirectory.Location = new System.Drawing.Point(10, 25);
             this.textBoxDirectory.Name = "textBoxDirectory";
-            this.textBoxDirectory.Size = new System.Drawing.Size(530, 22);
+            this.textBoxDirectory.Size = new System.Drawing.Size(454, 22);
             this.textBoxDirectory.TabIndex = 0;
             this.textBoxDirectory.TextChanged += new System.EventHandler(this.textBoxDirectory_TextChanged);
             // 
             // buttonFolderBrowser
             // 
             this.buttonFolderBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonFolderBrowser.Location = new System.Drawing.Point(546, 25);
+            this.buttonFolderBrowser.Location = new System.Drawing.Point(470, 25);
             this.buttonFolderBrowser.Name = "buttonFolderBrowser";
             this.buttonFolderBrowser.Size = new System.Drawing.Size(26, 23);
             this.buttonFolderBrowser.TabIndex = 1;
@@ -431,11 +432,24 @@
             this.helpInfoLabel3.TabIndex = 3;
             this.helpInfoLabel3.Text = "You can uninstall mods by removing the .dll from that folder.";
             // 
+            // comboBox_gameVersions
+            // 
+            this.comboBox_gameVersions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_gameVersions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_gameVersions.DropDownWidth = 70;
+            this.comboBox_gameVersions.FormattingEnabled = true;
+            this.comboBox_gameVersions.Location = new System.Drawing.Point(502, 26);
+            this.comboBox_gameVersions.Name = "comboBox_gameVersions";
+            this.comboBox_gameVersions.Size = new System.Drawing.Size(72, 21);
+            this.comboBox_gameVersions.TabIndex = 11;
+            this.comboBox_gameVersions.SelectedIndexChanged += new System.EventHandler(this.comboBox_gameVersions_SelectedIndexChanged);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(588, 436);
+            this.Controls.Add(this.comboBox_gameVersions);
             this.Controls.Add(this.panelInfo);
             this.Controls.Add(this.buttonViewInfo);
             this.Controls.Add(this.tabControlMain);
@@ -499,6 +513,7 @@
         private System.Windows.Forms.Label labelDiscordInfo;
         private System.Windows.Forms.LinkLabel linkLabelDiscord;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox comboBox_gameVersions;
     }
 }
 

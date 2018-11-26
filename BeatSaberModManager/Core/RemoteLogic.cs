@@ -18,8 +18,8 @@ namespace BeatSaberModManager.Core
         private const string ApiVersion = "1.0";
         private readonly string ApiURL = $"{ModSaberURL}/api/v{ApiVersion}";
 
-        private GameVersion[] gameVersions;
-        private GameVersion selectedGameVersion;
+        public GameVersion[] gameVersions;
+        public GameVersion selectedGameVersion;
 
         public List<ReleaseInfo> releases;
 
@@ -54,6 +54,8 @@ namespace BeatSaberModManager.Core
 
         public void PopulateReleases()
         {
+            releases.Clear();
+
             string raw = GetModSaberReleases();
             if (raw != null)
             {
