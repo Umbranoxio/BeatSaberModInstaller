@@ -1,10 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Windows.Forms;
 using BeatSaberModManager.DataModels;
 using BeatSaberModManager.Dependencies.SimpleJSON;
+using SemVer;
+using Version = SemVer.Version;
+
 namespace BeatSaberModManager.Core
 {
     public class RemoteLogic
@@ -125,7 +129,7 @@ namespace BeatSaberModManager.Core
 
         private string GetModSaberReleases()
         {
-            string raw = Fetch($"{ApiURL}/mods/approved/latest");
+            string raw = Fetch($"{ApiURL}/mods/approved/all");
             var decoded = JSON.Parse(raw);
             int lastPage = decoded["lastPage"];
 
@@ -133,7 +137,7 @@ namespace BeatSaberModManager.Core
 
             for (int i = 0; i <= lastPage; i++)
             {
-                string page = Fetch($"{ApiURL}/mods/approved/latest/{i}");
+                string page = Fetch($"{ApiURL}/mods/approved/all/{i}");
                 var pageDecoded = JSON.Parse(page);
                 var mods = pageDecoded["mods"];
 
@@ -145,8 +149,28 @@ namespace BeatSaberModManager.Core
 
         private void CreateRelease(ReleaseInfo release)
         {
-            if (release.gameVersion == selectedGameVersion.value)
+            if (release.gameVersion != selectedGameVersion.value)
+                return;
+
+            ReleaseInfo test = releases.Find(x => x.name == release.name);
+            if (test != null)
+            {
+                Version testVersion = new Version(test.version);
+                Version newVersion = new Version(release.version);
+
+                if (testVersion > newVersion)
+                {
+                    return;
+                }
+                else
+                {
+                    int idx = releases.FindIndex(x => (x.name == test.name) && (x.version == test.version));
+                    releases[idx] = release;
+                }
+            } else
+            {
                 releases.Add(release);
+            }
         }
     }
 }
