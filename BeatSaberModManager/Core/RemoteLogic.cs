@@ -152,25 +152,21 @@ namespace BeatSaberModManager.Core
             if (release.gameVersion != selectedGameVersion.value)
                 return;
 
-            ReleaseInfo test = releases.Find(x => x.name == release.name);
-            if (test != null)
-            {
-                Version testVersion = new Version(test.version);
-                Version newVersion = new Version(release.version);
-
-                if (testVersion > newVersion)
-                {
-                    return;
-                }
-                else
-                {
-                    int idx = releases.FindIndex(x => (x.name == test.name) && (x.version == test.version));
-                    releases[idx] = release;
-                }
-            } else
+            ReleaseInfo current = releases.Find(x => x.name == release.name);
+            if (current == null)
             {
                 releases.Add(release);
+                return;
             }
+
+            Version currentVersion = new Version(current.version);
+            Version newVersion = new Version(release.version);
+
+            if (currentVersion >= newVersion)
+                return;
+
+            releases.Remove(current);
+            releases.Add(release);
         }
     }
 }

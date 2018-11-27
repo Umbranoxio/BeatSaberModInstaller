@@ -70,6 +70,10 @@ namespace BeatSaberModManager
 
         private void comboBox_gameVersions_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // For some reason this breaks deps/conflicts
+            // God knows why
+            // listViewMods.Items.Clear();
+
             ComboBox comboBox = (ComboBox)sender;
             GameVersion gameVersion = remote.gameVersions[comboBox.SelectedIndex];
 
@@ -121,6 +125,8 @@ namespace BeatSaberModManager
                 }
             }
 
+            ReRenderListView();
+
             ListViewGroup[] sortedGroups = new ListViewGroup[this.listViewMods.Groups.Count];
 
             listViewMods.Groups.CopyTo(sortedGroups, 0);
@@ -147,6 +153,7 @@ namespace BeatSaberModManager
                 labelStatus.Text = formattedText;
             }));
         }
+
         private void CheckDefaultMod(ReleaseInfo release, ListViewItem item)
         {
             string link = release.downloadLink.ToLower();
@@ -264,10 +271,16 @@ namespace BeatSaberModManager
                     Range range = new Range(link.semver);
 
                     return range.IsSatisfied(version);
-                }).ToList();
+                })
+                .GroupBy(lvi =>
+                {
+                    ReleaseInfo info = (ReleaseInfo)lvi.Tag;
+                    return $"{info.name}@{info.version}";
+                }).Select(x => x.First()).ToList();
 
                 if (filtered.Count != release.dependsOn.Count)
                 {
+                    Console.WriteLine($"aaa // {release.name}@{release.version}");
                     release.install = false;
                     release.disabled = true;
 
