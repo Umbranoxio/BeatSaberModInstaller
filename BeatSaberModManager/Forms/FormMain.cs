@@ -37,18 +37,9 @@ namespace BeatSaberModManager
         {
             try
             {
-                textBoxDirectory.Text = path.GetInstallationPath();
                 updater.CheckForUpdates();
-
-                remote.GetGameVersions();
-                for (int i = 0; i < remote.gameVersions.Length; i++)
-                {
-                    GameVersion gv = remote.gameVersions[i];
-                    comboBox_gameVersions.Items.Add(gv.value);
-                }
-
-                comboBox_gameVersions.SelectedIndex = 0;
-
+                textBoxDirectory.Text = path.GetInstallationPath();
+             
                 new Thread(() => { RemoteLoad(); }).Start();
             }
             catch (Exception ex)
@@ -60,26 +51,44 @@ namespace BeatSaberModManager
 
         private void RemoteLoad()
         {
+            UpdateStatus("Loading game versions...");
+            remote.GetGameVersions();
+            for (int i = 0; i < remote.gameVersions.Length; i++)
+            {
+                GameVersion gv = remote.gameVersions[i];
+                this.Invoke((MethodInvoker)(() => { comboBox_gameVersions.Items.Add(gv.value); })); 
+            }
+            this.Invoke((MethodInvoker)(() => { comboBox_gameVersions.SelectedIndex = 0; }));
             UpdateStatus("Loading releases...");
-
             remote.PopulateReleases();
             installer = new InstallerLogic(remote.releases, path.installPath);
             installer.StatusUpdate += Installer_StatusUpdate;
             this.Invoke((MethodInvoker)(() => { ShowReleases(); }));
         }
 
+        bool first = true;
         private void comboBox_gameVersions_SelectedIndexChanged(object sender, EventArgs e)
         {
             // For some reason this breaks deps/conflicts
             // God knows why
             // listViewMods.Items.Clear();
+            UpdateStatus("Loading releases...");
+            if (!first)
+            {
+                ComboBox comboBox = (ComboBox)sender;
+                GameVersion gameVersion = remote.gameVersions[comboBox.SelectedIndex];
 
-            ComboBox comboBox = (ComboBox)sender;
-            GameVersion gameVersion = remote.gameVersions[comboBox.SelectedIndex];
-
-            remote.selectedGameVersion = gameVersion;
+                remote.selectedGameVersion = gameVersion;
+                new Thread(() => { LoadFromComboBox(); }).Start();
+            } else
+            {
+                first = false;
+            }
+        }
+               
+        private void LoadFromComboBox()
+        {
             remote.PopulateReleases();
-
             this.Invoke((MethodInvoker)(() => { ShowReleases(); }));
         }
 
@@ -121,6 +130,7 @@ namespace BeatSaberModManager
                     }
 
                     listViewMods.Items.Add(item);
+                    release.itemHandle = item;
                     CheckDefaultMod(release, item);
                 }
             }
@@ -215,94 +225,59 @@ namespace BeatSaberModManager
                 release.install = e.Item.Checked;
             }
 
-            IEnumerable<ListViewItem> lv = listViewMods.Items.Cast<ListViewItem>();
-
-            List<ListViewItem> changedConflicts = new List<ListViewItem>();
-            if (release.conflictsWith.Count > 0)
+            if (e.Item.Checked)
             {
-                List<ListViewItem> filtered = lv.Where(lvi =>
+                if (release.dependsOn.Count > 0)
                 {
-                    ReleaseInfo info = (ReleaseInfo)lvi.Tag;
-
-                    bool exists = release.conflictsWith.Exists(l => l.name == info.name);
-                    if (!exists)
-                        return false;
-
-                    ModLink link = release.conflictsWith.Find(l => l.name == info.name);
-
-                    Version version = new Version(info.version);
-                    Range range = new Range(link.semver);
-
-                    return range.IsSatisfied(version);
-                }).ToList();
-
-                foreach (var x in filtered)
-                {
-                    changedConflicts.Add(x);
-                    ReleaseInfo info = (ReleaseInfo)x.Tag;
-                    info.disabled = e.Item.Checked;
-
-                    info.install = !info.install && !e.Item.Checked ?
-                        false :
-                        info.install && !e.Item.Checked ?
-                            true :
-                            false;
-
-                    if (e.Item.Checked)
-                        x.Checked = false;
-                }
-            }
-
-            if (release.dependsOn.Count > 0)
-            {
-                List<ListViewItem> filtered = lv.Where(lvi =>
-                {
-                    ReleaseInfo info = (ReleaseInfo)lvi.Tag;
-                    if (info.disabled && !info.install)
-                        return false;
-
-                    bool exists = release.dependsOn.Exists(l => l.name == info.name);
-                    if (!exists)
-                        return false;
-
-                    ModLink link = release.dependsOn.Find(l => l.name == info.name);
-
-                    Version version = new Version(info.version);
-                    Range range = new Range(link.semver);
-
-                    return range.IsSatisfied(version);
-                })
-                .GroupBy(lvi =>
-                {
-                    ReleaseInfo info = (ReleaseInfo)lvi.Tag;
-                    return $"{info.name}@{info.version}";
-                }).Select(x => x.First()).ToList();
-
-                if (filtered.Count != release.dependsOn.Count)
-                {
-                    Console.WriteLine($"aaa // {release.name}@{release.version}");
-                    release.install = false;
-                    release.disabled = true;
-
-                    foreach (var x in changedConflicts)
+                    foreach (ModLink dependency in release.dependsOn)
                     {
-                        ReleaseInfo info = (ReleaseInfo)x.Tag;
-                        info.disabled = !e.Item.Checked;
-                        info.install = e.Item.Checked;
-                    }
-                }
-                else
-                {
-                    foreach (var x in filtered)
-                    {
-                        ReleaseInfo info = (ReleaseInfo)x.Tag;
-                        info.disabled = e.Item.Checked;
-                        info.install = e.Item.Checked;
-                        x.Checked = e.Item.Checked;
+                        foreach (ListViewItem lvi in listViewMods.Items)
+                        {
+                            ReleaseInfo check = (ReleaseInfo)lvi.Tag;
+                            if (check.name == dependency.name)
+                            {
+                                check.itemHandle.Checked = true;
+                            }
+                        }
                     }
                 }
             }
 
+            if (e.Item.Checked)
+            {
+                if (release.conflictsWith.Count > 0)
+                {
+                    foreach (ModLink dependency in release.conflictsWith)
+                    {
+                        foreach (ListViewItem lvi in listViewMods.Items)
+                        {
+                            ReleaseInfo check = (ReleaseInfo)lvi.Tag;
+                            if (check.name == dependency.name)
+                            {
+                                check.itemHandle.Checked = false;
+                                check.disabled = true;
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (release.conflictsWith.Count > 0)
+                {
+                    foreach (ModLink dependency in release.conflictsWith)
+                    {
+                        foreach (ListViewItem lvi in listViewMods.Items)
+                        {
+                            ReleaseInfo check = (ReleaseInfo)lvi.Tag;
+                            if (check.name == dependency.name)
+                            {
+                                check.disabled = false;
+                            }
+                        }
+                    }
+                }
+            }
             ReRenderListView();
         }
 

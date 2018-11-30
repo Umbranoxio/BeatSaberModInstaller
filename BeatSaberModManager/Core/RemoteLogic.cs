@@ -161,12 +161,20 @@ namespace BeatSaberModManager.Core
 
             Version currentVersion = new Version(current.version);
             Version newVersion = new Version(release.version);
-
-            if (currentVersion >= newVersion)
-                return;
-
-            releases.Remove(current);
-            releases.Add(release);
+           
+            if (release.platform == Platform.Default )
+            {
+                releases.Remove(current);
+                releases.Add(release);
+            } else
+            {
+                if (currentVersion < newVersion)
+                {
+                    releases.Remove(current);
+                }
+                releases.Add(release);
+            }
+           
         }
     }
 }

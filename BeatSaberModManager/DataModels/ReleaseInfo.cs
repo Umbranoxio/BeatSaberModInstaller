@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BeatSaberModManager.DataModels
 {
@@ -25,6 +26,8 @@ namespace BeatSaberModManager.DataModels
 
         public bool install;
         public bool disabled;
+
+        public ListViewItem itemHandle;
 
         public List<ModLink> dependsOn;
         public List<ModLink> conflictsWith;
