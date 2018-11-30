@@ -437,6 +437,7 @@
             this.comboBox_gameVersions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_gameVersions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_gameVersions.DropDownWidth = 70;
+            this.comboBox_gameVersions.Enabled = false;
             this.comboBox_gameVersions.FormattingEnabled = true;
             this.comboBox_gameVersions.Location = new System.Drawing.Point(502, 26);
             this.comboBox_gameVersions.Name = "comboBox_gameVersions";

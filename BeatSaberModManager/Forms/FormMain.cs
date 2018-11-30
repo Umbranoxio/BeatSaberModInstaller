@@ -73,6 +73,7 @@ namespace BeatSaberModManager
             // God knows why
             // listViewMods.Items.Clear();
             UpdateStatus("Loading releases...");
+            comboBox_gameVersions.Enabled = false;
             if (!first)
             {
                 ComboBox comboBox = (ComboBox)sender;
@@ -94,6 +95,7 @@ namespace BeatSaberModManager
 
         private void ShowReleases()
         {
+            comboBox_gameVersions.Enabled = true;
             Dictionary<string, int> groups = new Dictionary<string, int>();
 
             listViewMods.Groups.Clear();
