@@ -185,7 +185,7 @@ namespace BeatSaberModManager
             }
             else
             {
-                release.install = false;
+              //  release.install = false;
             }
         }
         #endregion
