@@ -20,6 +20,7 @@ namespace BeatSaberModManager
         UpdateLogic updater;
         RemoteLogic remote;
         InstallerLogic installer;
+        bool finishedLoading = false;
         #endregion
 
         #region Constructor
@@ -133,12 +134,10 @@ namespace BeatSaberModManager
 
                     listViewMods.Items.Add(item);
                     release.itemHandle = item;
-                    CheckDefaultMod(release, item);
+                   
                 }
             }
-
-            ReRenderListView();
-
+            
             ListViewGroup[] sortedGroups = new ListViewGroup[this.listViewMods.Groups.Count];
 
             listViewMods.Groups.CopyTo(sortedGroups, 0);
@@ -148,7 +147,7 @@ namespace BeatSaberModManager
             listViewMods.Groups.Clear();
             listViewMods.Groups.AddRange(sortedGroups);
             listViewMods.EndUpdate();
-
+            finishedLoading = true;
             ReRenderListView();
 
             UpdateStatus("Releases loaded.");
@@ -280,7 +279,9 @@ namespace BeatSaberModManager
                     }
                 }
             }
-            ReRenderListView();
+            if (finishedLoading ){
+                ReRenderListView();
+            }
         }
 
         private void ReRenderListView ()
@@ -299,6 +300,7 @@ namespace BeatSaberModManager
                     item.Text = release.title;
                     item.BackColor = Color.White;
                 }
+                CheckDefaultMod(release, item);
             }
         }
 
