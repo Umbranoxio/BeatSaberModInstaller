@@ -5,6 +5,7 @@ using System.Net;
 using System.Windows.Forms;
 using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.Zip;
+using System.Reflection;
 
 namespace BeatSaberModManager.Core
 {
@@ -18,7 +19,7 @@ namespace BeatSaberModManager.Core
                 request.Method = "GET";
                 request.KeepAlive = true;
                 request.ContentType = "application/x-www-form-urlencoded";
-                request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.121 Safari/535.2";
+                request.UserAgent = $"BeatSaberModManager/{Assembly.GetEntryAssembly().GetName().Version}";
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 using (StreamReader requestReader = new StreamReader(response.GetResponseStream())) {
                     return requestReader.ReadToEnd();
