@@ -26,11 +26,14 @@ namespace BeatSaberModManager.DataModels
 
         public bool install;
         public bool disabled;
+        public enum installSpecial { Dependency, Conflict, Required, None };
+        public int installType = (int)installSpecial.None;
 
         public ListViewItem itemHandle;
 
         public List<ModLink> dependsOn;
         public List<ModLink> conflictsWith;
+        public List<string> dependedBy = new List<string> { };
 
         public ReleaseInfo(
             string _name, string _title, string _version, string _author, string _description,
