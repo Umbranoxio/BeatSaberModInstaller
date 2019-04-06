@@ -344,7 +344,7 @@ namespace BeatSaberModManager
                     item.Checked = true;
                     release.install = true;
                     item.BackColor = Color.LightGray;
-                    item.Text = $"[DEPENDECY] {release.title}";
+                    item.Text = $"[DEPENDENCY] {release.title}";
                 }
                 else
                 {
