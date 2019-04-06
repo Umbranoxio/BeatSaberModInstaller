@@ -62,7 +62,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxPluginsPath = new System.Windows.Forms.TextBox();
             this.helpInfoLabel3 = new System.Windows.Forms.Label();
-            this.comboBox_gameVersions = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabPageCore.SuspendLayout();
             this.contextMenuStripMain.SuspendLayout();
@@ -234,10 +234,10 @@
             this.linkLabellolPants.AutoSize = true;
             this.linkLabellolPants.Location = new System.Drawing.Point(386, 92);
             this.linkLabellolPants.Name = "linkLabellolPants";
-            this.linkLabellolPants.Size = new System.Drawing.Size(48, 13);
+            this.linkLabellolPants.Size = new System.Drawing.Size(57, 13);
             this.linkLabellolPants.TabIndex = 5;
             this.linkLabellolPants.TabStop = true;
-            this.linkLabellolPants.Text = "lolPants";
+            this.linkLabellolPants.Text = "vanZeben";
             this.linkLabellolPants.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabellolPants_LinkClicked);
             // 
             // linkLabelUmbranox
@@ -278,10 +278,10 @@
             this.linkLabelModSaberLink.AutoSize = true;
             this.linkLabelModSaberLink.Location = new System.Drawing.Point(273, 92);
             this.linkLabelModSaberLink.Name = "linkLabelModSaberLink";
-            this.linkLabelModSaberLink.Size = new System.Drawing.Size(60, 13);
+            this.linkLabelModSaberLink.Size = new System.Drawing.Size(59, 13);
             this.linkLabelModSaberLink.TabIndex = 1;
             this.linkLabelModSaberLink.TabStop = true;
-            this.linkLabelModSaberLink.Text = "ModSaber";
+            this.linkLabelModSaberLink.Text = "BeatMods";
             this.linkLabelModSaberLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelModSaberLink_LinkClicked);
             // 
             // labelModSaber1
@@ -432,25 +432,23 @@
             this.helpInfoLabel3.TabIndex = 3;
             this.helpInfoLabel3.Text = "You can uninstall mods by removing the .dll from that folder.";
             // 
-            // comboBox_gameVersions
+            // label5
             // 
-            this.comboBox_gameVersions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox_gameVersions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_gameVersions.DropDownWidth = 70;
-            this.comboBox_gameVersions.Enabled = false;
-            this.comboBox_gameVersions.FormattingEnabled = true;
-            this.comboBox_gameVersions.Location = new System.Drawing.Point(502, 26);
-            this.comboBox_gameVersions.Name = "comboBox_gameVersions";
-            this.comboBox_gameVersions.Size = new System.Drawing.Size(72, 21);
-            this.comboBox_gameVersions.TabIndex = 11;
-            this.comboBox_gameVersions.SelectedIndexChanged += new System.EventHandler(this.comboBox_gameVersions_SelectedIndexChanged);
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(507, 30);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(67, 13);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "v0.13.2 only";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(588, 436);
-            this.Controls.Add(this.comboBox_gameVersions);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.panelInfo);
             this.Controls.Add(this.buttonViewInfo);
             this.Controls.Add(this.tabControlMain);
@@ -463,7 +461,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Beat Saber Mod Manager";
+            this.Text = "Beat Saber Mod Manager (Beat Mods Edition!) BETA!";
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.tabControlMain.ResumeLayout(false);
             this.tabPageCore.ResumeLayout(false);
@@ -514,7 +512,7 @@
         private System.Windows.Forms.Label labelDiscordInfo;
         private System.Windows.Forms.LinkLabel linkLabelDiscord;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox_gameVersions;
+        private System.Windows.Forms.Label label5;
     }
 }
 
