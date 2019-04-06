@@ -222,7 +222,7 @@ namespace BeatSaberModManager
                 release.disabled = true;
 
                 release.installType = (int)ReleaseInfo.installSpecial.Required;
-                release.installPreviousState = true;
+
                 release.install = true;
                 item.Checked = true;
             }
@@ -230,8 +230,7 @@ namespace BeatSaberModManager
             if (defaultMods.Contains(name))
             {
                 item.Checked = true;
-                release.installPreviousState = true;
-                resolveDependencies(release, 1, true);
+                resolveDependencies(release, 1);
                 defaultMods.Remove(name);
             }
         }
@@ -301,7 +300,7 @@ namespace BeatSaberModManager
             if (status == "Install complete!") { this.Invoke((MethodInvoker)(() => { buttonInstall.Enabled = true; })); }
         }
 
-        private void resolveDependencies(ReleaseInfo release, int action, bool defaults = false)
+        private void resolveDependencies(ReleaseInfo release, int action)
         {
             if (release.dependsOn.Count > 0)
             {
@@ -326,10 +325,6 @@ namespace BeatSaberModManager
                                     check.dependedBy.Remove(release.name);
                                 }
                             }
-                            if (check.dependedBy.Count == 1 && action == 1 && !defaults)
-                            {
-                                check.installPreviousState = check.itemHandle.Checked;
-                            }
                             if (check.dependedBy.Count > 0)
                             {
                                 check.installType = (int)ReleaseInfo.installSpecial.Dependency;
@@ -341,7 +336,6 @@ namespace BeatSaberModManager
                             {
                                 check.installType = (int)ReleaseInfo.installSpecial.None;
                                 check.disabled = false;
-                                check.itemHandle.Checked = check.installPreviousState;
                             }
                         }
                     }

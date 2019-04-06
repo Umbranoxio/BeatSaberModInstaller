@@ -28,7 +28,6 @@ namespace BeatSaberModManager.DataModels
         public bool disabled;
         public enum installSpecial { Dependency, Conflict, Required, None };
         public int installType = (int)installSpecial.None;
-        public bool installPreviousState = false;
 
         public ListViewItem itemHandle;
 
