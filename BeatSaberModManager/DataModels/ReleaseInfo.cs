@@ -46,7 +46,7 @@ namespace BeatSaberModManager.DataModels
             weight = _weight;
             gameVersion = _gameVersion;
             downloadLink = _downloadLink;
-            category = _category;
+            category = _category.First().ToString().ToUpper() + _category.Substring(1);
             platform = _platform;
             dependsOn = _dependsOn;
             conflictsWith = _conflictsWith;
