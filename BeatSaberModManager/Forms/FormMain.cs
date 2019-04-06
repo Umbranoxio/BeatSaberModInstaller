@@ -178,7 +178,7 @@ namespace BeatSaberModManager
             if (name.Equals("bsipa"))
             {
                 release.installType = (int)ReleaseInfo.installSpecial.Required;
-
+                release.installPreviousState = true;
                 release.install = true;
                 item.Checked = true;
             }
@@ -186,7 +186,8 @@ namespace BeatSaberModManager
             if (defaultMods.Contains(name))
             {
                 item.Checked = true;
-                resolveDependencies(release, 1);
+                release.installPreviousState = true;
+                resolveDependencies(release, 1, true);
                 defaultMods.Remove(name);
             }
         }
@@ -215,7 +216,7 @@ namespace BeatSaberModManager
             installer.installDirectory = textBoxDirectory.Text;
         }
 
-        private void resolveDependencies(ReleaseInfo release, int action)
+        private void resolveDependencies(ReleaseInfo release, int action, bool defaults = false)
         {
             if (release.dependsOn.Count > 0)
             {
@@ -240,6 +241,10 @@ namespace BeatSaberModManager
                                     check.dependedBy.Remove(release.name);
                                 }
                             }
+                            if (check.dependedBy.Count == 1 && action == 1 && !defaults)
+                            {
+                                check.installPreviousState = check.itemHandle.Checked;
+                            }
                             if (check.dependedBy.Count > 0)
                             {
                                 check.installType = (int)ReleaseInfo.installSpecial.Dependency;
@@ -251,6 +256,7 @@ namespace BeatSaberModManager
                             {
                                 check.installType = (int)ReleaseInfo.installSpecial.None;
                                 check.disabled = false;
+                                check.itemHandle.Checked = check.installPreviousState;
                             }
                         }
                     }
