@@ -129,28 +129,15 @@ namespace BeatSaberModManager.Core
 
         private string GetBeatModsReleases()
         {
-            string raw = Fetch($"{ApiURL}/mods/approved/all");
+            string raw = Fetch($"{ApiURL}/mod?status=approved");
             var decoded = JSON.Parse(raw);
-            int lastPage = decoded["lastPage"];
-
-            JSONArray final = new JSONArray();
-
-            for (int i = 0; i <= lastPage; i++)
-            {
-                string page = Fetch($"{ApiURL}/mods/approved/all/{i}");
-                var pageDecoded = JSON.Parse(page);
-                var mods = pageDecoded["mods"];
-
-                foreach (var x in mods)
-                    final.Add(x.Value);
-            }
-            return final.ToString();
+            return decoded.ToString();
         }
 
         private void CreateRelease(ReleaseInfo release)
         {
-            if (release.gameVersion != selectedGameVersion.value)
-                return;
+            //if (release.gameVersion != selectedGameVersion.value)
+            //    return;
 
             ReleaseInfo current = releases.Find(x => x.name == release.name);
             if (current == null)
