@@ -47,9 +47,18 @@ namespace BeatSaberModManager
         #region Loading
         private void FormMain_Load(object sender, EventArgs e)
         {
+            
+            if (Properties.Settings.Default.DarkTheme == true)
+            {
+                skinManager.Theme = MaterialSkinManager.Themes.DARK;
+                listViewMods.BackColor = Color.FromArgb(255, 20, 20, 20);
+                listViewMods.ForeColor = Color.WhiteSmoke;
+                darkTheme = true;
+            }
+
             try
             {
-                updater.CheckForUpdates();
+                new Thread(() => { updater.CheckForUpdates(); }).Start();
                 textBoxDirectory.Text = path.GetInstallationPath();
              
                 new Thread(() => { RemoteLoad(); }).Start();
@@ -367,6 +376,8 @@ namespace BeatSaberModManager
                 listViewMods.BackColor = Color.FromArgb(255, 20, 20, 20);
                 listViewMods.ForeColor = Color.WhiteSmoke;
                 darkTheme = true;
+                Properties.Settings.Default.DarkTheme = true;
+                Properties.Settings.Default.Save();
             }
             else
             {
@@ -374,6 +385,8 @@ namespace BeatSaberModManager
                 listViewMods.BackColor = Color.White;
                 listViewMods.ForeColor = Color.Black;
                 darkTheme = false;
+                Properties.Settings.Default.DarkTheme = false;
+                Properties.Settings.Default.Save();
             }
             ReRenderListView();
         }
