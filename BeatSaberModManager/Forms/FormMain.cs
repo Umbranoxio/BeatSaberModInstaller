@@ -175,12 +175,10 @@ namespace BeatSaberModManager
         {
             string name = release.name.ToLower();
             string category = release.category.ToLower();
-            if (name.Equals("bsipa") || category.Contains("libraries"))
+            if (name.Equals("bsipa"))
             {
-                item.Text = $"[REQUIRED] {release.title}";
-                item.BackColor = Color.LightGray;
-                release.disabled = true;
-
+                release.installType = (int)ReleaseInfo.installSpecial.Required;
+                release.installPreviousState = true;
                 release.install = true;
                 item.Checked = true;
             }
@@ -188,6 +186,8 @@ namespace BeatSaberModManager
             if (defaultMods.Contains(name))
             {
                 item.Checked = true;
+                release.installPreviousState = true;
+                resolveDependencies(release, 1, true);
                 defaultMods.Remove(name);
             }
         }
@@ -216,6 +216,54 @@ namespace BeatSaberModManager
             installer.installDirectory = textBoxDirectory.Text;
         }
 
+        private void resolveDependencies(ReleaseInfo release, int action, bool defaults = false)
+        {
+            if (release.dependsOn.Count > 0)
+            {
+                foreach (ModLink dependency in release.dependsOn)
+                {
+                    foreach (ListViewItem lvi in listViewMods.Items)
+                    {
+                        ReleaseInfo check = (ReleaseInfo)lvi.Tag;
+                        if (check.name == dependency.name)
+                        {
+                            if (action == 1)
+                            {
+                                if (!check.dependedBy.Contains(release.name))
+                                {
+                                    check.dependedBy.Add(release.name);
+                                }
+                            }
+                            else if (action == 0)
+                            {
+                                if (check.dependedBy.Contains(release.name))
+                                {
+                                    check.dependedBy.Remove(release.name);
+                                }
+                            }
+                            if (check.dependedBy.Count == 1 && action == 1 && !defaults)
+                            {
+                                check.installPreviousState = check.itemHandle.Checked;
+                            }
+                            if (check.dependedBy.Count > 0)
+                            {
+                                check.installType = (int)ReleaseInfo.installSpecial.Dependency;
+                                check.disabled = true;
+                                check.itemHandle.Checked = true;
+                                check.install = true;
+                            }
+                            else
+                            {
+                                check.installType = (int)ReleaseInfo.installSpecial.None;
+                                check.disabled = false;
+                                check.itemHandle.Checked = check.installPreviousState;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         private void listViewMods_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             ReleaseInfo release = (ReleaseInfo)e.Item.Tag;
@@ -231,20 +279,11 @@ namespace BeatSaberModManager
 
             if (e.Item.Checked)
             {
-                if (release.dependsOn.Count > 0)
-                {
-                    foreach (ModLink dependency in release.dependsOn)
-                    {
-                        foreach (ListViewItem lvi in listViewMods.Items)
-                        {
-                            ReleaseInfo check = (ReleaseInfo)lvi.Tag;
-                            if (check.name == dependency.name)
-                            {
-                                check.itemHandle.Checked = true;
-                            }
-                        }
-                    }
-                }
+                resolveDependencies(release, 1);
+            }
+            else
+            {
+                resolveDependencies(release, 0);
             }
 
             if (e.Item.Checked)
@@ -292,11 +331,20 @@ namespace BeatSaberModManager
             foreach (ListViewItem item in listViewMods.Items)
             {
                 ReleaseInfo release = (ReleaseInfo)item.Tag;
-                if (release.disabled)
+                if (release.installType == (int)ReleaseInfo.installSpecial.Required)
                 {
-                    item.Checked = release.install;
+                    item.Checked = true;
+                    release.install = true;
                     item.BackColor = Color.LightGray;
-                    item.Text = $"[{(release.install ? "REQUIRED" : "CONFLICT")}] {release.title}";
+                    item.Text = $"[REQUIRED] {release.title}";
+                }
+                else
+                if (release.installType == (int)ReleaseInfo.installSpecial.Dependency)
+                {
+                    item.Checked = true;
+                    release.install = true;
+                    item.BackColor = Color.LightGray;
+                    item.Text = $"[DEPENDENCY] {release.title}";
                 }
                 else
                 {
