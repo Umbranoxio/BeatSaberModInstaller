@@ -21,6 +21,8 @@ namespace BeatSaberModManager
         RemoteLogic remote;
         InstallerLogic installer;
         bool finishedLoading = false;
+        List<string> defaultMods = new List<string>(new string[] { "songloader", "scoresaber", "beatsaverdownloader" });
+
         #endregion
 
         #region Constructor
@@ -171,9 +173,9 @@ namespace BeatSaberModManager
 
         private void CheckDefaultMod(ReleaseInfo release, ListViewItem item)
         {
-            string link = release.downloadLink.ToLower();
+            string name = release.name.ToLower();
             string category = release.category.ToLower();
-            if (link.Contains("bsipa") || category.Contains("libraries"))
+            if (name.Equals("bsipa") || category.Contains("libraries"))
             {
                 item.Text = $"[REQUIRED] {release.title}";
                 item.BackColor = Color.LightGray;
@@ -183,14 +185,10 @@ namespace BeatSaberModManager
                 item.Checked = true;
             }
 
-            if (link.Contains("songloader") || link.Contains("scoresaber") || link.Contains("beatsaverdownloader"))
+            if (defaultMods.Contains(name))
             {
                 item.Checked = true;
-                release.install = true;
-            }
-            else
-            {
-              //  release.install = false;
+                defaultMods.Remove(name);
             }
         }
         #endregion
