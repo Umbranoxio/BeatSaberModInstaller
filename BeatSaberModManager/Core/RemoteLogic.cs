@@ -68,7 +68,7 @@ namespace BeatSaberModManager.Core
                 {
                     var current = mods[i];
 
-                    List<ModLink> dependsOn = new List<ModLink>(); //NodeToLinks(current["dependencies"]);
+                    List<ModLink> dependsOn = NodeToLinks(current["dependencies"]);
                     List<ModLink> conflictsWith = new List<ModLink>(); //NodeToLinks(current["links"]["conflicts"]);
 
                     var files = current["downloads"];
@@ -123,8 +123,8 @@ namespace BeatSaberModManager.Core
 
             foreach (string str in arr)
             {
-                string[] split = str.Split('@');
-                ModLink link = new ModLink(split[0], split[1]);
+                var parsed = JSON.Parse(str);
+                ModLink link = new ModLink(parsed["name"], parsed["version"]);
                 links.Add(link);
             }
 
