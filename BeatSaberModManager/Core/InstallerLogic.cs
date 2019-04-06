@@ -35,7 +35,7 @@ namespace BeatSaberModManager.Core
                 StatusUpdate("Starting install sequence...");
 
                 ReleaseInfo bsipa = null;
-                if ((bsipa = releases.Find(release => release.name == "bsipa")) != null)
+                if ((bsipa = releases.Find(release => release.name.ToLower() == "bsipa")) != null)
                 {
                     StatusUpdate($"Downloading...{bsipa.title}");
                     byte[] file = Helper.GetFile(bsipa.downloadLink);
