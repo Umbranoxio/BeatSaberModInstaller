@@ -73,15 +73,21 @@ namespace BeatSaberModManager.Core
 
                     var files = current["downloads"];
 
-                    for(var f = 0; f < files.Count; ++f)
+                    JSONNode steam = files[0];
+                    JSONNode oculus = files[1];
+
+                    for (var f = 0; f < files.Count; ++f)
                     {
                         files[f]["url"] = BeatModsURL + files[f]["url"];
                     }
 
                     if (files.Count > 1)
                     {
-                        var steam = files[0];
-                        var oculus = files[1];
+                        for (var f = 0; f < files.Count; ++f)
+                        {
+                            if (files[f]["type"] == "steam") steam = files[f];
+                            if (files[f]["type"] == "oculus") oculus = files[f];
+                        }
 
                         CreateRelease(
                             new ReleaseInfo(current["name"], current["name"], current["version"], current["author"]["username"],
