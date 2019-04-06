@@ -69,7 +69,7 @@ namespace BeatSaberModManager.Core
                     var current = mods[i];
 
                     List<ModLink> dependsOn = NodeToLinks(current["dependencies"]);
-                    List<ModLink> conflictsWith = new List<ModLink>(); //NodeToLinks(current["links"]["conflicts"]);
+                    List<ModLink> conflictsWith = NodeToLinks(current["conflicts"]);
 
                     var files = current["downloads"];
 
