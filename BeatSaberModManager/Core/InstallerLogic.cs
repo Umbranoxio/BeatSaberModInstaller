@@ -43,11 +43,12 @@ namespace BeatSaberModManager.Core
                         StatusUpdate(string.Format("Unzipped! {0}", release.title));
                     }
                 }
-                Process.Start(installDirectory + @"\IPA.exe", Quoted(installDirectory + @"\Beat Saber.exe"));
+                Process.Start(installDirectory + @"\IPA.exe");
                 StatusUpdate("Install complete!");
             } catch (Exception ex)
             {
                 StatusUpdate("Install failed! " + ex.ToString());
+                Console.WriteLine("Install failed! " + ex.ToString());
             }
             
         }
