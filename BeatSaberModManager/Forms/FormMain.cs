@@ -170,7 +170,8 @@ namespace BeatSaberModManager
         private void CheckDefaultMod(ReleaseInfo release, ListViewItem item)
         {
             string link = release.downloadLink.ToLower();
-            if (link.Contains("bsipa"))
+            string category = release.category.ToLower();
+            if (link.Contains("bsipa") || category.Contains("libraries"))
             {
                 item.Text = $"[REQUIRED] {release.title}";
                 item.BackColor = Color.LightGray;
