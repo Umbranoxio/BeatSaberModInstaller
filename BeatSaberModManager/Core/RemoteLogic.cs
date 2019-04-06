@@ -72,6 +72,12 @@ namespace BeatSaberModManager.Core
                     List<ModLink> conflictsWith = new List<ModLink>(); //NodeToLinks(current["links"]["conflicts"]);
 
                     var files = current["downloads"];
+
+                    for(var f = 0; f < files.Count; ++f)
+                    {
+                        files[f]["url"] = BeatModsURL + files[f]["url"];
+                    }
+
                     if (files.Count > 1)
                     {
                         var steam = files[0];
