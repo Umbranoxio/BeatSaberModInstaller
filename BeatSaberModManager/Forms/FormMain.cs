@@ -38,7 +38,7 @@ namespace BeatSaberModManager
         {
             try
             {
-                updater.CheckForUpdates();
+                //updater.CheckForUpdates();
                 textBoxDirectory.Text = path.GetInstallationPath();
              
                 new Thread(() => { RemoteLoad(); }).Start();
@@ -52,6 +52,7 @@ namespace BeatSaberModManager
 
         private void RemoteLoad()
         {
+            /*
             UpdateStatus("Loading game versions...");
             remote.GetGameVersions();
             for (int i = 0; i < remote.gameVersions.Length; i++)
@@ -60,6 +61,7 @@ namespace BeatSaberModManager
                 this.Invoke((MethodInvoker)(() => { comboBox_gameVersions.Items.Add(gv.value); })); 
             }
             this.Invoke((MethodInvoker)(() => { comboBox_gameVersions.SelectedIndex = 0; }));
+            */
             UpdateStatus("Loading releases...");
             remote.PopulateReleases();
             installer = new InstallerLogic(remote.releases, path.installPath);
