@@ -38,7 +38,7 @@ namespace BeatSaberModManager
         {
             try
             {
-                //updater.CheckForUpdates();
+                updater.CheckForUpdates();
                 textBoxDirectory.Text = path.GetInstallationPath();
              
                 new Thread(() => { RemoteLoad(); }).Start();
@@ -62,6 +62,8 @@ namespace BeatSaberModManager
             }
             this.Invoke((MethodInvoker)(() => { comboBox_gameVersions.SelectedIndex = 0; }));
             */
+            //this.Invoke((MethodInvoker)(() => { comboBox_gameVersions.Items.Add("0.13.2"); }));
+            //this.Invoke((MethodInvoker)(() => { comboBox_gameVersions.SelectedIndex = 0; }));
             UpdateStatus("Loading releases...");
             remote.PopulateReleases();
             installer = new InstallerLogic(remote.releases, path.installPath);
@@ -76,7 +78,7 @@ namespace BeatSaberModManager
             // God knows why
             // listViewMods.Items.Clear();
             UpdateStatus("Loading releases...");
-            comboBox_gameVersions.Enabled = false;
+            //comboBox_gameVersions.Enabled = false;
             if (!first)
             {
                 ComboBox comboBox = (ComboBox)sender;
@@ -98,7 +100,7 @@ namespace BeatSaberModManager
 
         private void ShowReleases()
         {
-            comboBox_gameVersions.Enabled = true;
+            //comboBox_gameVersions.Enabled = true;
             Dictionary<string, int> groups = new Dictionary<string, int>();
 
             listViewMods.Groups.Clear();
@@ -334,12 +336,12 @@ namespace BeatSaberModManager
 
         private void linkLabellolPants_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://github.com/lolPants");
+            Process.Start("https://github.com/vanZeben");
         }
 
         private void linkLabelModSaberLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://www.modsaber.org/faq");
+            Process.Start("https://beatmods.com/");
         }
 
         private void linkLabelUmbranox_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -349,7 +351,7 @@ namespace BeatSaberModManager
 
         private void linkLabelContributors_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://github.com/Umbranoxio/BeatSaberModInstaller/graphs/contributors");
+            Process.Start("https://github.com/beat-saber-modding-group/BeatSaberModInstaller/graphs/contributors");
         }
 
         private void textBoxDirectory_TextChanged(object sender, EventArgs e)
@@ -379,5 +381,10 @@ namespace BeatSaberModManager
             Process.Start("https://discord.gg/beatsabermods");
         }
         #endregion
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
