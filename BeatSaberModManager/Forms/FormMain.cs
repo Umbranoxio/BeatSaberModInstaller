@@ -186,6 +186,7 @@ namespace BeatSaberModManager
             if (defaultMods.Contains(name))
             {
                 item.Checked = true;
+                resolveDependencies(release, 1);
                 defaultMods.Remove(name);
             }
         }
@@ -214,6 +215,49 @@ namespace BeatSaberModManager
             installer.installDirectory = textBoxDirectory.Text;
         }
 
+        private void resolveDependencies(ReleaseInfo release, int action)
+        {
+            if (release.dependsOn.Count > 0)
+            {
+                foreach (ModLink dependency in release.dependsOn)
+                {
+                    foreach (ListViewItem lvi in listViewMods.Items)
+                    {
+                        ReleaseInfo check = (ReleaseInfo)lvi.Tag;
+                        if (check.name == dependency.name)
+                        {
+                            if (action == 1)
+                            {
+                                if (!check.dependedBy.Contains(release.name))
+                                {
+                                    check.dependedBy.Add(release.name);
+                                }
+                            }
+                            else if (action == 0)
+                            {
+                                if (check.dependedBy.Contains(release.name))
+                                {
+                                    check.dependedBy.Remove(release.name);
+                                }
+                            }
+                            if (check.dependedBy.Count > 0)
+                            {
+                                check.installType = (int)ReleaseInfo.installSpecial.Dependency;
+                                check.disabled = true;
+                                check.itemHandle.Checked = true;
+                                check.install = true;
+                            }
+                            else
+                            {
+                                check.installType = (int)ReleaseInfo.installSpecial.None;
+                                check.disabled = false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         private void listViewMods_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             ReleaseInfo release = (ReleaseInfo)e.Item.Tag;
@@ -229,61 +273,11 @@ namespace BeatSaberModManager
 
             if (e.Item.Checked)
             {
-                if (release.dependsOn.Count > 0)
-                {
-                    foreach (ModLink dependency in release.dependsOn)
-                    {
-                        foreach (ListViewItem lvi in listViewMods.Items)
-                        {
-                            ReleaseInfo check = (ReleaseInfo)lvi.Tag;
-                            if (check.name == dependency.name)
-                            {
-                                check.dependedBy.Add(release.name);
-                                if (check.dependedBy.Count > 0)
-                                {
-                                    check.installType = (int)ReleaseInfo.installSpecial.Dependency;
-                                    check.disabled = true;
-                                    check.itemHandle.Checked = true;
-                                    check.install = true;
-                                }
-                                else
-                                {
-                                    check.installType = (int)ReleaseInfo.installSpecial.None;
-                                    check.disabled = false;
-                                }
-                            }
-                        }
-                    }
-                }
+                resolveDependencies(release, 1);
             }
             else
             {
-                if (release.dependsOn.Count > 0)
-                {
-                    foreach (ModLink dependency in release.dependsOn)
-                    {
-                        foreach (ListViewItem lvi in listViewMods.Items)
-                        {
-                            ReleaseInfo check = (ReleaseInfo)lvi.Tag;
-                            if (check.name == dependency.name)
-                            {
-                                check.dependedBy.Remove(release.name);
-                                if (check.dependedBy.Count > 0)
-                                {
-                                    check.installType = (int)ReleaseInfo.installSpecial.Dependency;
-                                    check.disabled = true;
-                                    check.itemHandle.Checked = true;
-                                    check.install = true;
-                                }
-                                else
-                                {
-                                    check.installType = (int)ReleaseInfo.installSpecial.None;
-                                    check.disabled = false;
-                                }
-                            }
-                        }
-                    }
-                }
+                resolveDependencies(release, 0);
             }
 
             if (e.Item.Checked)
