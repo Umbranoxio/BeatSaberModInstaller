@@ -28,90 +28,76 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelTitle = new System.Windows.Forms.Label();
-            this.linkLabelDirectLink = new System.Windows.Forms.LinkLabel();
-            this.buttonClose = new System.Windows.Forms.Button();
-            this.labelDescription = new System.Windows.Forms.Label();
-            this.panelDescription = new System.Windows.Forms.Panel();
             this.webBrowserDescription = new System.Windows.Forms.WebBrowser();
-            this.panelDescription.SuspendLayout();
+            this.labelDescription = new MaterialSkin.Controls.MaterialLabel();
+            this.buttonClose = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.materialRaisedButton1 = new MaterialSkin.Controls.MaterialRaisedButton();
             this.SuspendLayout();
             // 
-            // labelTitle
+            // webBrowserDescription
             // 
-            this.labelTitle.AutoSize = true;
-            this.labelTitle.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTitle.Location = new System.Drawing.Point(11, 9);
-            this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(250, 20);
-            this.labelTitle.TabIndex = 0;
-            this.labelTitle.Text = "Mod Name by Author Name Version";
-            // 
-            // linkLabelDirectLink
-            // 
-            this.linkLabelDirectLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.linkLabelDirectLink.AutoSize = true;
-            this.linkLabelDirectLink.Location = new System.Drawing.Point(12, 454);
-            this.linkLabelDirectLink.Name = "linkLabelDirectLink";
-            this.linkLabelDirectLink.Size = new System.Drawing.Size(94, 13);
-            this.linkLabelDirectLink.TabIndex = 3;
-            this.linkLabelDirectLink.TabStop = true;
-            this.linkLabelDirectLink.Text = "Direct Download";
-            this.linkLabelDirectLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelDirectLink_LinkClicked);
-            // 
-            // buttonClose
-            // 
-            this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonClose.Location = new System.Drawing.Point(548, 449);
-            this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(75, 23);
-            this.buttonClose.TabIndex = 4;
-            this.buttonClose.Text = "Close";
-            this.buttonClose.UseVisualStyleBackColor = true;
-            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            this.webBrowserDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.webBrowserDescription.IsWebBrowserContextMenuEnabled = false;
+            this.webBrowserDescription.Location = new System.Drawing.Point(12, 97);
+            this.webBrowserDescription.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowserDescription.Name = "webBrowserDescription";
+            this.webBrowserDescription.Size = new System.Drawing.Size(743, 398);
+            this.webBrowserDescription.TabIndex = 6;
+            this.webBrowserDescription.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowserDescription_DocumentCompleted);
             // 
             // labelDescription
             // 
             this.labelDescription.AutoSize = true;
-            this.labelDescription.Location = new System.Drawing.Point(12, 32);
+            this.labelDescription.BackColor = System.Drawing.Color.Transparent;
+            this.labelDescription.Depth = 0;
+            this.labelDescription.Font = new System.Drawing.Font("Roboto", 11F);
+            this.labelDescription.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.labelDescription.Location = new System.Drawing.Point(12, 74);
+            this.labelDescription.MouseState = MaterialSkin.MouseState.HOVER;
             this.labelDescription.Name = "labelDescription";
-            this.labelDescription.Size = new System.Drawing.Size(69, 13);
-            this.labelDescription.TabIndex = 2;
+            this.labelDescription.Size = new System.Drawing.Size(90, 19);
+            this.labelDescription.TabIndex = 6;
             this.labelDescription.Text = "Description:";
             // 
-            // panelDescription
+            // buttonClose
             // 
-            this.panelDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelDescription.Controls.Add(this.webBrowserDescription);
-            this.panelDescription.Location = new System.Drawing.Point(15, 48);
-            this.panelDescription.Name = "panelDescription";
-            this.panelDescription.Size = new System.Drawing.Size(607, 395);
-            this.panelDescription.TabIndex = 5;
+            this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonClose.Depth = 0;
+            this.buttonClose.Location = new System.Drawing.Point(637, 501);
+            this.buttonClose.MouseState = MaterialSkin.MouseState.HOVER;
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Primary = true;
+            this.buttonClose.Size = new System.Drawing.Size(118, 35);
+            this.buttonClose.TabIndex = 7;
+            this.buttonClose.Text = "Close";
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.MaterialRaisedButton1_Click);
             // 
-            // webBrowserDescription
+            // materialRaisedButton1
             // 
-            this.webBrowserDescription.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowserDescription.IsWebBrowserContextMenuEnabled = false;
-            this.webBrowserDescription.Location = new System.Drawing.Point(0, 0);
-            this.webBrowserDescription.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowserDescription.Name = "webBrowserDescription";
-            this.webBrowserDescription.Size = new System.Drawing.Size(605, 393);
-            this.webBrowserDescription.TabIndex = 6;
-            this.webBrowserDescription.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowserDescription_DocumentCompleted);
+            this.materialRaisedButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.materialRaisedButton1.Depth = 0;
+            this.materialRaisedButton1.Location = new System.Drawing.Point(12, 501);
+            this.materialRaisedButton1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialRaisedButton1.Name = "materialRaisedButton1";
+            this.materialRaisedButton1.Primary = true;
+            this.materialRaisedButton1.Size = new System.Drawing.Size(156, 35);
+            this.materialRaisedButton1.TabIndex = 9;
+            this.materialRaisedButton1.Text = "Direct Download";
+            this.materialRaisedButton1.UseVisualStyleBackColor = true;
+            this.materialRaisedButton1.Click += new System.EventHandler(this.MaterialRaisedButton1_Click_1);
             // 
             // FormDetailViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(634, 479);
-            this.Controls.Add(this.panelDescription);
+            this.ClientSize = new System.Drawing.Size(776, 548);
+            this.Controls.Add(this.materialRaisedButton1);
             this.Controls.Add(this.buttonClose);
-            this.Controls.Add(this.linkLabelDirectLink);
+            this.Controls.Add(this.webBrowserDescription);
             this.Controls.Add(this.labelDescription);
-            this.Controls.Add(this.labelTitle);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -119,19 +105,16 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.panelDescription.ResumeLayout(false);
+            this.Text = "Mod Name by Author Name Version";
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label labelTitle;
-        private System.Windows.Forms.LinkLabel linkLabelDirectLink;
-        private System.Windows.Forms.Button buttonClose;
-        private System.Windows.Forms.Label labelDescription;
-        private System.Windows.Forms.Panel panelDescription;
         private System.Windows.Forms.WebBrowser webBrowserDescription;
+        private MaterialSkin.Controls.MaterialLabel labelDescription;
+        private MaterialSkin.Controls.MaterialRaisedButton buttonClose;
+        private MaterialSkin.Controls.MaterialRaisedButton materialRaisedButton1;
     }
 }

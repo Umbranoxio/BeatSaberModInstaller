@@ -181,6 +181,10 @@ namespace BeatSaberModManager.Core
                     }
 
                 }
+                else
+                {
+                    return installPath;
+                }
             }
             return string.Empty;
         }

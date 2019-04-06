@@ -9,10 +9,12 @@ using System.Diagnostics;
 using System.Drawing;
 using SemVer;
 using Version = SemVer.Version;
+using MaterialSkin.Controls;
+using MaterialSkin;
 
 namespace BeatSaberModManager
 {
-    public partial class FormMain : Form
+    public partial class FormMain : MaterialForm
     {
 
         #region Instances
@@ -20,7 +22,9 @@ namespace BeatSaberModManager
         UpdateLogic updater;
         RemoteLogic remote;
         InstallerLogic installer;
+        MaterialSkinManager skinManager;
         bool finishedLoading = false;
+        bool darkTheme = false;
         List<string> defaultMods = new List<string>(new string[] { "songloader", "scoresaber", "beatsaverdownloader" });
 
         #endregion
@@ -32,6 +36,11 @@ namespace BeatSaberModManager
             path = new PathLogic();
             updater = new UpdateLogic();
             remote = new RemoteLogic();
+
+            skinManager = MaterialSkinManager.Instance;
+            skinManager.AddFormToManage(this);
+            skinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            skinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
         }
         #endregion
 
@@ -178,7 +187,7 @@ namespace BeatSaberModManager
             if (name.Equals("bsipa") || category.Contains("libraries"))
             {
                 item.Text = $"[REQUIRED] {release.title}";
-                item.BackColor = Color.LightGray;
+                item.BackColor = darkTheme ? Color.FromArgb(255, 10, 10, 10) : Color.LightGray;
                 release.disabled = true;
 
                 release.install = true;
@@ -198,22 +207,6 @@ namespace BeatSaberModManager
         {
             UpdateStatus(status);
             if (status == "Install complete!") { this.Invoke((MethodInvoker)(() => { buttonInstall.Enabled = true; })); }
-        }
-        private void buttonInstall_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(textBoxDirectory.Text))
-            {
-                MessageBox.Show("No install directory selected!", "No install directory", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            buttonInstall.Enabled = false;
-            new Thread(() => { installer.Run(); }).Start();
-        }
-
-        private void buttonFolderBrowser_Click(object sender, EventArgs e)
-        {
-            textBoxDirectory.Text = path.ManualFind();
-            installer.installDirectory = textBoxDirectory.Text;
         }
 
         private void listViewMods_ItemChecked(object sender, ItemCheckedEventArgs e)
@@ -295,13 +288,13 @@ namespace BeatSaberModManager
                 if (release.disabled)
                 {
                     item.Checked = release.install;
-                    item.BackColor = Color.LightGray;
+                    item.BackColor = darkTheme ? Color.FromArgb(255, 10, 10, 10) : Color.LightGray;
                     item.Text = $"[{(release.install ? "REQUIRED" : "CONFLICT")}] {release.title}";
                 }
                 else
                 {
                     item.Text = release.title;
-                    item.BackColor = Color.White;
+                    item.BackColor = darkTheme ? Color.FromArgb(255, 25, 25, 25) : Color.White;
                 }
                 CheckDefaultMod(release, item);
             }
@@ -321,7 +314,7 @@ namespace BeatSaberModManager
 
         private void buttonViewInfo_Click(object sender, EventArgs e)
         {
-            new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
+            
         }
 
         private void viewInfoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -330,26 +323,6 @@ namespace BeatSaberModManager
             {
                 new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
             }
-        }
-
-        private void linkLabellolPants_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start("https://github.com/vanZeben");
-        }
-
-        private void linkLabelModSaberLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start("https://beatmods.com/");
-        }
-
-        private void linkLabelUmbranox_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start("https://twitter.com/Umbranoxus");
-        }
-
-        private void linkLabelContributors_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start("https://github.com/beat-saber-modding-group/BeatSaberModInstaller/graphs/contributors");
         }
 
         private void textBoxDirectory_TextChanged(object sender, EventArgs e)
@@ -380,9 +353,76 @@ namespace BeatSaberModManager
         }
         #endregion
 
-        private void label5_Click(object sender, EventArgs e)
+        private void BrowseInstallationButton_Click(object sender, EventArgs e)
         {
+            textBoxDirectory.Text = path.ManualFind();
+            installer.installDirectory = textBoxDirectory.Text;
+        }
 
+        private void ToggleTheme_CheckedChanged(object sender, EventArgs e)
+        {
+            if (toggleTheme.Checked)
+            {
+                skinManager.Theme = MaterialSkinManager.Themes.DARK;
+                listViewMods.BackColor = Color.FromArgb(255, 20, 20, 20);
+                listViewMods.ForeColor = Color.WhiteSmoke;
+                darkTheme = true;
+            }
+            else
+            {
+                skinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+                listViewMods.BackColor = Color.White;
+                listViewMods.ForeColor = Color.Black;
+                darkTheme = false;
+            }
+            ReRenderListView();
+        }
+
+        private void ButtonInstall2_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBoxDirectory.Text))
+            {
+                MessageBox.Show("No install directory selected!", "No install directory", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            buttonInstall.Enabled = false;
+            new Thread(() => { installer.Run(); }).Start();
+        }
+
+        private void ButtonViewInfo2_Click(object sender, EventArgs e)
+        {
+            if (listViewMods.SelectedItems.Count == 0) { MessageBox.Show("You have to select a mod first."); return; }
+            new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
+        }
+
+        private void CreditBeatmods_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://beatmods.com/");
+        }
+
+        private void CreditContributors_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/beat-saber-modding-group/BeatSaberModInstaller/graphs/contributors");
+        }
+
+        private void CreditUmbranox_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://twitter.com/Umbranoxus");
+        }
+
+        private void CreditVanZeben_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/vanZeben");
+        }
+
+        private void CreditMaterialSkin_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/IgnaceMaes/MaterialSkin");
+        }
+
+        private void DiscordJoinButton_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://discord.gg/beatsabermods");
         }
     }
 }
