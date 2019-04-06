@@ -68,31 +68,31 @@ namespace BeatSaberModManager.Core
                 {
                     var current = mods[i];
 
-                    List<ModLink> dependsOn = NodeToLinks(current["links"]["dependencies"]);
-                    List<ModLink> conflictsWith = NodeToLinks(current["links"]["conflicts"]);
+                    List<ModLink> dependsOn = new List<ModLink>(); //NodeToLinks(current["dependencies"]);
+                    List<ModLink> conflictsWith = new List<ModLink>(); //NodeToLinks(current["links"]["conflicts"]);
 
-                    var files = current["files"];
+                    var files = current["downloads"];
                     if (files.Count > 1)
                     {
                         var steam = files[0];
                         var oculus = files[1];
 
                         CreateRelease(
-                            new ReleaseInfo(current["name"], current["details"]["title"], current["version"], current["details"]["author"]["name"],
-                            current["details"]["description"], current["meta"]["weight"], current["gameVersion"]["value"],
-                            steam["url"], current["meta"]["category"], Platform.Steam, dependsOn, conflictsWith));
+                            new ReleaseInfo(current["name"], current["name"], current["version"], current["author"]["username"],
+                            current["description"], 0, "0.13.2", steam["url"],
+                            current["category"], Platform.Default, dependsOn, conflictsWith));
 
                         CreateRelease(
-                            new ReleaseInfo(current["name"], current["details"]["title"], current["version"], current["details"]["author"]["name"],
-                            current["details"]["description"], current["meta"]["weight"], current["gameVersion"]["value"],
-                            oculus["url"], current["meta"]["category"], Platform.Oculus, dependsOn, conflictsWith));
+                            new ReleaseInfo(current["name"], current["name"], current["version"], current["author"]["username"],
+                            current["description"], 0, "0.13.2", oculus["url"],
+                            current["category"], Platform.Default, dependsOn, conflictsWith));
                     }
                     else
                     {
                         CreateRelease(
-                            new ReleaseInfo(current["name"], current["details"]["title"], current["version"], current["details"]["author"]["name"],
-                            current["details"]["description"], current["meta"]["weight"], current["gameVersion"]["value"],
-                            files["steam"]["url"], current["meta"]["category"], Platform.Default, dependsOn, conflictsWith));
+                            new ReleaseInfo(current["name"], current["name"], current["version"], current["author"]["username"],
+                            current["description"], 0, "0.13.2", files[0]["url"],
+                            current["category"], Platform.Default, dependsOn, conflictsWith));
                     }
                 }
             }
