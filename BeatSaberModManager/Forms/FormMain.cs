@@ -54,6 +54,7 @@ namespace BeatSaberModManager
                 listViewMods.BackColor = Color.FromArgb(255, 20, 20, 20);
                 listViewMods.ForeColor = Color.WhiteSmoke;
                 darkTheme = true;
+                toggleTheme.Checked = true;
             }
 
             try
@@ -341,14 +342,14 @@ namespace BeatSaberModManager
                 {
                     item.Checked = true;
                     release.install = true;
-                    item.BackColor = Color.LightGray;
+                    item.BackColor = darkTheme ? Color.FromArgb(255, 20, 20, 20) : Color.LightGray;
                     item.Text = $"[REQUIRED] {release.title}";
                 }
                 else
                 if (release.installType == (int)ReleaseInfo.installSpecial.Dependency)
                 {
                     item.Checked = release.install;
-                    item.BackColor = darkTheme ? Color.FromArgb(255, 10, 10, 10) : Color.LightGray;
+                    item.BackColor = darkTheme ? Color.FromArgb(255, 20, 20, 20) : Color.LightGray;
                     item.Text = $"[{(release.install ? "REQUIRED" : "CONFLICT")}] {release.title}";
 
                     item.Checked = true;
@@ -373,19 +374,6 @@ namespace BeatSaberModManager
             else
             {
                 buttonViewInfo.Enabled = false;
-            }
-        }
-
-        private void buttonViewInfo_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void viewInfoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (listViewMods.SelectedItems.Count >= 1)
-            {
-                new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
             }
         }
 
@@ -491,6 +479,14 @@ namespace BeatSaberModManager
         private void DiscordJoinButton_Click(object sender, EventArgs e)
         {
             Process.Start("http://discord.gg/beatsabermods");
+        }
+
+        private void ViewInfoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (listViewMods.SelectedItems.Count >= 1)
+            {
+                new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
+            }
         }
     }
 }

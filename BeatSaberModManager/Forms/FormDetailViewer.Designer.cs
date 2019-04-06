@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDetailViewer));
             this.webBrowserDescription = new System.Windows.Forms.WebBrowser();
             this.labelDescription = new MaterialSkin.Controls.MaterialLabel();
             this.buttonClose = new MaterialSkin.Controls.MaterialRaisedButton();
@@ -99,6 +100,7 @@
             this.Controls.Add(this.webBrowserDescription);
             this.Controls.Add(this.labelDescription);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormDetailViewer";

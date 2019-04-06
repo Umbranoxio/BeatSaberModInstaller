@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.textBoxDirectory = new System.Windows.Forms.TextBox();
             this.tabPageCore = new System.Windows.Forms.TabPage();
@@ -36,8 +35,6 @@
             this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderAuthor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.contextMenuStripMain = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.viewInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPageCredits = new System.Windows.Forms.TabPage();
             this.creditMaterialSkin = new MaterialSkin.Controls.MaterialRaisedButton();
             this.creditContributors = new MaterialSkin.Controls.MaterialRaisedButton();
@@ -64,14 +61,16 @@
             this.buttonInstall = new MaterialSkin.Controls.MaterialFlatButton();
             this.buttonViewInfo = new MaterialSkin.Controls.MaterialFlatButton();
             this.labelStatus = new MaterialSkin.Controls.MaterialLabel();
+            this.materialContextMenuStrip1 = new MaterialSkin.Controls.MaterialContextMenuStrip();
+            this.viewInfoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPageCore.SuspendLayout();
-            this.contextMenuStripMain.SuspendLayout();
             this.tabPageCredits.SuspendLayout();
             this.tabPageHelp.SuspendLayout();
             this.panelInfo.SuspendLayout();
             this.tableLayoutPanelInfo.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageOptions.SuspendLayout();
+            this.materialContextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxDirectory
@@ -85,7 +84,7 @@
             this.textBoxDirectory.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBoxDirectory.Location = new System.Drawing.Point(15, 33);
             this.textBoxDirectory.Name = "textBoxDirectory";
-            this.textBoxDirectory.Size = new System.Drawing.Size(774, 26);
+            this.textBoxDirectory.Size = new System.Drawing.Size(795, 26);
             this.textBoxDirectory.TabIndex = 0;
             this.textBoxDirectory.TextChanged += new System.EventHandler(this.textBoxDirectory_TextChanged);
             // 
@@ -95,7 +94,7 @@
             this.tabPageCore.Location = new System.Drawing.Point(4, 22);
             this.tabPageCore.Name = "tabPageCore";
             this.tabPageCore.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCore.Size = new System.Drawing.Size(835, 393);
+            this.tabPageCore.Size = new System.Drawing.Size(856, 398);
             this.tabPageCore.TabIndex = 0;
             this.tabPageCore.Text = "Plugins";
             this.tabPageCore.UseVisualStyleBackColor = true;
@@ -108,12 +107,12 @@
             this.columnHeaderName,
             this.columnHeaderAuthor,
             this.columnHeaderVersion});
-            this.listViewMods.ContextMenuStrip = this.contextMenuStripMain;
+            this.listViewMods.ContextMenuStrip = this.materialContextMenuStrip1;
             this.listViewMods.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewMods.FullRowSelect = true;
             this.listViewMods.Location = new System.Drawing.Point(3, 3);
             this.listViewMods.Name = "listViewMods";
-            this.listViewMods.Size = new System.Drawing.Size(829, 387);
+            this.listViewMods.Size = new System.Drawing.Size(850, 392);
             this.listViewMods.TabIndex = 0;
             this.listViewMods.UseCompatibleStateImageBehavior = false;
             this.listViewMods.View = System.Windows.Forms.View.Details;
@@ -135,20 +134,6 @@
             this.columnHeaderVersion.Text = "Version";
             this.columnHeaderVersion.Width = 112;
             // 
-            // contextMenuStripMain
-            // 
-            this.contextMenuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewInfoToolStripMenuItem});
-            this.contextMenuStripMain.Name = "contextMenuStripMain";
-            this.contextMenuStripMain.Size = new System.Drawing.Size(124, 26);
-            // 
-            // viewInfoToolStripMenuItem
-            // 
-            this.viewInfoToolStripMenuItem.Name = "viewInfoToolStripMenuItem";
-            this.viewInfoToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.viewInfoToolStripMenuItem.Text = "View Info";
-            this.viewInfoToolStripMenuItem.Click += new System.EventHandler(this.viewInfoToolStripMenuItem_Click);
-            // 
             // tabPageCredits
             // 
             this.tabPageCredits.Controls.Add(this.creditMaterialSkin);
@@ -159,7 +144,7 @@
             this.tabPageCredits.Controls.Add(this.materialLabel1);
             this.tabPageCredits.Location = new System.Drawing.Point(4, 22);
             this.tabPageCredits.Name = "tabPageCredits";
-            this.tabPageCredits.Size = new System.Drawing.Size(835, 393);
+            this.tabPageCredits.Size = new System.Drawing.Size(856, 398);
             this.tabPageCredits.TabIndex = 1;
             this.tabPageCredits.Text = "Mod Manager Credits";
             this.tabPageCredits.UseVisualStyleBackColor = true;
@@ -168,7 +153,7 @@
             // 
             this.creditMaterialSkin.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.creditMaterialSkin.Depth = 0;
-            this.creditMaterialSkin.Location = new System.Drawing.Point(672, 345);
+            this.creditMaterialSkin.Location = new System.Drawing.Point(683, 350);
             this.creditMaterialSkin.MouseState = MaterialSkin.MouseState.HOVER;
             this.creditMaterialSkin.Name = "creditMaterialSkin";
             this.creditMaterialSkin.Primary = true;
@@ -182,7 +167,7 @@
             // 
             this.creditContributors.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.creditContributors.Depth = 0;
-            this.creditContributors.Location = new System.Drawing.Point(508, 345);
+            this.creditContributors.Location = new System.Drawing.Point(519, 350);
             this.creditContributors.MouseState = MaterialSkin.MouseState.HOVER;
             this.creditContributors.Name = "creditContributors";
             this.creditContributors.Primary = true;
@@ -196,7 +181,7 @@
             // 
             this.creditUmbranox.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.creditUmbranox.Depth = 0;
-            this.creditUmbranox.Location = new System.Drawing.Point(344, 345);
+            this.creditUmbranox.Location = new System.Drawing.Point(355, 350);
             this.creditUmbranox.MouseState = MaterialSkin.MouseState.HOVER;
             this.creditUmbranox.Name = "creditUmbranox";
             this.creditUmbranox.Primary = true;
@@ -210,7 +195,7 @@
             // 
             this.creditVanZeben.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.creditVanZeben.Depth = 0;
-            this.creditVanZeben.Location = new System.Drawing.Point(180, 345);
+            this.creditVanZeben.Location = new System.Drawing.Point(191, 350);
             this.creditVanZeben.MouseState = MaterialSkin.MouseState.HOVER;
             this.creditVanZeben.Name = "creditVanZeben";
             this.creditVanZeben.Primary = true;
@@ -224,7 +209,7 @@
             // 
             this.creditBeatmods.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.creditBeatmods.Depth = 0;
-            this.creditBeatmods.Location = new System.Drawing.Point(16, 345);
+            this.creditBeatmods.Location = new System.Drawing.Point(27, 350);
             this.creditBeatmods.MouseState = MaterialSkin.MouseState.HOVER;
             this.creditBeatmods.Name = "creditBeatmods";
             this.creditBeatmods.Primary = true;
@@ -241,7 +226,7 @@
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(191, 145);
+            this.materialLabel1.Location = new System.Drawing.Point(188, 147);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(452, 57);
@@ -258,7 +243,7 @@
             this.tabPageHelp.Location = new System.Drawing.Point(4, 22);
             this.tabPageHelp.Name = "tabPageHelp";
             this.tabPageHelp.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageHelp.Size = new System.Drawing.Size(835, 393);
+            this.tabPageHelp.Size = new System.Drawing.Size(856, 398);
             this.tabPageHelp.TabIndex = 2;
             this.tabPageHelp.Text = "Help";
             this.tabPageHelp.UseVisualStyleBackColor = true;
@@ -267,7 +252,7 @@
             // 
             this.discordJoinButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.discordJoinButton.Depth = 0;
-            this.discordJoinButton.Location = new System.Drawing.Point(306, 225);
+            this.discordJoinButton.Location = new System.Drawing.Point(317, 228);
             this.discordJoinButton.MouseState = MaterialSkin.MouseState.HOVER;
             this.discordJoinButton.Name = "discordJoinButton";
             this.discordJoinButton.Primary = true;
@@ -284,7 +269,7 @@
             this.materialLabel2.Depth = 0;
             this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel2.Location = new System.Drawing.Point(222, 179);
+            this.materialLabel2.Location = new System.Drawing.Point(233, 182);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
             this.materialLabel2.Size = new System.Drawing.Size(391, 38);
@@ -303,7 +288,7 @@
             this.panelInfo.ForeColor = System.Drawing.SystemColors.ControlText;
             this.panelInfo.Location = new System.Drawing.Point(8, 6);
             this.panelInfo.Name = "panelInfo";
-            this.panelInfo.Size = new System.Drawing.Size(821, 80);
+            this.panelInfo.Size = new System.Drawing.Size(842, 80);
             this.panelInfo.TabIndex = 10;
             // 
             // helpInfoLabel1
@@ -333,7 +318,7 @@
             this.tableLayoutPanelInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanelInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanelInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelInfo.Size = new System.Drawing.Size(821, 79);
+            this.tableLayoutPanelInfo.Size = new System.Drawing.Size(842, 79);
             this.tableLayoutPanelInfo.TabIndex = 13;
             // 
             // label2
@@ -356,7 +341,7 @@
             this.textBoxPluginsPath.Name = "textBoxPluginsPath";
             this.textBoxPluginsPath.ReadOnly = true;
             this.textBoxPluginsPath.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.textBoxPluginsPath.Size = new System.Drawing.Size(812, 15);
+            this.textBoxPluginsPath.Size = new System.Drawing.Size(833, 15);
             this.textBoxPluginsPath.TabIndex = 5;
             this.textBoxPluginsPath.Click += new System.EventHandler(this.textBoxPluginsPath_Click);
             this.textBoxPluginsPath.Leave += new System.EventHandler(this.textBoxPluginsPath_Leave);
@@ -387,7 +372,7 @@
             this.browseInstallationButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.browseInstallationButton.Depth = 0;
             this.browseInstallationButton.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.browseInstallationButton.Location = new System.Drawing.Point(795, 32);
+            this.browseInstallationButton.Location = new System.Drawing.Point(816, 32);
             this.browseInstallationButton.MouseState = MaterialSkin.MouseState.HOVER;
             this.browseInstallationButton.Name = "browseInstallationButton";
             this.browseInstallationButton.Primary = true;
@@ -420,12 +405,12 @@
             this.tabControlMain.Controls.Add(this.tabPageHelp);
             this.tabControlMain.Controls.Add(this.tabPageOptions);
             this.tabControlMain.Depth = 0;
-            this.tabControlMain.Location = new System.Drawing.Point(9, 97);
+            this.tabControlMain.Location = new System.Drawing.Point(0, 94);
             this.tabControlMain.Margin = new System.Windows.Forms.Padding(0);
             this.tabControlMain.MouseState = MaterialSkin.MouseState.HOVER;
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(843, 419);
+            this.tabControlMain.Size = new System.Drawing.Size(864, 424);
             this.tabControlMain.TabIndex = 15;
             // 
             // tabPageOptions
@@ -437,7 +422,7 @@
             this.tabPageOptions.Controls.Add(this.browseInstallationButton);
             this.tabPageOptions.Location = new System.Drawing.Point(4, 22);
             this.tabPageOptions.Name = "tabPageOptions";
-            this.tabPageOptions.Size = new System.Drawing.Size(835, 393);
+            this.tabPageOptions.Size = new System.Drawing.Size(856, 398);
             this.tabPageOptions.TabIndex = 3;
             this.tabPageOptions.Text = "Options";
             this.tabPageOptions.UseVisualStyleBackColor = true;
@@ -521,6 +506,23 @@
             this.labelStatus.TabIndex = 18;
             this.labelStatus.Text = "Status: NULL";
             // 
+            // materialContextMenuStrip1
+            // 
+            this.materialContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialContextMenuStrip1.Depth = 0;
+            this.materialContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewInfoToolStripMenuItem1});
+            this.materialContextMenuStrip1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialContextMenuStrip1.Name = "materialContextMenuStrip1";
+            this.materialContextMenuStrip1.Size = new System.Drawing.Size(124, 26);
+            // 
+            // viewInfoToolStripMenuItem1
+            // 
+            this.viewInfoToolStripMenuItem1.Name = "viewInfoToolStripMenuItem1";
+            this.viewInfoToolStripMenuItem1.Size = new System.Drawing.Size(123, 22);
+            this.viewInfoToolStripMenuItem1.Text = "View Info";
+            this.viewInfoToolStripMenuItem1.Click += new System.EventHandler(this.ViewInfoToolStripMenuItem1_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -538,7 +540,6 @@
             this.Text = "Beat Saber Mod Manager";
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.tabPageCore.ResumeLayout(false);
-            this.contextMenuStripMain.ResumeLayout(false);
             this.tabPageCredits.ResumeLayout(false);
             this.tabPageCredits.PerformLayout();
             this.tabPageHelp.ResumeLayout(false);
@@ -550,6 +551,7 @@
             this.tabControlMain.ResumeLayout(false);
             this.tabPageOptions.ResumeLayout(false);
             this.tabPageOptions.PerformLayout();
+            this.materialContextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -562,8 +564,6 @@
         private System.Windows.Forms.ListView listViewMods;
         private System.Windows.Forms.ColumnHeader columnHeaderName;
         private System.Windows.Forms.ColumnHeader columnHeaderAuthor;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStripMain;
-        private System.Windows.Forms.ToolStripMenuItem viewInfoToolStripMenuItem;
         private System.Windows.Forms.TabPage tabPageCredits;
         private System.Windows.Forms.ColumnHeader columnHeaderVersion;
         private System.Windows.Forms.TabPage tabPageHelp;
@@ -591,6 +591,8 @@
         private MaterialSkin.Controls.MaterialRaisedButton creditUmbranox;
         private MaterialSkin.Controls.MaterialRaisedButton discordJoinButton;
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
+        private MaterialSkin.Controls.MaterialContextMenuStrip materialContextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem viewInfoToolStripMenuItem1;
     }
 }
 
