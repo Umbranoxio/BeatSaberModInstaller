@@ -170,7 +170,7 @@ namespace BeatSaberModManager
         private void CheckDefaultMod(ReleaseInfo release, ListViewItem item)
         {
             string link = release.downloadLink.ToLower();
-            if (link.Contains("songloader"))
+            if (link.Contains("bsipa"))
             {
                 item.Text = $"[REQUIRED] {release.title}";
                 item.BackColor = Color.LightGray;
@@ -180,7 +180,7 @@ namespace BeatSaberModManager
                 item.Checked = true;
             }
 
-            if (link.Contains("scoresaber") || link.Contains("beatsaverdownloader"))
+            if (link.Contains("songloader") || link.Contains("scoresaber") || link.Contains("beatsaverdownloader"))
             {
                 item.Checked = true;
                 release.install = true;
