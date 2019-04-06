@@ -14,13 +14,13 @@ namespace BeatSaberModManager.Core
     public class RemoteLogic
     {
 #if DEBUG
-        private const string ModSaberURL = "https://staging.modsaber.org";
+        private const string BeatModsURL = "https://beatmods.com";
 #else
-        private const string ModSaberURL = "https://www.modsaber.org";
+        private const string BeatModsURL = "https://beatmods.com";
 #endif
 
-        private const string ApiVersion = "1.1";
-        private readonly string ApiURL = $"{ModSaberURL}/api/v{ApiVersion}";
+        private const string ApiVersion = "1";
+        private readonly string ApiURL = $"{BeatModsURL}/api/v{ApiVersion}";
 
         public GameVersion[] gameVersions;
         public GameVersion selectedGameVersion;
@@ -60,7 +60,7 @@ namespace BeatSaberModManager.Core
         {
             releases.Clear();
 
-            string raw = GetModSaberReleases();
+            string raw = GetBeatModsReleases();
             if (raw != null)
             {
                 var mods = JSON.Parse(raw);
@@ -127,7 +127,7 @@ namespace BeatSaberModManager.Core
 
         private string Fetch(string URL) => Helper.Get(URL);
 
-        private string GetModSaberReleases()
+        private string GetBeatModsReleases()
         {
             string raw = Fetch($"{ApiURL}/mods/approved/all");
             var decoded = JSON.Parse(raw);
