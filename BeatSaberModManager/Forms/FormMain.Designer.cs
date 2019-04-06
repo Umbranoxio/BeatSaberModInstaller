@@ -463,7 +463,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Beat Saber Mod Manager";
+            this.Text = "Beat Saber Mod Manager (Beat Mods Edition!)";
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.tabControlMain.ResumeLayout(false);
             this.tabPageCore.ResumeLayout(false);
