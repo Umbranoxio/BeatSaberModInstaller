@@ -35,7 +35,7 @@
             this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderAuthor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.materialContextMenuStrip1 = new MaterialSkin.Controls.MaterialContextMenuStrip();
+            this.contextMenu = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.viewInfoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPageCredits = new System.Windows.Forms.TabPage();
             this.creditMaterialSkin = new MaterialSkin.Controls.MaterialRaisedButton();
@@ -63,14 +63,21 @@
             this.buttonInstall = new MaterialSkin.Controls.MaterialFlatButton();
             this.buttonViewInfo = new MaterialSkin.Controls.MaterialFlatButton();
             this.labelStatus = new MaterialSkin.Controls.MaterialLabel();
+            this.themeGroupBox = new System.Windows.Forms.GroupBox();
+            this.radioThemeBlueGrey = new MaterialSkin.Controls.MaterialRadioButton();
+            this.radioThemeGreen = new MaterialSkin.Controls.MaterialRadioButton();
+            this.radioThemeOrange = new MaterialSkin.Controls.MaterialRadioButton();
+            this.radioThemeBlue = new MaterialSkin.Controls.MaterialRadioButton();
+            this.radioThemeRed = new MaterialSkin.Controls.MaterialRadioButton();
             this.tabPageCore.SuspendLayout();
-            this.materialContextMenuStrip1.SuspendLayout();
+            this.contextMenu.SuspendLayout();
             this.tabPageCredits.SuspendLayout();
             this.tabPageHelp.SuspendLayout();
             this.panelInfo.SuspendLayout();
             this.tableLayoutPanelInfo.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageOptions.SuspendLayout();
+            this.themeGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxDirectory
@@ -82,7 +89,7 @@
             this.textBoxDirectory.Enabled = false;
             this.textBoxDirectory.Font = new System.Drawing.Font("Consolas", 12F);
             this.textBoxDirectory.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBoxDirectory.Location = new System.Drawing.Point(15, 33);
+            this.textBoxDirectory.Location = new System.Drawing.Point(15, 41);
             this.textBoxDirectory.Name = "textBoxDirectory";
             this.textBoxDirectory.Size = new System.Drawing.Size(797, 26);
             this.textBoxDirectory.TabIndex = 0;
@@ -94,7 +101,7 @@
             this.tabPageCore.Location = new System.Drawing.Point(4, 22);
             this.tabPageCore.Name = "tabPageCore";
             this.tabPageCore.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCore.Size = new System.Drawing.Size(860, 400);
+            this.tabPageCore.Size = new System.Drawing.Size(860, 401);
             this.tabPageCore.TabIndex = 0;
             this.tabPageCore.Text = "Plugins";
             this.tabPageCore.UseVisualStyleBackColor = true;
@@ -107,13 +114,13 @@
             this.columnHeaderName,
             this.columnHeaderAuthor,
             this.columnHeaderVersion});
-            this.listViewMods.ContextMenuStrip = this.materialContextMenuStrip1;
+            this.listViewMods.ContextMenuStrip = this.contextMenu;
             this.listViewMods.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewMods.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.listViewMods.FullRowSelect = true;
             this.listViewMods.Location = new System.Drawing.Point(3, 3);
             this.listViewMods.Name = "listViewMods";
-            this.listViewMods.Size = new System.Drawing.Size(854, 394);
+            this.listViewMods.Size = new System.Drawing.Size(854, 395);
             this.listViewMods.TabIndex = 0;
             this.listViewMods.UseCompatibleStateImageBehavior = false;
             this.listViewMods.View = System.Windows.Forms.View.Details;
@@ -135,15 +142,15 @@
             this.columnHeaderVersion.Text = "Version";
             this.columnHeaderVersion.Width = 112;
             // 
-            // materialContextMenuStrip1
+            // contextMenu
             // 
-            this.materialContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.materialContextMenuStrip1.Depth = 0;
-            this.materialContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.contextMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.contextMenu.Depth = 0;
+            this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.viewInfoToolStripMenuItem1});
-            this.materialContextMenuStrip1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialContextMenuStrip1.Name = "materialContextMenuStrip1";
-            this.materialContextMenuStrip1.Size = new System.Drawing.Size(124, 26);
+            this.contextMenu.MouseState = MaterialSkin.MouseState.HOVER;
+            this.contextMenu.Name = "materialContextMenuStrip1";
+            this.contextMenu.Size = new System.Drawing.Size(124, 26);
             // 
             // viewInfoToolStripMenuItem1
             // 
@@ -162,7 +169,7 @@
             this.tabPageCredits.Controls.Add(this.materialLabel1);
             this.tabPageCredits.Location = new System.Drawing.Point(4, 22);
             this.tabPageCredits.Name = "tabPageCredits";
-            this.tabPageCredits.Size = new System.Drawing.Size(858, 400);
+            this.tabPageCredits.Size = new System.Drawing.Size(860, 401);
             this.tabPageCredits.TabIndex = 1;
             this.tabPageCredits.Text = "Mod Manager Credits";
             this.tabPageCredits.UseVisualStyleBackColor = true;
@@ -171,7 +178,7 @@
             // 
             this.creditMaterialSkin.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.creditMaterialSkin.Depth = 0;
-            this.creditMaterialSkin.Location = new System.Drawing.Point(684, 352);
+            this.creditMaterialSkin.Location = new System.Drawing.Point(684, 353);
             this.creditMaterialSkin.MouseState = MaterialSkin.MouseState.HOVER;
             this.creditMaterialSkin.Name = "creditMaterialSkin";
             this.creditMaterialSkin.Primary = true;
@@ -185,7 +192,7 @@
             // 
             this.creditContributors.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.creditContributors.Depth = 0;
-            this.creditContributors.Location = new System.Drawing.Point(520, 352);
+            this.creditContributors.Location = new System.Drawing.Point(520, 353);
             this.creditContributors.MouseState = MaterialSkin.MouseState.HOVER;
             this.creditContributors.Name = "creditContributors";
             this.creditContributors.Primary = true;
@@ -199,7 +206,7 @@
             // 
             this.creditUmbranox.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.creditUmbranox.Depth = 0;
-            this.creditUmbranox.Location = new System.Drawing.Point(356, 352);
+            this.creditUmbranox.Location = new System.Drawing.Point(356, 353);
             this.creditUmbranox.MouseState = MaterialSkin.MouseState.HOVER;
             this.creditUmbranox.Name = "creditUmbranox";
             this.creditUmbranox.Primary = true;
@@ -213,7 +220,7 @@
             // 
             this.creditVanZeben.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.creditVanZeben.Depth = 0;
-            this.creditVanZeben.Location = new System.Drawing.Point(192, 352);
+            this.creditVanZeben.Location = new System.Drawing.Point(192, 353);
             this.creditVanZeben.MouseState = MaterialSkin.MouseState.HOVER;
             this.creditVanZeben.Name = "creditVanZeben";
             this.creditVanZeben.Primary = true;
@@ -227,7 +234,7 @@
             // 
             this.creditBeatmods.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.creditBeatmods.Depth = 0;
-            this.creditBeatmods.Location = new System.Drawing.Point(28, 352);
+            this.creditBeatmods.Location = new System.Drawing.Point(28, 353);
             this.creditBeatmods.MouseState = MaterialSkin.MouseState.HOVER;
             this.creditBeatmods.Name = "creditBeatmods";
             this.creditBeatmods.Primary = true;
@@ -261,7 +268,7 @@
             this.tabPageHelp.Location = new System.Drawing.Point(4, 22);
             this.tabPageHelp.Name = "tabPageHelp";
             this.tabPageHelp.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageHelp.Size = new System.Drawing.Size(858, 400);
+            this.tabPageHelp.Size = new System.Drawing.Size(860, 401);
             this.tabPageHelp.TabIndex = 2;
             this.tabPageHelp.Text = "Help";
             this.tabPageHelp.UseVisualStyleBackColor = true;
@@ -380,7 +387,7 @@
             this.versionWarningLabel.BackColor = System.Drawing.Color.Transparent;
             this.versionWarningLabel.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.versionWarningLabel.ForeColor = System.Drawing.Color.Tomato;
-            this.versionWarningLabel.Location = new System.Drawing.Point(179, 14);
+            this.versionWarningLabel.Location = new System.Drawing.Point(179, 22);
             this.versionWarningLabel.Name = "versionWarningLabel";
             this.versionWarningLabel.Size = new System.Drawing.Size(69, 15);
             this.versionWarningLabel.TabIndex = 11;
@@ -391,7 +398,7 @@
             this.browseInstallationButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.browseInstallationButton.Depth = 0;
             this.browseInstallationButton.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.browseInstallationButton.Location = new System.Drawing.Point(818, 32);
+            this.browseInstallationButton.Location = new System.Drawing.Point(818, 40);
             this.browseInstallationButton.MouseState = MaterialSkin.MouseState.HOVER;
             this.browseInstallationButton.Name = "browseInstallationButton";
             this.browseInstallationButton.Primary = true;
@@ -424,24 +431,24 @@
             this.tabControlMain.Controls.Add(this.tabPageHelp);
             this.tabControlMain.Controls.Add(this.tabPageOptions);
             this.tabControlMain.Depth = 0;
-            this.tabControlMain.Location = new System.Drawing.Point(-2, 92);
+            this.tabControlMain.Location = new System.Drawing.Point(-2, 91);
             this.tabControlMain.Margin = new System.Windows.Forms.Padding(0);
             this.tabControlMain.MouseState = MaterialSkin.MouseState.HOVER;
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(868, 426);
+            this.tabControlMain.Size = new System.Drawing.Size(868, 427);
             this.tabControlMain.TabIndex = 15;
             // 
             // tabPageOptions
             // 
+            this.tabPageOptions.Controls.Add(this.themeGroupBox);
             this.tabPageOptions.Controls.Add(this.versionWarningLabel);
             this.tabPageOptions.Controls.Add(this.folderPathLabel);
-            this.tabPageOptions.Controls.Add(this.toggleTheme);
             this.tabPageOptions.Controls.Add(this.textBoxDirectory);
             this.tabPageOptions.Controls.Add(this.browseInstallationButton);
             this.tabPageOptions.Location = new System.Drawing.Point(4, 22);
             this.tabPageOptions.Name = "tabPageOptions";
-            this.tabPageOptions.Size = new System.Drawing.Size(858, 400);
+            this.tabPageOptions.Size = new System.Drawing.Size(860, 401);
             this.tabPageOptions.TabIndex = 3;
             this.tabPageOptions.Text = "Options";
             this.tabPageOptions.UseVisualStyleBackColor = true;
@@ -452,7 +459,7 @@
             this.folderPathLabel.Depth = 0;
             this.folderPathLabel.Font = new System.Drawing.Font("Roboto", 11F);
             this.folderPathLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.folderPathLabel.Location = new System.Drawing.Point(12, 11);
+            this.folderPathLabel.Location = new System.Drawing.Point(12, 19);
             this.folderPathLabel.MouseState = MaterialSkin.MouseState.HOVER;
             this.folderPathLabel.Name = "folderPathLabel";
             this.folderPathLabel.Size = new System.Drawing.Size(165, 19);
@@ -464,7 +471,7 @@
             this.toggleTheme.AutoSize = true;
             this.toggleTheme.Depth = 0;
             this.toggleTheme.Font = new System.Drawing.Font("Roboto", 10F);
-            this.toggleTheme.Location = new System.Drawing.Point(15, 76);
+            this.toggleTheme.Location = new System.Drawing.Point(21, 32);
             this.toggleTheme.Margin = new System.Windows.Forms.Padding(0);
             this.toggleTheme.MouseLocation = new System.Drawing.Point(-1, -1);
             this.toggleTheme.MouseState = MaterialSkin.MouseState.HOVER;
@@ -525,6 +532,109 @@
             this.labelStatus.Text = "Status: NULL";
             this.labelStatus.DoubleClick += new System.EventHandler(this.LabelStatus_DoubleClick);
             // 
+            // themeGroupBox
+            // 
+            this.themeGroupBox.Controls.Add(this.radioThemeRed);
+            this.themeGroupBox.Controls.Add(this.radioThemeBlue);
+            this.themeGroupBox.Controls.Add(this.radioThemeOrange);
+            this.themeGroupBox.Controls.Add(this.radioThemeGreen);
+            this.themeGroupBox.Controls.Add(this.toggleTheme);
+            this.themeGroupBox.Controls.Add(this.radioThemeBlueGrey);
+            this.themeGroupBox.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.themeGroupBox.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.themeGroupBox.Location = new System.Drawing.Point(15, 79);
+            this.themeGroupBox.Name = "themeGroupBox";
+            this.themeGroupBox.Size = new System.Drawing.Size(829, 122);
+            this.themeGroupBox.TabIndex = 15;
+            this.themeGroupBox.TabStop = false;
+            this.themeGroupBox.Text = "Theme";
+            // 
+            // radioThemeBlueGrey
+            // 
+            this.radioThemeBlueGrey.AutoSize = true;
+            this.radioThemeBlueGrey.Checked = true;
+            this.radioThemeBlueGrey.Depth = 0;
+            this.radioThemeBlueGrey.Font = new System.Drawing.Font("Roboto", 10F);
+            this.radioThemeBlueGrey.Location = new System.Drawing.Point(21, 74);
+            this.radioThemeBlueGrey.Margin = new System.Windows.Forms.Padding(0);
+            this.radioThemeBlueGrey.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.radioThemeBlueGrey.MouseState = MaterialSkin.MouseState.HOVER;
+            this.radioThemeBlueGrey.Name = "radioThemeBlueGrey";
+            this.radioThemeBlueGrey.Ripple = true;
+            this.radioThemeBlueGrey.Size = new System.Drawing.Size(88, 30);
+            this.radioThemeBlueGrey.TabIndex = 0;
+            this.radioThemeBlueGrey.Text = "Blue Grey";
+            this.radioThemeBlueGrey.UseVisualStyleBackColor = true;
+            this.radioThemeBlueGrey.CheckedChanged += new System.EventHandler(this.RadioThemeBlueGrey_CheckedChanged);
+            // 
+            // radioThemeGreen
+            // 
+            this.radioThemeGreen.AutoSize = true;
+            this.radioThemeGreen.Depth = 0;
+            this.radioThemeGreen.Font = new System.Drawing.Font("Roboto", 10F);
+            this.radioThemeGreen.Location = new System.Drawing.Point(159, 74);
+            this.radioThemeGreen.Margin = new System.Windows.Forms.Padding(0);
+            this.radioThemeGreen.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.radioThemeGreen.MouseState = MaterialSkin.MouseState.HOVER;
+            this.radioThemeGreen.Name = "radioThemeGreen";
+            this.radioThemeGreen.Ripple = true;
+            this.radioThemeGreen.Size = new System.Drawing.Size(66, 30);
+            this.radioThemeGreen.TabIndex = 1;
+            this.radioThemeGreen.Text = "Green";
+            this.radioThemeGreen.UseVisualStyleBackColor = true;
+            this.radioThemeGreen.CheckedChanged += new System.EventHandler(this.RadioThemeGreen_CheckedChanged);
+            // 
+            // radioThemeOrange
+            // 
+            this.radioThemeOrange.AutoSize = true;
+            this.radioThemeOrange.Depth = 0;
+            this.radioThemeOrange.Font = new System.Drawing.Font("Roboto", 10F);
+            this.radioThemeOrange.Location = new System.Drawing.Point(275, 74);
+            this.radioThemeOrange.Margin = new System.Windows.Forms.Padding(0);
+            this.radioThemeOrange.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.radioThemeOrange.MouseState = MaterialSkin.MouseState.HOVER;
+            this.radioThemeOrange.Name = "radioThemeOrange";
+            this.radioThemeOrange.Ripple = true;
+            this.radioThemeOrange.Size = new System.Drawing.Size(73, 30);
+            this.radioThemeOrange.TabIndex = 2;
+            this.radioThemeOrange.Text = "Orange";
+            this.radioThemeOrange.UseVisualStyleBackColor = true;
+            this.radioThemeOrange.CheckedChanged += new System.EventHandler(this.RadioThemeOrange_CheckedChanged);
+            // 
+            // radioThemeBlue
+            // 
+            this.radioThemeBlue.AutoSize = true;
+            this.radioThemeBlue.Depth = 0;
+            this.radioThemeBlue.Font = new System.Drawing.Font("Roboto", 10F);
+            this.radioThemeBlue.Location = new System.Drawing.Point(398, 74);
+            this.radioThemeBlue.Margin = new System.Windows.Forms.Padding(0);
+            this.radioThemeBlue.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.radioThemeBlue.MouseState = MaterialSkin.MouseState.HOVER;
+            this.radioThemeBlue.Name = "radioThemeBlue";
+            this.radioThemeBlue.Ripple = true;
+            this.radioThemeBlue.Size = new System.Drawing.Size(56, 30);
+            this.radioThemeBlue.TabIndex = 3;
+            this.radioThemeBlue.Text = "Blue";
+            this.radioThemeBlue.UseVisualStyleBackColor = true;
+            this.radioThemeBlue.CheckedChanged += new System.EventHandler(this.RadioThemeBlue_CheckedChanged);
+            // 
+            // radioThemeRed
+            // 
+            this.radioThemeRed.AutoSize = true;
+            this.radioThemeRed.Depth = 0;
+            this.radioThemeRed.Font = new System.Drawing.Font("Roboto", 10F);
+            this.radioThemeRed.Location = new System.Drawing.Point(499, 74);
+            this.radioThemeRed.Margin = new System.Windows.Forms.Padding(0);
+            this.radioThemeRed.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.radioThemeRed.MouseState = MaterialSkin.MouseState.HOVER;
+            this.radioThemeRed.Name = "radioThemeRed";
+            this.radioThemeRed.Ripple = true;
+            this.radioThemeRed.Size = new System.Drawing.Size(53, 30);
+            this.radioThemeRed.TabIndex = 4;
+            this.radioThemeRed.Text = "Red";
+            this.radioThemeRed.UseVisualStyleBackColor = true;
+            this.radioThemeRed.CheckedChanged += new System.EventHandler(this.RadioThemeRed_CheckedChanged);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -542,7 +652,7 @@
             this.Text = "Beat Saber Mod Manager";
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.tabPageCore.ResumeLayout(false);
-            this.materialContextMenuStrip1.ResumeLayout(false);
+            this.contextMenu.ResumeLayout(false);
             this.tabPageCredits.ResumeLayout(false);
             this.tabPageCredits.PerformLayout();
             this.tabPageHelp.ResumeLayout(false);
@@ -554,6 +664,8 @@
             this.tabControlMain.ResumeLayout(false);
             this.tabPageOptions.ResumeLayout(false);
             this.tabPageOptions.PerformLayout();
+            this.themeGroupBox.ResumeLayout(false);
+            this.themeGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -593,8 +705,14 @@
         private MaterialSkin.Controls.MaterialRaisedButton creditUmbranox;
         private MaterialSkin.Controls.MaterialRaisedButton discordJoinButton;
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
-        private MaterialSkin.Controls.MaterialContextMenuStrip materialContextMenuStrip1;
+        private MaterialSkin.Controls.MaterialContextMenuStrip contextMenu;
         private System.Windows.Forms.ToolStripMenuItem viewInfoToolStripMenuItem1;
+        private System.Windows.Forms.GroupBox themeGroupBox;
+        private MaterialSkin.Controls.MaterialRadioButton radioThemeBlue;
+        private MaterialSkin.Controls.MaterialRadioButton radioThemeOrange;
+        private MaterialSkin.Controls.MaterialRadioButton radioThemeGreen;
+        private MaterialSkin.Controls.MaterialRadioButton radioThemeBlueGrey;
+        private MaterialSkin.Controls.MaterialRadioButton radioThemeRed;
     }
 }
 

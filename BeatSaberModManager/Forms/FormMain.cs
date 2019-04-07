@@ -25,6 +25,7 @@ namespace BeatSaberModManager
         MaterialSkinManager skinManager;
         bool finishedLoading = false;
         bool darkTheme = false;
+        int activeThemeID = 0;
         List<string> defaultMods = new List<string>(new string[] { "songloader", "scoresaber", "beatsaverdownloader" });
 
         #endregion
@@ -47,14 +48,34 @@ namespace BeatSaberModManager
         #region Loading
         private void FormMain_Load(object sender, EventArgs e)
         {
-            
-            if (Properties.Settings.Default.DarkTheme == true)
+            SetUITheme(Properties.Settings.Default.Theme, Properties.Settings.Default.DarkTheme);
+            toggleTheme.Checked = Properties.Settings.Default.DarkTheme;
+
+            switch (Properties.Settings.Default.Theme)
             {
-                skinManager.Theme = MaterialSkinManager.Themes.DARK;
-                listViewMods.BackColor = Color.FromArgb(255, 40, 40, 40);
-                listViewMods.ForeColor = Color.WhiteSmoke;
-                darkTheme = true;
-                toggleTheme.Checked = true;
+                case 0:
+                    radioThemeBlueGrey.Checked = true;
+                    break;
+
+                case 1:
+                    radioThemeGreen.Checked = true;
+                    break;
+
+                case 2:
+                    radioThemeOrange.Checked = true;
+                    break;
+
+                case 3:
+                    radioThemeBlue.Checked = true;
+                    break;
+
+                case 4:
+                    radioThemeRed.Checked = true;
+                    break;
+
+                default:
+                    radioThemeBlueGrey.Checked = true;
+                    break;
             }
 
             try
@@ -213,6 +234,63 @@ namespace BeatSaberModManager
                 resolveDependencies(release, 1, true);
                 defaultMods.Remove(name);
             }
+        }
+
+        private void SetUITheme(int themeID, bool darkMode)
+        {
+            darkTheme = darkMode;
+            activeThemeID = themeID;
+
+            if (darkMode)
+            {
+                skinManager.Theme = MaterialSkinManager.Themes.DARK;
+                listViewMods.BackColor = Color.FromArgb(255, 40, 40, 40);
+                listViewMods.ForeColor = Color.WhiteSmoke;
+            }
+            else
+            {
+                skinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+                listViewMods.BackColor = Color.White;
+                listViewMods.ForeColor = Color.Black;
+            }
+
+            switch (themeID)
+            {
+                case 0:
+                    // Blue Grey
+                    skinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+                    break;
+
+                case 1:
+                    // Green
+                    skinManager.ColorScheme = new ColorScheme(Primary.Green800, Primary.Green900, Primary.Green500, Accent.LightGreen200, TextShade.WHITE);
+                    break;
+
+                case 2:
+                    // Orange
+                    skinManager.ColorScheme = new ColorScheme(Primary.DeepOrange800, Primary.DeepOrange900, Primary.DeepOrange500, Accent.Orange200, TextShade.WHITE);
+                    break;
+
+                case 3:
+                    // Blue
+                    skinManager.ColorScheme = new ColorScheme(Primary.Blue800, Primary.Blue900, Primary.Blue500, Accent.Blue200, TextShade.WHITE);
+                    break;
+
+                case 4:
+                    // Red
+                    skinManager.ColorScheme = new ColorScheme(Primary.Red800, Primary.Red900, Primary.Red500, Accent.Red200, TextShade.WHITE);
+                    break;
+
+                default:
+                    // Default - Blue Grey
+                    skinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+                    break;
+            }
+
+            Properties.Settings.Default.DarkTheme = darkMode;
+            Properties.Settings.Default.Theme = themeID;
+            Properties.Settings.Default.Save();
+            ReRenderListView();
         }
         #endregion
 
@@ -403,7 +481,6 @@ namespace BeatSaberModManager
         {
             Process.Start("https://discord.gg/beatsabermods");
         }
-        #endregion
 
         private void BrowseInstallationButton_Click(object sender, EventArgs e)
         {
@@ -413,25 +490,7 @@ namespace BeatSaberModManager
 
         private void ToggleTheme_CheckedChanged(object sender, EventArgs e)
         {
-            if (toggleTheme.Checked)
-            {
-                skinManager.Theme = MaterialSkinManager.Themes.DARK;
-                listViewMods.BackColor = Color.FromArgb(255, 40, 40, 40);
-                listViewMods.ForeColor = Color.WhiteSmoke;
-                darkTheme = true;
-                Properties.Settings.Default.DarkTheme = true;
-                Properties.Settings.Default.Save();
-            }
-            else
-            {
-                skinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-                listViewMods.BackColor = Color.White;
-                listViewMods.ForeColor = Color.Black;
-                darkTheme = false;
-                Properties.Settings.Default.DarkTheme = false;
-                Properties.Settings.Default.Save();
-            }
-            ReRenderListView();
+            SetUITheme(activeThemeID, toggleTheme.Checked);
         }
 
         private void ButtonInstall2_Click(object sender, EventArgs e)
@@ -448,7 +507,9 @@ namespace BeatSaberModManager
         private void ButtonViewInfo2_Click(object sender, EventArgs e)
         {
             if (listViewMods.SelectedItems.Count == 0) { MessageBox.Show("You have to select a mod first."); return; }
+            this.Opacity = 0.8;
             new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
+            this.Opacity = 1;
         }
 
         private void CreditBeatmods_Click(object sender, EventArgs e)
@@ -493,5 +554,32 @@ namespace BeatSaberModManager
         {
             MessageBox.Show(labelStatus.Text);
         }
+
+        private void RadioThemeRed_CheckedChanged(object sender, EventArgs e)
+        {
+            SetUITheme(4, darkTheme);
+        }
+
+        private void RadioThemeGreen_CheckedChanged(object sender, EventArgs e)
+        {
+            SetUITheme(1, darkTheme);
+        }
+
+        private void RadioThemeOrange_CheckedChanged(object sender, EventArgs e)
+        {
+            SetUITheme(2, darkTheme);
+        }
+
+        private void RadioThemeBlue_CheckedChanged(object sender, EventArgs e)
+        {
+            SetUITheme(3, darkTheme);
+        }
+
+        private void RadioThemeBlueGrey_CheckedChanged(object sender, EventArgs e)
+        {
+            SetUITheme(0, darkTheme);
+        }
+        #endregion
+
     }
 }

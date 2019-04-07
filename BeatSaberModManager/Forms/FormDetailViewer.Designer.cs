@@ -66,6 +66,7 @@
             // 
             this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonClose.Depth = 0;
+            this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonClose.Location = new System.Drawing.Point(637, 501);
             this.buttonClose.MouseState = MaterialSkin.MouseState.HOVER;
             this.buttonClose.Name = "buttonClose";
@@ -80,6 +81,7 @@
             // 
             this.materialRaisedButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.materialRaisedButton1.Depth = 0;
+            this.materialRaisedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.materialRaisedButton1.Location = new System.Drawing.Point(12, 501);
             this.materialRaisedButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialRaisedButton1.Name = "materialRaisedButton1";

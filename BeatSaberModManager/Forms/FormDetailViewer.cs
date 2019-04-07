@@ -41,7 +41,7 @@ namespace BeatSaberModManager
             // Change the font for everything in the document. Font list taken from the Github readme page
             int index = styleSheet.addRule("*", "font-family: -apple-system,BlinkMacSystemFont,\"Segoe UI\",Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\";");
 
-            //Dark Theme
+            // Dark Theme
             if (MaterialSkinManager.Instance.Theme == MaterialSkinManager.Themes.DARK)
             {
                 styleSheet.addRule("body", "background: #282828; color: whitesmoke;");
