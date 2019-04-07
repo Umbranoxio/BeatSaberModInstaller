@@ -51,7 +51,7 @@ namespace BeatSaberModManager
             if (Properties.Settings.Default.DarkTheme == true)
             {
                 skinManager.Theme = MaterialSkinManager.Themes.DARK;
-                listViewMods.BackColor = Color.FromArgb(255, 20, 20, 20);
+                listViewMods.BackColor = Color.FromArgb(255, 40, 40, 40);
                 listViewMods.ForeColor = Color.WhiteSmoke;
                 darkTheme = true;
                 toggleTheme.Checked = true;
@@ -197,7 +197,7 @@ namespace BeatSaberModManager
             if (name.Equals("bsipa"))
             {
                 item.Text = $"[REQUIRED] {release.title}";
-                item.BackColor = darkTheme ? Color.FromArgb(255, 10, 10, 10) : Color.LightGray;
+                item.BackColor = darkTheme ? Color.FromArgb(255, 30, 30, 30) : Color.LightGray;
                 release.disabled = true;
 
                 release.installType = (int)ReleaseInfo.installSpecial.Required;
@@ -342,14 +342,14 @@ namespace BeatSaberModManager
                 {
                     item.Checked = true;
                     release.install = true;
-                    item.BackColor = darkTheme ? Color.FromArgb(255, 20, 20, 20) : Color.LightGray;
+                    item.BackColor = darkTheme ? Color.FromArgb(255, 30, 30, 30) : Color.LightGray;
                     item.Text = $"[REQUIRED] {release.title}";
                 }
                 else
                 if (release.installType == (int)ReleaseInfo.installSpecial.Dependency)
                 {
                     item.Checked = release.install;
-                    item.BackColor = darkTheme ? Color.FromArgb(255, 20, 20, 20) : Color.LightGray;
+                    item.BackColor = darkTheme ? Color.FromArgb(255, 30, 30, 30) : Color.LightGray;
                     item.Text = $"[{(release.install ? "REQUIRED" : "CONFLICT")}] {release.title}";
 
                     item.Checked = true;
@@ -359,7 +359,7 @@ namespace BeatSaberModManager
                 else
                 {
                     item.Text = release.title;
-                    item.BackColor = darkTheme ? Color.FromArgb(255, 25, 25, 25) : Color.White;
+                    item.BackColor = darkTheme ? Color.FromArgb(255, 35, 35, 35) : Color.White;
                 }
                 CheckDefaultMod(release, item);
             }
@@ -416,7 +416,7 @@ namespace BeatSaberModManager
             if (toggleTheme.Checked)
             {
                 skinManager.Theme = MaterialSkinManager.Themes.DARK;
-                listViewMods.BackColor = Color.FromArgb(255, 20, 20, 20);
+                listViewMods.BackColor = Color.FromArgb(255, 40, 40, 40);
                 listViewMods.ForeColor = Color.WhiteSmoke;
                 darkTheme = true;
                 Properties.Settings.Default.DarkTheme = true;
@@ -487,6 +487,11 @@ namespace BeatSaberModManager
             {
                 new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
             }
+        }
+
+        private void LabelStatus_DoubleClick(object sender, EventArgs e)
+        {
+            MessageBox.Show(labelStatus.Text);
         }
     }
 }
