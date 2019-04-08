@@ -215,13 +215,11 @@ namespace BeatSaberModManager
         {
             string name = release.name.ToLower();
             string category = release.category.ToLower();
-            if (name.Equals("bsipa"))
+            if (name.Equals("bsipa") || category.Contains("libraries"))
             {
                 item.Text = $"[REQUIRED] {release.title}";
                 item.BackColor = darkTheme ? Color.FromArgb(255, 30, 30, 30) : Color.LightGray;
                 release.disabled = true;
-
-                release.installType = (int)ReleaseInfo.installSpecial.Required;
 
                 release.install = true;
                 item.Checked = true;
@@ -323,48 +321,7 @@ namespace BeatSaberModManager
                             ReleaseInfo check = (ReleaseInfo)lvi.Tag;
                             if (check.name == dependency.name)
                             {
-                                check.dependedBy.Add(release.name);
-                                if (check.dependedBy.Count > 0)
-                                {
-                                    check.installType = (int)ReleaseInfo.installSpecial.Dependency;
-                                    check.disabled = true;
-                                    check.itemHandle.Checked = true;
-                                    check.install = true;
-                                }
-                                else
-                                {
-                                    check.installType = (int)ReleaseInfo.installSpecial.None;
-                                    check.disabled = false;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            else
-            {
-                if (release.dependsOn.Count > 0)
-                {
-                    foreach (ModLink dependency in release.dependsOn)
-                    {
-                        foreach (ListViewItem lvi in listViewMods.Items)
-                        {
-                            ReleaseInfo check = (ReleaseInfo)lvi.Tag;
-                            if (check.name == dependency.name)
-                            {
-                                check.dependedBy.Remove(release.name);
-                                if (check.dependedBy.Count > 0)
-                                {
-                                    check.installType = (int)ReleaseInfo.installSpecial.Dependency;
-                                    check.disabled = true;
-                                    check.itemHandle.Checked = true;
-                                    check.install = true;
-                                }
-                                else
-                                {
-                                    check.installType = (int)ReleaseInfo.installSpecial.None;
-                                    check.disabled = false;
-                                }
+                                check.itemHandle.Checked = true;
                             }
                         }
                     }
@@ -416,23 +373,11 @@ namespace BeatSaberModManager
             foreach (ListViewItem item in listViewMods.Items)
             {
                 ReleaseInfo release = (ReleaseInfo)item.Tag;
-                if (release.installType == (int)ReleaseInfo.installSpecial.Required)
+                if (release.disabled)
                 {
                     item.Checked = true;
-                    release.install = true;
                     item.BackColor = darkTheme ? Color.FromArgb(255, 30, 30, 30) : Color.LightGray;
                     item.Text = $"[REQUIRED] {release.title}";
-                }
-                else
-                if (release.installType == (int)ReleaseInfo.installSpecial.Dependency)
-                {
-                    item.Checked = release.install;
-                    item.BackColor = darkTheme ? Color.FromArgb(255, 30, 30, 30) : Color.LightGray;
-                    item.Text = $"[{(release.install ? "REQUIRED" : "CONFLICT")}] {release.title}";
-
-                    item.Checked = true;
-                    release.install = true;
-                    item.Text = $"[DEPENDENCY] {release.title}";
                 }
                 else
                 {
