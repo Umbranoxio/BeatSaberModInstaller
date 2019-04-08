@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            this.MinimumSize = new System.Drawing.Size(300, 300);
             this.textBoxDirectory = new System.Windows.Forms.TextBox();
             this.tabPageCore = new System.Windows.Forms.TabPage();
             this.listViewMods = new System.Windows.Forms.ListView();
@@ -59,17 +58,17 @@
             this.tabControlSelector = new MaterialSkin.Controls.MaterialTabSelector();
             this.tabControlMain = new MaterialSkin.Controls.MaterialTabControl();
             this.tabPageOptions = new System.Windows.Forms.TabPage();
-            this.folderPathLabel = new MaterialSkin.Controls.MaterialLabel();
+            this.themeGroupBox = new System.Windows.Forms.GroupBox();
+            this.radioThemeRed = new MaterialSkin.Controls.MaterialRadioButton();
+            this.radioThemeBlue = new MaterialSkin.Controls.MaterialRadioButton();
+            this.radioThemeOrange = new MaterialSkin.Controls.MaterialRadioButton();
+            this.radioThemeGreen = new MaterialSkin.Controls.MaterialRadioButton();
             this.toggleTheme = new MaterialSkin.Controls.MaterialCheckBox();
+            this.radioThemeBlueGrey = new MaterialSkin.Controls.MaterialRadioButton();
+            this.folderPathLabel = new MaterialSkin.Controls.MaterialLabel();
             this.buttonInstall = new MaterialSkin.Controls.MaterialFlatButton();
             this.buttonViewInfo = new MaterialSkin.Controls.MaterialFlatButton();
             this.labelStatus = new MaterialSkin.Controls.MaterialLabel();
-            this.themeGroupBox = new System.Windows.Forms.GroupBox();
-            this.radioThemeBlueGrey = new MaterialSkin.Controls.MaterialRadioButton();
-            this.radioThemeGreen = new MaterialSkin.Controls.MaterialRadioButton();
-            this.radioThemeOrange = new MaterialSkin.Controls.MaterialRadioButton();
-            this.radioThemeBlue = new MaterialSkin.Controls.MaterialRadioButton();
-            this.radioThemeRed = new MaterialSkin.Controls.MaterialRadioButton();
             this.tabPageCore.SuspendLayout();
             this.contextMenu.SuspendLayout();
             this.tabPageCredits.SuspendLayout();
@@ -454,18 +453,90 @@
             this.tabPageOptions.Text = "Options";
             this.tabPageOptions.UseVisualStyleBackColor = true;
             // 
-            // folderPathLabel
+            // themeGroupBox
             // 
-            this.folderPathLabel.AutoSize = true;
-            this.folderPathLabel.Depth = 0;
-            this.folderPathLabel.Font = new System.Drawing.Font("Roboto", 11F);
-            this.folderPathLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.folderPathLabel.Location = new System.Drawing.Point(12, 19);
-            this.folderPathLabel.MouseState = MaterialSkin.MouseState.HOVER;
-            this.folderPathLabel.Name = "folderPathLabel";
-            this.folderPathLabel.Size = new System.Drawing.Size(165, 19);
-            this.folderPathLabel.TabIndex = 14;
-            this.folderPathLabel.Text = "Beat Saber Folder Path:";
+            this.themeGroupBox.Controls.Add(this.radioThemeRed);
+            this.themeGroupBox.Controls.Add(this.radioThemeBlue);
+            this.themeGroupBox.Controls.Add(this.radioThemeOrange);
+            this.themeGroupBox.Controls.Add(this.radioThemeGreen);
+            this.themeGroupBox.Controls.Add(this.toggleTheme);
+            this.themeGroupBox.Controls.Add(this.radioThemeBlueGrey);
+            this.themeGroupBox.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.themeGroupBox.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.themeGroupBox.Location = new System.Drawing.Point(15, 79);
+            this.themeGroupBox.Name = "themeGroupBox";
+            this.themeGroupBox.Size = new System.Drawing.Size(829, 122);
+            this.themeGroupBox.TabIndex = 15;
+            this.themeGroupBox.TabStop = false;
+            this.themeGroupBox.Text = "Theme";
+            // 
+            // radioThemeRed
+            // 
+            this.radioThemeRed.AutoSize = true;
+            this.radioThemeRed.Depth = 0;
+            this.radioThemeRed.Font = new System.Drawing.Font("Roboto", 10F);
+            this.radioThemeRed.Location = new System.Drawing.Point(499, 74);
+            this.radioThemeRed.Margin = new System.Windows.Forms.Padding(0);
+            this.radioThemeRed.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.radioThemeRed.MouseState = MaterialSkin.MouseState.HOVER;
+            this.radioThemeRed.Name = "radioThemeRed";
+            this.radioThemeRed.Ripple = true;
+            this.radioThemeRed.Size = new System.Drawing.Size(53, 30);
+            this.radioThemeRed.TabIndex = 4;
+            this.radioThemeRed.Text = "Red";
+            this.radioThemeRed.UseVisualStyleBackColor = true;
+            this.radioThemeRed.CheckedChanged += new System.EventHandler(this.RadioThemeRed_CheckedChanged);
+            // 
+            // radioThemeBlue
+            // 
+            this.radioThemeBlue.AutoSize = true;
+            this.radioThemeBlue.Depth = 0;
+            this.radioThemeBlue.Font = new System.Drawing.Font("Roboto", 10F);
+            this.radioThemeBlue.Location = new System.Drawing.Point(398, 74);
+            this.radioThemeBlue.Margin = new System.Windows.Forms.Padding(0);
+            this.radioThemeBlue.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.radioThemeBlue.MouseState = MaterialSkin.MouseState.HOVER;
+            this.radioThemeBlue.Name = "radioThemeBlue";
+            this.radioThemeBlue.Ripple = true;
+            this.radioThemeBlue.Size = new System.Drawing.Size(56, 30);
+            this.radioThemeBlue.TabIndex = 3;
+            this.radioThemeBlue.Text = "Blue";
+            this.radioThemeBlue.UseVisualStyleBackColor = true;
+            this.radioThemeBlue.CheckedChanged += new System.EventHandler(this.RadioThemeBlue_CheckedChanged);
+            // 
+            // radioThemeOrange
+            // 
+            this.radioThemeOrange.AutoSize = true;
+            this.radioThemeOrange.Depth = 0;
+            this.radioThemeOrange.Font = new System.Drawing.Font("Roboto", 10F);
+            this.radioThemeOrange.Location = new System.Drawing.Point(275, 74);
+            this.radioThemeOrange.Margin = new System.Windows.Forms.Padding(0);
+            this.radioThemeOrange.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.radioThemeOrange.MouseState = MaterialSkin.MouseState.HOVER;
+            this.radioThemeOrange.Name = "radioThemeOrange";
+            this.radioThemeOrange.Ripple = true;
+            this.radioThemeOrange.Size = new System.Drawing.Size(73, 30);
+            this.radioThemeOrange.TabIndex = 2;
+            this.radioThemeOrange.Text = "Orange";
+            this.radioThemeOrange.UseVisualStyleBackColor = true;
+            this.radioThemeOrange.CheckedChanged += new System.EventHandler(this.RadioThemeOrange_CheckedChanged);
+            // 
+            // radioThemeGreen
+            // 
+            this.radioThemeGreen.AutoSize = true;
+            this.radioThemeGreen.Depth = 0;
+            this.radioThemeGreen.Font = new System.Drawing.Font("Roboto", 10F);
+            this.radioThemeGreen.Location = new System.Drawing.Point(159, 74);
+            this.radioThemeGreen.Margin = new System.Windows.Forms.Padding(0);
+            this.radioThemeGreen.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.radioThemeGreen.MouseState = MaterialSkin.MouseState.HOVER;
+            this.radioThemeGreen.Name = "radioThemeGreen";
+            this.radioThemeGreen.Ripple = true;
+            this.radioThemeGreen.Size = new System.Drawing.Size(66, 30);
+            this.radioThemeGreen.TabIndex = 1;
+            this.radioThemeGreen.Text = "Green";
+            this.radioThemeGreen.UseVisualStyleBackColor = true;
+            this.radioThemeGreen.CheckedChanged += new System.EventHandler(this.RadioThemeGreen_CheckedChanged);
             // 
             // toggleTheme
             // 
@@ -483,6 +554,38 @@
             this.toggleTheme.Text = "Turn the lights off";
             this.toggleTheme.UseVisualStyleBackColor = true;
             this.toggleTheme.CheckedChanged += new System.EventHandler(this.ToggleTheme_CheckedChanged);
+            // 
+            // radioThemeBlueGrey
+            // 
+            this.radioThemeBlueGrey.AutoSize = true;
+            this.radioThemeBlueGrey.Checked = true;
+            this.radioThemeBlueGrey.Depth = 0;
+            this.radioThemeBlueGrey.Font = new System.Drawing.Font("Roboto", 10F);
+            this.radioThemeBlueGrey.Location = new System.Drawing.Point(21, 74);
+            this.radioThemeBlueGrey.Margin = new System.Windows.Forms.Padding(0);
+            this.radioThemeBlueGrey.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.radioThemeBlueGrey.MouseState = MaterialSkin.MouseState.HOVER;
+            this.radioThemeBlueGrey.Name = "radioThemeBlueGrey";
+            this.radioThemeBlueGrey.Ripple = true;
+            this.radioThemeBlueGrey.Size = new System.Drawing.Size(88, 30);
+            this.radioThemeBlueGrey.TabIndex = 0;
+            this.radioThemeBlueGrey.TabStop = true;
+            this.radioThemeBlueGrey.Text = "Blue Grey";
+            this.radioThemeBlueGrey.UseVisualStyleBackColor = true;
+            this.radioThemeBlueGrey.CheckedChanged += new System.EventHandler(this.RadioThemeBlueGrey_CheckedChanged);
+            // 
+            // folderPathLabel
+            // 
+            this.folderPathLabel.AutoSize = true;
+            this.folderPathLabel.Depth = 0;
+            this.folderPathLabel.Font = new System.Drawing.Font("Roboto", 11F);
+            this.folderPathLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.folderPathLabel.Location = new System.Drawing.Point(12, 19);
+            this.folderPathLabel.MouseState = MaterialSkin.MouseState.HOVER;
+            this.folderPathLabel.Name = "folderPathLabel";
+            this.folderPathLabel.Size = new System.Drawing.Size(165, 19);
+            this.folderPathLabel.TabIndex = 14;
+            this.folderPathLabel.Text = "Beat Saber Folder Path:";
             // 
             // buttonInstall
             // 
@@ -533,109 +636,6 @@
             this.labelStatus.Text = "Status: NULL";
             this.labelStatus.DoubleClick += new System.EventHandler(this.LabelStatus_DoubleClick);
             // 
-            // themeGroupBox
-            // 
-            this.themeGroupBox.Controls.Add(this.radioThemeRed);
-            this.themeGroupBox.Controls.Add(this.radioThemeBlue);
-            this.themeGroupBox.Controls.Add(this.radioThemeOrange);
-            this.themeGroupBox.Controls.Add(this.radioThemeGreen);
-            this.themeGroupBox.Controls.Add(this.toggleTheme);
-            this.themeGroupBox.Controls.Add(this.radioThemeBlueGrey);
-            this.themeGroupBox.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.themeGroupBox.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.themeGroupBox.Location = new System.Drawing.Point(15, 79);
-            this.themeGroupBox.Name = "themeGroupBox";
-            this.themeGroupBox.Size = new System.Drawing.Size(829, 122);
-            this.themeGroupBox.TabIndex = 15;
-            this.themeGroupBox.TabStop = false;
-            this.themeGroupBox.Text = "Theme";
-            // 
-            // radioThemeBlueGrey
-            // 
-            this.radioThemeBlueGrey.AutoSize = true;
-            this.radioThemeBlueGrey.Checked = true;
-            this.radioThemeBlueGrey.Depth = 0;
-            this.radioThemeBlueGrey.Font = new System.Drawing.Font("Roboto", 10F);
-            this.radioThemeBlueGrey.Location = new System.Drawing.Point(21, 74);
-            this.radioThemeBlueGrey.Margin = new System.Windows.Forms.Padding(0);
-            this.radioThemeBlueGrey.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.radioThemeBlueGrey.MouseState = MaterialSkin.MouseState.HOVER;
-            this.radioThemeBlueGrey.Name = "radioThemeBlueGrey";
-            this.radioThemeBlueGrey.Ripple = true;
-            this.radioThemeBlueGrey.Size = new System.Drawing.Size(88, 30);
-            this.radioThemeBlueGrey.TabIndex = 0;
-            this.radioThemeBlueGrey.Text = "Blue Grey";
-            this.radioThemeBlueGrey.UseVisualStyleBackColor = true;
-            this.radioThemeBlueGrey.CheckedChanged += new System.EventHandler(this.RadioThemeBlueGrey_CheckedChanged);
-            // 
-            // radioThemeGreen
-            // 
-            this.radioThemeGreen.AutoSize = true;
-            this.radioThemeGreen.Depth = 0;
-            this.radioThemeGreen.Font = new System.Drawing.Font("Roboto", 10F);
-            this.radioThemeGreen.Location = new System.Drawing.Point(159, 74);
-            this.radioThemeGreen.Margin = new System.Windows.Forms.Padding(0);
-            this.radioThemeGreen.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.radioThemeGreen.MouseState = MaterialSkin.MouseState.HOVER;
-            this.radioThemeGreen.Name = "radioThemeGreen";
-            this.radioThemeGreen.Ripple = true;
-            this.radioThemeGreen.Size = new System.Drawing.Size(66, 30);
-            this.radioThemeGreen.TabIndex = 1;
-            this.radioThemeGreen.Text = "Green";
-            this.radioThemeGreen.UseVisualStyleBackColor = true;
-            this.radioThemeGreen.CheckedChanged += new System.EventHandler(this.RadioThemeGreen_CheckedChanged);
-            // 
-            // radioThemeOrange
-            // 
-            this.radioThemeOrange.AutoSize = true;
-            this.radioThemeOrange.Depth = 0;
-            this.radioThemeOrange.Font = new System.Drawing.Font("Roboto", 10F);
-            this.radioThemeOrange.Location = new System.Drawing.Point(275, 74);
-            this.radioThemeOrange.Margin = new System.Windows.Forms.Padding(0);
-            this.radioThemeOrange.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.radioThemeOrange.MouseState = MaterialSkin.MouseState.HOVER;
-            this.radioThemeOrange.Name = "radioThemeOrange";
-            this.radioThemeOrange.Ripple = true;
-            this.radioThemeOrange.Size = new System.Drawing.Size(73, 30);
-            this.radioThemeOrange.TabIndex = 2;
-            this.radioThemeOrange.Text = "Orange";
-            this.radioThemeOrange.UseVisualStyleBackColor = true;
-            this.radioThemeOrange.CheckedChanged += new System.EventHandler(this.RadioThemeOrange_CheckedChanged);
-            // 
-            // radioThemeBlue
-            // 
-            this.radioThemeBlue.AutoSize = true;
-            this.radioThemeBlue.Depth = 0;
-            this.radioThemeBlue.Font = new System.Drawing.Font("Roboto", 10F);
-            this.radioThemeBlue.Location = new System.Drawing.Point(398, 74);
-            this.radioThemeBlue.Margin = new System.Windows.Forms.Padding(0);
-            this.radioThemeBlue.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.radioThemeBlue.MouseState = MaterialSkin.MouseState.HOVER;
-            this.radioThemeBlue.Name = "radioThemeBlue";
-            this.radioThemeBlue.Ripple = true;
-            this.radioThemeBlue.Size = new System.Drawing.Size(56, 30);
-            this.radioThemeBlue.TabIndex = 3;
-            this.radioThemeBlue.Text = "Blue";
-            this.radioThemeBlue.UseVisualStyleBackColor = true;
-            this.radioThemeBlue.CheckedChanged += new System.EventHandler(this.RadioThemeBlue_CheckedChanged);
-            // 
-            // radioThemeRed
-            // 
-            this.radioThemeRed.AutoSize = true;
-            this.radioThemeRed.Depth = 0;
-            this.radioThemeRed.Font = new System.Drawing.Font("Roboto", 10F);
-            this.radioThemeRed.Location = new System.Drawing.Point(499, 74);
-            this.radioThemeRed.Margin = new System.Windows.Forms.Padding(0);
-            this.radioThemeRed.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.radioThemeRed.MouseState = MaterialSkin.MouseState.HOVER;
-            this.radioThemeRed.Name = "radioThemeRed";
-            this.radioThemeRed.Ripple = true;
-            this.radioThemeRed.Size = new System.Drawing.Size(53, 30);
-            this.radioThemeRed.TabIndex = 4;
-            this.radioThemeRed.Text = "Red";
-            this.radioThemeRed.UseVisualStyleBackColor = true;
-            this.radioThemeRed.CheckedChanged += new System.EventHandler(this.RadioThemeRed_CheckedChanged);
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -648,6 +648,7 @@
             this.Controls.Add(this.tabControlMain);
             this.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(300, 300);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Beat Saber Mod Manager";
