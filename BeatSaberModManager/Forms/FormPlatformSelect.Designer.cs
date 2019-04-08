@@ -28,18 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.radioButtonSteam = new System.Windows.Forms.RadioButton();
-            this.radioButtonOculus = new System.Windows.Forms.RadioButton();
-            this.buttonConfirm = new System.Windows.Forms.Button();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPlatformSelect));
+            this.radioButtonSteam = new MaterialSkin.Controls.MaterialRadioButton();
+            this.radioButtonOculus = new MaterialSkin.Controls.MaterialRadioButton();
+            this.buttonConfirm = new MaterialSkin.Controls.MaterialRaisedButton();
             this.SuspendLayout();
             // 
             // radioButtonSteam
             // 
             this.radioButtonSteam.AutoSize = true;
-            this.radioButtonSteam.Location = new System.Drawing.Point(53, 12);
+            this.radioButtonSteam.Depth = 0;
+            this.radioButtonSteam.Font = new System.Drawing.Font("Roboto", 10F);
+            this.radioButtonSteam.Location = new System.Drawing.Point(20, 80);
+            this.radioButtonSteam.Margin = new System.Windows.Forms.Padding(0);
+            this.radioButtonSteam.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.radioButtonSteam.MouseState = MaterialSkin.MouseState.HOVER;
             this.radioButtonSteam.Name = "radioButtonSteam";
-            this.radioButtonSteam.Size = new System.Drawing.Size(187, 17);
-            this.radioButtonSteam.TabIndex = 0;
+            this.radioButtonSteam.Ripple = true;
+            this.radioButtonSteam.Size = new System.Drawing.Size(224, 30);
+            this.radioButtonSteam.TabIndex = 3;
             this.radioButtonSteam.TabStop = true;
             this.radioButtonSteam.Text = "I purchased the game on Steam";
             this.radioButtonSteam.UseVisualStyleBackColor = true;
@@ -47,34 +54,44 @@
             // radioButtonOculus
             // 
             this.radioButtonOculus.AutoSize = true;
-            this.radioButtonOculus.Location = new System.Drawing.Point(25, 35);
+            this.radioButtonOculus.Depth = 0;
+            this.radioButtonOculus.Font = new System.Drawing.Font("Roboto", 10F);
+            this.radioButtonOculus.Location = new System.Drawing.Point(20, 122);
+            this.radioButtonOculus.Margin = new System.Windows.Forms.Padding(0);
+            this.radioButtonOculus.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.radioButtonOculus.MouseState = MaterialSkin.MouseState.HOVER;
             this.radioButtonOculus.Name = "radioButtonOculus";
-            this.radioButtonOculus.Size = new System.Drawing.Size(242, 17);
-            this.radioButtonOculus.TabIndex = 1;
+            this.radioButtonOculus.Ripple = true;
+            this.radioButtonOculus.Size = new System.Drawing.Size(286, 30);
+            this.radioButtonOculus.TabIndex = 4;
             this.radioButtonOculus.TabStop = true;
             this.radioButtonOculus.Text = "I purchased the game on the Oculus Store";
             this.radioButtonOculus.UseVisualStyleBackColor = true;
             // 
             // buttonConfirm
             // 
-            this.buttonConfirm.Location = new System.Drawing.Point(109, 60);
+            this.buttonConfirm.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.buttonConfirm.Depth = 0;
+            this.buttonConfirm.Location = new System.Drawing.Point(124, 166);
+            this.buttonConfirm.MouseState = MaterialSkin.MouseState.HOVER;
             this.buttonConfirm.Name = "buttonConfirm";
-            this.buttonConfirm.Size = new System.Drawing.Size(75, 23);
-            this.buttonConfirm.TabIndex = 2;
+            this.buttonConfirm.Primary = true;
+            this.buttonConfirm.Size = new System.Drawing.Size(157, 39);
+            this.buttonConfirm.TabIndex = 5;
             this.buttonConfirm.Text = "Confirm";
             this.buttonConfirm.UseVisualStyleBackColor = true;
-            this.buttonConfirm.Click += new System.EventHandler(this.buttonConfirm_Click);
+            this.buttonConfirm.Click += new System.EventHandler(this.MaterialRaisedButton1_Click);
             // 
             // FormPlatformSelect
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 95);
+            this.ClientSize = new System.Drawing.Size(404, 219);
             this.Controls.Add(this.buttonConfirm);
             this.Controls.Add(this.radioButtonOculus);
             this.Controls.Add(this.radioButtonSteam);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormPlatformSelect";
@@ -89,9 +106,8 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.RadioButton radioButtonSteam;
-        private System.Windows.Forms.RadioButton radioButtonOculus;
-        private System.Windows.Forms.Button buttonConfirm;
+        private MaterialSkin.Controls.MaterialRadioButton radioButtonSteam;
+        private MaterialSkin.Controls.MaterialRadioButton radioButtonOculus;
+        private MaterialSkin.Controls.MaterialRaisedButton buttonConfirm;
     }
 }

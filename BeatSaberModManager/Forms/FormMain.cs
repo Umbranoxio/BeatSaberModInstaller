@@ -9,10 +9,12 @@ using System.Diagnostics;
 using System.Drawing;
 using SemVer;
 using Version = SemVer.Version;
+using MaterialSkin.Controls;
+using MaterialSkin;
 
 namespace BeatSaberModManager
 {
-    public partial class FormMain : Form
+    public partial class FormMain : MaterialForm
     {
 
         #region Instances
@@ -20,7 +22,10 @@ namespace BeatSaberModManager
         UpdateLogic updater;
         RemoteLogic remote;
         InstallerLogic installer;
+        MaterialSkinManager skinManager;
         bool finishedLoading = false;
+        bool darkTheme = false;
+        int activeThemeID = 0;
         List<string> defaultMods = new List<string>(new string[] { "songloader", "scoresaber", "beatsaverdownloader" });
 
         #endregion
@@ -32,15 +37,50 @@ namespace BeatSaberModManager
             path = new PathLogic();
             updater = new UpdateLogic();
             remote = new RemoteLogic();
+
+            skinManager = MaterialSkinManager.Instance;
+            skinManager.AddFormToManage(this);
+            skinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            skinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
         }
         #endregion
 
         #region Loading
         private void FormMain_Load(object sender, EventArgs e)
         {
+            SetUITheme(Properties.Settings.Default.Theme, Properties.Settings.Default.DarkTheme);
+            toggleTheme.Checked = Properties.Settings.Default.DarkTheme;
+
+            switch (Properties.Settings.Default.Theme)
+            {
+                case 0:
+                    radioThemeBlueGrey.Checked = true;
+                    break;
+
+                case 1:
+                    radioThemeGreen.Checked = true;
+                    break;
+
+                case 2:
+                    radioThemeOrange.Checked = true;
+                    break;
+
+                case 3:
+                    radioThemeBlue.Checked = true;
+                    break;
+
+                case 4:
+                    radioThemeRed.Checked = true;
+                    break;
+
+                default:
+                    radioThemeBlueGrey.Checked = true;
+                    break;
+            }
+
             try
             {
-                updater.CheckForUpdates();
+                new Thread(() => { updater.CheckForUpdates(); }).Start();
                 textBoxDirectory.Text = path.GetInstallationPath();
              
                 new Thread(() => { RemoteLoad(); }).Start();
@@ -178,7 +218,7 @@ namespace BeatSaberModManager
             if (name.Equals("bsipa") || category.Contains("libraries"))
             {
                 item.Text = $"[REQUIRED] {release.title}";
-                item.BackColor = Color.LightGray;
+                item.BackColor = darkTheme ? Color.FromArgb(255, 30, 30, 30) : Color.LightGray;
                 release.disabled = true;
 
                 release.install = true;
@@ -191,6 +231,65 @@ namespace BeatSaberModManager
                 defaultMods.Remove(name);
             }
         }
+
+        private void SetUITheme(int themeID, bool darkMode)
+        {
+            darkTheme = darkMode;
+            activeThemeID = themeID;
+
+            if (darkMode)
+            {
+                skinManager.Theme = MaterialSkinManager.Themes.DARK;
+                listViewMods.BackColor = Color.FromArgb(255, 40, 40, 40);
+                listViewMods.ForeColor = Color.WhiteSmoke;
+                textBoxDirectory.BackColor = Color.FromArgb(255, 40, 40, 40);
+            }
+            else
+            {
+                skinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+                listViewMods.BackColor = Color.White;
+                listViewMods.ForeColor = Color.Black;
+                textBoxDirectory.BackColor = Color.WhiteSmoke;
+            }
+
+            switch (themeID)
+            {
+                case 0:
+                    // Blue Grey
+                    skinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+                    break;
+
+                case 1:
+                    // Green
+                    skinManager.ColorScheme = new ColorScheme(Primary.Green800, Primary.Green900, Primary.Green500, Accent.LightGreen200, TextShade.WHITE);
+                    break;
+
+                case 2:
+                    // Orange
+                    skinManager.ColorScheme = new ColorScheme(Primary.DeepOrange800, Primary.DeepOrange900, Primary.DeepOrange500, Accent.Orange200, TextShade.WHITE);
+                    break;
+
+                case 3:
+                    // Blue
+                    skinManager.ColorScheme = new ColorScheme(Primary.Blue800, Primary.Blue900, Primary.Blue500, Accent.Blue200, TextShade.WHITE);
+                    break;
+
+                case 4:
+                    // Red
+                    skinManager.ColorScheme = new ColorScheme(Primary.Red800, Primary.Red900, Primary.Red500, Accent.Red200, TextShade.WHITE);
+                    break;
+
+                default:
+                    // Default - Blue Grey
+                    skinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+                    break;
+            }
+
+            Properties.Settings.Default.DarkTheme = darkMode;
+            Properties.Settings.Default.Theme = themeID;
+            Properties.Settings.Default.Save();
+            ReRenderListView();
+        }
         #endregion
 
         #region Event Handlers
@@ -198,22 +297,6 @@ namespace BeatSaberModManager
         {
             UpdateStatus(status);
             if (status == "Install complete!") { this.Invoke((MethodInvoker)(() => { buttonInstall.Enabled = true; })); }
-        }
-        private void buttonInstall_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(textBoxDirectory.Text))
-            {
-                MessageBox.Show("No install directory selected!", "No install directory", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            buttonInstall.Enabled = false;
-            new Thread(() => { installer.Run(); }).Start();
-        }
-
-        private void buttonFolderBrowser_Click(object sender, EventArgs e)
-        {
-            textBoxDirectory.Text = path.ManualFind();
-            installer.installDirectory = textBoxDirectory.Text;
         }
 
         private void listViewMods_ItemChecked(object sender, ItemCheckedEventArgs e)
@@ -294,14 +377,14 @@ namespace BeatSaberModManager
                 ReleaseInfo release = (ReleaseInfo)item.Tag;
                 if (release.disabled)
                 {
-                    item.Checked = release.install;
-                    item.BackColor = Color.LightGray;
-                    item.Text = $"[{(release.install ? "REQUIRED" : "CONFLICT")}] {release.title}";
+                    item.Checked = true;
+                    item.BackColor = darkTheme ? Color.FromArgb(255, 30, 30, 30) : Color.LightGray;
+                    item.Text = $"[REQUIRED] {release.title}";
                 }
                 else
                 {
                     item.Text = release.title;
-                    item.BackColor = Color.White;
+                    item.BackColor = darkTheme ? Color.FromArgb(255, 40, 40, 40) : Color.White;
                 }
                 CheckDefaultMod(release, item);
             }
@@ -317,39 +400,6 @@ namespace BeatSaberModManager
             {
                 buttonViewInfo.Enabled = false;
             }
-        }
-
-        private void buttonViewInfo_Click(object sender, EventArgs e)
-        {
-            new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
-        }
-
-        private void viewInfoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (listViewMods.SelectedItems.Count >= 1)
-            {
-                new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
-            }
-        }
-
-        private void linkLabellolPants_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start("https://github.com/vanZeben");
-        }
-
-        private void linkLabelModSaberLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start("https://beatmods.com/");
-        }
-
-        private void linkLabelUmbranox_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start("https://twitter.com/Umbranoxus");
-        }
-
-        private void linkLabelContributors_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start("https://github.com/beat-saber-modding-group/BeatSaberModInstaller/graphs/contributors");
         }
 
         private void textBoxDirectory_TextChanged(object sender, EventArgs e)
@@ -378,11 +428,105 @@ namespace BeatSaberModManager
         {
             Process.Start("https://discord.gg/beatsabermods");
         }
+
+        private void BrowseInstallationButton_Click(object sender, EventArgs e)
+        {
+            textBoxDirectory.Text = path.ManualFind();
+            installer.installDirectory = textBoxDirectory.Text;
+        }
+
+        private void ToggleTheme_CheckedChanged(object sender, EventArgs e)
+        {
+            SetUITheme(activeThemeID, toggleTheme.Checked);
+        }
+
+        private void ButtonInstall2_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBoxDirectory.Text))
+            {
+                MessageBox.Show("No install directory selected!", "No install directory", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            buttonInstall.Enabled = false;
+            new Thread(() => { installer.Run(); }).Start();
+        }
+
+        private void ButtonViewInfo2_Click(object sender, EventArgs e)
+        {
+            if (listViewMods.SelectedItems.Count == 0) { MessageBox.Show("You have to select a mod first."); return; }
+            this.Opacity = 0.8;
+            new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
+            this.Opacity = 1;
+        }
+
+        private void CreditBeatmods_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://beatmods.com/");
+        }
+
+        private void CreditContributors_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/beat-saber-modding-group/BeatSaberModInstaller/graphs/contributors");
+        }
+
+        private void CreditUmbranox_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://twitter.com/Umbranoxus");
+        }
+
+        private void CreditVanZeben_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/vanZeben");
+        }
+
+        private void CreditMaterialSkin_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/IgnaceMaes/MaterialSkin");
+        }
+
+        private void DiscordJoinButton_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://discord.gg/beatsabermods");
+        }
+
+        private void ViewInfoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (listViewMods.SelectedItems.Count >= 1)
+            {
+                new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
+            }
+        }
+
+        private void LabelStatus_DoubleClick(object sender, EventArgs e)
+        {
+            MessageBox.Show(labelStatus.Text);
+        }
+
+        private void RadioThemeRed_CheckedChanged(object sender, EventArgs e)
+        {
+            SetUITheme(4, darkTheme);
+        }
+
+        private void RadioThemeGreen_CheckedChanged(object sender, EventArgs e)
+        {
+            SetUITheme(1, darkTheme);
+        }
+
+        private void RadioThemeOrange_CheckedChanged(object sender, EventArgs e)
+        {
+            SetUITheme(2, darkTheme);
+        }
+
+        private void RadioThemeBlue_CheckedChanged(object sender, EventArgs e)
+        {
+            SetUITheme(3, darkTheme);
+        }
+
+        private void RadioThemeBlueGrey_CheckedChanged(object sender, EventArgs e)
+        {
+            SetUITheme(0, darkTheme);
+        }
         #endregion
 
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
 using BeatSaberModManager.Core;
+using MaterialSkin.Controls;
+using MaterialSkin;
+
 namespace BeatSaberModManager
 {
-    public partial class FormPlatformSelect : Form
+    public partial class FormPlatformSelect : MaterialForm
     {
         PathLogic logic;
         public FormPlatformSelect(PathLogic _logic)
@@ -12,7 +15,7 @@ namespace BeatSaberModManager
             logic = _logic;
         }
 
-        private void buttonConfirm_Click(object sender, EventArgs e)
+        private void MaterialRaisedButton1_Click(object sender, EventArgs e)
         {
             if (radioButtonOculus.Checked)
             {
