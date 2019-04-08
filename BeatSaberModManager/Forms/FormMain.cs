@@ -242,12 +242,14 @@ namespace BeatSaberModManager
                 skinManager.Theme = MaterialSkinManager.Themes.DARK;
                 listViewMods.BackColor = Color.FromArgb(255, 40, 40, 40);
                 listViewMods.ForeColor = Color.WhiteSmoke;
+                textBoxDirectory.BackColor = Color.FromArgb(255, 40, 40, 40);
             }
             else
             {
                 skinManager.Theme = MaterialSkinManager.Themes.LIGHT;
                 listViewMods.BackColor = Color.White;
                 listViewMods.ForeColor = Color.Black;
+                textBoxDirectory.BackColor = Color.WhiteSmoke;
             }
 
             switch (themeID)
@@ -382,7 +384,7 @@ namespace BeatSaberModManager
                 else
                 {
                     item.Text = release.title;
-                    item.BackColor = darkTheme ? Color.FromArgb(255, 35, 35, 35) : Color.White;
+                    item.BackColor = darkTheme ? Color.FromArgb(255, 40, 40, 40) : Color.White;
                 }
                 CheckDefaultMod(release, item);
             }
