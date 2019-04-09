@@ -42,6 +42,9 @@ namespace BeatSaberModManager
             skinManager.AddFormToManage(this);
             skinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             skinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+            
+            // Show tooltips
+            listViewMods.ShowItemToolTips = true;
         }
         #endregion
 
@@ -144,7 +147,7 @@ namespace BeatSaberModManager
         {
             //comboBox_gameVersions.Enabled = true;
             Dictionary<string, int> groups = new Dictionary<string, int>();
-
+            
             listViewMods.Groups.Clear();
             int other = listViewMods.Groups.Add(new ListViewGroup("Other", HorizontalAlignment.Left));
             groups.Add("Other", other);
@@ -156,6 +159,8 @@ namespace BeatSaberModManager
                     Text = release.title,
                     Tag = release
                 };
+
+                item.ToolTipText = release.description;
 
                 item.SubItems.Add(release.author);
                 item.SubItems.Add(release.version);
