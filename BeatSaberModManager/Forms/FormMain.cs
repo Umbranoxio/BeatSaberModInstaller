@@ -549,5 +549,25 @@ namespace BeatSaberModManager
                 Process.Start(release.downloadLink);
             }
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://www.patreon.com/AssistantMoe");
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void materialLabel3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://wiki.assistant.moe/about");
+        }
     }
 }

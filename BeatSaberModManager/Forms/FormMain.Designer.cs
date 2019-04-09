@@ -39,6 +39,7 @@
             this.viewInfoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.directDownloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPageCredits = new System.Windows.Forms.TabPage();
+            this.patreonBox = new System.Windows.Forms.PictureBox();
             this.creditMaterialSkin = new MaterialSkin.Controls.MaterialRaisedButton();
             this.creditContributors = new MaterialSkin.Controls.MaterialRaisedButton();
             this.creditUmbranox = new MaterialSkin.Controls.MaterialRaisedButton();
@@ -70,15 +71,20 @@
             this.buttonInstall = new MaterialSkin.Controls.MaterialFlatButton();
             this.buttonViewInfo = new MaterialSkin.Controls.MaterialFlatButton();
             this.labelStatus = new MaterialSkin.Controls.MaterialLabel();
+            this.pateronLabel = new MaterialSkin.Controls.MaterialLabel();
+            this.donateModdersLabel = new MaterialSkin.Controls.MaterialLabel();
+            this.donateModdersBox = new System.Windows.Forms.PictureBox();
             this.tabPageCore.SuspendLayout();
             this.contextMenu.SuspendLayout();
             this.tabPageCredits.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.patreonBox)).BeginInit();
             this.tabPageHelp.SuspendLayout();
             this.panelInfo.SuspendLayout();
             this.tableLayoutPanelInfo.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageOptions.SuspendLayout();
             this.themeGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.donateModdersBox)).BeginInit();
             this.SuspendLayout();
             // 
             // textBoxDirectory
@@ -152,25 +158,29 @@
             this.directDownloadToolStripMenuItem});
             this.contextMenu.MouseState = MaterialSkin.MouseState.HOVER;
             this.contextMenu.Name = "materialContextMenuStrip1";
-            this.contextMenu.Size = new System.Drawing.Size(181, 70);
+            this.contextMenu.Size = new System.Drawing.Size(163, 48);
             this.contextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenu_Opening);
             // 
             // viewInfoToolStripMenuItem1
             // 
             this.viewInfoToolStripMenuItem1.Name = "viewInfoToolStripMenuItem1";
-            this.viewInfoToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.viewInfoToolStripMenuItem1.Size = new System.Drawing.Size(162, 22);
             this.viewInfoToolStripMenuItem1.Text = "View Info";
             this.viewInfoToolStripMenuItem1.Click += new System.EventHandler(this.ViewInfoToolStripMenuItem1_Click);
             // 
             // directDownloadToolStripMenuItem
             // 
             this.directDownloadToolStripMenuItem.Name = "directDownloadToolStripMenuItem";
-            this.directDownloadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.directDownloadToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.directDownloadToolStripMenuItem.Text = "Direct Download";
             this.directDownloadToolStripMenuItem.Click += new System.EventHandler(this.directDownloadToolStripMenuItem_Click);
             // 
             // tabPageCredits
             // 
+            this.tabPageCredits.Controls.Add(this.donateModdersBox);
+            this.tabPageCredits.Controls.Add(this.donateModdersLabel);
+            this.tabPageCredits.Controls.Add(this.pateronLabel);
+            this.tabPageCredits.Controls.Add(this.patreonBox);
             this.tabPageCredits.Controls.Add(this.creditMaterialSkin);
             this.tabPageCredits.Controls.Add(this.creditContributors);
             this.tabPageCredits.Controls.Add(this.creditUmbranox);
@@ -183,6 +193,18 @@
             this.tabPageCredits.TabIndex = 1;
             this.tabPageCredits.Text = "Mod Manager Credits";
             this.tabPageCredits.UseVisualStyleBackColor = true;
+            // 
+            // patreonBox
+            // 
+            this.patreonBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.patreonBox.Image = ((System.Drawing.Image)(resources.GetObject("patreonBox.Image")));
+            this.patreonBox.Location = new System.Drawing.Point(69, 253);
+            this.patreonBox.Name = "patreonBox";
+            this.patreonBox.Size = new System.Drawing.Size(217, 51);
+            this.patreonBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.patreonBox.TabIndex = 14;
+            this.patreonBox.TabStop = false;
+            this.patreonBox.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // creditMaterialSkin
             // 
@@ -261,7 +283,7 @@
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(189, 148);
+            this.materialLabel1.Location = new System.Drawing.Point(202, 81);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(447, 57);
@@ -646,6 +668,45 @@
             this.labelStatus.Text = "Status: NULL";
             this.labelStatus.DoubleClick += new System.EventHandler(this.LabelStatus_DoubleClick);
             // 
+            // pateronLabel
+            // 
+            this.pateronLabel.AutoSize = true;
+            this.pateronLabel.Depth = 0;
+            this.pateronLabel.Font = new System.Drawing.Font("Roboto", 11F);
+            this.pateronLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.pateronLabel.Location = new System.Drawing.Point(43, 222);
+            this.pateronLabel.MouseState = MaterialSkin.MouseState.HOVER;
+            this.pateronLabel.Name = "pateronLabel";
+            this.pateronLabel.Size = new System.Drawing.Size(270, 19);
+            this.pateronLabel.TabIndex = 16;
+            this.pateronLabel.Text = "Help offset server costs for BeatMods!";
+            this.pateronLabel.Click += new System.EventHandler(this.materialLabel3_Click);
+            // 
+            // donateModdersLabel
+            // 
+            this.donateModdersLabel.AutoSize = true;
+            this.donateModdersLabel.Depth = 0;
+            this.donateModdersLabel.Font = new System.Drawing.Font("Roboto", 11F);
+            this.donateModdersLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.donateModdersLabel.Location = new System.Drawing.Point(528, 222);
+            this.donateModdersLabel.MouseState = MaterialSkin.MouseState.HOVER;
+            this.donateModdersLabel.Name = "donateModdersLabel";
+            this.donateModdersLabel.Size = new System.Drawing.Size(305, 19);
+            this.donateModdersLabel.TabIndex = 18;
+            this.donateModdersLabel.Text = "Donate to the modders that make the mods!";
+            // 
+            // donateModdersBox
+            // 
+            this.donateModdersBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.donateModdersBox.Image = ((System.Drawing.Image)(resources.GetObject("donateModdersBox.Image")));
+            this.donateModdersBox.Location = new System.Drawing.Point(572, 253);
+            this.donateModdersBox.Name = "donateModdersBox";
+            this.donateModdersBox.Size = new System.Drawing.Size(217, 51);
+            this.donateModdersBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.donateModdersBox.TabIndex = 19;
+            this.donateModdersBox.TabStop = false;
+            this.donateModdersBox.Click += new System.EventHandler(this.pictureBox2_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -667,6 +728,7 @@
             this.contextMenu.ResumeLayout(false);
             this.tabPageCredits.ResumeLayout(false);
             this.tabPageCredits.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.patreonBox)).EndInit();
             this.tabPageHelp.ResumeLayout(false);
             this.tabPageHelp.PerformLayout();
             this.panelInfo.ResumeLayout(false);
@@ -678,6 +740,7 @@
             this.tabPageOptions.PerformLayout();
             this.themeGroupBox.ResumeLayout(false);
             this.themeGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.donateModdersBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -726,6 +789,10 @@
         private MaterialSkin.Controls.MaterialRadioButton radioThemeBlueGrey;
         private MaterialSkin.Controls.MaterialRadioButton radioThemeRed;
         private System.Windows.Forms.ToolStripMenuItem directDownloadToolStripMenuItem;
+        private System.Windows.Forms.PictureBox patreonBox;
+        private MaterialSkin.Controls.MaterialLabel pateronLabel;
+        private MaterialSkin.Controls.MaterialLabel donateModdersLabel;
+        private System.Windows.Forms.PictureBox donateModdersBox;
     }
 }
 
