@@ -10,4 +10,4 @@ The program currently supports
 
 This uses BeatMods to get the latest approved and manually verified mods latest version automatically.
 
-![Preview](https://cdn.discordapp.com/attachments/456611538912935970/564110534929285122/beatmods-preview.PNG)
+![Preview](https://user-images.githubusercontent.com/27714637/55780977-02170700-5a5e-11e9-9622-9b1ccdd1b982.png)
