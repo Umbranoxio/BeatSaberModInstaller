@@ -66,5 +66,13 @@ namespace BeatSaberModManager
                 Process.Start(_release.downloadLink);
             }
         }
+
+        private void buttonExternalLink_Click(object sender, EventArgs e)
+        {
+            if (_release.infoLink.StartsWith("https://"))
+            {
+                Process.Start(_release.infoLink);
+            }
+        }
     }
 }
