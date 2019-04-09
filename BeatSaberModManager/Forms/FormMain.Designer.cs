@@ -256,7 +256,7 @@
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(452, 57);
             this.materialLabel1.TabIndex = 8;
-            this.materialLabel1.Text = "Mod Hosting Platform Provided by BeatMods created by vanZeben\r\nMod Installer crea" +
+            this.materialLabel1.Text = "Mod hosting platform provided by BeatMods created by vanZeben\r\nMod Installer crea" +
     "ted by Umbranox\r\nMaterialSkin created by IgnaceMaes";
             this.materialLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
