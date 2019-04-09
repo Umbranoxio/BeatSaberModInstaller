@@ -460,7 +460,8 @@ namespace BeatSaberModManager
         {
             if (listViewMods.SelectedItems.Count == 0) { MessageBox.Show("You have to select a mod first."); return; }
             this.Opacity = 0.8;
-            new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
+            //new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
+            Process.Start(((ReleaseInfo)listViewMods.SelectedItems[0].Tag).infoLink);
             this.Opacity = 1;
         }
 
@@ -498,7 +499,9 @@ namespace BeatSaberModManager
         {
             if (listViewMods.SelectedItems.Count >= 1)
             {
-                new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
+                // Instead of opening the form, simply open the link in browser window
+                //new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
+                Process.Start(((ReleaseInfo)listViewMods.SelectedItems[0].Tag).infoLink);
             }
         }
 
@@ -533,5 +536,18 @@ namespace BeatSaberModManager
         }
         #endregion
 
+        private void contextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
+        private void directDownloadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var release = (ReleaseInfo)listViewMods.SelectedItems[0].Tag;
+            if (release.downloadLink.StartsWith("https://"))
+            {
+                Process.Start(release.downloadLink);
+            }
+        }
     }
 }

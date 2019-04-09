@@ -37,6 +37,7 @@
             this.columnHeaderVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenu = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.viewInfoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.directDownloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPageCredits = new System.Windows.Forms.TabPage();
             this.creditMaterialSkin = new MaterialSkin.Controls.MaterialRaisedButton();
             this.creditContributors = new MaterialSkin.Controls.MaterialRaisedButton();
@@ -147,17 +148,26 @@
             this.contextMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.contextMenu.Depth = 0;
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewInfoToolStripMenuItem1});
+            this.viewInfoToolStripMenuItem1,
+            this.directDownloadToolStripMenuItem});
             this.contextMenu.MouseState = MaterialSkin.MouseState.HOVER;
             this.contextMenu.Name = "materialContextMenuStrip1";
-            this.contextMenu.Size = new System.Drawing.Size(124, 26);
+            this.contextMenu.Size = new System.Drawing.Size(181, 70);
+            this.contextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenu_Opening);
             // 
             // viewInfoToolStripMenuItem1
             // 
             this.viewInfoToolStripMenuItem1.Name = "viewInfoToolStripMenuItem1";
-            this.viewInfoToolStripMenuItem1.Size = new System.Drawing.Size(123, 22);
+            this.viewInfoToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.viewInfoToolStripMenuItem1.Text = "View Info";
             this.viewInfoToolStripMenuItem1.Click += new System.EventHandler(this.ViewInfoToolStripMenuItem1_Click);
+            // 
+            // directDownloadToolStripMenuItem
+            // 
+            this.directDownloadToolStripMenuItem.Name = "directDownloadToolStripMenuItem";
+            this.directDownloadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.directDownloadToolStripMenuItem.Text = "Direct Download";
+            this.directDownloadToolStripMenuItem.Click += new System.EventHandler(this.directDownloadToolStripMenuItem_Click);
             // 
             // tabPageCredits
             // 
@@ -254,7 +264,7 @@
             this.materialLabel1.Location = new System.Drawing.Point(189, 148);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(452, 57);
+            this.materialLabel1.Size = new System.Drawing.Size(447, 57);
             this.materialLabel1.TabIndex = 8;
             this.materialLabel1.Text = "Mod hosting platform provided by BeatMods created by vanZeben\r\nMod Installer crea" +
     "ted by Umbranox\r\nMaterialSkin created by IgnaceMaes";
@@ -715,6 +725,7 @@
         private MaterialSkin.Controls.MaterialRadioButton radioThemeGreen;
         private MaterialSkin.Controls.MaterialRadioButton radioThemeBlueGrey;
         private MaterialSkin.Controls.MaterialRadioButton radioThemeRed;
+        private System.Windows.Forms.ToolStripMenuItem directDownloadToolStripMenuItem;
     }
 }
 
