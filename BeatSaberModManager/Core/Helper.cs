@@ -26,8 +26,7 @@ namespace BeatSaberModManager.Core
                 }
             }
             catch (Exception ex) {
-                Console.WriteLine(ex.Message);
-                MessageBox.Show("Failed to get version info! Please check your internet connection!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error trying to access: {URL}\n\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(0);
                 return null;
             }
