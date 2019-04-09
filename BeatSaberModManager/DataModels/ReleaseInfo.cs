@@ -22,6 +22,8 @@ namespace BeatSaberModManager.DataModels
         public string gameVersion;
         public string downloadLink;
 
+        public string infoLink;
+
         public Platform platform;
 
         public bool install;
@@ -33,7 +35,7 @@ namespace BeatSaberModManager.DataModels
         public List<ModLink> conflictsWith;
 
         public ReleaseInfo(
-            string _name, string _title, string _version, string _author, string _description,
+            string _name, string _title, string _version, string _author, string _description, string _infoLink,
             int _weight, string _gameVersion, string _downloadLink, string _category,
             Platform _platform, List<ModLink> _dependsOn, List<ModLink> _conflictsWith
         )
@@ -43,6 +45,7 @@ namespace BeatSaberModManager.DataModels
             version = _version;
             author = _author;
             description = _description;
+            infoLink = _infoLink;
             weight = _weight;
             gameVersion = _gameVersion;
             downloadLink = _downloadLink;

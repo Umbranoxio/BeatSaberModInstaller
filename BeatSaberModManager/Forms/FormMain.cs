@@ -42,6 +42,9 @@ namespace BeatSaberModManager
             skinManager.AddFormToManage(this);
             skinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             skinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+            
+            // Show tooltips
+            listViewMods.ShowItemToolTips = true;
         }
         #endregion
 
@@ -144,7 +147,7 @@ namespace BeatSaberModManager
         {
             //comboBox_gameVersions.Enabled = true;
             Dictionary<string, int> groups = new Dictionary<string, int>();
-
+            
             listViewMods.Groups.Clear();
             int other = listViewMods.Groups.Add(new ListViewGroup("Other", HorizontalAlignment.Left));
             groups.Add("Other", other);
@@ -156,6 +159,8 @@ namespace BeatSaberModManager
                     Text = release.title,
                     Tag = release
                 };
+
+                item.ToolTipText = release.description;
 
                 item.SubItems.Add(release.author);
                 item.SubItems.Add(release.version);
@@ -455,7 +460,8 @@ namespace BeatSaberModManager
         {
             if (listViewMods.SelectedItems.Count == 0) { MessageBox.Show("You have to select a mod first."); return; }
             this.Opacity = 0.8;
-            new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
+            //new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
+            Process.Start(((ReleaseInfo)listViewMods.SelectedItems[0].Tag).infoLink);
             this.Opacity = 1;
         }
 
@@ -493,7 +499,9 @@ namespace BeatSaberModManager
         {
             if (listViewMods.SelectedItems.Count >= 1)
             {
-                new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
+                // Instead of opening the form, simply open the link in browser window
+                //new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
+                Process.Start(((ReleaseInfo)listViewMods.SelectedItems[0].Tag).infoLink);
             }
         }
 
@@ -528,5 +536,38 @@ namespace BeatSaberModManager
         }
         #endregion
 
+        private void contextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
+        private void directDownloadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var release = (ReleaseInfo)listViewMods.SelectedItems[0].Tag;
+            if (release.downloadLink.StartsWith("https://"))
+            {
+                Process.Start(release.downloadLink);
+            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://www.patreon.com/AssistantMoe");
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void materialLabel3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://wiki.assistant.moe/about");
+        }
     }
 }

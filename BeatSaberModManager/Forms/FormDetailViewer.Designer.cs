@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            MaterialSkin.Controls.MaterialRaisedButton buttonExternalLink;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDetailViewer));
             this.webBrowserDescription = new System.Windows.Forms.WebBrowser();
             this.labelDescription = new MaterialSkin.Controls.MaterialLabel();
             this.buttonClose = new MaterialSkin.Controls.MaterialRaisedButton();
             this.materialRaisedButton1 = new MaterialSkin.Controls.MaterialRaisedButton();
+            buttonExternalLink = new MaterialSkin.Controls.MaterialRaisedButton();
             this.SuspendLayout();
             // 
             // webBrowserDescription
@@ -92,11 +94,27 @@
             this.materialRaisedButton1.UseVisualStyleBackColor = true;
             this.materialRaisedButton1.Click += new System.EventHandler(this.MaterialRaisedButton1_Click_1);
             // 
+            // buttonExternalLink
+            // 
+            buttonExternalLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            buttonExternalLink.Depth = 0;
+            buttonExternalLink.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            buttonExternalLink.Location = new System.Drawing.Point(174, 501);
+            buttonExternalLink.MouseState = MaterialSkin.MouseState.HOVER;
+            buttonExternalLink.Name = "buttonExternalLink";
+            buttonExternalLink.Primary = true;
+            buttonExternalLink.Size = new System.Drawing.Size(118, 35);
+            buttonExternalLink.TabIndex = 10;
+            buttonExternalLink.Text = "More Info";
+            buttonExternalLink.UseVisualStyleBackColor = true;
+            buttonExternalLink.Click += new System.EventHandler(this.buttonExternalLink_Click);
+            // 
             // FormDetailViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(776, 548);
+            this.Controls.Add(buttonExternalLink);
             this.Controls.Add(this.materialRaisedButton1);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.webBrowserDescription);
