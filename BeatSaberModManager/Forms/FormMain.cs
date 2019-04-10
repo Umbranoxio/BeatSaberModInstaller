@@ -561,15 +561,15 @@ namespace BeatSaberModManager
         {
             if (m.Msg == OneClickInstaller.WM_DL_START)
             {
-                UpdateStatus("Song download started");
+                UpdateStatus("Download started");
             }
             else if (m.Msg == OneClickInstaller.WM_DL_SUCCESS)
             {
-                UpdateStatus("Song downloaded successfully");
+                UpdateStatus("Downloaded successfully");
             }
             else if (m.Msg == OneClickInstaller.WM_DL_FAIL)
             {
-                UpdateStatus("Song download failed");
+                UpdateStatus("Download failed");
             }
             base.WndProc(ref m);
         }

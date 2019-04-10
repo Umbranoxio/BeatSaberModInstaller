@@ -1,9 +1,9 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 
 namespace BeatSaberModManager.Core
 {
@@ -14,8 +14,14 @@ namespace BeatSaberModManager.Core
     {
         private const string OneClickProviderKey = "OneClick-Provider";
         private const string OneClickInstallerName = "BSMG-BeatSaberModInstaller";
-        private static readonly Regex BeatSaverId = new Regex(@"(modsaber://song/)?(\d+-\d+)",
-            RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.ECMAScript);
+
+        private const string CustomSongsFolder = "CustomSongs";
+        private const string CustomSabersFolder = "CustomSabers";
+        private const string CustomPlatformsFolder = "CustomPlatforms";
+        private const string CustomAvatarsFolder = "CustomAvatars";
+
+        private static readonly string[] SupportedProtocols = new[] { "modsaber", "beatdrop" };
+
         private static PathLogic _pathLogic;
         private static PathLogic PathLogic => _pathLogic = _pathLogic ?? new PathLogic();
 
@@ -34,7 +40,7 @@ namespace BeatSaberModManager.Core
         /// <returns>True when registered, false otherwise.</returns>
         public static bool CheckRegistered()
         {
-            using (var modsaberKey = Registry.ClassesRoot.OpenSubKey("modsaber"))
+            using (var modsaberKey = Registry.ClassesRoot.OpenSubKey(SupportedProtocols.First()))
             {
                 if (modsaberKey == null)
                     return false;
@@ -45,46 +51,93 @@ namespace BeatSaberModManager.Core
 
         public static void Register()
         {
-            using (var modsaberKey = Registry.ClassesRoot.CreateSubKey("modsaber"))
+            foreach (var protocol in SupportedProtocols)
+                RegisterProtocol(protocol);
+        }
+
+        private static void RegisterProtocol(string protocol)
+        {
+            using (var modsaberKey = Registry.ClassesRoot.CreateSubKey(protocol))
             using (var commandKey = modsaberKey.CreateSubKey(@"shell\open\command"))
             {
                 modsaberKey.SetValue("URL Protocol", "", RegistryValueKind.String);
                 modsaberKey.SetValue(OneClickProviderKey, OneClickInstallerName, RegistryValueKind.String);
                 var exeLocation = Assembly.GetEntryAssembly().Location;
-                commandKey.SetValue("", $"\"{exeLocation}\" \"--install-song\" \"%1\"");
+                commandKey.SetValue("", $"\"{exeLocation}\" \"--install\" \"%1\"");
             }
         }
 
         public static void Unregister()
         {
-            Registry.ClassesRoot.DeleteSubKeyTree("modsaber");
+            foreach (var protocol in SupportedProtocols)
+            {
+                using (var modsaberKey = Registry.ClassesRoot.OpenSubKey(protocol))
+                {
+                    // Only remove providers which we also registered
+                    if (modsaberKey != null
+                        && modsaberKey.GetValue(OneClickProviderKey) is string provider
+                        && provider == OneClickInstallerName)
+                    {
+                        Registry.ClassesRoot.DeleteSubKeyTree(protocol);
+                    }
+                }
+            }
         }
 
-        public static void InstallSong(string idString)
+        public static void InstallFile(string link)
         {
+            var uri = new Uri(link);
+            if (!SupportedProtocols.Contains(uri.Scheme))
+                return;
+
             BroadcastDownloadStatus(DownloadStatus.Started);
 
-            // Check if we got a valid beatsaver id and extract it
-            var match = BeatSaverId.Match(idString);
-            if (!match.Success)
+            bool downloadOk = false;
+            if (uri.Scheme == "modsaber")
             {
-                BroadcastDownloadStatus(DownloadStatus.Failed);
-                return;
+                switch (uri.Host)
+                {
+                    case "song":
+                        downloadOk = InstallSong(uri.AbsolutePath.Substring(1));
+                        break;
+                    case "avatar":
+                        downloadOk = InstallFile(uri.AbsolutePath.Substring(1), CustomAvatarsFolder);
+                        break;
+                    case "saber":
+                        downloadOk = InstallFile(uri.AbsolutePath.Substring(1), CustomSabersFolder);
+                        break;
+                    case "platform":
+                        downloadOk = InstallFile(uri.AbsolutePath.Substring(1), CustomPlatformsFolder);
+                        break;
+                }
             }
-            var id = match.Groups[2].Value;
+            else if (uri.Scheme == "beatdrop")
+            {
+                switch (uri.Host)
+                {
+                    case "download":
+                        downloadOk = InstallSong(uri.AbsolutePath);
+                        break;
+                }
+            }
 
-            // Get the custom songs folder
+            if (downloadOk)
+                BroadcastDownloadStatus(DownloadStatus.Succeeded);
+            else
+                BroadcastDownloadStatus(DownloadStatus.Failed);
+        }
+
+        private static bool InstallSong(string id)
+        {
+            // Get the base folder for all custom stuff
             var bsPath = PathLogic.GetInstallationPath();
             if (string.IsNullOrEmpty(bsPath))
-            {
-                BroadcastDownloadStatus(DownloadStatus.Failed);
-                return;
-            }
+                return false;
 
             try
             {
                 // Create an id folder for the song
-                var songPath = Path.Combine(bsPath, "CustomSongs", id);
+                var songPath = Path.Combine(bsPath, CustomSongsFolder, id);
                 Directory.CreateDirectory(songPath);
 
                 // Donwload and extract
@@ -93,11 +146,37 @@ namespace BeatSaberModManager.Core
             }
             catch
             {
-                BroadcastDownloadStatus(DownloadStatus.Failed);
-                return;
+                return false;
             }
 
-            BroadcastDownloadStatus(DownloadStatus.Succeeded);
+            return true;
+        }
+
+        private static bool InstallFile(string link, string folder)
+        {
+            // Get the base folder for all custom stuff
+            var bsPath = PathLogic.GetInstallationPath();
+            if (string.IsNullOrEmpty(bsPath))
+                return false;
+
+            try
+            {
+                // Create the folder and get the file name
+                var filePath = Path.Combine(bsPath, folder);
+                Directory.CreateDirectory(filePath);
+                var uri = new Uri(link);
+                var fileName = Path.Combine(filePath, uri.Segments.Last());
+
+                // Donwload and extract
+                var data = Helper.GetFile(link);
+                File.WriteAllBytes(fileName, data);
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
 
         private static void BroadcastDownloadStatus(DownloadStatus status)
@@ -105,10 +184,10 @@ namespace BeatSaberModManager.Core
             int message;
             switch (status)
             {
-            case DownloadStatus.Started: message = WM_DL_START; break;
-            case DownloadStatus.Succeeded: message = WM_DL_SUCCESS; break;
-            case DownloadStatus.Failed: message = WM_DL_FAIL; break;
-            default: return;
+                case DownloadStatus.Started: message = WM_DL_START; break;
+                case DownloadStatus.Succeeded: message = WM_DL_SUCCESS; break;
+                case DownloadStatus.Failed: message = WM_DL_FAIL; break;
+                default: return;
             }
             PostMessage((IntPtr)HWND_BROADCAST, message, IntPtr.Zero, IntPtr.Zero);
         }
