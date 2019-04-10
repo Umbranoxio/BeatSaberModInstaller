@@ -47,6 +47,14 @@ namespace BeatSaberModManager
             // Show tooltips
             listViewMods.ShowItemToolTips = true;
             
+            // Upgrade settings from previous version
+            if (Properties.Settings.Default.UpgradeRequired)
+            {
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.UpgradeRequired = false;
+                Properties.Settings.Default.Save();
+            }
+
             var modList = Properties.Settings.Default.ModsList.Split(',');
             foreach (var mod in modList)
             {
