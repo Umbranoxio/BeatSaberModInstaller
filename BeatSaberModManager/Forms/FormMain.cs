@@ -46,11 +46,10 @@ namespace BeatSaberModManager
             
             // Show tooltips
             listViewMods.ShowItemToolTips = true;
-            var modsListFilePath = System.IO.Path.Combine(Environment.CurrentDirectory, "mods.txt");
 
-            if (File.Exists(modsListFilePath))
+            if (File.Exists(path.modsListPath))
             {
-                var modList = System.IO.File.ReadAllText(modsListFilePath).Split(',');
+                var modList = System.IO.File.ReadAllText(path.modsListPath).Split(',');
                 foreach (var mod in modList)
                 {
                     if (!defaultMods.Contains(mod))
@@ -478,7 +477,7 @@ namespace BeatSaberModManager
                         modList.Add(releaseInfo.name);
                     }
                 }
-                System.IO.File.WriteAllText(System.IO.Path.Combine(Environment.CurrentDirectory, "mods.txt"), string.Join(",", modList));
+                System.IO.File.WriteAllText(System.IO.Path.Combine(Environment.CurrentDirectory, path.modsListPath), string.Join(",", modList));
             }
             catch (Exception ex)
             {
