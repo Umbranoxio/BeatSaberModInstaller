@@ -16,8 +16,7 @@ namespace BeatSaberModManager.Core
 
         private const int SteamAppId = 620980;
         private const string AppFileName = "Beat Saber.exe";
-
-
+        
         public string GetInstallationPath()
         {
             string steam = GetSteamLocation();
