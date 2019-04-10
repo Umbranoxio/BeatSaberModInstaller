@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Windows.Forms;
 using BeatSaberModManager.Core;
@@ -45,6 +45,14 @@ namespace BeatSaberModManager
             
             // Show tooltips
             listViewMods.ShowItemToolTips = true;
+            var modList = System.IO.File.ReadAllText(System.IO.Path.Combine(Environment.CurrentDirectory, "mods.txt")).Split(',');
+            foreach ( var mod in modList)
+            {
+                if (!defaultMods.Contains(mod))
+                {
+                    defaultMods.Add(mod.ToLower());
+                }
+            }
         }
         #endregion
 
@@ -453,6 +461,22 @@ namespace BeatSaberModManager
                 return;
             }
             buttonInstall.Enabled = false;
+            try
+            {
+                var modList = new List<string>();
+                foreach (ListViewItem item in listViewMods.Items)
+                {
+                    if (item.Checked)
+                    {
+                        modList.Add(item.Text);
+                    }
+                }
+                System.IO.File.WriteAllText(System.IO.Path.Combine(Environment.CurrentDirectory, "mods.txt"), string.Join(",", modList));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Unable to save modlist backup, Will not load mods on next startup{Environment.NewLine}{ex}");
+            }
             new Thread(() => { installer.Run(); }).Start();
         }
 
