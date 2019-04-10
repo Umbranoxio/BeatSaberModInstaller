@@ -51,6 +51,9 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialSkin.0.2.1\lib\MaterialSkin.dll</HintPath>
@@ -73,6 +76,7 @@
     <Compile Include="Core\GroupSorter.cs" />
     <Compile Include="Core\Helper.cs" />
     <Compile Include="Core\InstallerLogic.cs" />
+    <Compile Include="Core\OneClickInstaller.cs" />
     <Compile Include="Core\PathLogic.cs" />
     <Compile Include="Core\RemoteLogic.cs" />
     <Compile Include="Core\UpdateLogic.cs" />
@@ -227,6 +231,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormPlatformSelect.resx">
       <DependentUpon>FormPlatformSelect.cs</DependentUpon>

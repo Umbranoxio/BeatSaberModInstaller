@@ -42,7 +42,7 @@ namespace BeatSaberModManager
             skinManager.AddFormToManage(this);
             skinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             skinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
-            
+
             // Show tooltips
             listViewMods.ShowItemToolTips = true;
         }
@@ -81,11 +81,17 @@ namespace BeatSaberModManager
                     break;
             }
 
+            bool oneClickInstallerRegistered = OneClickInstaller.CheckRegistered();
+            toggleRegisterOneClick.Checked = oneClickInstallerRegistered;
+            if (oneClickInstallerRegistered)
+                // Update registry in case exe has moved
+                OneClickInstaller.Register();
+
             try
             {
                 new Thread(() => { updater.CheckForUpdates(); }).Start();
                 textBoxDirectory.Text = path.GetInstallationPath();
-             
+
                 new Thread(() => { RemoteLoad(); }).Start();
             }
             catch (Exception ex)
@@ -131,12 +137,13 @@ namespace BeatSaberModManager
 
                 remote.selectedGameVersion = gameVersion;
                 new Thread(() => { LoadFromComboBox(); }).Start();
-            } else
+            }
+            else
             {
                 first = false;
             }
         }
-               
+
         private void LoadFromComboBox()
         {
             remote.PopulateReleases();
@@ -147,7 +154,7 @@ namespace BeatSaberModManager
         {
             //comboBox_gameVersions.Enabled = true;
             Dictionary<string, int> groups = new Dictionary<string, int>();
-            
+
             listViewMods.Groups.Clear();
             int other = listViewMods.Groups.Add(new ListViewGroup("Other", HorizontalAlignment.Left));
             groups.Add("Other", other);
@@ -185,10 +192,10 @@ namespace BeatSaberModManager
 
                     listViewMods.Items.Add(item);
                     release.itemHandle = item;
-                   
+
                 }
             }
-            
+
             ListViewGroup[] sortedGroups = new ListViewGroup[this.listViewMods.Groups.Count];
 
             listViewMods.Groups.CopyTo(sortedGroups, 0);
@@ -370,12 +377,13 @@ namespace BeatSaberModManager
                     }
                 }
             }
-            if (finishedLoading ){
+            if (finishedLoading)
+            {
                 ReRenderListView();
             }
         }
 
-        private void ReRenderListView ()
+        private void ReRenderListView()
         {
             foreach (ListViewItem item in listViewMods.Items)
             {
@@ -533,6 +541,37 @@ namespace BeatSaberModManager
         private void RadioThemeBlueGrey_CheckedChanged(object sender, EventArgs e)
         {
             SetUITheme(0, darkTheme);
+        }
+
+        private void ToggleRegisterOneClick_CheckedChanged(object sender, EventArgs e)
+        {
+            if (toggleRegisterOneClick.Checked)
+            {
+                OneClickInstaller.Register();
+                UpdateStatus("Registered as OneClick installer");
+            }
+            else
+            {
+                OneClickInstaller.Unregister();
+                UpdateStatus("Unregistered OneClick installer");
+            }
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == OneClickInstaller.WM_DL_START)
+            {
+                UpdateStatus("Song download started");
+            }
+            else if (m.Msg == OneClickInstaller.WM_DL_SUCCESS)
+            {
+                UpdateStatus("Song downloaded successfully");
+            }
+            else if (m.Msg == OneClickInstaller.WM_DL_FAIL)
+            {
+                UpdateStatus("Song download failed");
+            }
+            base.WndProc(ref m);
         }
         #endregion
 
