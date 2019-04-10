@@ -12,17 +12,10 @@ namespace BeatSaberModManager.Core
     public class PathLogic
     {
         public string installPath;
-        public string modsListPath;
         public Platform platform;
 
         private const int SteamAppId = 620980;
         private const string AppFileName = "Beat Saber.exe";
-        private const string ModsListFileName = "mods.txt";
-        
-        public PathLogic()
-        {
-            modsListPath = System.IO.Path.Combine(Environment.CurrentDirectory, ModsListFileName);
-        }
         
         public string GetInstallationPath()
         {
