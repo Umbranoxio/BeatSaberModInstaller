@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows.Forms;
 using BeatSaberModManager.Core;
 using System.Threading;
+using System.IO;
 using System.Collections.Generic;
 using BeatSaberModManager.DataModels;
 using System.Diagnostics;
@@ -45,12 +46,17 @@ namespace BeatSaberModManager
             
             // Show tooltips
             listViewMods.ShowItemToolTips = true;
-            var modList = System.IO.File.ReadAllText(System.IO.Path.Combine(Environment.CurrentDirectory, "mods.txt")).Split(',');
-            foreach ( var mod in modList)
+            var modsListFilePath = System.IO.Path.Combine(Environment.CurrentDirectory, "mods.txt");
+
+            if (File.Exists(modsListFilePath))
             {
-                if (!defaultMods.Contains(mod))
+                var modList = System.IO.File.ReadAllText(modsListFilePath).Split(',');
+                foreach (var mod in modList)
                 {
-                    defaultMods.Add(mod.ToLower());
+                    if (!defaultMods.Contains(mod))
+                    {
+                        defaultMods.Add(mod.ToLower());
+                    }
                 }
             }
         }
