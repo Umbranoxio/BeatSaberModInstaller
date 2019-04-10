@@ -17,14 +17,13 @@ namespace BeatSaberModManager
             {
                 switch (args[i])
                 {
-                case "--install-song":
-                    Console.WriteLine("Installing: {0}", args[i + 1]);
-                    Core.OneClickInstaller.InstallSong(args[i + 1]);
-                    close = true;
-                    break;
+                    case "--install":
+                        Core.OneClickInstaller.InstallFile(args[i + 1]);
+                        close = true;
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
                 }
             }
 
@@ -35,6 +34,5 @@ namespace BeatSaberModManager
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormMain());
         }
-
     }
 }
