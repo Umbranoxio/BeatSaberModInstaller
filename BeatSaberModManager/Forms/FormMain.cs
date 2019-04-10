@@ -474,7 +474,8 @@ namespace BeatSaberModManager
                 {
                     if (item.Checked)
                     {
-                        modList.Add(item.Text);
+                        var releaseInfo = (ReleaseInfo)item.Tag;
+                        modList.Add(releaseInfo.name);
                     }
                 }
                 System.IO.File.WriteAllText(System.IO.Path.Combine(Environment.CurrentDirectory, "mods.txt"), string.Join(",", modList));
