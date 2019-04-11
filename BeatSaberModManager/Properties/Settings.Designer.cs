@@ -70,5 +70,17 @@ namespace BeatSaberModManager.Properties {
                 this["UpgradeRequired"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string InstallPath {
+            get {
+                return ((string)(this["InstallPath"]));
+            }
+            set {
+                this["InstallPath"] = value;
+            }
+        }
     }
 }
