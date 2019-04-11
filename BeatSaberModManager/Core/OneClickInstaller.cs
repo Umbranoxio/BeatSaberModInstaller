@@ -12,6 +12,8 @@ namespace BeatSaberModManager.Core
     /// </summary>
     static class OneClickInstaller
     {
+        private const string modelSaberUrlPrefix = "https://modelsaber.com/files";
+
         private const string OneClickProviderKey = "OneClick-Provider";
         private const string OneClickInstallerName = "BSMG-BeatSaberModInstaller";
 
@@ -20,7 +22,7 @@ namespace BeatSaberModManager.Core
         private const string CustomPlatformsFolder = "CustomPlatforms";
         private const string CustomAvatarsFolder = "CustomAvatars";
 
-        private static readonly string[] SupportedProtocols = new[] { "modsaber", "beatdrop" };
+        private static readonly string[] SupportedProtocols = new[] { "modsaber", "beatdrop", "modelsaber" };
 
         private static PathLogic _pathLogic;
         private static PathLogic PathLogic => _pathLogic = _pathLogic ?? new PathLogic();
@@ -93,7 +95,7 @@ namespace BeatSaberModManager.Core
             BroadcastDownloadStatus(DownloadStatus.Started);
 
             bool downloadOk = false;
-            if (uri.Scheme == "modsaber")
+            if (uri.Scheme == "modsaber") // preliminary, should be removed once 'modsaber' is deprecated and 'beatdrop' is established
             {
                 switch (uri.Host)
                 {
@@ -118,13 +120,42 @@ namespace BeatSaberModManager.Core
                     case "download":
                         downloadOk = InstallSong(uri.AbsolutePath);
                         break;
+                    case "avatar": // preliminary, should be removed once 'modelsaber' is established
+                        downloadOk = InstallFile(modelSaberUrlPrefix + "/avatar" + uri.AbsolutePath, CustomAvatarsFolder);
+                        break;
+                    case "saber": // preliminary, should be removed once 'modelsaber' is established
+                        downloadOk = InstallFile(modelSaberUrlPrefix + "/saber" + uri.AbsolutePath, CustomSabersFolder);
+                        break;
+                    case "platform": // preliminary, should be removed once 'modelsaber' is established
+                        downloadOk = InstallFile(modelSaberUrlPrefix + "/platform" + uri.AbsolutePath, CustomPlatformsFolder);
+                        break;
+                }
+            }
+            else if (uri.Scheme == "modelsaber")
+            {
+                switch (uri.Host)
+                {
+                    case "avatar":
+                        downloadOk = InstallFile(modelSaberUrlPrefix + "/avatar" + uri.AbsolutePath, CustomAvatarsFolder);
+                        break;
+                    case "saber":
+                        downloadOk = InstallFile(modelSaberUrlPrefix + "/saber" + uri.AbsolutePath, CustomSabersFolder);
+                        break;
+                    case "platform":
+                        downloadOk = InstallFile(modelSaberUrlPrefix + "/platform" + uri.AbsolutePath, CustomPlatformsFolder);
+                        break;
                 }
             }
 
             if (downloadOk)
+            {
                 BroadcastDownloadStatus(DownloadStatus.Succeeded);
+            }
             else
+            {
                 BroadcastDownloadStatus(DownloadStatus.Failed);
+                PushWindowsNotification("Donwload failed");
+            }
         }
 
         private static bool InstallSong(string id)
@@ -143,6 +174,12 @@ namespace BeatSaberModManager.Core
                 // Donwload and extract
                 var data = Helper.GetFile($"https://beatsaver.com/download/{id}");
                 Helper.UnzipFile(data, songPath);
+
+                var childFolder = Directory.GetDirectories(songPath);
+                var songName = childFolder.Length > 0
+                    ? new DirectoryInfo(childFolder[0]).Name
+                    : "Song";
+                PushWindowsNotification("Installed: " + songName);
             }
             catch
             {
@@ -170,6 +207,8 @@ namespace BeatSaberModManager.Core
                 // Donwload and extract
                 var data = Helper.GetFile(link);
                 File.WriteAllBytes(fileName, data);
+
+                PushWindowsNotification("Installed: " + Path.GetFileNameWithoutExtension(fileName));
             }
             catch
             {
@@ -190,6 +229,20 @@ namespace BeatSaberModManager.Core
                 default: return;
             }
             PostMessage((IntPtr)HWND_BROADCAST, message, IntPtr.Zero, IntPtr.Zero);
+        }
+
+        public static void PushWindowsNotification(string text)
+        {
+            var notification = new System.Windows.Forms.NotifyIcon()
+            {
+                Visible = true,
+                Icon = System.Drawing.SystemIcons.Information,
+                BalloonTipText = text,
+            };
+
+            notification.ShowBalloonTip(2000);
+
+            notification.Dispose();
         }
 
         private enum DownloadStatus
