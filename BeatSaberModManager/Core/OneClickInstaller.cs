@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Net;
 
 namespace BeatSaberModManager.Core
 {
@@ -202,7 +203,7 @@ namespace BeatSaberModManager.Core
                 var filePath = Path.Combine(bsPath, folder);
                 Directory.CreateDirectory(filePath);
                 var uri = new Uri(link);
-                var fileName = Path.Combine(filePath, uri.Segments.Last());
+                var fileName = Path.Combine(filePath, WebUtility.UrlDecode(uri.Segments.Last()));
 
                 // Donwload and extract
                 var data = Helper.GetFile(link);
