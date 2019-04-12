@@ -20,6 +20,16 @@ namespace BeatSaberModManager.Core
 
         public string GetInstallationPath()
         {
+            // Check if install path is already saved
+            if (Properties.Settings.Default.InstallPath != null)
+            {
+                if (File.Exists(Path.Combine(Properties.Settings.Default.InstallPath, AppFileName)))
+                {
+                    installPath = Properties.Settings.Default.InstallPath;
+                    return installPath;
+                }
+            }
+
             string steam = GetSteamLocation();
             if (steam != null)
             {
