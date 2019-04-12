@@ -464,6 +464,8 @@ namespace BeatSaberModManager
         {
             textBoxDirectory.Text = path.ManualFind();
             installer.installDirectory = textBoxDirectory.Text;
+            Properties.Settings.Default.InstallPath = textBoxDirectory.Text;
+            Properties.Settings.Default.Save();
         }
 
         private void ToggleTheme_CheckedChanged(object sender, EventArgs e)
