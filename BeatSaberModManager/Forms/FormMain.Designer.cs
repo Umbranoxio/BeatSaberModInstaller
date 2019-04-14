@@ -43,6 +43,7 @@
             this.columnHeaderVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStripMain = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.directDownloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPageCredits = new System.Windows.Forms.TabPage();
             this.linkLabelContributors = new System.Windows.Forms.LinkLabel();
             this.linkLabellolPants = new System.Windows.Forms.LinkLabel();
@@ -199,6 +200,13 @@
             this.viewInfoToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.viewInfoToolStripMenuItem.Text = "View Info";
             this.viewInfoToolStripMenuItem.Click += new System.EventHandler(this.viewInfoToolStripMenuItem_Click);
+            // 
+            // directDownloadToolStripMenuItem
+            // 
+            this.directDownloadToolStripMenuItem.Name = "directDownloadToolStripMenuItem";
+            this.directDownloadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.directDownloadToolStripMenuItem.Text = "Direct Download";
+            this.directDownloadToolStripMenuItem.Click += new System.EventHandler(this.directDownloadToolStripMenuItem_Click);
             // 
             // tabPageCredits
             // 
