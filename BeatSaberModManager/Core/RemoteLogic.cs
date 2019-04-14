@@ -85,19 +85,19 @@ namespace BeatSaberModManager.Core
 
                         CreateRelease(
                             new ReleaseInfo(current["name"], current["name"], current["version"], current["author"]["username"],
-                            current["description"], 0, "0.13.2", steam["url"],
-                            current["category"], Platform.Default, dependsOn, conflictsWith));
+                            current["description"], current["link"], 0, "0.13.2", steam["url"],
+                            current["category"], Platform.Steam, dependsOn, conflictsWith));
 
                         CreateRelease(
                             new ReleaseInfo(current["name"], current["name"], current["version"], current["author"]["username"],
-                            current["description"], 0, "0.13.2", oculus["url"],
-                            current["category"], Platform.Default, dependsOn, conflictsWith));
+                            current["description"], current["link"], 0, "0.13.2", oculus["url"],
+                            current["category"], Platform.Oculus, dependsOn, conflictsWith));
                     }
                     else
                     {
                         CreateRelease(
                             new ReleaseInfo(current["name"], current["name"], current["version"], current["author"]["username"],
-                            current["description"], 0, "0.13.2", files[0]["url"],
+                            current["description"], current["link"], 0, "0.13.2", files[0]["url"],
                             current["category"], Platform.Default, dependsOn, conflictsWith));
                     }
                 }

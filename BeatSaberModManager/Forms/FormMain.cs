@@ -325,14 +325,20 @@ namespace BeatSaberModManager
 
         private void buttonViewInfo_Click(object sender, EventArgs e)
         {
-            new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
+            openInfoLink();
         }
 
         private void viewInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (listViewMods.SelectedItems.Count >= 1)
+            openInfoLink();
+        }
+
+        private void openInfoLink()
+        {
+            var release = (ReleaseInfo)listViewMods.SelectedItems[0].Tag;
+            if (release.infoLink.StartsWith("https://"))
             {
-                new FormDetailViewer((ReleaseInfo)listViewMods.SelectedItems[0].Tag).ShowDialog();
+                Process.Start(release.infoLink);
             }
         }
 

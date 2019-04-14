@@ -43,6 +43,7 @@
             this.columnHeaderVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStripMain = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.directDownloadToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPageCredits = new System.Windows.Forms.TabPage();
             this.linkLabelContributors = new System.Windows.Forms.LinkLabel();
             this.linkLabellolPants = new System.Windows.Forms.LinkLabel();
@@ -63,7 +64,6 @@
             this.textBoxPluginsPath = new System.Windows.Forms.TextBox();
             this.helpInfoLabel3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.directDownloadToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlMain.SuspendLayout();
             this.tabPageCore.SuspendLayout();
             this.contextMenuStripMain.SuspendLayout();
@@ -193,15 +193,22 @@
             this.viewInfoToolStripMenuItem,
             this.directDownloadToolStripMenuItem1});
             this.contextMenuStripMain.Name = "contextMenuStripMain";
-            this.contextMenuStripMain.Size = new System.Drawing.Size(181, 70);
+            this.contextMenuStripMain.Size = new System.Drawing.Size(163, 48);
             this.contextMenuStripMain.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripMain_Opening);
             // 
             // viewInfoToolStripMenuItem
             // 
             this.viewInfoToolStripMenuItem.Name = "viewInfoToolStripMenuItem";
-            this.viewInfoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viewInfoToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.viewInfoToolStripMenuItem.Text = "View Info";
             this.viewInfoToolStripMenuItem.Click += new System.EventHandler(this.viewInfoToolStripMenuItem_Click);
+            // 
+            // directDownloadToolStripMenuItem1
+            // 
+            this.directDownloadToolStripMenuItem1.Name = "directDownloadToolStripMenuItem1";
+            this.directDownloadToolStripMenuItem1.Size = new System.Drawing.Size(162, 22);
+            this.directDownloadToolStripMenuItem1.Text = "Direct Download";
+            this.directDownloadToolStripMenuItem1.Click += new System.EventHandler(this.directDownloadToolStripMenuItem1_Click);
             // 
             // tabPageCredits
             // 
@@ -445,13 +452,6 @@
             this.label5.TabIndex = 11;
             this.label5.Text = "v0.13.2 only";
             this.label5.Click += new System.EventHandler(this.label5_Click);
-            // 
-            // directDownloadToolStripMenuItem1
-            // 
-            this.directDownloadToolStripMenuItem1.Name = "directDownloadToolStripMenuItem1";
-            this.directDownloadToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.directDownloadToolStripMenuItem1.Text = "Direct Download";
-            this.directDownloadToolStripMenuItem1.Click += new System.EventHandler(this.directDownloadToolStripMenuItem1_Click);
             // 
             // FormMain
             // 
