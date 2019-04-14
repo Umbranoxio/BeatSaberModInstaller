@@ -34,6 +34,15 @@ namespace BeatSaberModManager
             remote = new RemoteLogic();
             listViewMods.ShowItemToolTips = true;
             // Show tooltips
+
+            var modList = Properties.Settings.Default.ModsList.Split(',');
+            foreach (var mod in modList)
+            {
+                if (!defaultMods.Contains(mod))
+                {
+                    defaultMods.Add(mod.ToLower());
+                }
+            }
         }
         #endregion
 
@@ -211,6 +220,21 @@ namespace BeatSaberModManager
                 return;
             }
             buttonInstall.Enabled = false;
+
+
+            var modList = new List<string>();
+            foreach (ListViewItem item in listViewMods.Items)
+            {
+                if (item.Checked)
+                {
+                    var releaseInfo = (ReleaseInfo)item.Tag;
+                    modList.Add(releaseInfo.name);
+                }
+            }
+
+            Properties.Settings.Default.ModsList = string.Join(",", modList);
+            Properties.Settings.Default.Save();
+
             new Thread(() => { installer.Run(); }).Start();
         }
 
