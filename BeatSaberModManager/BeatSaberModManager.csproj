@@ -42,6 +42,9 @@
   <PropertyGroup>
     <ApplicationIcon>saber.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -61,6 +64,7 @@
     <Compile Include="Core\GroupSorter.cs" />
     <Compile Include="Core\Helper.cs" />
     <Compile Include="Core\InstallerLogic.cs" />
+    <Compile Include="Core\OneClickInstaller.cs" />
     <Compile Include="Core\PathLogic.cs" />
     <Compile Include="Core\RemoteLogic.cs" />
     <Compile Include="Core\UpdateLogic.cs" />
@@ -215,6 +219,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormPlatformSelect.resx">
       <DependentUpon>FormPlatformSelect.cs</DependentUpon>
