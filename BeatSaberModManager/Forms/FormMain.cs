@@ -388,5 +388,19 @@ namespace BeatSaberModManager
         {
 
         }
+
+        private void contextMenuStripMain_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
+        private void directDownloadToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var release = (ReleaseInfo)listViewMods.SelectedItems[0].Tag;
+            if (release.downloadLink.StartsWith("https://"))
+            {
+                Process.Start(release.downloadLink);
+            }
+        }
     }
 }
