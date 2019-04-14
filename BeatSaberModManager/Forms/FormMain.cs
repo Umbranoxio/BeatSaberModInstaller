@@ -32,6 +32,8 @@ namespace BeatSaberModManager
             path = new PathLogic();
             updater = new UpdateLogic();
             remote = new RemoteLogic();
+            listViewMods.ShowItemToolTips = true;
+            // Show tooltips
         }
         #endregion
 
@@ -104,7 +106,7 @@ namespace BeatSaberModManager
         {
             //comboBox_gameVersions.Enabled = true;
             Dictionary<string, int> groups = new Dictionary<string, int>();
-
+            
             listViewMods.Groups.Clear();
             int other = listViewMods.Groups.Add(new ListViewGroup("Other", HorizontalAlignment.Left));
             groups.Add("Other", other);
@@ -116,6 +118,8 @@ namespace BeatSaberModManager
                     Text = release.title,
                     Tag = release
                 };
+
+                item.ToolTipText = release.description;
 
                 item.SubItems.Add(release.author);
                 item.SubItems.Add(release.version);
