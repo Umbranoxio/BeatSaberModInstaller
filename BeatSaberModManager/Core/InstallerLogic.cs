@@ -35,7 +35,7 @@ namespace BeatSaberModManager.Core
                 StatusUpdate("Starting install sequence...");
 
                 ReleaseInfo bsipa = null;
-                if ((bsipa = releases.Find(release => release.name.ToLower() == "bsipa")) != null)
+                if ((bsipa = releases.Find(release => release.name.ToLower() == "BSIPA")) != null)
                 {
                     StatusUpdate($"Downloading...{bsipa.title}");
                     byte[] file = Helper.GetFile(bsipa.downloadLink);
@@ -46,7 +46,7 @@ namespace BeatSaberModManager.Core
                     releases.Remove(bsipa); // don't want to double down
                 }
 
-                var toInstall = bsipa == null ? installDirectory : Path.Combine(installDirectory, "IPA", "Pending");
+                var toInstall = Path.Combine(installDirectory, "IPA", "Pending");
                 Directory.CreateDirectory(toInstall);
 
                 foreach (ReleaseInfo release in releases)
