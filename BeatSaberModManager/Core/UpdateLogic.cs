@@ -75,7 +75,7 @@ namespace BeatSaberModManager.Core
                 exe = assets.Linq.First(x =>
                 {
                     string name = x.Value["name"].ToString().Trim('"');
-                    return name.Contains(".exe");
+                    return name.Contains("Classic.exe");
                 }).Value.AsObject;
             }
             catch
