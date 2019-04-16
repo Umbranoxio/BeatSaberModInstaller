@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BeatSaberModManager</RootNamespace>
-    <AssemblyName>BeatSaberModManager</AssemblyName>
+    <AssemblyName>BeatSaberModManagerClassic</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -183,7 +183,6 @@
     <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\ZipNameTransform.cs" />
     <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\ZipOutputStream.cs" />
     <Compile Include="Dependencies\ICSharpCode.SharpZipLib\Zip\ZipStrings.cs" />
-    <Compile Include="Dependencies\RegHelper.cs" />
     <Compile Include="Dependencies\SemVer\Comparator.cs" />
     <Compile Include="Dependencies\SemVer\ComparatorSet.cs" />
     <Compile Include="Dependencies\SemVer\Desugarer.cs" />
