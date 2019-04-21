@@ -244,6 +244,30 @@ namespace BeatSaberModManager
 
             new Thread(() => { installer.Run(); }).Start();
         }
+        
+        private void ProcessInfoLink(string infoLink)
+        {
+            if (infoLink == null)
+            {
+                MessageBox.Show("No info link was provided by this mod.");
+            }
+            else if (Uri.IsWellFormedUriString(infoLink, UriKind.RelativeOrAbsolute))
+            {
+                try
+                {
+                    Process.Start(infoLink);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Could not open info link provided by this mod:\n{infoLink}", "Error");
+                }
+            }
+            else
+            {
+                MessageBox.Show($"The info link provided by this mod is invalid.\n{infoLink}", "Error");
+            }
+        }
+        #endregion
 
         private void buttonFolderBrowser_Click(object sender, EventArgs e)
         {
@@ -359,21 +383,14 @@ namespace BeatSaberModManager
 
         private void buttonViewInfo_Click(object sender, EventArgs e)
         {
-            openInfoLink();
+            var release = (ReleaseInfo)listViewMods.SelectedItems[0].Tag;
+            ProcessInfoLink(release.infoLink);
         }
 
         private void viewInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openInfoLink();
-        }
-
-        private void openInfoLink()
-        {
             var release = (ReleaseInfo)listViewMods.SelectedItems[0].Tag;
-            if (release.infoLink.StartsWith("https://"))
-            {
-                Process.Start(release.infoLink);
-            }
+            ProcessInfoLink(release.infoLink);
         }
 
         private void linkLabellolPants_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -422,7 +439,6 @@ namespace BeatSaberModManager
         {
             Process.Start("https://discord.gg/beatsabermods");
         }
-        #endregion
 
         private void label5_Click(object sender, EventArgs e)
         {
