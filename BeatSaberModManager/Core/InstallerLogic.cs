@@ -46,7 +46,7 @@ namespace BeatSaberModManager.Core
                     releases.Remove(bsipa); // don't want to double down
                 }
 
-                var toInstall = bsipa == null ? installDirectory : Path.Combine(installDirectory, "IPA", "Pending");
+                var toInstall = Path.Combine(installDirectory, "IPA", "Pending");
                 Directory.CreateDirectory(toInstall);
 
                 foreach (ReleaseInfo release in releases)
@@ -61,20 +61,13 @@ namespace BeatSaberModManager.Core
                     }
                 }
 
-                if (bsipa != null)
-                    Process.Start(new ProcessStartInfo
-                    {
-                        FileName = Path.Combine(installDirectory, "IPA.exe"),
-                        WorkingDirectory = installDirectory,
-                        Arguments = "-fn"
-                    }).WaitForExit();
-                else
-                    Process.Start(new ProcessStartInfo
-                    {
-                        FileName = Path.Combine(installDirectory, "IPA.exe"),
-                        WorkingDirectory = installDirectory,
-                        Arguments = Quoted(Path.Combine(installDirectory, "Beat Saber.exe"))
-                    }).WaitForExit();
+                // Only ever going to be downloading BSIPA
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = Path.Combine(installDirectory, "IPA.exe"),
+                    WorkingDirectory = installDirectory,
+                    Arguments = "-n"
+                }).WaitForExit();
                 
                 StatusUpdate("Install complete!");
             } catch (Exception ex)
