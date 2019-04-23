@@ -21,7 +21,8 @@ namespace BeatSaberModManager.Core
         public string GetInstallationPath()
         {
             // Check if install path is already saved
-            if (Properties.Settings.Default.InstallPath.Length != 0)
+            if (Properties.Settings.Default.InstallPath.Length != 0
+                && Properties.Settings.Default.Platform != (int)Platform.Default)
             {
                 if (File.Exists(Path.Combine(Properties.Settings.Default.InstallPath, AppFileName)))
                 {
