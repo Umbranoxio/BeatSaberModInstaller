@@ -58,5 +58,17 @@ namespace BeatSaberModManager.Properties {
                 this["InstallPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int Platform {
+            get {
+                return ((int)(this["Platform"]));
+            }
+            set {
+                this["Platform"] = value;
+            }
+        }
     }
 }
