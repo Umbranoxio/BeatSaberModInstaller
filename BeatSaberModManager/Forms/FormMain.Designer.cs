@@ -57,6 +57,8 @@
             this.linkLabelDiscord = new System.Windows.Forms.LinkLabel();
             this.labelDiscordInfo = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.extrasGroupBox = new System.Windows.Forms.GroupBox();
+            this.openSettingsFolder = new System.Windows.Forms.Button();
             this.toggleRegisterOneClick = new System.Windows.Forms.CheckBox();
             this.buttonViewInfo = new System.Windows.Forms.Button();
             this.panelInfo = new System.Windows.Forms.Panel();
@@ -66,17 +68,15 @@
             this.textBoxPluginsPath = new System.Windows.Forms.TextBox();
             this.helpInfoLabel3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.extrasGroupBox = new System.Windows.Forms.GroupBox();
-            this.openSettingsFolder = new System.Windows.Forms.Button();
             this.tabSettings.SuspendLayout();
             this.tabPageCore.SuspendLayout();
             this.contextMenuStripMain.SuspendLayout();
             this.tabPageCredits.SuspendLayout();
             this.tabPageHelp.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.extrasGroupBox.SuspendLayout();
             this.panelInfo.SuspendLayout();
             this.tableLayoutPanelInfo.SuspendLayout();
-            this.extrasGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxDirectory
@@ -371,6 +371,26 @@
             this.tabPage1.Text = "Settings";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // extrasGroupBox
+            // 
+            this.extrasGroupBox.Controls.Add(this.openSettingsFolder);
+            this.extrasGroupBox.Location = new System.Drawing.Point(7, 31);
+            this.extrasGroupBox.Name = "extrasGroupBox";
+            this.extrasGroupBox.Size = new System.Drawing.Size(545, 55);
+            this.extrasGroupBox.TabIndex = 1;
+            this.extrasGroupBox.TabStop = false;
+            this.extrasGroupBox.Text = "Debugging";
+            // 
+            // openSettingsFolder
+            // 
+            this.openSettingsFolder.Location = new System.Drawing.Point(7, 22);
+            this.openSettingsFolder.Name = "openSettingsFolder";
+            this.openSettingsFolder.Size = new System.Drawing.Size(129, 23);
+            this.openSettingsFolder.TabIndex = 0;
+            this.openSettingsFolder.Text = "Open Settings Folder";
+            this.openSettingsFolder.UseVisualStyleBackColor = true;
+            this.openSettingsFolder.Click += new System.EventHandler(this.openSettingsFolderButton_Click);
+            // 
             // toggleRegisterOneClick
             // 
             this.toggleRegisterOneClick.AutoSize = true;
@@ -483,26 +503,6 @@
             this.label5.Text = "v0.13.2 only";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
-            // extrasGroupBox
-            // 
-            this.extrasGroupBox.Controls.Add(this.openSettingsFolder);
-            this.extrasGroupBox.Location = new System.Drawing.Point(7, 31);
-            this.extrasGroupBox.Name = "extrasGroupBox";
-            this.extrasGroupBox.Size = new System.Drawing.Size(545, 55);
-            this.extrasGroupBox.TabIndex = 1;
-            this.extrasGroupBox.TabStop = false;
-            this.extrasGroupBox.Text = "Debugging";
-            // 
-            // openSettingsFolder
-            // 
-            this.openSettingsFolder.Location = new System.Drawing.Point(7, 22);
-            this.openSettingsFolder.Name = "openSettingsFolder";
-            this.openSettingsFolder.Size = new System.Drawing.Size(129, 23);
-            this.openSettingsFolder.TabIndex = 0;
-            this.openSettingsFolder.Text = "Open Settings Folder";
-            this.openSettingsFolder.UseVisualStyleBackColor = true;
-            this.openSettingsFolder.Click += new System.EventHandler(this.openSettingsFolderButton_Click);
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -532,10 +532,10 @@
             this.tabPageHelp.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.extrasGroupBox.ResumeLayout(false);
             this.panelInfo.ResumeLayout(false);
             this.tableLayoutPanelInfo.ResumeLayout(false);
             this.tableLayoutPanelInfo.PerformLayout();
-            this.extrasGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
