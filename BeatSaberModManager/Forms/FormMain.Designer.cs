@@ -68,6 +68,7 @@
             this.textBoxPluginsPath = new System.Windows.Forms.TextBox();
             this.helpInfoLabel3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.resetSettingsButton = new System.Windows.Forms.Button();
             this.tabSettings.SuspendLayout();
             this.tabPageCore.SuspendLayout();
             this.contextMenuStripMain.SuspendLayout();
@@ -373,6 +374,7 @@
             // 
             // extrasGroupBox
             // 
+            this.extrasGroupBox.Controls.Add(this.resetSettingsButton);
             this.extrasGroupBox.Controls.Add(this.openSettingsFolder);
             this.extrasGroupBox.Location = new System.Drawing.Point(7, 31);
             this.extrasGroupBox.Name = "extrasGroupBox";
@@ -503,6 +505,15 @@
             this.label5.Text = "v0.13.2 only";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
+            // resetSettingsButton
+            // 
+            this.resetSettingsButton.Location = new System.Drawing.Point(143, 22);
+            this.resetSettingsButton.Name = "resetSettingsButton";
+            this.resetSettingsButton.Size = new System.Drawing.Size(144, 23);
+            this.resetSettingsButton.TabIndex = 1;
+            this.resetSettingsButton.Text = "Reset Settings to Default";
+            this.resetSettingsButton.UseVisualStyleBackColor = true;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -581,6 +592,7 @@
         private System.Windows.Forms.CheckBox toggleRegisterOneClick;
         private System.Windows.Forms.GroupBox extrasGroupBox;
         private System.Windows.Forms.Button openSettingsFolder;
+        private System.Windows.Forms.Button resetSettingsButton;
     }
 }
 
