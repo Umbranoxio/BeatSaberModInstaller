@@ -58,6 +58,8 @@
             this.labelDiscordInfo = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.extrasGroupBox = new System.Windows.Forms.GroupBox();
+            this.platformLabel = new System.Windows.Forms.Label();
+            this.resetSettingsButton = new System.Windows.Forms.Button();
             this.openSettingsFolder = new System.Windows.Forms.Button();
             this.toggleRegisterOneClick = new System.Windows.Forms.CheckBox();
             this.buttonViewInfo = new System.Windows.Forms.Button();
@@ -68,7 +70,6 @@
             this.textBoxPluginsPath = new System.Windows.Forms.TextBox();
             this.helpInfoLabel3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.resetSettingsButton = new System.Windows.Forms.Button();
             this.tabSettings.SuspendLayout();
             this.tabPageCore.SuspendLayout();
             this.contextMenuStripMain.SuspendLayout();
@@ -374,18 +375,37 @@
             // 
             // extrasGroupBox
             // 
+            this.extrasGroupBox.Controls.Add(this.platformLabel);
             this.extrasGroupBox.Controls.Add(this.resetSettingsButton);
             this.extrasGroupBox.Controls.Add(this.openSettingsFolder);
             this.extrasGroupBox.Location = new System.Drawing.Point(7, 31);
             this.extrasGroupBox.Name = "extrasGroupBox";
-            this.extrasGroupBox.Size = new System.Drawing.Size(545, 55);
+            this.extrasGroupBox.Size = new System.Drawing.Size(545, 70);
             this.extrasGroupBox.TabIndex = 1;
             this.extrasGroupBox.TabStop = false;
             this.extrasGroupBox.Text = "Debugging";
             // 
+            // platformLabel
+            // 
+            this.platformLabel.AutoSize = true;
+            this.platformLabel.Location = new System.Drawing.Point(7, 22);
+            this.platformLabel.Name = "platformLabel";
+            this.platformLabel.Size = new System.Drawing.Size(94, 13);
+            this.platformLabel.TabIndex = 2;
+            this.platformLabel.Text = "Platform: Default";
+            // 
+            // resetSettingsButton
+            // 
+            this.resetSettingsButton.Location = new System.Drawing.Point(141, 41);
+            this.resetSettingsButton.Name = "resetSettingsButton";
+            this.resetSettingsButton.Size = new System.Drawing.Size(144, 23);
+            this.resetSettingsButton.TabIndex = 1;
+            this.resetSettingsButton.Text = "Reset Settings to Default";
+            this.resetSettingsButton.UseVisualStyleBackColor = true;
+            // 
             // openSettingsFolder
             // 
-            this.openSettingsFolder.Location = new System.Drawing.Point(7, 22);
+            this.openSettingsFolder.Location = new System.Drawing.Point(6, 41);
             this.openSettingsFolder.Name = "openSettingsFolder";
             this.openSettingsFolder.Size = new System.Drawing.Size(129, 23);
             this.openSettingsFolder.TabIndex = 0;
@@ -505,15 +525,6 @@
             this.label5.Text = "v0.13.2 only";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
-            // resetSettingsButton
-            // 
-            this.resetSettingsButton.Location = new System.Drawing.Point(143, 22);
-            this.resetSettingsButton.Name = "resetSettingsButton";
-            this.resetSettingsButton.Size = new System.Drawing.Size(144, 23);
-            this.resetSettingsButton.TabIndex = 1;
-            this.resetSettingsButton.Text = "Reset Settings to Default";
-            this.resetSettingsButton.UseVisualStyleBackColor = true;
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -544,6 +555,7 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.extrasGroupBox.ResumeLayout(false);
+            this.extrasGroupBox.PerformLayout();
             this.panelInfo.ResumeLayout(false);
             this.tableLayoutPanelInfo.ResumeLayout(false);
             this.tableLayoutPanelInfo.PerformLayout();
@@ -593,6 +605,7 @@
         private System.Windows.Forms.GroupBox extrasGroupBox;
         private System.Windows.Forms.Button openSettingsFolder;
         private System.Windows.Forms.Button resetSettingsButton;
+        private System.Windows.Forms.Label platformLabel;
     }
 }
 

@@ -60,6 +60,7 @@ namespace BeatSaberModManager
             {
                 updater.CheckForUpdates();
                 textBoxDirectory.Text = path.GetInstallationPath();
+                platformLabel.Text = $"Platform: {path.GetPlatformString()}";
 
                 new Thread(() => { RemoteLoad(); }).Start();
             }
@@ -158,7 +159,6 @@ namespace BeatSaberModManager
                         groups.Add(release.category, index);
                         item.Group = listViewMods.Groups[index];
                     }
-
                     listViewMods.Items.Add(item);
                     release.itemHandle = item;
 
@@ -274,8 +274,7 @@ namespace BeatSaberModManager
         {
             textBoxDirectory.Text = path.ManualFind();
             installer.installDirectory = textBoxDirectory.Text;
-            Properties.Settings.Default.InstallPath = textBoxDirectory.Text;
-            Properties.Settings.Default.Save();
+            path.SaveInstallPath(textBoxDirectory.Text);
         }
 
         private void listViewMods_ItemChecked(object sender, ItemCheckedEventArgs e)
