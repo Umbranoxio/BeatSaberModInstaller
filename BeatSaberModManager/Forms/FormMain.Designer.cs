@@ -66,6 +66,8 @@
             this.textBoxPluginsPath = new System.Windows.Forms.TextBox();
             this.helpInfoLabel3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.extrasGroupBox = new System.Windows.Forms.GroupBox();
+            this.openSettingsFolder = new System.Windows.Forms.Button();
             this.tabSettings.SuspendLayout();
             this.tabPageCore.SuspendLayout();
             this.contextMenuStripMain.SuspendLayout();
@@ -74,6 +76,7 @@
             this.tabPage1.SuspendLayout();
             this.panelInfo.SuspendLayout();
             this.tableLayoutPanelInfo.SuspendLayout();
+            this.extrasGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxDirectory
@@ -358,6 +361,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.extrasGroupBox);
             this.tabPage1.Controls.Add(this.toggleRegisterOneClick);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -479,6 +483,26 @@
             this.label5.Text = "v0.13.2 only";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
+            // extrasGroupBox
+            // 
+            this.extrasGroupBox.Controls.Add(this.openSettingsFolder);
+            this.extrasGroupBox.Location = new System.Drawing.Point(7, 31);
+            this.extrasGroupBox.Name = "extrasGroupBox";
+            this.extrasGroupBox.Size = new System.Drawing.Size(545, 55);
+            this.extrasGroupBox.TabIndex = 1;
+            this.extrasGroupBox.TabStop = false;
+            this.extrasGroupBox.Text = "Debugging";
+            // 
+            // openSettingsFolder
+            // 
+            this.openSettingsFolder.Location = new System.Drawing.Point(7, 22);
+            this.openSettingsFolder.Name = "openSettingsFolder";
+            this.openSettingsFolder.Size = new System.Drawing.Size(129, 23);
+            this.openSettingsFolder.TabIndex = 0;
+            this.openSettingsFolder.Text = "Open Settings Folder";
+            this.openSettingsFolder.UseVisualStyleBackColor = true;
+            this.openSettingsFolder.Click += new System.EventHandler(this.openSettingsFolderButton_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -511,6 +535,7 @@
             this.panelInfo.ResumeLayout(false);
             this.tableLayoutPanelInfo.ResumeLayout(false);
             this.tableLayoutPanelInfo.PerformLayout();
+            this.extrasGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -554,6 +579,8 @@
         private System.Windows.Forms.ToolStripMenuItem directDownloadToolStripMenuItem1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.CheckBox toggleRegisterOneClick;
+        private System.Windows.Forms.GroupBox extrasGroupBox;
+        private System.Windows.Forms.Button openSettingsFolder;
     }
 }
 
