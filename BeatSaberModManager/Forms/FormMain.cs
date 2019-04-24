@@ -514,5 +514,27 @@ namespace BeatSaberModManager
                 return;
             }
         }
+
+        private void resetSettingsButton_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Are you sure you want to reset the application settings?\n\n" +
+                "This will clear your selected mods, and install path.",
+                "Warning",
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Warning);
+
+            if (result == DialogResult.OK)
+            {
+                Properties.Settings.Default.Reset();
+
+                // Prevent application from thinking it was just updated, and thus loading settings from old version
+                Properties.Settings.Default.UpgradeRequired = false;
+                Properties.Settings.Default.Save();
+
+                MessageBox.Show("Settings reset!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Application.Restart();
+            }
+        }
     }
 }

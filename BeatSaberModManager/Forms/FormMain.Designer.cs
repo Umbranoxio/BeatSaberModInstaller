@@ -402,6 +402,7 @@
             this.resetSettingsButton.TabIndex = 1;
             this.resetSettingsButton.Text = "Reset Settings to Default";
             this.resetSettingsButton.UseVisualStyleBackColor = true;
+            this.resetSettingsButton.Click += new System.EventHandler(this.resetSettingsButton_Click);
             // 
             // openSettingsFolder
             // 
