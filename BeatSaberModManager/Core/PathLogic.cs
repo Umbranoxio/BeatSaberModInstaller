@@ -146,13 +146,19 @@ namespace BeatSaberModManager.Core
                     {
                         using (RegistryKey libraryKey = librariesKey.OpenSubKey(libraryKeyName))
                         {
-                            string libraryPath = (string) libraryKey.GetValue("Path");
-                            folderPath = Path.Combine(guidLetterVolumes.First(x => libraryPath.Contains(x.Key)).Value, libraryPath.Substring(49), subFolderPath);
-                            fullAppPath = Path.Combine(folderPath, AppFileName);
+                            string libraryPath = (string)libraryKey.GetValue("Path");
 
-                            if (File.Exists(fullAppPath))
+                            // Apparently this can be null
+                            var guidLetter = guidLetterVolumes.FirstOrDefault(x => libraryPath.Contains(x.Key)).Value;
+                            if (guidLetter != null)
                             {
-                                return folderPath;
+                                folderPath = Path.Combine(guidLetter, libraryPath.Substring(49), subFolderPath);
+                                fullAppPath = Path.Combine(folderPath, AppFileName);
+
+                                if (File.Exists(fullAppPath))
+                                {
+                                    return folderPath;
+                                }
                             }
                         }
                     }
