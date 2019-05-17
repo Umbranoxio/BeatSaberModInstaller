@@ -23,7 +23,7 @@ namespace BeatSaberModManager.Core
         private const string CustomPlatformsFolder = "CustomPlatforms";
         private const string CustomAvatarsFolder = "CustomAvatars";
 
-        private static readonly string[] SupportedProtocols = new[] { "modsaber", "beatdrop", "modelsaber" };
+        private static readonly string[] SupportedProtocols = new[] { "beatdrop", "modelsaber", "beatsaver" };
 
         private static PathLogic _pathLogic;
         private static PathLogic PathLogic => _pathLogic = _pathLogic ?? new PathLogic();
@@ -96,23 +96,11 @@ namespace BeatSaberModManager.Core
             BroadcastDownloadStatus(DownloadStatus.Started);
 
             bool downloadOk = false;
-            if (uri.Scheme == "modsaber") // preliminary, should be removed once 'modsaber' is deprecated and 'beatdrop' is established
+            if (uri.Scheme == "beatsaver")
             {
-                switch (uri.Host)
-                {
-                    case "song":
-                        downloadOk = InstallSong(uri.AbsolutePath.Substring(1));
-                        break;
-                    case "avatar":
-                        downloadOk = InstallFile(uri.AbsolutePath.Substring(1), CustomAvatarsFolder);
-                        break;
-                    case "saber":
-                        downloadOk = InstallFile(uri.AbsolutePath.Substring(1), CustomSabersFolder);
-                        break;
-                    case "platform":
-                        downloadOk = InstallFile(uri.AbsolutePath.Substring(1), CustomPlatformsFolder);
-                        break;
-                }
+                // For beatsaver the "host" is the id
+                // Example: beatsaver://0000-0000
+                downloadOk = InstallSong(uri.Host);
             }
             else if (uri.Scheme == "beatdrop")
             {
@@ -155,7 +143,7 @@ namespace BeatSaberModManager.Core
             else
             {
                 BroadcastDownloadStatus(DownloadStatus.Failed);
-                PushWindowsNotification("Donwload failed");
+                PushWindowsNotification("Download failed");
             }
         }
 
@@ -172,7 +160,7 @@ namespace BeatSaberModManager.Core
                 var songPath = Path.Combine(bsPath, CustomSongsFolder, id);
                 Directory.CreateDirectory(songPath);
 
-                // Donwload and extract
+                // Download and extract
                 var data = Helper.GetFile($"https://beatsaver.com/download/{id}");
                 Helper.UnzipFile(data, songPath);
 
