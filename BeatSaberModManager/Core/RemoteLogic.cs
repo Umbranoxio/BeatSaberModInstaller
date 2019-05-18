@@ -35,7 +35,7 @@ namespace BeatSaberModManager.Core
 
         public void GetGameVersions()
         {
-            string raw = Fetch($"{ApiURL}/site/gameversions");
+            string raw = Fetch($"{ApiURL}/version");
             var gameVersionsRaw = JSON.Parse(raw);
 
             List<GameVersion> gvList = new List<GameVersion>();
@@ -43,11 +43,7 @@ namespace BeatSaberModManager.Core
             {
                 var current = gameVersionsRaw[i];
 
-                GameVersion gv = new GameVersion(
-                    current["id"],
-                    current["value"],
-                    current["manifest"]
-                );
+                GameVersion gv = new GameVersion(current["value"]);
 
                 gvList.Add(gv);
             }
