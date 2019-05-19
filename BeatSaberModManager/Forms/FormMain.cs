@@ -75,18 +75,37 @@ namespace BeatSaberModManager
         {
             UpdateStatus("Loading game versions...");
             remote.GetGameVersions();
+
+            string installedVersion = GetInstalledGameVersion();
+            int installedVersionIndex = 0;
             for (int i = 0; i < remote.gameVersions.Length; i++)
             {
                 GameVersion gv = remote.gameVersions[i];
-                this.Invoke((MethodInvoker)(() => { comboBox_gameVersions.Items.Add(gv.value); })); 
+                this.Invoke((MethodInvoker)(() => { comboBox_gameVersions.Items.Add(gv.value); }));
+
+                if (gv.value.Equals(installedVersion)) installedVersionIndex = i;
             }
-            this.Invoke((MethodInvoker)(() => { comboBox_gameVersions.SelectedIndex = 0; }));
+            this.Invoke((MethodInvoker)(() => { comboBox_gameVersions.SelectedIndex = installedVersionIndex; }));
 
             UpdateStatus("Loading releases...");
             remote.PopulateReleases();
             installer = new InstallerLogic(remote.releases, path.installPath);
             installer.StatusUpdate += Installer_StatusUpdate;
             this.Invoke((MethodInvoker)(() => { ShowReleases(); }));
+        }
+
+        private string GetInstalledGameVersion()
+        {
+            string gameVersionFilePath = Path.Combine(path.installPath, "BeatSaberVersion.txt");
+            try
+            {
+                string[] lines = File.ReadAllLines(gameVersionFilePath);
+                return lines.First<string>();
+            } catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return null;
+            }
         }
 
         bool first = true;
