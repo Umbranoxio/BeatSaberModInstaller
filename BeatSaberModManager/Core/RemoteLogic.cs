@@ -100,19 +100,19 @@ namespace BeatSaberModManager.Core
 
                         CreateRelease(
                             new ReleaseInfo(current["name"], current["name"], current["version"], current["author"]["username"],
-                            current["description"], current["link"], 0, "0.13.2", steam["url"],
+                            current["description"], current["link"], 0, current["gameVersion"], steam["url"],
                             current["category"], Platform.Steam, dependsOn, conflictsWith));
 
                         CreateRelease(
                             new ReleaseInfo(current["name"], current["name"], current["version"], current["author"]["username"],
-                            current["description"], current["link"], 0, "0.13.2", oculus["url"],
+                            current["description"], current["link"], 0, current["gameVersion"], oculus["url"],
                             current["category"], Platform.Oculus, dependsOn, conflictsWith));
                     }
                     else
                     {
                         CreateRelease(
                             new ReleaseInfo(current["name"], current["name"], current["version"], current["author"]["username"],
-                            current["description"], current["link"], 0, "0.13.2", files[0]["url"],
+                            current["description"], current["link"], 0, current["gameVersion"], files[0]["url"],
                             current["category"], Platform.Default, dependsOn, conflictsWith));
                     }
                 }
@@ -157,8 +157,8 @@ namespace BeatSaberModManager.Core
 
         private void CreateRelease(ReleaseInfo release)
         {
-            //if (release.gameVersion != selectedGameVersion.value)
-            //    return;
+            if (release.gameVersion != selectedGameVersion.value)
+                return;
 
             ReleaseInfo current = releases.Find(x => x.name == release.name);
             if (current == null)
