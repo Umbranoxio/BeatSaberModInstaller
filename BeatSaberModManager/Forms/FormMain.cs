@@ -77,7 +77,7 @@ namespace BeatSaberModManager
             remote.GetGameVersions();
 
             string installedVersion = GetInstalledGameVersion();
-            int installedVersionIndex = 0;
+            int installedVersionIndex = -1;
             for (int i = 0; i < remote.gameVersions.Length; i++)
             {
                 GameVersion gv = remote.gameVersions[i];
@@ -85,7 +85,27 @@ namespace BeatSaberModManager
 
                 if (gv.value.Equals(installedVersion)) installedVersionIndex = i;
             }
-            this.Invoke((MethodInvoker)(() => { comboBox_gameVersions.SelectedIndex = installedVersionIndex; }));
+
+            // Show error message if installed version isn't found
+            if (installedVersionIndex == -1 && installedVersion != null)
+            {
+                string allVersionsString = "";
+                foreach (var versionString in remote.gameVersions)
+                {
+                    allVersionsString = allVersionsString + versionString.value;
+                }
+                string versionErrorMessage =
+                    "You have Beat Saber version " + installedVersion + " installed,\n" +
+                    "but it is not supported by Beat Mods!\n\n" +
+                    "Beat Mods only supports the following versions:\n" +
+                    allVersionsString;
+                MessageBox.Show(versionErrorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            // Set the comboBox to the installed version
+            this.Invoke((MethodInvoker)(() => {
+                comboBox_gameVersions.SelectedIndex = (installedVersionIndex < 0 ? 0 : installedVersionIndex);
+            }));
 
             UpdateStatus("Loading releases...");
             remote.PopulateReleases();
@@ -104,6 +124,7 @@ namespace BeatSaberModManager
             } catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
+                MessageBox.Show("Could not get installed game version!\n\nChange version in OPTIONS tab!\n\nERROR:\n" + e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
