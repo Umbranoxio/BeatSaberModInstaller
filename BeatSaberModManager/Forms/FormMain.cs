@@ -98,7 +98,9 @@ namespace BeatSaberModManager
                     "You have Beat Saber version " + installedVersion + " installed,\n" +
                     "but it is not supported by Beat Mods!\n\n" +
                     "Beat Mods only supports the following versions:\n" +
-                    allVersionsString;
+                    allVersionsString +
+                    "\n\n" +
+                    "Install mods at your own risk!";
                 MessageBox.Show(versionErrorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
