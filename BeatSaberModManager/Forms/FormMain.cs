@@ -88,7 +88,7 @@ namespace BeatSaberModManager
                 allVersionsString = string.Concat(allVersionsString, (i > 0 ? ", " : "") + gv.value);
                 if (gv.value.Equals(installedVersion)) installedVersionIndex = i;
             }
-            
+
             // Check if a new version has been added to BeatMods
             if (Properties.Settings.Default.VersionsList != allVersionsString)
             {
@@ -97,8 +97,13 @@ namespace BeatSaberModManager
                     latestVersion + "\n\n" +
                     "This version has been selected automatically.\n" +
                     "You can change it in the settings tab!";
-                    
-                MessageBox.Show(infoMessage, "Beat Saber v" + latestVersion, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // If this is a fresh install, don't show version message
+                if (Properties.Settings.Default.VersionsList != "")
+                {
+                    MessageBox.Show(infoMessage, "Beat Saber v" + latestVersion, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
                 Properties.Settings.Default.VersionsList = allVersionsString;
                 Properties.Settings.Default.Save();
             }
