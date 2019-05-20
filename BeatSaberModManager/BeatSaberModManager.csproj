@@ -193,6 +193,12 @@
     <Compile Include="Dependencies\SemVer\Tuple.cs" />
     <Compile Include="Dependencies\SemVer\Version.cs" />
     <Compile Include="Dependencies\SimpleJson.cs" />
+    <Compile Include="Forms\FormAnnouncement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormAnnouncement.Designer.cs">
+      <DependentUpon>FormAnnouncement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormDetailViewer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -214,6 +220,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dependencies\SteamFinder.cs" />
+    <EmbeddedResource Include="Forms\FormAnnouncement.resx">
+      <DependentUpon>FormAnnouncement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormDetailViewer.resx">
       <DependentUpon>FormDetailViewer.cs</DependentUpon>
     </EmbeddedResource>
