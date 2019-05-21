@@ -70,5 +70,17 @@ namespace BeatSaberModManager.Properties {
                 this["Platform"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string VersionsList {
+            get {
+                return ((string)(this["VersionsList"]));
+            }
+            set {
+                this["VersionsList"] = value;
+            }
+        }
     }
 }

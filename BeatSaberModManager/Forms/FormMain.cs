@@ -78,24 +78,37 @@ namespace BeatSaberModManager
 
             string installedVersion = GetInstalledGameVersion();
             int installedVersionIndex = -1;
+            string allVersionsString = "";
+            string latestVersion = remote.gameVersions[0].value;
             for (int i = 0; i < remote.gameVersions.Length; i++)
             {
                 GameVersion gv = remote.gameVersions[i];
                 this.Invoke((MethodInvoker)(() => { comboBox_gameVersions.Items.Add(gv.value); }));
-
+                
+                allVersionsString = string.Concat(allVersionsString, (i > 0 ? ", " : "") + gv.value);
                 if (gv.value.Equals(installedVersion)) installedVersionIndex = i;
             }
+            
+            // Check if a new version has been added to BeatMods
+            if (Properties.Settings.Default.VersionsList != allVersionsString)
+            {
+                string infoMessage =
+                    "A new version of Beat Saber has been added to Beat Mods!\n" +
+                    latestVersion + "\n\n" +
+                    "This version has been selected automatically.\n" +
+                    "You can change it in the settings tab!";
+                    
+                MessageBox.Show(infoMessage, "Beat Saber v" + latestVersion, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Properties.Settings.Default.VersionsList = allVersionsString;
+                Properties.Settings.Default.Save();
+            }
+
 
             // Show error message if installed version isn't found
             if (installedVersionIndex == -1 && installedVersion != null)
             {
-                string allVersionsString = "";
-                foreach (var versionString in remote.gameVersions)
-                {
-                    allVersionsString = allVersionsString + versionString.value;
-                }
                 string versionErrorMessage =
-                    "You have Beat Saber version " + installedVersion + " installed,\n" +
+                    "You appear to have Beat Saber version " + installedVersion + " installed,\n" +
                     "but it is not supported by Beat Mods!\n\n" +
                     "Beat Mods only supports the following versions:\n" +
                     allVersionsString +
@@ -106,7 +119,7 @@ namespace BeatSaberModManager
 
             // Set the comboBox to the installed version
             this.Invoke((MethodInvoker)(() => {
-                comboBox_gameVersions.SelectedIndex = (installedVersionIndex < 0 ? 0 : installedVersionIndex);
+                comboBox_gameVersions.SelectedIndex = 0;
             }));
 
             UpdateStatus("Loading releases...");
