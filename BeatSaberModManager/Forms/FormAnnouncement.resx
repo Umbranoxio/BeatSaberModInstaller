@@ -119,7 +119,7 @@
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
     <value>Beat Saber 1.0 has released!
-The mod manager is almost a year old now, and in need of a rewrite.
+The Mod Manager is almost a year old now, and in need of a rewrite.
 
 Assistant has created Mod Assistant as a replacement for the Mod Manager. It's a lightweight app that supports installing / uninstalling mods and dependencies.
 
