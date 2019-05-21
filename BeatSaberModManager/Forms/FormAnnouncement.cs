@@ -1,5 +1,4 @@
-﻿using MaterialSkin.Controls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,26 +11,11 @@ using System.Windows.Forms;
 
 namespace BeatSaberModManager.Forms
 {
-    public partial class FormAnnouncement : MaterialForm
+    public partial class FormAnnouncement : Form
     {
         public FormAnnouncement()
         {
             InitializeComponent();
-        }
-
-        private void FormAnnouncement_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void materialLabel1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void buttonModAssistant_Click(object sender, EventArgs e)
