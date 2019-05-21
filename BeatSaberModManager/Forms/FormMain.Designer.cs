@@ -69,6 +69,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxPluginsPath = new System.Windows.Forms.TextBox();
             this.helpInfoLabel3 = new System.Windows.Forms.Label();
+            this.comboBox_gameVersions = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tabSettings.SuspendLayout();
             this.tabPageCore.SuspendLayout();
@@ -95,7 +96,7 @@
             // buttonFolderBrowser
             // 
             this.buttonFolderBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonFolderBrowser.Location = new System.Drawing.Point(470, 25);
+            this.buttonFolderBrowser.Location = new System.Drawing.Point(469, 24);
             this.buttonFolderBrowser.Name = "buttonFolderBrowser";
             this.buttonFolderBrowser.Size = new System.Drawing.Size(26, 23);
             this.buttonFolderBrowser.TabIndex = 1;
@@ -515,16 +516,23 @@
             this.helpInfoLabel3.TabIndex = 3;
             this.helpInfoLabel3.Text = "You can uninstall mods by removing the .dll from that folder.";
             // 
+            // comboBox_gameVersions
+            // 
+            this.comboBox_gameVersions.FormattingEnabled = true;
+            this.comboBox_gameVersions.Location = new System.Drawing.Point(501, 25);
+            this.comboBox_gameVersions.Name = "comboBox_gameVersions";
+            this.comboBox_gameVersions.Size = new System.Drawing.Size(73, 21);
+            this.comboBox_gameVersions.TabIndex = 11;
+            this.comboBox_gameVersions.SelectedIndexChanged += new System.EventHandler(this.comboBox_gameVersions_SelectedIndexChanged);
+            // 
             // label5
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(507, 30);
+            this.label5.Location = new System.Drawing.Point(499, 9);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(67, 13);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "v0.13.2 only";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
+            this.label5.Size = new System.Drawing.Size(77, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Game Version";
             // 
             // FormMain
             // 
@@ -532,6 +540,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(588, 436);
             this.Controls.Add(this.label5);
+            this.Controls.Add(this.comboBox_gameVersions);
             this.Controls.Add(this.panelInfo);
             this.Controls.Add(this.buttonViewInfo);
             this.Controls.Add(this.tabSettings);
@@ -599,7 +608,6 @@
         private System.Windows.Forms.Label labelDiscordInfo;
         private System.Windows.Forms.LinkLabel linkLabelDiscord;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ToolStripMenuItem directDownloadToolStripMenuItem1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.CheckBox toggleRegisterOneClick;
@@ -607,6 +615,8 @@
         private System.Windows.Forms.Button openSettingsFolder;
         private System.Windows.Forms.Button resetSettingsButton;
         private System.Windows.Forms.Label platformLabel;
+        private System.Windows.Forms.ComboBox comboBox_gameVersions;
+        private System.Windows.Forms.Label label5;
     }
 }
 

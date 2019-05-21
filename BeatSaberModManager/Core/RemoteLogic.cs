@@ -43,7 +43,7 @@ namespace BeatSaberModManager.Core
             {
                 var current = gameVersionsRaw[i];
 
-                GameVersion gv = new GameVersion(current["value"]);
+                GameVersion gv = new GameVersion(current.Value);
 
                 gvList.Add(gv);
             }
