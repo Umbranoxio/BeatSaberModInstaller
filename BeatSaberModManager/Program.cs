@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Reflection;
+using BeatSaberModManager.Forms;
 
 namespace BeatSaberModManager
 {
@@ -32,6 +33,8 @@ namespace BeatSaberModManager
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            // Open the announcement window
+            Application.Run(new FormAnnouncement());
             Application.Run(new FormMain());
         }
     }
