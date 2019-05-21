@@ -10,6 +10,7 @@ using System.Drawing;
 using System.Configuration;
 using SemVer;
 using Version = SemVer.Version;
+using System.IO;
 
 namespace BeatSaberModManager
 {
