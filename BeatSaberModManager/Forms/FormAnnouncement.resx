@@ -117,4 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value>Beat Saber 1.0 has released!
+The mod manager is almost a year old now, and in need of a rewrite.
+
+Assistant has created Mod Assistant as a replacement for the Mod Manager. It's a lightweight app and supports uninstalling mods, dependency resolution, and conflicts.
+
+Alternatively, if you are interested in a fully fledged installer / manager, Beat Drop offers a modern UI and aims to be a complete mod / song downloader and manager.</value>
+  </data>
 </root>
