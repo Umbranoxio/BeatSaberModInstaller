@@ -35,7 +35,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.buttonInstall = new System.Windows.Forms.Button();
             this.labelStatus = new System.Windows.Forms.Label();
-            this.tabControlMain = new System.Windows.Forms.TabControl();
+            this.tabSettings = new System.Windows.Forms.TabControl();
             this.tabPageCore = new System.Windows.Forms.TabPage();
             this.listViewMods = new System.Windows.Forms.ListView();
             this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -43,6 +43,7 @@
             this.columnHeaderVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStripMain = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.directDownloadToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPageCredits = new System.Windows.Forms.TabPage();
             this.linkLabelContributors = new System.Windows.Forms.LinkLabel();
             this.linkLabellolPants = new System.Windows.Forms.LinkLabel();
@@ -55,6 +56,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.linkLabelDiscord = new System.Windows.Forms.LinkLabel();
             this.labelDiscordInfo = new System.Windows.Forms.Label();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.extrasGroupBox = new System.Windows.Forms.GroupBox();
+            this.platformLabel = new System.Windows.Forms.Label();
+            this.resetSettingsButton = new System.Windows.Forms.Button();
+            this.openSettingsFolder = new System.Windows.Forms.Button();
+            this.toggleRegisterOneClick = new System.Windows.Forms.CheckBox();
             this.buttonViewInfo = new System.Windows.Forms.Button();
             this.panelInfo = new System.Windows.Forms.Panel();
             this.tableLayoutPanelInfo = new System.Windows.Forms.TableLayoutPanel();
@@ -63,11 +70,14 @@
             this.textBoxPluginsPath = new System.Windows.Forms.TextBox();
             this.helpInfoLabel3 = new System.Windows.Forms.Label();
             this.comboBox_gameVersions = new System.Windows.Forms.ComboBox();
-            this.tabControlMain.SuspendLayout();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tabSettings.SuspendLayout();
             this.tabPageCore.SuspendLayout();
             this.contextMenuStripMain.SuspendLayout();
             this.tabPageCredits.SuspendLayout();
             this.tabPageHelp.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.extrasGroupBox.SuspendLayout();
             this.panelInfo.SuspendLayout();
             this.tableLayoutPanelInfo.SuspendLayout();
             this.SuspendLayout();
@@ -86,7 +96,7 @@
             // buttonFolderBrowser
             // 
             this.buttonFolderBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonFolderBrowser.Location = new System.Drawing.Point(470, 25);
+            this.buttonFolderBrowser.Location = new System.Drawing.Point(469, 24);
             this.buttonFolderBrowser.Name = "buttonFolderBrowser";
             this.buttonFolderBrowser.Size = new System.Drawing.Size(26, 23);
             this.buttonFolderBrowser.TabIndex = 1;
@@ -124,20 +134,21 @@
             this.labelStatus.TabIndex = 5;
             this.labelStatus.Text = "Status: Null";
             // 
-            // tabControlMain
+            // tabSettings
             // 
-            this.tabControlMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tabSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControlMain.Controls.Add(this.tabPageCore);
-            this.tabControlMain.Controls.Add(this.tabPageCredits);
-            this.tabControlMain.Controls.Add(this.tabPageHelp);
-            this.tabControlMain.Enabled = false;
-            this.tabControlMain.Location = new System.Drawing.Point(10, 140);
-            this.tabControlMain.Name = "tabControlMain";
-            this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(566, 255);
-            this.tabControlMain.TabIndex = 8;
+            this.tabSettings.Controls.Add(this.tabPageCore);
+            this.tabSettings.Controls.Add(this.tabPageCredits);
+            this.tabSettings.Controls.Add(this.tabPageHelp);
+            this.tabSettings.Controls.Add(this.tabPage1);
+            this.tabSettings.Enabled = false;
+            this.tabSettings.Location = new System.Drawing.Point(10, 140);
+            this.tabSettings.Name = "tabSettings";
+            this.tabSettings.SelectedIndex = 0;
+            this.tabSettings.Size = new System.Drawing.Size(566, 255);
+            this.tabSettings.TabIndex = 8;
             // 
             // tabPageCore
             // 
@@ -189,16 +200,25 @@
             // contextMenuStripMain
             // 
             this.contextMenuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewInfoToolStripMenuItem});
+            this.viewInfoToolStripMenuItem,
+            this.directDownloadToolStripMenuItem1});
             this.contextMenuStripMain.Name = "contextMenuStripMain";
-            this.contextMenuStripMain.Size = new System.Drawing.Size(124, 26);
+            this.contextMenuStripMain.Size = new System.Drawing.Size(163, 48);
+            this.contextMenuStripMain.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripMain_Opening);
             // 
             // viewInfoToolStripMenuItem
             // 
             this.viewInfoToolStripMenuItem.Name = "viewInfoToolStripMenuItem";
-            this.viewInfoToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.viewInfoToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.viewInfoToolStripMenuItem.Text = "View Info";
             this.viewInfoToolStripMenuItem.Click += new System.EventHandler(this.viewInfoToolStripMenuItem_Click);
+            // 
+            // directDownloadToolStripMenuItem1
+            // 
+            this.directDownloadToolStripMenuItem1.Name = "directDownloadToolStripMenuItem1";
+            this.directDownloadToolStripMenuItem1.Size = new System.Drawing.Size(162, 22);
+            this.directDownloadToolStripMenuItem1.Text = "Direct Download";
+            this.directDownloadToolStripMenuItem1.Click += new System.EventHandler(this.directDownloadToolStripMenuItem1_Click);
             // 
             // tabPageCredits
             // 
@@ -234,10 +254,10 @@
             this.linkLabellolPants.AutoSize = true;
             this.linkLabellolPants.Location = new System.Drawing.Point(386, 92);
             this.linkLabellolPants.Name = "linkLabellolPants";
-            this.linkLabellolPants.Size = new System.Drawing.Size(48, 13);
+            this.linkLabellolPants.Size = new System.Drawing.Size(57, 13);
             this.linkLabellolPants.TabIndex = 5;
             this.linkLabellolPants.TabStop = true;
-            this.linkLabellolPants.Text = "lolPants";
+            this.linkLabellolPants.Text = "vanZeben";
             this.linkLabellolPants.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabellolPants_LinkClicked);
             // 
             // linkLabelUmbranox
@@ -278,10 +298,10 @@
             this.linkLabelModSaberLink.AutoSize = true;
             this.linkLabelModSaberLink.Location = new System.Drawing.Point(273, 92);
             this.linkLabelModSaberLink.Name = "linkLabelModSaberLink";
-            this.linkLabelModSaberLink.Size = new System.Drawing.Size(60, 13);
+            this.linkLabelModSaberLink.Size = new System.Drawing.Size(59, 13);
             this.linkLabelModSaberLink.TabIndex = 1;
             this.linkLabelModSaberLink.TabStop = true;
-            this.linkLabelModSaberLink.Text = "ModSaber";
+            this.linkLabelModSaberLink.Text = "BeatMods";
             this.linkLabelModSaberLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelModSaberLink_LinkClicked);
             // 
             // labelModSaber1
@@ -341,6 +361,70 @@
             this.labelDiscordInfo.TabIndex = 0;
             this.labelDiscordInfo.Text = "Join us on the Beat Saber Modding Group Discord server!";
             this.labelDiscordInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.extrasGroupBox);
+            this.tabPage1.Controls.Add(this.toggleRegisterOneClick);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(558, 229);
+            this.tabPage1.TabIndex = 3;
+            this.tabPage1.Text = "Settings";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // extrasGroupBox
+            // 
+            this.extrasGroupBox.Controls.Add(this.platformLabel);
+            this.extrasGroupBox.Controls.Add(this.resetSettingsButton);
+            this.extrasGroupBox.Controls.Add(this.openSettingsFolder);
+            this.extrasGroupBox.Location = new System.Drawing.Point(7, 31);
+            this.extrasGroupBox.Name = "extrasGroupBox";
+            this.extrasGroupBox.Size = new System.Drawing.Size(545, 70);
+            this.extrasGroupBox.TabIndex = 1;
+            this.extrasGroupBox.TabStop = false;
+            this.extrasGroupBox.Text = "Debugging";
+            // 
+            // platformLabel
+            // 
+            this.platformLabel.AutoSize = true;
+            this.platformLabel.Location = new System.Drawing.Point(7, 22);
+            this.platformLabel.Name = "platformLabel";
+            this.platformLabel.Size = new System.Drawing.Size(94, 13);
+            this.platformLabel.TabIndex = 2;
+            this.platformLabel.Text = "Platform: Default";
+            // 
+            // resetSettingsButton
+            // 
+            this.resetSettingsButton.Location = new System.Drawing.Point(141, 41);
+            this.resetSettingsButton.Name = "resetSettingsButton";
+            this.resetSettingsButton.Size = new System.Drawing.Size(144, 23);
+            this.resetSettingsButton.TabIndex = 1;
+            this.resetSettingsButton.Text = "Reset Settings to Default";
+            this.resetSettingsButton.UseVisualStyleBackColor = true;
+            this.resetSettingsButton.Click += new System.EventHandler(this.resetSettingsButton_Click);
+            // 
+            // openSettingsFolder
+            // 
+            this.openSettingsFolder.Location = new System.Drawing.Point(6, 41);
+            this.openSettingsFolder.Name = "openSettingsFolder";
+            this.openSettingsFolder.Size = new System.Drawing.Size(129, 23);
+            this.openSettingsFolder.TabIndex = 0;
+            this.openSettingsFolder.Text = "Open Settings Folder";
+            this.openSettingsFolder.UseVisualStyleBackColor = true;
+            this.openSettingsFolder.Click += new System.EventHandler(this.openSettingsFolderButton_Click);
+            // 
+            // toggleRegisterOneClick
+            // 
+            this.toggleRegisterOneClick.AutoSize = true;
+            this.toggleRegisterOneClick.Location = new System.Drawing.Point(7, 7);
+            this.toggleRegisterOneClick.Name = "toggleRegisterOneClick";
+            this.toggleRegisterOneClick.Size = new System.Drawing.Size(175, 17);
+            this.toggleRegisterOneClick.TabIndex = 0;
+            this.toggleRegisterOneClick.Text = "Register as OneClick Installer";
+            this.toggleRegisterOneClick.UseVisualStyleBackColor = true;
+            this.toggleRegisterOneClick.CheckedChanged += new System.EventHandler(this.ToggleRegisterOneClick_CheckedChanged);
             // 
             // buttonViewInfo
             // 
@@ -434,26 +518,32 @@
             // 
             // comboBox_gameVersions
             // 
-            this.comboBox_gameVersions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox_gameVersions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_gameVersions.DropDownWidth = 70;
-            this.comboBox_gameVersions.Enabled = false;
             this.comboBox_gameVersions.FormattingEnabled = true;
-            this.comboBox_gameVersions.Location = new System.Drawing.Point(502, 26);
+            this.comboBox_gameVersions.Location = new System.Drawing.Point(501, 25);
             this.comboBox_gameVersions.Name = "comboBox_gameVersions";
-            this.comboBox_gameVersions.Size = new System.Drawing.Size(72, 21);
+            this.comboBox_gameVersions.Size = new System.Drawing.Size(73, 21);
             this.comboBox_gameVersions.TabIndex = 11;
             this.comboBox_gameVersions.SelectedIndexChanged += new System.EventHandler(this.comboBox_gameVersions_SelectedIndexChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(499, 9);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(77, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Game Version";
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(588, 436);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.comboBox_gameVersions);
             this.Controls.Add(this.panelInfo);
             this.Controls.Add(this.buttonViewInfo);
-            this.Controls.Add(this.tabControlMain);
+            this.Controls.Add(this.tabSettings);
             this.Controls.Add(this.labelStatus);
             this.Controls.Add(this.buttonInstall);
             this.Controls.Add(this.label1);
@@ -463,15 +553,19 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Beat Saber Mod Manager";
+            this.Text = "Beat Saber Mod Manager (Classic Edition) ";
             this.Load += new System.EventHandler(this.FormMain_Load);
-            this.tabControlMain.ResumeLayout(false);
+            this.tabSettings.ResumeLayout(false);
             this.tabPageCore.ResumeLayout(false);
             this.contextMenuStripMain.ResumeLayout(false);
             this.tabPageCredits.ResumeLayout(false);
             this.tabPageCredits.PerformLayout();
             this.tabPageHelp.ResumeLayout(false);
             this.tabPageHelp.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.extrasGroupBox.ResumeLayout(false);
+            this.extrasGroupBox.PerformLayout();
             this.panelInfo.ResumeLayout(false);
             this.tableLayoutPanelInfo.ResumeLayout(false);
             this.tableLayoutPanelInfo.PerformLayout();
@@ -487,13 +581,13 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonInstall;
         private System.Windows.Forms.Label labelStatus;
-        private System.Windows.Forms.TabControl tabControlMain;
+        private System.Windows.Forms.TabControl tabSettings;
         private System.Windows.Forms.TabPage tabPageCore;
         private System.Windows.Forms.ListView listViewMods;
         private System.Windows.Forms.ColumnHeader columnHeaderName;
         private System.Windows.Forms.ColumnHeader columnHeaderAuthor;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripMain;
-        private System.Windows.Forms.ToolStripMenuItem viewInfoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewInfoToolStripMenuItem; 
         private System.Windows.Forms.TabPage tabPageCredits;
         private System.Windows.Forms.Button buttonViewInfo;
         private System.Windows.Forms.ColumnHeader columnHeaderVersion;
@@ -514,7 +608,15 @@
         private System.Windows.Forms.Label labelDiscordInfo;
         private System.Windows.Forms.LinkLabel linkLabelDiscord;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ToolStripMenuItem directDownloadToolStripMenuItem1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.CheckBox toggleRegisterOneClick;
+        private System.Windows.Forms.GroupBox extrasGroupBox;
+        private System.Windows.Forms.Button openSettingsFolder;
+        private System.Windows.Forms.Button resetSettingsButton;
+        private System.Windows.Forms.Label platformLabel;
         private System.Windows.Forms.ComboBox comboBox_gameVersions;
+        private System.Windows.Forms.Label label5;
     }
 }
 

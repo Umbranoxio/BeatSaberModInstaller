@@ -14,13 +14,13 @@ namespace BeatSaberModManager.Core
     public class RemoteLogic
     {
 #if DEBUG
-        private const string ModSaberURL = "https://staging.modsaber.org";
+        private const string BeatModsURL = "https://beatmods.com";
 #else
-        private const string ModSaberURL = "https://www.modsaber.org";
+        private const string BeatModsURL = "https://beatmods.com";
 #endif
 
-        private const string ApiVersion = "1.1";
-        private readonly string ApiURL = $"{ModSaberURL}/api/v{ApiVersion}";
+        private const string ApiVersion = "1";
+        private readonly string ApiURL = $"{BeatModsURL}/api/v{ApiVersion}";
 
         public GameVersion[] gameVersions;
         public GameVersion selectedGameVersion;
@@ -35,7 +35,7 @@ namespace BeatSaberModManager.Core
 
         public void GetGameVersions()
         {
-            string raw = Fetch($"{ApiURL}/site/gameversions");
+            string raw = Fetch($"{ApiURL}/version");
             var gameVersionsRaw = JSON.Parse(raw);
 
             List<GameVersion> gvList = new List<GameVersion>();
@@ -43,11 +43,7 @@ namespace BeatSaberModManager.Core
             {
                 var current = gameVersionsRaw[i];
 
-                GameVersion gv = new GameVersion(
-                    current["id"],
-                    current["value"],
-                    current["manifest"]
-                );
+                GameVersion gv = new GameVersion(current.Value);
 
                 gvList.Add(gv);
             }
@@ -60,7 +56,7 @@ namespace BeatSaberModManager.Core
         {
             releases.Clear();
 
-            string raw = GetModSaberReleases();
+            string raw = GetBeatModsReleases();
             if (raw != null)
             {
                 var mods = JSON.Parse(raw);
@@ -68,31 +64,56 @@ namespace BeatSaberModManager.Core
                 {
                     var current = mods[i];
 
-                    List<ModLink> dependsOn = NodeToLinks(current["links"]["dependencies"]);
-                    List<ModLink> conflictsWith = NodeToLinks(current["links"]["conflicts"]);
+                    List<ModLink> dependsOn = NodeToLinks(current["dependencies"]);
+                    List<ModLink> conflictsWith = NodeToLinks(current["conflicts"]);
 
-                    var files = current["files"];
+                    var files = current["downloads"];
+
+                    for (var f = 0; f < files.Count; ++f)
+                    {
+                        files[f]["url"] = BeatModsURL + files[f]["url"];
+                    }
+
                     if (files.Count > 1)
                     {
-                        var steam = files[0];
-                        var oculus = files[1];
+                        JSONNode steam = null;
+                        JSONNode oculus = null;
+                        for (var f = 0; f < files.Count; ++f)
+                        {
+                            if (files[f]["type"] == "steam") steam = files[f];
+                            if (files[f]["type"] == "oculus") oculus = files[f];
+                        }
+
+                        if (steam == null && oculus == null)
+                        {
+                            MessageBox.Show($"Could not find Steam or Oculus release for {current["name"]}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            continue;
+                        }else if (steam == null)
+                        {
+                            MessageBox.Show($"Could not find steam release for {current["name"]}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            continue;
+                        }else if (oculus == null)
+                        {
+                            MessageBox.Show($"Could not find oculus release for {current["name"]}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            continue;
+                        }
 
                         CreateRelease(
-                            new ReleaseInfo(current["name"], current["details"]["title"], current["version"], current["details"]["author"]["name"],
-                            current["details"]["description"], current["meta"]["weight"], current["gameVersion"]["value"],
-                            steam["url"], current["meta"]["category"], Platform.Steam, dependsOn, conflictsWith));
+                            new ReleaseInfo(current["name"], current["name"], current["version"], current["author"]["username"],
+                            current["description"], current["link"], 0, current["gameVersion"], steam["url"],
+                            current["category"], Platform.Steam, dependsOn, conflictsWith));
 
                         CreateRelease(
-                            new ReleaseInfo(current["name"], current["details"]["title"], current["version"], current["details"]["author"]["name"],
-                            current["details"]["description"], current["meta"]["weight"], current["gameVersion"]["value"],
-                            oculus["url"], current["meta"]["category"], Platform.Oculus, dependsOn, conflictsWith));
+                            new ReleaseInfo(current["name"], current["name"], current["version"], current["author"]["username"],
+                            current["description"], current["link"], 0, current["gameVersion"], oculus["url"],
+                            current["category"], Platform.Oculus, dependsOn, conflictsWith));
                     }
                     else
                     {
                         CreateRelease(
-                            new ReleaseInfo(current["name"], current["details"]["title"], current["version"], current["details"]["author"]["name"],
-                            current["details"]["description"], current["meta"]["weight"], current["gameVersion"]["value"],
-                            files["steam"]["url"], current["meta"]["category"], Platform.Default, dependsOn, conflictsWith));
+                            new ReleaseInfo(current["name"], current["name"], current["version"], current["author"]["username"],
+                            current["description"], current["link"], 0, current["gameVersion"], files[0]["url"],
+                            current["category"], Platform.Default, dependsOn, conflictsWith));
                     }
                 }
             }
@@ -117,8 +138,8 @@ namespace BeatSaberModManager.Core
 
             foreach (string str in arr)
             {
-                string[] split = str.Split('@');
-                ModLink link = new ModLink(split[0], split[1]);
+                var parsed = JSON.Parse(str);
+                ModLink link = new ModLink(parsed["name"], parsed["version"]);
                 links.Add(link);
             }
 
@@ -127,24 +148,11 @@ namespace BeatSaberModManager.Core
 
         private string Fetch(string URL) => Helper.Get(URL);
 
-        private string GetModSaberReleases()
+        private string GetBeatModsReleases()
         {
-            string raw = Fetch($"{ApiURL}/mods/approved/all");
+            string raw = Fetch($"{ApiURL}/mod?status=approved");
             var decoded = JSON.Parse(raw);
-            int lastPage = decoded["lastPage"];
-
-            JSONArray final = new JSONArray();
-
-            for (int i = 0; i <= lastPage; i++)
-            {
-                string page = Fetch($"{ApiURL}/mods/approved/all/{i}");
-                var pageDecoded = JSON.Parse(page);
-                var mods = pageDecoded["mods"];
-
-                foreach (var x in mods)
-                    final.Add(x.Value);
-            }
-            return final.ToString();
+            return decoded.ToString();
         }
 
         private void CreateRelease(ReleaseInfo release)

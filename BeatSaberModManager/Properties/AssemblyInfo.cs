@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Beat Saber Mod Manager")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Beat Saber Mod Manager Classic")]
+[assembly: AssemblyDescription("Beat Saber Mod Manager Beat Mods Classic Edition")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BeatSaberModManager")]
+[assembly: AssemblyProduct("BeatSaberModManagerClassic")]
 [assembly: AssemblyCopyright("Copyright © Umbranox 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -33,7 +33,7 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.2.2.2")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("0.3.6.1")]
+[assembly: AssemblyFileVersion("0.3.6.1")]
 [assembly: NeutralResourcesLanguage("en")]
 

@@ -8,15 +8,11 @@ namespace BeatSaberModManager.DataModels
 {
     public struct GameVersion
     {
-        public string id;
         public string value;
-        public string manifest;
 
-        public GameVersion(string _id, string _value, string _manifest)
+        public GameVersion(string _value)
         {
-            id = _id;
             value = _value;
-            manifest = _manifest;
         }
     }
 }
